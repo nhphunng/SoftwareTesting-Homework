@@ -334,5 +334,139 @@ MSSV: 23127194
 Regarding severity, articles often either don't mention it or mention it directly. Therefore, AI usually uses available information to infer it, making this section the most susceptible to hallucinations or bias. For example, in the AT&T Mobile Signaling Core Blackout defect, the AI ​​inferred that it prevented critical access to 911 emergency centers, even though the article didn't mention it at all.  
 
 
+## Requirment 3 – Test cases for ONE physical product
 
+### TC04: Sequential Loop of Cooking Functions
+
+* **Objective:** Verify that the "Function" button can switch sequentially and accurately through all 6 cooking modes.
+* **Input:** "Function" button.
+* **Steps:**
+  1. Turn on the stove and press the "Function" button for the first time.
+  2. Press the "Function" button 6 more times continuously to check the transition order.
+* **Expected:** Each press accurately cycles the LED through the order: Hotpot -> Stir-fry -> Stew -> High Heat -> Grill -> Keep Warm. The final press loops back to the first function (Hotpot).
+* **Actual:** Each press accurately cycles the LED through the order: Hotpot -> Stir-fry -> Stew -> High Heat -> Grill -> Keep Warm. The final press loops back to the first function (Hotpot).
+* **Verdict:** PASS
+
+### TC05: Increase Temperature/Power Level
+
+* **Objective:** Verify that the temperature increase feature works correctly when pressing the "Increase" button.
+* **Input:** "Increase" (+) button.
+* **Steps:**
+  1. Turn on the stove and select the "Hotpot" function (at default level).
+  2. Press the "Increase" (+) button once.
+* **Expected:** The temperature/power level displayed on the screen increases by 1 step, and the stove generates more heat.
+* **Actual:** When selected " Hotpot", the default level is maximum so it can not increase.
+* **Verdict:** FAIL
+
+### TC06: Decrease Temperature/Power Level
+
+* **Objective:** Verify that the temperature decrease feature works correctly when pressing the "Decrease" button.
+* **Input:** "Decrease" (-) button.
+* **Steps:**
+  1. Turn on the stove and select the "Hotpot" function.
+  2. Press the "Decrease" (-) button once.
+
+
+* **Expected:** The temperature/power level displayed on the screen decreases by 1 step, and the stove reduces heat generation.
+* **Actual:** The temperature/power level displayed on the screen decreases
+* **Verdict:** PASS
+
+### TC07: Maximum Temperature Boundary Test (Max Boundary)
+
+* **Objective:** Verify that the system does not allow the temperature to exceed the stove's maximum limit.
+* **Input:** "Increase" (+) button.
+* **Steps:**
+  1. Turn on the stove and select the "High Heat" function.
+  2. Continuously press the "Increase" button until the screen reaches the maximum level 
+  3. Press the "Increase" button one more time.
+* **Expected:** The screen remains at the maximum value and does not increase further. A warning beep may sound depending on the circuit board design.
+* **Actual:** Does not increase futher
+* **Verdict:** PASS
+
+### TC08: Minimum Temperature Boundary Test (Min Boundary)
+
+* **Objective:** Verify that the system does not allow the temperature to drop below the stove's minimum limit.
+* **Input:** "Decrease" (-) button.
+* **Steps:**
+  1. Turn on the stove and select the "Keep Warm" function.
+  2. Continuously press the "Decrease" button until the screen reaches the minimum level
+  3. Press the "Decrease" button one more time.
+* **Expected:** The screen remains at the minimum value and does not decrease further.
+* **Actual:** Does not decrease futher
+* **Verdict:** PASS
+
+### TC09: Activate Child Lock Function
+
+* **Objective:** Verify that the child lock feature is successfully activated to protect the device.
+* **Input:** "Lock" button.
+* **Steps:**
+  1. Turn on the stove and select any cooking function (e.g., Stir-fry).
+  2. Press and hold the "Lock" button for about 3 seconds.
+* **Expected:** The "Lock" indicator LED lights up, and a beep sounds to confirm the successful activation of Lock mode.
+* **Actual:** The "Lock" indicator LED lights up, and a beep sounds to confirm the successful activation of Lock mode.
+* **Verdict:** PASS
+
+### TC10: Button Disabling Verification in Lock State
+
+* **Objective:** Verify that other buttons are completely disabled while Lock mode is active.
+* **Input:** "Increase", "Decrease", "Function", "Timer" buttons.
+* **Steps:**
+  1. Activate the Lock function (as in TC09).
+  2. Press the "Increase", "Decrease", "Function", and "Timer" buttons one by one.
+* **Expected:** The stove does not respond at all, no control beep sounds, and the temperature and cooking mode on the screen remain unchanged.
+* **Actual:** Remain unchanged
+* **Verdict:** PASS
+
+### TC11: Deactivate Child Lock Function
+* **Objective:** Verify that the stove can be unlocked successfully to return to normal control status.
+* **Input:** "Lock" button.
+* **Steps:**
+  1. Ensure the stove is in Lock state (Lock LED is on).
+  2. Press and hold the "Lock" button for 3 seconds.
+* **Expected:** The "Lock" indicator LED turns off, emitting a short beep. Other buttons ("Increase", "Decrease"...) resume normal operation.
+* **Actual:** The "Lock" indicator LED turns off, emitting a short beep. Other buttons ("Increase", "Decrease"...) resume normal operation.
+* **Verdict:** PASS
+
+### TC12: Set Cooking Timer
+
+* **Objective:** Verify that the countdown timer setup feature works correctly.
+* **Input:** "Timer" button, "Increase" (+) button.
+* **Steps:**
+  1. Turn on the stove, select the "Stew" mode.
+  2. Press the "Timer" button once.
+  3. Press the "Increase" button to adjust the time to 10 minutes.
+* **Expected:** The screen displays a flashing "10", then the timer indicator lights up steadily.
+* **Actual:** The screen displays a flashing "10", then the timer indicator lights up steadily
+* **Verdict:** PASS
+
+### TC13: Auto-shutdown on Timer Expiration
+* **Objective:** Verify that the stove safely cuts off heat generation when the countdown timer reaches 0.
+* **Input:** Automatic countdown timer.
+* **Steps:**
+  1. Set the timer to the lowest possible time (e.g., 1 minute) under "Keep Warm" mode.
+  2. Wait for the countdown timer to reach "00".
+  * **Expected:** The stove emits a continuous warning sound (beep beep), immediately stops generating heat, and switches to a safe off or standby state.
+* **Actual:** The stove emits a continuous warning sound (beep beep), immediately stops generating heat, and switches to a safe off or standby state.
+* **Verdict:** PASS
+
+### TC14: Change Cooking Function While Timer is Running
+* **Objective:** Check how the system handles a change in cooking mode while the timer is actively counting down.
+* **Input:** "Function" button.
+* **Steps:**
+  1. Turn on the stove, select "Hotpot" mode, set the timer for 10 minutes.
+  2. After the stove runs for 1 minute, press the "Function" button to switch to "Grill" mode.
+* **Expected:** The mode indicator switches to "Grill" with the default temperature of grill mode. The countdown timer remains intact and continues to count down from the 9th minute 
+* **Actual:** The mode indicator switches to "Grill" with the default temperature of grill mode. The countdown timer remains intact and continues to count down from the 9th minute 
+* **Verdict:** PASS
+
+### TC15: Turn Off Stove During High-Power Operation with Active Timer (Emergency Off)
+
+* **Objective:** Verify that the Power button has the highest priority and can immediately shut down all operations of the stove.
+* **Input:** "Power (On/Off)" button.
+* **Steps:**
+  1. Turn on the stove, select "High Heat" mode, increase to the maximum level, set the timer for 30 minutes.
+  2. While the stove is very hot, press the "Power" button once.
+* **Expected:** The stove immediately cuts off the heating circuit, clears all timer settings, and displays a hot surface warning on the screen (e.g., "H" for Hot). The cooling fan continues to run to cool down internal components safely.
+* **Actual:** he stove immediately cuts off the heating circuit, clears all timer settings, and displays a hot surface warning on the screen. The cooling fan continues to run to cool down internal components safely.
+* **Verdict:** PASS
 
