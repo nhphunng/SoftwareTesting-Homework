@@ -330,6 +330,8 @@ MSSV: 23127194
 - **Severity:** Critical because the leak exposed private data of ChatGPT Plus subscribers to unauthorized users.
 - **Consequences:** Unauthorized leak of active subscriber chat histories and personal PII, forcing OpenAI to take the service offline.
 - **Solution:** Update connection state lifecycles to guarantee buffer clears upon close and patch the redis-py client library to ensure explicit memory buffer purging before connection reassignment. 
+### AI is biased or hallucinates when explaining the defect
+Regarding severity, articles often either don't mention it or mention it directly. Therefore, AI usually uses available information to infer it, making this section the most susceptible to hallucinations or bias. For example, in the AT&T Mobile Signaling Core Blackout defect, the AI ​​inferred that it prevented critical access to 911 emergency centers, even though the article didn't mention it at all.  
 
 
 
