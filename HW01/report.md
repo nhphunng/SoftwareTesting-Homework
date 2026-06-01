@@ -336,8 +336,51 @@ Regarding severity, articles often either don't mention it or mention it directl
 
 ## Requirment 3 – Test cases for ONE physical product
 
-### TC04: Sequential Loop of Cooking Functions
+- **Houseware:** Infrared Stove
+- **Brand:** SANAKY
+- **Model:** VH-6100HG
+- **Year:** 2025
+- **Serial number:** 5902****4106
 
+### TC01: Maximum Timer Boundary (AI Tool could NOT find)
+* **Objective:** Verify that the system does not allow the timer value to exceed the maximum supported limit.
+* **Input:** "Timer" button, "+" button.
+* **Steps:**
+  1. Turn on the stove and select any cooking mode.
+  2. Press the "Timer" button.
+  3. Press the "+" button repeatedly until the timer reaches its maximum value.
+  4. Press the "+" button one more time.
+* **Expected:** The displayed timer value remains at the maximum limit and does not increase further.
+* **Actual:** The displayed timer value remains at the maximum limit and does not increase further.
+* **Verdict:** PASS
+
+### TC02: Minimum Timer Boundary (AI Tool could NOT find)
+* **Objective:** Verify that the system does not allow the timer value to be set below the minimum supported limit.
+* **Input:** "Timer" button, "-" button.
+* **Steps:**
+  1. Turn on the stove and select any cooking mode.
+  2. Press the "Timer" button.
+  3. Press the "-" button repeatedly until the timer reaches its minimum value.
+  4. Press the "-" button one more time.
+* **Expected:** The displayed timer value remains at the minimum limit and does not decrease further or become invalid.
+* **Actual:** The displayed timer value remains at the minimum limit and does not decrease further or become invalid.
+* **Verdict:** PASS
+
+### TC03: Timer Operation During Child Lock (AI Tool could NOT find)
+* **Objective:** Verify that the countdown timer continues operating normally while Child Lock is enabled.
+* **Input:** "Timer" button, "+" button, "Lock" button.
+* **Steps:**
+  1. Turn on the stove and select any cooking mode.
+  2. Set the timer to 5 minutes.
+  3. Activate Child Lock by pressing and holding the "Lock" button for 3 seconds.
+  4. Observe the countdown timer for at least 1 minute.
+  5. Attempt to change the timer value using the "+" or "-" buttons.
+* **Expected:** The timer continues counting down normally while Child Lock is active. Timer settings cannot be modified, and the stove automatically performs the configured timer action when the countdown reaches zero.
+* **Actual:** The timer continues counting down normally while Child Lock is active. Timer settings cannot be modified, and the stove automatically performs the configured timer action when the countdown reaches zero.
+* **Verdict:** PASS
+
+
+### TC04: Sequential Loop of Cooking Functions
 * **Objective:** Verify that the "Function" button can switch sequentially and accurately through all 6 cooking modes.
 * **Input:** "Function" button.
 * **Steps:**
@@ -348,7 +391,6 @@ Regarding severity, articles often either don't mention it or mention it directl
 * **Verdict:** PASS
 
 ### TC05: Increase Temperature/Power Level
-
 * **Objective:** Verify that the temperature increase feature works correctly when pressing the "Increase" button.
 * **Input:** "Increase" (+) button.
 * **Steps:**
@@ -359,20 +401,16 @@ Regarding severity, articles often either don't mention it or mention it directl
 * **Verdict:** FAIL
 
 ### TC06: Decrease Temperature/Power Level
-
 * **Objective:** Verify that the temperature decrease feature works correctly when pressing the "Decrease" button.
 * **Input:** "Decrease" (-) button.
 * **Steps:**
   1. Turn on the stove and select the "Hotpot" function.
   2. Press the "Decrease" (-) button once.
-
-
 * **Expected:** The temperature/power level displayed on the screen decreases by 1 step, and the stove reduces heat generation.
 * **Actual:** The temperature/power level displayed on the screen decreases
 * **Verdict:** PASS
 
 ### TC07: Maximum Temperature Boundary Test (Max Boundary)
-
 * **Objective:** Verify that the system does not allow the temperature to exceed the stove's maximum limit.
 * **Input:** "Increase" (+) button.
 * **Steps:**
@@ -384,7 +422,6 @@ Regarding severity, articles often either don't mention it or mention it directl
 * **Verdict:** PASS
 
 ### TC08: Minimum Temperature Boundary Test (Min Boundary)
-
 * **Objective:** Verify that the system does not allow the temperature to drop below the stove's minimum limit.
 * **Input:** "Decrease" (-) button.
 * **Steps:**
@@ -396,7 +433,6 @@ Regarding severity, articles often either don't mention it or mention it directl
 * **Verdict:** PASS
 
 ### TC09: Activate Child Lock Function
-
 * **Objective:** Verify that the child lock feature is successfully activated to protect the device.
 * **Input:** "Lock" button.
 * **Steps:**
@@ -407,7 +443,6 @@ Regarding severity, articles often either don't mention it or mention it directl
 * **Verdict:** PASS
 
 ### TC10: Button Disabling Verification in Lock State
-
 * **Objective:** Verify that other buttons are completely disabled while Lock mode is active.
 * **Input:** "Increase", "Decrease", "Function", "Timer" buttons.
 * **Steps:**
@@ -428,7 +463,6 @@ Regarding severity, articles often either don't mention it or mention it directl
 * **Verdict:** PASS
 
 ### TC12: Set Cooking Timer
-
 * **Objective:** Verify that the countdown timer setup feature works correctly.
 * **Input:** "Timer" button, "Increase" (+) button.
 * **Steps:**
@@ -460,7 +494,6 @@ Regarding severity, articles often either don't mention it or mention it directl
 * **Verdict:** PASS
 
 ### TC15: Turn Off Stove During High-Power Operation with Active Timer (Emergency Off)
-
 * **Objective:** Verify that the Power button has the highest priority and can immediately shut down all operations of the stove.
 * **Input:** "Power (On/Off)" button.
 * **Steps:**
