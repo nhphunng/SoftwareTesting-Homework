@@ -44,3 +44,39 @@ Mandatory deliverables:
 - Do not invent actual execution results. Use "Not Executed" until the tester provides actual results.
 - If a bug is found, create a bug report template with steps, expected result, actual result, severity, and screenshot placeholder.
 - After each major step, suggest a Git commit message.
+
+## AI Audit Report Rule
+
+AI Audit Report is mandatory for HW02.
+
+If AI is used, the report must include this declaration:
+
+"I use AI tools for the following tasks."
+
+For every AI interaction, Codex must generate an AI Audit Entry with:
+
+1. Name of the AI tool
+2. Date and time
+3. User prompt
+4. AI output summary
+5. Human review notes
+
+Codex must not claim that the work was fully human-made if AI was used.
+
+For every generated testing artifact, Codex must append or provide an audit entry in this format:
+
+| Interaction ID | AI Tool | Date and Time | Task | User Prompt | AI Output Summary | Human Review |
+| -------------- | ------- | ------------- | ---- | ----------- | ----------------- | ------------ |
+
+If the exact date and time is not available, Codex must write:
+"To be filled by tester"
+
+If the full AI output is too long, Codex must summarize the output and reference the generated file path.
+
+Codex must also include a short "Human Review" section after each AI-generated artifact:
+
+* Accepted:
+* Modified:
+* Removed:
+* Added:
+* Assumptions to verify:

@@ -34,6 +34,7 @@ For every feature, follow this exact order:
 
 Do not skip steps.
 
+
 ## Step 1: Feature Understanding
 
 For each feature, summarize:
@@ -173,7 +174,57 @@ Common AI gaps to check:
 - Missing role-based or permission cases
 - Missing data dependency between FR-17 and FR-09
 
-## Step 11: Human Review Notes
+## Step 11: AI Audit Entry
+
+For every AI-assisted output, create an AI Audit Entry.
+
+This is mandatory because the assignment requires an AI Audit Report appendix.
+
+If AI was used, include this declaration in the AI Audit Report:
+
+"I use AI tools for the following tasks."
+
+If AI was not used, include this declaration:
+
+"I do not use any AI help in this exercise."
+
+For each AI interaction, record:
+
+| Interaction ID | AI Tool | Date and Time | Task | User Prompt | AI Output Summary | Human Review |
+| -------------- | ------- | ------------- | ---- | ----------- | ----------------- | ------------ |
+
+Rules:
+
+* AI Tool should be "Codex" unless the tester specifies another tool.
+* Date and Time should be filled with the current date/time if available. If not available, write "To be filled by tester".
+* User Prompt must include the actual prompt used by the tester.
+* AI Output Summary must summarize what Codex generated.
+* If the generated output was saved to a file, reference the file path.
+* Human Review must describe what the tester accepted, modified, removed, or added.
+* Do not invent human review results. If not reviewed yet, write "Pending human review".
+
+Required audit entry format:
+
+```markdown
+## AI Audit Entry - [Interaction ID]
+
+| Field | Content |
+|---|---|
+| AI Tool | Codex |
+| Date and Time | To be filled by tester |
+| Task | |
+| User Prompt | |
+| AI Output | |
+| Generated File | |
+| Human Review | Pending human review |
+```
+
+After generating any feature testing artifact, Codex must also provide a short instruction:
+
+"Copy this AI Audit Entry into reports/ai-audit-report.md."
+
+
+## Step 12: Human Review Notes
 
 Always include:
 
@@ -184,3 +235,4 @@ Human Review:
 - Removed:
 - Added:
 - Assumptions to verify:
+
