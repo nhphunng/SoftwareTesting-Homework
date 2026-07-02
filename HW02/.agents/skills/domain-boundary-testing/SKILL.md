@@ -219,8 +219,7 @@ Required audit entry format:
 | Human Review | Pending human review |
 ```
 
-After generating any feature testing artifact, Codex must also provide a short instruction:
-
+After generating anything, Codex must also provide a short instruction:
 "Copy this AI Audit Entry into reports/ai-audit-report.md."
 
 
