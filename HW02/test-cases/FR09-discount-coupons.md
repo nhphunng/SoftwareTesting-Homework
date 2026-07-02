@@ -128,7 +128,7 @@
 | FR09-BVA-008 | Usage count exactly at `SAVE10` limit  | User logged in; usage history can be prepared.                   | `SAVE10`; used count `1`; max uses `1`.               | Apply `SAVE10`.             | Coupon is rejected because usage count is not less than max uses.                                  | Coupon is rejected                                                               | Passed |
 | FR09-BVA-009 | Usage count below `VIP100` limit       | User logged in; usage history can be prepared.                   | `VIP100`; used count `1`; max uses `2`.               | Apply `VIP100`.             | Coupon is accepted                                                                                 | Coupon is accepted                                                               | Passed |
 | FR09-BVA-010 | Expiration exactly at current date     | User logged in; coupon exists with `expired_at=2026-06-30`.      | Coupon `EXPIRES_TODAY`; current date `2026-06-30`.    | Apply coupon.               | Requirement unclear: coupon should be rejected unless end-of-day behavior is defined.              | Coupon is rejected                                                               | Passed |
-| FR09-BVA-011 | Expiration after current date          | User logged in; coupon exists with `expired_at=2026-07-01`.      | Coupon `EXPIRES_TOMORROW`; current date `2026-07-01`. | Apply coupon.               | Coupon is accepted if all other conditions pass.                                                   | TBD                                                                              | Passed |
+| FR09-BVA-011 | Expiration after current date          | User logged in; coupon exists with `expired_at=2026-07-01`.      | Coupon `EXPIRES_TOMORROW`; current date `2026-07-01`. | Apply coupon.               | Coupon is accepted if all other conditions pass.                                                   | Coupon is accepted                                                               | Passed |
 | FR09-BVA-012 | Fixed discount equals cart total       | User logged in; test fixed coupon exists.                        | Cart total `50000`; fixed discount `50000`.           | Apply coupon.               | Final amount is `0`; payment flow handles zero amount according to product rule.                   | Final amount is `0`; payment flow handles zero amount according to product rule. | Passed |
 | FR09-BVA-013 | Fixed discount greater than cart total | User logged in; test fixed coupon exists.                        | Cart total `50000`; fixed discount `50001`.           | Apply coupon.               | Final amount is `0`; payment flow handles zero amount according to product rule.                   | Final amout is nagative value                                                    | Failed |
 
@@ -136,40 +136,19 @@
 
 | Feature ID | Designed | Executed | Passed | Failed | Not Executed | Bugs Found |
 | ---------- | -------: | -------: | -----: | -----: | -----------: | ---------: |
-| FR-09      |       25 |        0 |      0 |      0 |           25 |          0 |
+| FR-09      |       23 |       23 |     12 |      7 |            0 |          3 |
 
-## 9. Bug Report Template
+## 9. AI Gap Analysis
 
-Use this template only after a defect is observed during execution.
+| Gap ID       | AI Output Issue                                                           | Missed / Wrong / Incomplete | Why It Happened                                                                                                                   | Human Correction                                                                                                   |
+| ------------ | ------------------------------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| FR09-GAP-001 | Usage-limit cases require controlled user history.                        | Incomplete                  | AI cannot infer or create actual usage history without execution setup.                                                           | Prepare user coupon usage counts for `FR09-DT-005` and `FR09-BVA-007` to `FR09-BVA-009`.                           |
+| FR09-GAP-002 | Discount greater than cart total was treated as unclear before execution. | Incomplete                  | Formula does not define whether fixed discount should be capped, but actual execution shows negative payable amounts.             | Record defects for `FR09-DT-009` and `FR09-BVA-013`; clarify whether expected behavior is rejection or cap at `0`. |
+| FR09-GAP-003 | Date boundary semantics are unclear.                                      | Incomplete                  | Requirement says current date must be before `expired_at`, but UI/business may treat expiration date as valid through end of day. | Clarify whether a coupon expiring on the current date is valid through end of day.                                 |
+| FR09-GAP-004 | FR-17 defects may affect FR-09 behavior.                                  | Incomplete                  | FR-09 consumes coupon data from FR-17, and FR-17 execution found validation defects.                                              | Add cross-feature verification with invalid FR-17-created coupons in future FR09 tests.                            |
+| FR09-GAP-005 | Rounding/display rule for percentage discount is not specified.           | Incomplete                  | Formula can produce decimal VND values for totals like `300001`.                                                                  | Clarify rounding before asserting exact display for `FR09-BVA-003`.                                                |
 
-| Field              | Content                                                      |
-| ------------------ | ------------------------------------------------------------ |
-| Bug ID             | FR09-BUG-\_\_\_                                              |
-| Title              |                                                        |
-| Feature            | FR-09 Discount Coupons                                       |
-| Severity           |                                                        |
-| Priority           |                                                        |
-| Environment        | Browser, OS, app URL, build/commit                           |
-| Preconditions      | User account/session, cart data, coupon seed data from FR-17 |
-| Steps to Reproduce | 1.                                                           |
-| Expected Result    |                                                        |
-| Actual Result      |                                                        |
-| Screenshot         | `screenshots/FR09-BUG-___.png`                               |
-| Related Test Case  | FR09-\_\_\_                                                  |
-| GitHub Issue Link  |                                                        |
-
-## 10. AI Gap Analysis
-
-| Gap ID       | AI Output Issue                                                             | Missed / Wrong / Incomplete | Why It Happened                                                                                                                   | Human Correction                                                                         |
-| ------------ | --------------------------------------------------------------------------- | --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| FR09-GAP-001 | Inactive coupon requires test data not provided in the sample coupon table. | Incomplete                  | Sample data includes active/expired examples but not inactive coupon.                                                             | Create inactive coupon via FR-17 or seed DB before executing `FR09-DT-004`.              |
-| FR09-GAP-002 | Usage-limit cases require controlled user history.                          | Incomplete                  | AI cannot infer or create actual usage history without execution setup.                                                           | Prepare user coupon usage counts for `FR09-DT-005` and `FR09-BVA-007` to `FR09-BVA-009`. |
-| FR09-GAP-003 | Discount greater than cart total is unclear.                                | Incomplete                  | Formula does not define whether fixed discount should be capped.                                                                  | Clarify product rule before marking `FR09-DT-009` and `FR09-BVA-013` as pass/fail.       |
-| FR09-GAP-004 | Date boundary semantics are unclear.                                        | Incomplete                  | Requirement says current date must be before `expired_at`, but UI/business may treat expiration date as valid through end of day. | Clarify whether `expired_at=2026-06-23` is valid on `2026-06-23`.                        |
-| FR09-GAP-005 | FR-17 defects may affect FR-09 behavior.                                    | Incomplete                  | FR-09 consumes coupon data from FR-17, and FR-17 execution found validation defects.                                              | Add cross-feature verification with invalid FR-17-created coupons in `FR09-DT-012`.      |
-| FR09-GAP-006 | Rounding/display rule for percentage discount is not specified.             | Incomplete                  | Formula can produce decimal VND values for totals like `300001`.                                                                  | Clarify rounding before asserting exact display for `FR09-BVA-003`.                      |
-
-## 11. Human Review Notes
+## 10. Human Review Notes
 
 ```text
 Human Review:
@@ -186,7 +165,7 @@ Human Review:
   - Whether FR-09 validates coupon data again when FR-17 creates invalid coupon records.
 ```
 
-## 12. Suggested Git Commit Message
+## 11. Suggested Git Commit Message
 
 ```text
 Add FR-09 discount coupon domain and boundary tests
