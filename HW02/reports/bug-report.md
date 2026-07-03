@@ -12,6 +12,9 @@
 | FR09-BUG-001 | FR-09 Discount Coupons | Percent coupon is accepted but final amount remains unchanged. | High | Confirmed | FR09-DT-001, FR09-DT-007 | [DT-001](../screenshots/FR09-DT-001.png), [DT-007](../screenshots/FR09-DT-007.png) |
 | FR09-BUG-002 | FR-09 Discount Coupons | Coupon is rejected when cart total is exactly at the minimum order amount. | High | Confirmed | FR09-BVA-002 | [BVA-002](../screenshots/FR09-BVA-002.png) |
 | FR09-BUG-003 | FR-09 Discount Coupons | Fixed discount greater than cart total produces a negative final amount. | High | Confirmed | FR09-DT-009, FR09-BVA-013 | [DT-009](../screenshots/FR09-DT-009.png), [BVA-013](../screenshots/FR09-BVA-013.png) |
+| MFR04-BUG-001 | Mobile-FR04 Profile Management | System accepts empty or whitespace-only full name. | High | Confirmed | MFR04-DT-005, MFR04-DT-006 | [DT-005](../screenshots/MFR04-DT-005.jpg), [DT-006](../screenshots/MFR04-DT-006.jpg) |
+| MFR04-BUG-002 | Mobile-FR04 Profile Management | System rejects valid phone numbers that start with `0`. | High | Confirmed | MFR04-DT-007, MFR04-DT-009, MFR04-BVA-006 | [DT-007](../screenshots/MFR04-DT-007.jpg), [DT-009](../screenshots/MFR04-DT-009.jpg), [BVA-006](../screenshots/MFR04-BVA-006.jpg) |
+| MFR04-BUG-003 | Mobile-FR04 Profile Management | System accepts phone numbers that do not start with `0`. | High | Confirmed | MFR04-DT-011, MFR04-BVA-007 | [DT-011](../screenshots/MFR04-DT-011.jpg), [BVA-007](../screenshots/MFR04-BVA-007.jpg) |
 
 ## Bug Details
 
@@ -159,6 +162,60 @@
 | Related Test Case | FR09-DT-009, FR09-BVA-013 |
 | GitHub Issue Link |  |
 
+### MFR04-BUG-001 - Empty or whitespace-only full name is accepted
+
+| Field | Content |
+|---|---|
+| Bug ID | MFR04-BUG-001 |
+| Title | Empty or whitespace-only full name is accepted |
+| Feature | Mobile-FR04 Profile Management |
+| Severity | High |
+| Priority | High |
+| Environment | EShop Mobile, local test environment |
+| Preconditions | Customer is logged in and opens the profile page. |
+| Steps to Reproduce | 1. Clear the full name field and tap `Cập nhật`. 2. Enter only spaces in the full name field and tap `Cập nhật`. |
+| Expected Result | Profile update is rejected and a required/invalid full-name validation message is shown. |
+| Actual Result | Profile is saved with an empty or whitespace-only full name. |
+| Screenshot | [DT-005](../screenshots/MFR04-DT-005.jpg), [DT-006](../screenshots/MFR04-DT-006.jpg) |
+| Related Test Case | MFR04-DT-005, MFR04-DT-006 |
+| GitHub Issue Link |  |
+
+### MFR04-BUG-002 - Valid leading-zero phone number is rejected
+
+| Field | Content |
+|---|---|
+| Bug ID | MFR04-BUG-002 |
+| Title | Valid phone numbers starting with `0` are rejected |
+| Feature | Mobile-FR04 Profile Management |
+| Severity | High |
+| Priority | High |
+| Environment | EShop Mobile, local test environment |
+| Preconditions | Customer is logged in and opens the profile page. |
+| Steps to Reproduce | 1. Enter a phone number starting with `0`, such as `0912345678` or `091234567`. 2. Tap `Cập nhật`. |
+| Expected Result | Profile is saved when the phone value satisfies the confirmed valid phone rule. |
+| Actual Result | System shows phone validation error such as `Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số`. |
+| Screenshot | [DT-007](../screenshots/MFR04-DT-007.jpg), [DT-009](../screenshots/MFR04-DT-009.jpg), [BVA-006](../screenshots/MFR04-BVA-006.jpg) |
+| Related Test Case | MFR04-DT-007, MFR04-DT-009, MFR04-BVA-006 |
+| GitHub Issue Link |  |
+
+### MFR04-BUG-003 - Phone number without leading zero is accepted
+
+| Field | Content |
+|---|---|
+| Bug ID | MFR04-BUG-003 |
+| Title | Phone numbers not starting with `0` are accepted |
+| Feature | Mobile-FR04 Profile Management |
+| Severity | High |
+| Priority | High |
+| Environment | EShop Mobile, local test environment |
+| Preconditions | Customer is logged in and opens the profile page. |
+| Steps to Reproduce | 1. Enter a phone number that does not start with `0`, such as `123456789`. 2. Tap `Cập nhật`. |
+| Expected Result | Profile update is rejected because phone number must start with `0`. |
+| Actual Result | Profile is saved and the updated value remains after reload. |
+| Screenshot | [DT-011](../screenshots/MFR04-DT-011.jpg), [BVA-007](../screenshots/MFR04-BVA-007.jpg) |
+| Related Test Case | MFR04-DT-011, MFR04-BVA-007 |
+| GitHub Issue Link |  |
+
 ## Human Review
 
 ```text
@@ -168,6 +225,7 @@ Human Review:
 - Removed:
 - Added:
   - FR-09 bugs for percent discount calculation/display, exact minimum-order boundary handling, and fixed discounts that create negative final amounts.
+  - Mobile-FR04 bugs for full-name validation and phone-number validation mismatches.
 - Assumptions to verify:
   - Whether percent discount must be limited to 100.
   - Whether creating already-expired coupons is allowed.
@@ -176,10 +234,12 @@ Human Review:
   - Expected validation message for each failed admin-form submission.
   - Whether fixed coupons greater than cart total should be rejected or capped at `0`.
   - Whether minimum-order validation should use `>= min_order_amount` consistently for all coupons.
+  - Whether Mobile-FR04 phone rule should follow the requirement `0` + 10-11 digits or the current app message saying 9-10 digits.
+  - Whether full name is mandatory after trimming whitespace.
 ```
 
 ## Suggested Git Commit Message
 
 ```text
-Update FR-17 coupon bug report evidence
+Update Mobile-FR04 bug report evidence
 ```
