@@ -168,3 +168,27 @@ I use AI tools for the following tasks.
 | AI Output | Codex used the repo-local `domain-boundary-testing` skill to group failed Mobile-FR04 test cases into confirmed defects, add defect-log rows, add detailed bug reports, attach available screenshot evidence, and update the bug report human review notes and suggested commit message. |
 | Generated File | reports/bug-report.md |
 | Human Review | Pending human review |
+
+### AI Audit Entry - AI-013
+
+| Field | Content |
+|---|---|
+| AI Tool | Codex |
+| Date and Time | 2026-07-05 10:35 +07 |
+| Task | Create HW02 main testing report in Markdown and PDF |
+| User Prompt | Based on HW02/test-cases write HW02/reports/main-report.md (Markdown + PDF), including the Domain Testing report and the Boundary Value Analysis report. |
+| AI Output | Codex used the repo-local `domain-boundary-testing` workflow and PDF rendering workflow to write `reports/main-report.md`, generate `reports/main-report.pdf`, summarize Domain Testing and Boundary Value Analysis results from the current test-case artifacts, and include execution totals, defect summary, AI gap analysis, human review notes, and follow-up questions. |
+| Generated File | reports/main-report.md; reports/main-report.pdf |
+| Human Review | Pending human review |
+
+### AI Audit Entry - AI-014
+
+| Field | Content |
+|---|---|
+| AI Tool | Codex |
+| Date and Time | 2026-07-05 10:46 +07 |
+| Task | Restructure HW02 main report by feature and update README summary |
+| User Prompt | I want main report is summarize of HW02/test-cases, each FR is a session on main report including content: Feature Understanding (expect Assumptions to verify), Input / Output Identification, Domain Rule Identification, Equivalence Class Partitioning, Domain Testing Test Cases, Boundary Identification. HW02/README.md containing the self-assessment table and a test summary report: number of features; number of test cases designed, executed, passed, failed, and not yet executed; number of bugs. |
+| AI Output | Codex used the repo-local `domain-boundary-testing` workflow to rewrite `reports/main-report.md` as per-feature sessions with the requested sections, update `README.md` with the self-assessment table and test summary report, and regenerate `reports/main-report.pdf` from the updated Markdown. |
+| Generated File | reports/main-report.md; reports/main-report.pdf; README.md |
+| Human Review | Pending human review |
