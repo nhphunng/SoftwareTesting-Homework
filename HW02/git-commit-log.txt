@@ -1,0 +1,367 @@
+* commit 523493bdccd135925e183b689c49926d43817f5e
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Sun Jul 5 20:27:57 2026 +0700
+| 
+|     Add AI audit entries for HW02 main testing report, including detailed summaries of Domain Testing and Boundary Value Analysis results, and update README.md with self-assessment and test summary report.
+| 
+|  HW02/reports/ai-audit-report.md | 24 ++++++++++++++++++++++++
+|  1 file changed, 24 insertions(+)
+| 
+* commit 870df1dceb78f3142d3d1d732fed978da8af8068
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Sun Jul 5 20:27:52 2026 +0700
+| 
+|     Add AI audit entries and critique for HW02, including detailed analysis of AI-generated outputs and their limitations
+| 
+|  HW02/reports/ai-critique.md | 3 +++
+|  1 file changed, 3 insertions(+)
+| 
+* commit 3817737b38d22a2d189e34179c76e38c2fdd54bc
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Sun Jul 5 20:27:42 2026 +0700
+| 
+|     Add README.md for HW02 - Domain Testing on EShop, including folder structure, selected features, main files, test summary report, self-assessment, and notes
+| 
+|  HW02/README.md | 76 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 76 insertions(+)
+| 
+* commit 2a8b02af9743783825530d489702d63b78711c6b
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Sun Jul 5 20:27:27 2026 +0700
+| 
+|     Implement code changes to enhance functionality and improve performance
+| 
+|  HW02/reports/main-report.md | 581 ++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 581 insertions(+)
+| 
+* commit ec8beaeca4fe8ad3a19be7ea622a4fd7344559ff
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Fri Jul 3 13:27:25 2026 +0700
+| 
+|     Add Mobile-FR04 profile management domain testing and boundary value analysis documentation
+| 
+|  HW02/test-cases/Mobile-FR04-profile-management.md | 264 ++++++++++++++++++++
+|  1 file changed, 264 insertions(+)
+| 
+* commit 6ea3905aeccb5170f6d4816fb11057ce26ff996c
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Fri Jul 3 13:27:16 2026 +0700
+| 
+|     Add AI audit entries for FR-17 and FR-09 testing artifacts, including updates on execution summaries, bug reports, and AI gap analyses
+| 
+|  HW02/reports/ai-audit-report.md | 144 +++++++++++++++++++++++++++++++++++++-
+|  1 file changed, 142 insertions(+), 2 deletions(-)
+| 
+* commit a7f7a566c12dc1af7bd2364fe6394769e38c3822
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Fri Jul 3 13:27:07 2026 +0700
+| 
+|     Add bug reports for Mobile-FR04 profile management validation issues
+| 
+|  HW02/reports/bug-report.md | 62 +++++++++++++++++++++++++++++++++++++++++++-
+|  1 file changed, 61 insertions(+), 1 deletion(-)
+| 
+* commit 5ff953816b9d5d6beae189a133b751784411f420
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Fri Jul 3 13:27:00 2026 +0700
+| 
+|     Add new screenshots for boundary value analysis and domain testing
+| 
+|  HW02/screenshots/MFR04-BVA-006.jpg | Bin 0 -> 211143 bytes
+|  HW02/screenshots/MFR04-BVA-007.jpg | Bin 0 -> 227900 bytes
+|  HW02/screenshots/MFR04-DT-005.jpg  | Bin 0 -> 208107 bytes
+|  HW02/screenshots/MFR04-DT-006.jpg  | Bin 0 -> 208107 bytes
+|  HW02/screenshots/MFR04-DT-007.jpg  | Bin 0 -> 211143 bytes
+|  HW02/screenshots/MFR04-DT-009.jpg  | Bin 0 -> 211143 bytes
+|  HW02/screenshots/MFR04-DT-011.jpg  | Bin 0 -> 227900 bytes
+|  7 files changed, 0 insertions(+), 0 deletions(-)
+| 
+* commit 8679e20e3e0ac675a6fa263d80dd6b6dcffc9484
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Thu Jul 2 19:20:06 2026 +0700
+| 
+|     Add bug report and test case templates for domain-boundary-testing
+| 
+|  .../skills/domain-boundary-testing/SKILL.md       |  3 +-
+|  .../assets/bug-report-template.md                 | 38 +++++++++++++++++++++
+|  .../assets/test-case-template.md                  | 18 ++++++++++
+|  HW02/prompt/prompt_template.md                    | 25 ++++++++++++++
+|  4 files changed, 82 insertions(+), 2 deletions(-)
+| 
+* commit ff9fceeb55adc365a5cd8e1ded3f924d1683a3cb
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Thu Jul 2 19:19:52 2026 +0700
+| 
+|     Add comprehensive bug report for FR-17 and FR-09 coupon management issues
+| 
+|  HW02/reports/bug-report.md | 185 +++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 185 insertions(+)
+| 
+* commit 4fe10ded1f05e0b8b14c803d781c39bdda2daf1d
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Thu Jul 2 19:19:31 2026 +0700
+| 
+|     Add domain testing and boundary value analysis for FR-05 product listing and search
+| 
+|  HW02/test-cases/FR05-product-listing-search.md | 181 +++++++++++++++++++++++
+|  1 file changed, 181 insertions(+)
+| 
+* commit 1853922c979970e10c0e418b05b138271f4fc3b2
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Thu Jul 2 19:19:24 2026 +0700
+| 
+|     Update FR-09 discount coupon tests for expiration and usage limits
+| 
+|  HW02/test-cases/FR09-discount-coupons.md | 51 +++++++++---------------------
+|  1 file changed, 15 insertions(+), 36 deletions(-)
+| 
+* commit dd9bf0556641887f82672f2b4f06bff2b0595581
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Thu Jul 2 19:19:10 2026 +0700
+| 
+|     Refactor code structure for improved readability and maintainability
+| 
+|  HW02/screenshots/FR17-BVA-001.png              | Bin 184448 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-006.png              | Bin 184853 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-007.png              | Bin 183307 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-008.png              | Bin 188646 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-010.png              | Bin 187860 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-013.png              | Bin 186525 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-016.png              | Bin 190885 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-017.png              | Bin 186801 -> 0 bytes
+|  HW02/screenshots/FR17-BVA-023.png              | Bin 190018 -> 0 bytes
+|  HW02/screenshots/FR17-DT-006.png               | Bin 194418 -> 0 bytes
+|  HW02/screenshots/FR17-DT-007.png               | Bin 0 -> 28788 bytes
+|  HW02/screenshots/FR17-DT-008.png               | Bin 25963 -> 28027 bytes
+|  HW02/screenshots/FR17-DT-009.png               | Bin 177550 -> 31331 bytes
+|  HW02/screenshots/FR17-DT-011.png               | Bin 0 -> 32484 bytes
+|  HW02/screenshots/FR17-DT-012 N:A.png           | Bin 176216 -> 0 bytes
+|  HW02/screenshots/FR17-DT-012.png               | Bin 0 -> 29415 bytes
+|  HW02/screenshots/FR17-DT-013.png               | Bin 172217 -> 33940 bytes
+|  HW02/screenshots/FR17-DT-014.png               | Bin 98099 -> 0 bytes
+|  HW02/screenshots/FR17-DT-015.png               | Bin 178510 -> 0 bytes
+|  HW02/screenshots/FR17-DT-017.png               | Bin 174786 -> 0 bytes
+|  HW02/screenshots/FR17-DT-018.png               | Bin 180183 -> 24209 bytes
+|  HW02/screenshots/FR17-DT-019.png               | Bin 156700 -> 55415 bytes
+|  HW02/screenshots/FR17-DT-021.png               | Bin 0 -> 29852 bytes
+|  HW02/screenshots/FR17-DT-022.png               | Bin 178524 -> 0 bytes
+|  HW02/screenshots/FR17-DT-023.png               | Bin 181370 -> 0 bytes
+|  HW02/screenshots/FR17-DT-024.png               | Bin 181127 -> 0 bytes
+|  HW02/screenshots/FR17-DT-025.png               | Bin 181338 -> 0 bytes
+|  HW02/screenshots/FR17-DT-026.png               | Bin 181345 -> 0 bytes
+|  HW02/screenshots/FR17-DT-027.png               | Bin 182533 -> 0 bytes
+|  HW02/screenshots/FR17-DT-028.png               | Bin 181205 -> 0 bytes
+|  HW02/screenshots/FR17-DT-029.png               | Bin 183605 -> 0 bytes
+|  HW02/screenshots/FR17-DT-030.png               | Bin 180367 -> 0 bytes
+|  HW02/screenshots/FR17-DT-031.png               | Bin 182612 -> 0 bytes
+|  HW02/test-cases/FR17-coupon-management-crud.md | 362 ++++++++++++-----------
+|  34 files changed, 191 insertions(+), 171 deletions(-)
+| 
+* commit c8b9186470de0fe7b2f85c4667d877783b2201b6
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Tue Jun 30 11:08:00 2026 +0700
+| 
+|     Add screenshots and test cases status for FR-09 Discount Coupons
+| 
+|  HW02/screenshots/FR09-BVA-002.png        | Bin 0 -> 120739 bytes
+|  HW02/screenshots/FR09-BVA-013.png        | Bin 0 -> 130518 bytes
+|  HW02/screenshots/FR09-DT-001.png         | Bin 0 -> 136147 bytes
+|  HW02/screenshots/FR09-DT-007.png         | Bin 0 -> 137304 bytes
+|  HW02/screenshots/FR09-DT-009.png         | Bin 0 -> 138943 bytes
+|  HW02/test-cases/FR09-discount-coupons.md | 193 +++++++++++++++++++++++++++++
+|  6 files changed, 193 insertions(+)
+| 
+* commit feecea7e9f6eccd3e10909def4daf44bbba73bb8
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Tue Jun 23 12:53:14 2026 +0700
+| 
+|     Add first draft testing artifacts for FR-17 Coupon Management CRUD
+| 
+|  HW02/test-cases/FR17-coupon-management-crud.md | 247 +++++++++++++++++++++++
+|  1 file changed, 247 insertions(+)
+| 
+* commit 9db87c4afe9950bb5a57fb12a5af265604d0c747
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Tue Jun 23 12:44:33 2026 +0700
+| 
+|     Add multiple screenshots for Boundary Value Analysis and Domain Testing
+| 
+|  HW02/screenshots/FR17-BVA-001.png    | Bin 0 -> 184448 bytes
+|  HW02/screenshots/FR17-BVA-006.png    | Bin 0 -> 184853 bytes
+|  HW02/screenshots/FR17-BVA-007.png    | Bin 0 -> 183307 bytes
+|  HW02/screenshots/FR17-BVA-008.png    | Bin 0 -> 188646 bytes
+|  HW02/screenshots/FR17-BVA-010.png    | Bin 0 -> 187860 bytes
+|  HW02/screenshots/FR17-BVA-013.png    | Bin 0 -> 186525 bytes
+|  HW02/screenshots/FR17-BVA-016.png    | Bin 0 -> 190885 bytes
+|  HW02/screenshots/FR17-BVA-017.png    | Bin 0 -> 186801 bytes
+|  HW02/screenshots/FR17-BVA-023.png    | Bin 0 -> 190018 bytes
+|  HW02/screenshots/FR17-DT-006.png     | Bin 0 -> 194418 bytes
+|  HW02/screenshots/FR17-DT-008.png     | Bin 0 -> 25963 bytes
+|  HW02/screenshots/FR17-DT-009.png     | Bin 0 -> 177550 bytes
+|  HW02/screenshots/FR17-DT-012 N:A.png | Bin 0 -> 176216 bytes
+|  HW02/screenshots/FR17-DT-013.png     | Bin 0 -> 172217 bytes
+|  HW02/screenshots/FR17-DT-014.png     | Bin 0 -> 98099 bytes
+|  HW02/screenshots/FR17-DT-015.png     | Bin 0 -> 178510 bytes
+|  HW02/screenshots/FR17-DT-017.png     | Bin 0 -> 174786 bytes
+|  HW02/screenshots/FR17-DT-018.png     | Bin 0 -> 180183 bytes
+|  HW02/screenshots/FR17-DT-019.png     | Bin 0 -> 156700 bytes
+|  HW02/screenshots/FR17-DT-022.png     | Bin 0 -> 178524 bytes
+|  HW02/screenshots/FR17-DT-023.png     | Bin 0 -> 181370 bytes
+|  HW02/screenshots/FR17-DT-024.png     | Bin 0 -> 181127 bytes
+|  HW02/screenshots/FR17-DT-025.png     | Bin 0 -> 181338 bytes
+|  HW02/screenshots/FR17-DT-026.png     | Bin 0 -> 181345 bytes
+|  HW02/screenshots/FR17-DT-027.png     | Bin 0 -> 182533 bytes
+|  HW02/screenshots/FR17-DT-028.png     | Bin 0 -> 181205 bytes
+|  HW02/screenshots/FR17-DT-029.png     | Bin 0 -> 183605 bytes
+|  HW02/screenshots/FR17-DT-030.png     | Bin 0 -> 180367 bytes
+|  HW02/screenshots/FR17-DT-031.png     | Bin 0 -> 182612 bytes
+|  29 files changed, 0 insertions(+), 0 deletions(-)
+| 
+* commit cb7b9041dcdd58e007ffca54aecbefd10c9fa585
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 22 13:43:43 2026 +0700
+| 
+|     Add AI Audit Entry guidelines and mandatory report for HW02
+| 
+|  .../skills/domain-boundary-testing/SKILL.md       | 56 ++++++++++++++++++++-
+|  .../assets/ai-audit-template.md                   | 31 ++++++++++++
+|  HW02/AGENTS.md                                    | 38 +++++++++++++-
+|  HW02/reports/ai-audit-report.md                   | 30 +++++++++++
+|  4 files changed, 152 insertions(+), 3 deletions(-)
+| 
+* commit 90fc30609e6c7147f9ef700ce913993af2657a90
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 22 12:47:36 2026 +0700
+| 
+|     Add templates for Assignment Summary, Boundary Value Analysis, and Domain Testing
+| 
+|  .../references/assignment-summary.md              | 38 +++++++++++++++++++++
+|  .../references/boundary-value-template.md         | 11 ++++++
+|  .../references/domain-testing-template.md         | 24 +++++++++++++
+|  3 files changed, 73 insertions(+)
+| 
+* commit c40aac253d1334b1b7296593c52edb48a943ce9c
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 22 12:36:53 2026 +0700
+| 
+|     Add SKILL.md for Domain Boundary Testing with structured workflow and test case guidelines
+| 
+|  .../skills/domain-boundary-testing/SKILL.md       | 186 ++++++++++++++++++++
+|  1 file changed, 186 insertions(+)
+| 
+* commit 77051f332f053286bb8bc4271cd449ea37da0159
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 22 12:33:08 2026 +0700
+| 
+|     Add AGENTS.md with project context, assignment requirements, and working rules for Domain Testing
+| 
+|  HW02/AGENTS.md | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 46 insertions(+)
+| 
+* commit 94676d73ba001d76f050101ad0e6e8cb4cefd0d3
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 15:53:39 2026 +0700
+| 
+|     Add QA/QC role map and clarify responsibilities for Code Quality, RCA, and Performance & Security
+| 
+|  HW01/QA-QC-role-map.md | 33 +++++++++++++++++++++++++++++++++
+|  1 file changed, 33 insertions(+)
+| 
+* commit 578bd1d74d55e58dcfc15b84b6ab85ea88162cbc
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 15:39:14 2026 +0700
+| 
+|     Add YouTube links for test cases TC04 to TC08
+| 
+|  HW01/youtubelink.md | 5 +++++
+|  1 file changed, 5 insertions(+)
+| 
+* commit bea4bcffb63c8040c6915d114a34c12a33025d61
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 15:38:55 2026 +0700
+| 
+|     Revise AI-generated content and enhance self-assessment criteria in report
+| 
+|  HW01/report.md | 14 +++++++++++++-
+|  1 file changed, 13 insertions(+), 1 deletion(-)
+| 
+* commit 9c0a879820c0a2988885d72f6a25e9b5ec091dec
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 13:20:04 2026 +0700
+| 
+|     Add AI Critique, Mandatory Disclosure, Appendix
+| 
+|  HW01/report.md | 823 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 823 insertions(+)
+| 
+* commit a102e0c409affac874104d4389058111453e2af4
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 12:01:48 2026 +0700
+| 
+|     Add Requirement 3 with test cases that AI can not find and information of the houseware
+| 
+|  HW01/report.md | 55 ++++++++++++++++++++++++++++++++++++++++++++-----------
+|  1 file changed, 44 insertions(+), 11 deletions(-)
+| 
+* commit 02d5b3bc32aad3a1bd1f4b1c8447dd10a4d1dd15
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 11:45:48 2026 +0700
+| 
+|     Add AI audit requirment 03
+| 
+|  HW01/Appendix A/requirement03.md | 394 +++++++++++++++++++++++++++++++++++++
+|  1 file changed, 394 insertions(+)
+| 
+* commit bcb7f982c556094b26b14b82cbba903df04d994a
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 11:44:36 2026 +0700
+| 
+|     Add Requirement 3 with test cases for physical product functionality by AI
+| 
+|  HW01/report.md | 136 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+|  1 file changed, 135 insertions(+), 1 deletion(-)
+| 
+* commit e1bf196c7f946a27d3fea4e3673e645af1644c13
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 10:13:14 2026 +0700
+| 
+|     Add analysis on AI bias and hallucination in defect explanations
+| 
+|  HW01/report.md | 2 ++
+|  1 file changed, 2 insertions(+)
+| 
+* commit f786865ec711d484207a8c4fa48c71851eedd532
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 10:12:54 2026 +0700
+| 
+|     Add Requirement 2 detailing 20 significant software defects from 2022 to 2026
+| 
+|  HW01/report.md | 144 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 144 insertions(+)
+| 
+* commit e1a340a5ea432437f5657ef690bfd4d25d9f4b74
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 10:12:29 2026 +0700
+| 
+|     AI audit requirment02
+| 
+|  HW01/Appendix A/requirement02.md | 358 +++++++++++++++++++++++++++++++++++++
+|  1 file changed, 358 insertions(+)
+| 
+* commit afcd20e8f9527d6b653d871a6f00aafe6cc3ac74
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Fri May 29 12:57:09 2026 +0700
+| 
+|     Ad AI audit for requirement 1
+| 
+|  HW01/Appendix A/requirement01.md | 400 +++++++++++++++++++++++++++++++++++++
+|  1 file changed, 400 insertions(+)
+| 
+* commit d2980477b36898ec1ec47e2e0f42517027fda489
+  Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+  Date:   Fri May 29 12:56:44 2026 +0700
+  
+      Add initial report for HW01 detailing QA/QC job market analysis for 2026+
+  
+   HW01/report.md | 192 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   1 file changed, 192 insertions(+)
