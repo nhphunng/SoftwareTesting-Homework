@@ -1,8 +1,18 @@
+# Dependencies and Playwright browser binaries/cache
 node_modules/
+.playwright/
+ms-playwright/
+
+# Playwright-generated execution artifacts
 test-results/
 playwright-report/
-reports/html/*
-!reports/html/.gitkeep
+blob-report/
+reports/html/
+screenshots/*.png
+*.webm
+trace.zip
+
+# Keep automation source files tracked:
+# tests/, pages/, fixtures/, data/, playwright.config.ts and package.json
 .env
 .DS_Store
-

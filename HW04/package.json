@@ -4,18 +4,18 @@
   "private": true,
   "scripts": {
     "test": "playwright test",
-    "test:fr05": "playwright test tests/fr05-product-search.spec.ts",
-    "test:fr09": "playwright test tests/fr09-discount-coupons.spec.ts",
-    "test:fr17": "playwright test tests/fr17-coupon-management.spec.ts",
-    "test:fr05:chromium": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr05-chromium RUN_LABEL=FR05-Chromium playwright test tests/fr05-product-search.spec.ts --project=chromium",
-    "test:fr05:firefox": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr05-firefox RUN_LABEL=FR05-Firefox playwright test tests/fr05-product-search.spec.ts --project=firefox",
-    "test:fr05:webkit": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr05-webkit RUN_LABEL=FR05-WebKit playwright test tests/fr05-product-search.spec.ts --project=webkit",
-    "test:fr09:chromium": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr09-chromium RUN_LABEL=FR09-Chromium playwright test tests/fr09-discount-coupons.spec.ts --project=chromium",
-    "test:fr09:firefox": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr09-firefox RUN_LABEL=FR09-Firefox playwright test tests/fr09-discount-coupons.spec.ts --project=firefox",
-    "test:fr09:webkit": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr09-webkit RUN_LABEL=FR09-WebKit playwright test tests/fr09-discount-coupons.spec.ts --project=webkit",
-    "test:fr17:chromium": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr17-chromium RUN_LABEL=FR17-Chromium playwright test tests/fr17-coupon-management.spec.ts --project=chromium",
-    "test:fr17:firefox": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr17-firefox RUN_LABEL=FR17-Firefox playwright test tests/fr17-coupon-management.spec.ts --project=firefox",
-    "test:fr17:webkit": "PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr17-webkit RUN_LABEL=FR17-WebKit playwright test tests/fr17-coupon-management.spec.ts --project=webkit",
+    "test:fr05": "TARGET_APP=user playwright test tests/fr05-product-search.spec.ts",
+    "test:fr09": "TARGET_APP=user playwright test tests/fr09-discount-coupons.spec.ts",
+    "test:fr17": "TARGET_APP=admin playwright test tests/fr17-coupon-management.spec.ts",
+    "test:fr05:chromium": "TARGET_APP=user PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr05-chromium RUN_LABEL=FR05-Chromium playwright test tests/fr05-product-search.spec.ts --project=chromium",
+    "test:fr05:firefox": "TARGET_APP=user PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr05-firefox RUN_LABEL=FR05-Firefox playwright test tests/fr05-product-search.spec.ts --project=firefox",
+    "test:fr05:webkit": "TARGET_APP=user PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr05-webkit RUN_LABEL=FR05-WebKit playwright test tests/fr05-product-search.spec.ts --project=webkit",
+    "test:fr09:chromium": "TARGET_APP=user PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr09-chromium RUN_LABEL=FR09-Chromium playwright test tests/fr09-discount-coupons.spec.ts --project=chromium",
+    "test:fr09:firefox": "TARGET_APP=user PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr09-firefox RUN_LABEL=FR09-Firefox playwright test tests/fr09-discount-coupons.spec.ts --project=firefox",
+    "test:fr09:webkit": "TARGET_APP=user PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr09-webkit RUN_LABEL=FR09-WebKit playwright test tests/fr09-discount-coupons.spec.ts --project=webkit",
+    "test:fr17:chromium": "TARGET_APP=admin PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr17-chromium RUN_LABEL=FR17-Chromium playwright test tests/fr17-coupon-management.spec.ts --project=chromium",
+    "test:fr17:firefox": "TARGET_APP=admin PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr17-firefox RUN_LABEL=FR17-Firefox playwright test tests/fr17-coupon-management.spec.ts --project=firefox",
+    "test:fr17:webkit": "TARGET_APP=admin PLAYWRIGHT_HTML_OUTPUT_DIR=reports/html/fr17-webkit RUN_LABEL=FR17-WebKit playwright test tests/fr17-coupon-management.spec.ts --project=webkit",
     "report:open": "playwright show-report reports/html/latest"
   },
   "devDependencies": {
@@ -24,4 +24,3 @@
     "typescript": "latest"
   }
 }
-
