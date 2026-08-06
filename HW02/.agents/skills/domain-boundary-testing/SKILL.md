@@ -14,6 +14,7 @@ It must be used for these selected features:
 - FR-09: Discount coupons
 - FR-17: Coupon management CRUD
 - Mobile-FR04: Personal profile management on Mobile
+- FR-02: Login and account lockout
 
 ## Mandatory Workflow
 

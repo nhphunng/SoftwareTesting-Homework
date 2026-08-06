@@ -4,11 +4,11 @@
 
 | Bug ID | Feature | Summary | Severity | Status | Related Test Case(s) | Evidence |
 |---|---|---|---|---|---|---|
-| FR17-BUG-001 | FR-17 Coupon Management CRUD | System accepts invalid `discount_value` values from the admin form. | High | Confirmed | FR17-DT-007, FR17-DT-008, FR17-DT-009, FR17-BVA-001, FR17-BVA-006, FR17-BVA-007, FR17-BVA-008 | [DT-007](<../screenshots/FR17-DT-007 copy.png>), [DT-008](<../screenshots/FR17-DT-008 copy.png>), [DT-009](<../screenshots/FR17-DT-009 copy.png>) |
-| FR17-BUG-002 | FR-17 Coupon Management CRUD | System accepts a past expiration date for a new coupon. | High | Confirmed | FR17-DT-011, FR17-BVA-017 | [DT-011](<../screenshots/FR17-DT-011 copy.png>) |
-| FR17-BUG-003 | FR-17 Coupon Management CRUD | System accepts missing or negative `min_order_amount`. | High | Confirmed | FR17-DT-012, FR17-DT-013, FR17-BVA-010 | [DT-012](<../screenshots/FR17-DT-012 copy.png>), [DT-013](<../screenshots/FR17-DT-013 copy.png>) |
-| FR17-BUG-004 | FR-17 Coupon Management CRUD | System accepts whitespace-only coupon code. | High | Confirmed | FR17-DT-018 | [DT-018](<../screenshots/FR17-DT-018 copy.png>) |
-| FR17-BUG-005 | FR-17 Coupon Management CRUD | Coupon code trimming and allowed-character behavior are unclear and may create confusing coupons. | Medium | Potential Defect - Requirement Clarification Needed | FR17-DT-019, FR17-DT-020, FR17-DT-021 | [DT-019](<../screenshots/FR17-DT-019 copy.png>), [DT-021](<../screenshots/FR17-DT-021 copy.png>) |
+| FR17-BUG-001 | FR-17 Coupon Management CRUD | System accepts invalid `discount_value` values from the admin form. | High | Confirmed | FR17-DT-007, FR17-DT-008, FR17-DT-009, FR17-BVA-001, FR17-BVA-006, FR17-BVA-007, FR17-BVA-008 | [DT-007](<../screenshots/FR17-DT-007.png>), [DT-008](<../screenshots/FR17-DT-008.png>), [DT-009](<../screenshots/FR17-DT-009.png>) |
+| FR17-BUG-002 | FR-17 Coupon Management CRUD | System accepts a past expiration date for a new coupon. | High | Confirmed | FR17-DT-011, FR17-BVA-017 | [DT-011](<../screenshots/FR17-DT-011.png>) |
+| FR17-BUG-003 | FR-17 Coupon Management CRUD | System accepts missing or negative `min_order_amount`. | High | Confirmed | FR17-DT-012, FR17-DT-013, FR17-BVA-010 | [DT-012](<../screenshots/FR17-DT-012.png>), [DT-013](<../screenshots/FR17-DT-013.png>) |
+| FR17-BUG-004 | FR-17 Coupon Management CRUD | System accepts whitespace-only coupon code. | High | Confirmed | FR17-DT-018 | [DT-018](<../screenshots/FR17-DT-018.png>) |
+| FR17-BUG-005 | FR-17 Coupon Management CRUD | Coupon code trimming and allowed-character behavior are unclear and may create confusing coupons. | Medium | Potential Defect - Requirement Clarification Needed | FR17-DT-019, FR17-DT-020, FR17-DT-021 | [DT-019](<../screenshots/FR17-DT-019.png>), [DT-021](<../screenshots/FR17-DT-021.png>) |
 | FR09-BUG-001 | FR-09 Discount Coupons | Percent coupon is accepted but final amount remains unchanged. | High | Confirmed | FR09-DT-001, FR09-DT-007 | [DT-001](../screenshots/FR09-DT-001.png), [DT-007](../screenshots/FR09-DT-007.png) |
 | FR09-BUG-002 | FR-09 Discount Coupons | Coupon is rejected when cart total is exactly at the minimum order amount. | High | Confirmed | FR09-BVA-002 | [BVA-002](../screenshots/FR09-BVA-002.png) |
 | FR09-BUG-003 | FR-09 Discount Coupons | Fixed discount greater than cart total produces a negative final amount. | High | Confirmed | FR09-DT-009, FR09-BVA-013 | [DT-009](../screenshots/FR09-DT-009.png), [BVA-013](../screenshots/FR09-BVA-013.png) |
@@ -32,9 +32,9 @@
 | Steps to Reproduce | 1. Create coupons from the admin form using invalid `discount_value` values such as `0`, `-1`, or `101` for percent. |
 | Expected Result | Coupon is not created. System returns a clear validation error because `discount_value` is required, positive, and percent discount should not exceed the confirmed maximum. |
 | Actual Result | Coupon is created with invalid discount values. |
-| Screenshot | [DT-007](<../screenshots/FR17-DT-007 copy.png>), [DT-008](<../screenshots/FR17-DT-008 copy.png>), [DT-009](<../screenshots/FR17-DT-009 copy.png>) |
+| Screenshot | [DT-007](<../screenshots/FR17-DT-007.png>), [DT-008](<../screenshots/FR17-DT-008.png>), [DT-009](<../screenshots/FR17-DT-009.png>) |
 | Related Test Case | FR17-DT-007, FR17-DT-008, FR17-DT-009, FR17-BVA-001, FR17-BVA-006, FR17-BVA-007, FR17-BVA-008 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/1 |
 
 ### FR17-BUG-002 - Past expiration date is accepted
 
@@ -50,9 +50,9 @@
 | Steps to Reproduce | 1. Create a coupon from the admin form with `expired_at=2020-01-01` or another date before the active-date boundary. |
 | Expected Result | Coupon is rejected or created only as expired according to a confirmed product rule. |
 | Actual Result | Coupon is created as a normal new coupon. |
-| Screenshot | [DT-011](<../screenshots/FR17-DT-011 copy.png>) |
+| Screenshot | [DT-011](<../screenshots/FR17-DT-011.png>) |
 | Related Test Case | FR17-DT-011, FR17-BVA-017 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/2 |
 
 ### FR17-BUG-003 - Invalid minimum order amount is accepted
 
@@ -68,9 +68,9 @@
 | Steps to Reproduce | 1. Create coupons from the admin form with empty `min_order_amount` or `min_order_amount=-1`. |
 | Expected Result | Coupon is not created. System returns a clear validation error because `min_order_amount` is required and must be greater than or equal to `0`. |
 | Actual Result | Coupon is created with invalid minimum order amount. |
-| Screenshot | [DT-012](<../screenshots/FR17-DT-012 copy.png>), [DT-013](<../screenshots/FR17-DT-013 copy.png>) |
+| Screenshot | [DT-012](<../screenshots/FR17-DT-012.png>), [DT-013](<../screenshots/FR17-DT-013.png>) |
 | Related Test Case | FR17-DT-012, FR17-DT-013, FR17-BVA-010 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/3 |
 
 ### FR17-BUG-004 - Whitespace-only coupon code is accepted
 
@@ -86,9 +86,9 @@
 | Steps to Reproduce | 1. Create coupon with `code=" "` and other fields valid. |
 | Expected Result | Coupon is not created because code is empty after trimming. System displays required/invalid code validation. |
 | Actual Result | Coupon is created. |
-| Screenshot | [DT-018](<../screenshots/FR17-DT-018 copy.png>) |
+| Screenshot | [DT-018](<../screenshots/FR17-DT-018.png>) |
 | Related Test Case | FR17-DT-018 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/4 |
 
 ### FR17-BUG-005 - Coupon code normalization rules are unclear
 
@@ -104,9 +104,9 @@
 | Steps to Reproduce | 1. Create coupon with `code=" FR17-DT-019 "`. 2. Create coupon with `code=SAVE_10`. 3. Create coupon with `code=GIẢM10`. |
 | Expected Result | Inconclusive - Requirement unclear. The product should define whether coupon code is trimmed and which characters/Unicode values are allowed. System must not create confusing duplicates. |
 | Actual Result | Coupons are created. |
-| Screenshot | [DT-019](<../screenshots/FR17-DT-019 copy.png>), [DT-021](<../screenshots/FR17-DT-021 copy.png>) |
+| Screenshot | [DT-019](<../screenshots/FR17-DT-019.png>), [DT-021](<../screenshots/FR17-DT-021.png>) |
 | Related Test Case | FR17-DT-019, FR17-DT-020, FR17-DT-021 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/5 |
 
 ### FR09-BUG-001 - Percent coupon does not update final amount
 
@@ -124,7 +124,7 @@
 | Actual Result | Coupon is applied, but the final amount remains unchanged. |
 | Screenshot | [FR09-DT-001](../screenshots/FR09-DT-001.png), [FR09-DT-007](../screenshots/FR09-DT-007.png) |
 | Related Test Case | FR09-DT-001, FR09-DT-007 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/6 |
 
 ### FR09-BUG-002 - Exact minimum order boundary is rejected
 
@@ -142,7 +142,7 @@
 | Actual Result | Coupon is rejected because the system says the total is below minimum. |
 | Screenshot | [FR09-BVA-002](../screenshots/FR09-BVA-002.png) |
 | Related Test Case | FR09-BVA-002 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/7 |
 
 ### FR09-BUG-003 - Fixed discount can produce negative final amount
 
@@ -160,7 +160,7 @@
 | Actual Result | System produces a negative final amount. |
 | Screenshot | [FR09-DT-009](../screenshots/FR09-DT-009.png), [FR09-BVA-013](../screenshots/FR09-BVA-013.png) |
 | Related Test Case | FR09-DT-009, FR09-BVA-013 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/8 |
 
 ### MFR04-BUG-001 - Empty or whitespace-only full name is accepted
 
@@ -178,7 +178,7 @@
 | Actual Result | Profile is saved with an empty or whitespace-only full name. |
 | Screenshot | [DT-005](../screenshots/MFR04-DT-005.jpg), [DT-006](../screenshots/MFR04-DT-006.jpg) |
 | Related Test Case | MFR04-DT-005, MFR04-DT-006 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/9 |
 
 ### MFR04-BUG-002 - Valid leading-zero phone number is rejected
 
@@ -196,7 +196,7 @@
 | Actual Result | System shows phone validation error such as `Số điện thoại không hợp lệ. Vui lòng nhập đúng 9-10 chữ số`. |
 | Screenshot | [DT-007](../screenshots/MFR04-DT-007.jpg), [DT-009](../screenshots/MFR04-DT-009.jpg), [BVA-006](../screenshots/MFR04-BVA-006.jpg) |
 | Related Test Case | MFR04-DT-007, MFR04-DT-009, MFR04-BVA-006 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/10 |
 
 ### MFR04-BUG-003 - Phone number without leading zero is accepted
 
@@ -214,7 +214,7 @@
 | Actual Result | Profile is saved and the updated value remains after reload. |
 | Screenshot | [DT-011](../screenshots/MFR04-DT-011.jpg), [BVA-007](../screenshots/MFR04-BVA-007.jpg) |
 | Related Test Case | MFR04-DT-011, MFR04-BVA-007 |
-| GitHub Issue Link |  |
+| GitHub Issue Link | https://github.com/nhphunng/SoftwareTesting-Homework/issues/11 |
 
 ## Human Review
 
