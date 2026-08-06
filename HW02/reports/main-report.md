@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-This report consolidates the full Domain Testing and Boundary Value Analysis content from sections 1 to 7 of each feature file in `HW02/test-cases/`, with the assumption-verification subsections omitted as requested.
+This report consolidates the full Domain Testing and Boundary Value Analysis content from sections 1 to 7 of each selected feature file in `HW02/test-cases/`, with the assumption-verification subsections omitted as requested.
 
 Included source files:
 
