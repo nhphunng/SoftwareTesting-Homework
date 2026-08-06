@@ -11,10 +11,12 @@ Playwright/TypeScript automation project for:
 1. Copy `.env.example` to `.env` and fill in the real values.
 2. Install dependencies with `npm install`.
 3. Install browser binaries with `npx playwright install`.
-4. Start the EShop SUT and verify `BASE_URL`.
+4. Start the EShop SUT and verify both `USER_WEB_URL` and `ADMIN_WEB_URL`.
 5. Run a feature or one of the nine feature-browser scripts from `package.json`.
 
 Do not commit real credentials or fabricated execution evidence.
+
+`TARGET_APP=user` selects `USER_WEB_URL` for FR-05 and FR-09. `TARGET_APP=admin` selects `ADMIN_WEB_URL` for FR-17. The feature scripts set this automatically.
 
 ## Project skills
 
@@ -27,13 +29,16 @@ Invoke them explicitly as `$playwright-automation-testing` and `$ai-audit-loggin
 
 | Metric | Value |
 | --- | ---: |
-| Features | 3 |
-| Test cases automated | 0 |
-| Test cases executed | 0 |
-| Passed | 0 |
-| Failed | 0 |
-| Browser runs | 0 / 9 |
-| Confirmed bugs | 0 |
+| Selected features | 3 |
+| Features automated | 1 / 3 |
+| Logical test cases automated | 12 |
+| Browser test executions | 36 |
+| Passed executions | 27 |
+| Failed executions | 9 |
+| Unique logical cases passed | 9 |
+| Unique logical cases failed | 3 |
+| Browser runs | 3 / 9 |
+| Confirmed bugs | 3 |
 | Demo video | To be added |
 
 ## Self-assessment
