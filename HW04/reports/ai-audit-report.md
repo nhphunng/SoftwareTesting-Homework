@@ -78,3 +78,40 @@ Human Review:
 - Added:
 - Notes:
 
+## AI Audit Entry – AI-005
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-06T13:25:31+07:00 |
+| Task | Implement and execute FR-05 Playwright automation |
+| User Prompt | `Sử dụng $playwright-automation-testing để triển khai FR-05` |
+| Generated/Modified Files | `HW04/playwright.config.ts`, `HW04/tsconfig.json`, `HW04/data/fr05-search.json`, `HW04/pages/product.page.ts`, `HW04/tests/fr05-product-search.spec.ts`, `HW04/.gitignore`, `HW04/README.md`, `HW04/reports/main-report.md`, `HW04/reports/bug-report.md`, `HW04/reports/html/fr05-chromium/`, `HW04/reports/html/fr05-firefox/`, `HW04/reports/html/fr05-webkit/`, `HW04/screenshots/FR05-BUG-001-multiple-h1-webkit.png`, `HW04/screenshots/FR05-BUG-002-missing-empty-state-webkit.png`, `HW04/screenshots/FR05-BUG-003-unsafe-search-rendering-webkit.png` |
+| AI Output | Inspected the live EShop UI and source before selecting locators. Implemented 12 external-data-driven cases traced to HW02, a Product Page Object, runtime data validation, and four assertion patterns. Fixed `.env` loading/default frontend URL and a TypeScript 7 configuration incompatibility. The first Firefox run revealed that the AI-generated response helper incorrectly rejected HTTP 304; the helper was corrected and Firefox was rerun. Final result for each of Chromium, Firefox, and WebKit: 12 executed, 9 passed, 3 failed, 0 flaky. The same three SUT defects were reproduced across all browsers: duplicate `<h1>`, missing empty state, and unsafe HTML rendering of the search keyword. Generated three attributable HTML reports and preserved three WebKit failure screenshots. No GitHub Issue was posted. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry – AI-006
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-06T13:33:19+07:00 |
+| Task | Route feature tests to the separate user and admin web frontends |
+| User Prompt | `có 2 web cho riêng cho user và admin tôi có cung  cấp trong .env` |
+| Generated/Modified Files | `HW04/.env.example`, `HW04/package.json`, `HW04/playwright.config.ts`, `HW04/README.md`, `HW04/reports/main-report.md`, `HW04/reports/ai-audit-report.md`, `HW04/reports/html/fr05-chromium/`, `HW04/reports/html/fr05-firefox/`, `HW04/reports/html/fr05-webkit/` |
+| AI Output | Replaced the single-base-URL assumption with explicit frontend routing. Playwright now loads `USER_WEB_URL` and `ADMIN_WEB_URL` from `.env`; `TARGET_APP=user` is assigned automatically to FR-05/FR-09 scripts and `TARGET_APP=admin` to FR-17 scripts. Invalid target values fail fast, and report metadata records the selected target without exposing URL values or credentials. TypeScript validation passed and FR-05 still listed 12 tests. The suite was rerun against the user frontend on Chromium, Firefox, and WebKit; each run produced 9 passed and the same 3 confirmed failures, with refreshed HTML reports. The real `.env` file and its values were not modified or printed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
