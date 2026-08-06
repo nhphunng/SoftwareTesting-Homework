@@ -1,5 +1,130 @@
 {
   "feature": "FR-05",
-  "cases": []
+  "source": "HW02/test-cases/FR05-product-listing-search.md",
+  "cases": [
+    {
+      "id": "FR05-DT-001",
+      "description": "Display the complete seeded product grid",
+      "enabled": true,
+      "kind": "initial-grid",
+      "preconditions": ["The product API returns the five seeded products"],
+      "expected": {
+        "resultCount": 5,
+        "productNames": ["iPhone 15 Pro Max", "Samsung Galaxy S24 Ultra", "MacBook Pro M3", "Tai nghe AirPods Pro 2", "Bàn phím cơ Keychron Q1"],
+        "h1Count": 1
+      }
+    },
+    {
+      "id": "FR05-DT-007",
+      "description": "Search by an exact product name",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "MacBook Pro M3" },
+      "expected": { "resultCount": 1, "productNames": ["MacBook Pro M3"], "searchEcho": "literal" }
+    },
+    {
+      "id": "FR05-DT-008",
+      "description": "Search by a partial product name",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "Samsung" },
+      "expected": { "resultCount": 1, "productNames": ["Samsung Galaxy S24 Ultra"], "searchEcho": "literal" }
+    },
+    {
+      "id": "FR05-DT-009",
+      "description": "Search is case-insensitive",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "iphone" },
+      "expected": { "resultCount": 1, "productNames": ["iPhone 15 Pro Max"], "searchEcho": "literal" }
+    },
+    {
+      "id": "FR05-DT-010",
+      "description": "Show an empty state when no product matches",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "Nintendo" },
+      "expected": { "resultCount": 0, "productNames": [], "searchEcho": "literal", "emptyState": true }
+    },
+    {
+      "id": "FR05-DT-011",
+      "description": "Clear a previous search to restore all products",
+      "enabled": true,
+      "kind": "reset-search",
+      "preconditions": ["A filtered search result is displayed"],
+      "setup": { "keyword": "MacBook Pro M3" },
+      "input": { "keyword": "" },
+      "expected": {
+        "resultCount": 5,
+        "productNames": ["iPhone 15 Pro Max", "Samsung Galaxy S24 Ultra", "MacBook Pro M3", "Tai nghe AirPods Pro 2", "Bàn phím cơ Keychron Q1"],
+        "searchEcho": "absent"
+      }
+    },
+    {
+      "id": "FR05-DT-012",
+      "description": "Trim a whitespace-only keyword and restore all products",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "   " },
+      "expected": {
+        "resultCount": 5,
+        "productNames": ["iPhone 15 Pro Max", "Samsung Galaxy S24 Ultra", "MacBook Pro M3", "Tai nghe AirPods Pro 2", "Bàn phím cơ Keychron Q1"],
+        "searchEcho": "visible"
+      }
+    },
+    {
+      "id": "FR05-DT-013",
+      "description": "Render a script-like keyword as literal text",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "<script>alert(1)</script>" },
+      "expected": { "resultCount": 0, "productNames": [], "searchEcho": "literal", "unsafeMarkupCount": 0 }
+    },
+    {
+      "id": "FR05-BVA-004",
+      "description": "Submit a keyword at the zero-character boundary",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "" },
+      "expected": {
+        "resultCount": 5,
+        "productNames": ["iPhone 15 Pro Max", "Samsung Galaxy S24 Ultra", "MacBook Pro M3", "Tai nghe AirPods Pro 2", "Bàn phím cơ Keychron Q1"],
+        "searchEcho": "absent"
+      }
+    },
+    {
+      "id": "FR05-BVA-005",
+      "description": "Search with a one-character keyword",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "keyword": "Q" },
+      "expected": { "resultCount": 1, "productNames": ["Bàn phím cơ Keychron Q1"], "searchEcho": "literal" }
+    },
+    {
+      "id": "FR05-BVA-006",
+      "description": "Handle a 255-character keyword without breaking the page",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "repeatCharacter": "a", "repeatCount": 255 },
+      "expected": { "resultCount": 0, "productNames": [], "searchEcho": "visible" }
+    },
+    {
+      "id": "FR05-BVA-007",
+      "description": "Handle a 256-character keyword without breaking the page",
+      "enabled": true,
+      "kind": "search",
+      "preconditions": ["The product list is loaded"],
+      "input": { "repeatCharacter": "a", "repeatCount": 256 },
+      "expected": { "resultCount": 0, "productNames": [], "searchEcho": "visible" }
+    }
+  ]
 }
-
