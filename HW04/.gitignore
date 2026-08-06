@@ -1,0 +1,8 @@
+node_modules/
+test-results/
+playwright-report/
+reports/html/*
+!reports/html/.gitkeep
+.env
+.DS_Store
+
