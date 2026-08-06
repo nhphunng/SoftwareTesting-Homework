@@ -1,0 +1,4 @@
+interface:
+  display_name: "Playwright Automation Testing"
+  short_description: "Build reviewed data-driven Playwright tests"
+  default_prompt: "Use $playwright-automation-testing to automate one HW04 feature with external test data and multi-browser evidence."
