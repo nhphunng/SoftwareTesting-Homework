@@ -30,15 +30,16 @@ Invoke them explicitly as `$playwright-automation-testing` and `$ai-audit-loggin
 | Metric | Value |
 | --- | ---: |
 | Selected features | 3 |
-| Features automated | 1 / 3 |
-| Logical test cases automated | 12 |
-| Browser test executions | 36 |
-| Passed executions | 27 |
-| Failed executions | 9 |
-| Unique logical cases passed | 9 |
-| Unique logical cases failed | 3 |
-| Browser runs | 3 / 9 |
-| Confirmed bugs | 3 |
+| Features automated | 2 / 3 |
+| Logical test cases automated | 27 |
+| Browser test executions | 51 |
+| Passed executions | 38 |
+| Failed executions | 13 |
+| Unique logical cases passed | 20 |
+| Unique logical cases failed | 7 |
+| Browser runs | 4 / 9 |
+| Confirmed bugs | 5 |
+| Open requirement gaps | 1 |
 | Demo video | To be added |
 
 ## Self-assessment

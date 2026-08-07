@@ -115,3 +115,22 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry – AI-007
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-07T15:48:08+07:00 |
+| Task | Implement and execute the Day 2 FR-17 coupon-management automation |
+| User Prompt | `Thực hiện task của ngày 2 có trong [plan.md](HW04/plan.md). Khi cần thực hiện viết script hãy sử dụng skill [playwright-automation-testing](HW04/.agents/skills/playwright-automation-testing/)` |
+| Generated/Modified Files | `HW04/data/fr17-coupon-crud.json`, `HW04/fixtures/auth.fixture.ts`, `HW04/pages/admin-coupon.page.ts`, `HW04/tests/fr17-coupon-management.spec.ts`, `HW04/README.md`, `HW04/reports/main-report.md`, `HW04/reports/bug-report.md`, `HW04/reports/ai-audit-report.md`, `HW04/reports/html/fr17-chromium/`, `HW04/test-results/` |
+| AI Output | Applied the project-local Playwright automation skill and inspected the running admin UI/source before selecting locators. Implemented 15 external-data-driven FR-17 cases traced to HW02, reusable `.env`-backed admin authentication, a coupon Page Object, unique test-owned codes, reload persistence checks, native/server/business rejection paths, and `afterEach` cleanup. Human review corrected an empty-code locator that matched every row, a success-only GET waiter left pending after duplicate rejection, and an unsafe whitespace-only cleanup strategy; the whitespace case now uses a unique surrounded code and compares raw stored text. TypeScript validation passed and Playwright listed 15 cases. The canonical Chromium run executed 15 tests: 11 passed and 4 failed. A focused rerun reproduced all four failures. Three failing cases form two confirmed validation defects (non-positive discount and negative minimum order); the untrimmed-code behavior remains a requirement gap. The final HTML report was verified as `targetApp=admin`, attributable to the configured student ID, ISO-timestamped, with 11 passed and 4 failed. Live cleanup verification showed only the four seeded coupons remained. Firefox and WebKit were not run because the plan assigns multi-browser execution to Day 4. No GitHub Issue was posted and no stable FR-17 issue screenshot was claimed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:

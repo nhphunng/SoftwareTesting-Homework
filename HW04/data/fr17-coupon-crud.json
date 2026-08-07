@@ -1,5 +1,143 @@
 {
   "feature": "FR-17",
-  "cases": []
+  "source": "HW02/test-cases/FR17-coupon-management-crud.md",
+  "cases": [
+    {
+      "id": "FR17-DT-001",
+      "description": "Display the coupon form and seeded coupon list",
+      "enabled": true,
+      "kind": "view",
+      "preconditions": ["An admin account exists", "Seeded coupons are available"],
+      "expected": {
+        "seedCodes": ["SAVE10", "BIGBUY", "VIP100", "EXPIRED"],
+        "headers": ["Mã", "Loại", "Giá trị", "Đơn tối thiểu", "Hết hạn", "Giới hạn/người", "Hành động"]
+      }
+    },
+    {
+      "id": "FR17-DT-002",
+      "description": "Create and persist a valid percent coupon",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in", "Generated coupon code does not exist"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "created", "rowText": ["Phần trăm", "10%", "0 ₫", "2099-12-31", "1 lần"] }
+    },
+    {
+      "id": "FR17-DT-003",
+      "description": "Create and persist a valid fixed coupon",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in", "Generated coupon code does not exist"],
+      "input": { "code": "{{UNIQUE}}", "type": "fixed", "discountValue": "50000", "minOrderAmount": "300000", "expiredAt": "2099-12-31", "maxUsesPerUser": "2" },
+      "expected": { "outcome": "created", "rowText": ["Cố định", "50,000 ₫", "300,000 ₫", "2099-12-31", "2 lần"] }
+    },
+    {
+      "id": "FR17-DT-004",
+      "description": "Reject an empty coupon code",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in"],
+      "input": { "code": "", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "native" }
+    },
+    {
+      "id": "FR17-DT-005",
+      "description": "Reject a duplicate coupon code",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in", "Seeded coupon SAVE10 exists"],
+      "input": { "code": "SAVE10", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "server", "errorText": "UNIQUE constraint failed" }
+    },
+    {
+      "id": "FR17-DT-006",
+      "description": "Reject a missing discount value",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "native" }
+    },
+    {
+      "id": "FR17-DT-007",
+      "description": "Reject a zero percent discount",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "0", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "business" }
+    },
+    {
+      "id": "FR17-DT-008",
+      "description": "Reject a negative fixed discount",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in"],
+      "input": { "code": "{{UNIQUE}}", "type": "fixed", "discountValue": "-1", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "business" }
+    },
+    {
+      "id": "FR17-DT-010",
+      "description": "Reject a missing expiration date",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "native" }
+    },
+    {
+      "id": "FR17-DT-011",
+      "description": "Create a past-date coupon and display it as expired",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in", "Past-date creation behavior is accepted for status verification"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "2020-01-01", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "created", "rowText": ["Phần trăm", "10%", "0 ₫", "Hết hạn", "1 lần"] }
+    },
+    {
+      "id": "FR17-DT-013",
+      "description": "Reject a negative minimum order amount",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "10", "minOrderAmount": "-1", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "business" }
+    },
+    {
+      "id": "FR17-DT-015",
+      "description": "Reject zero maximum uses per user",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "0" },
+      "expected": { "outcome": "rejected", "rejectionMechanism": "native" }
+    },
+    {
+      "id": "FR17-DT-019",
+      "description": "Reject or normalize leading and trailing coupon-code whitespace",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in", "Generated coupon code does not exist"],
+      "input": { "code": " {{UNIQUE}} ", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "normalized-or-rejected" }
+    },
+    {
+      "id": "FR17-BVA-005",
+      "description": "Create a percent coupon at the assumed upper boundary",
+      "enabled": true,
+      "kind": "create",
+      "preconditions": ["Admin is logged in", "The assumed percent upper boundary is 100"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "100", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "created", "rowText": ["Phần trăm", "100%", "0 ₫", "2099-12-31", "1 lần"] }
+    },
+    {
+      "id": "FR17-DT-017",
+      "description": "Delete a test-owned coupon and persist its removal",
+      "enabled": true,
+      "kind": "delete",
+      "preconditions": ["Admin is logged in", "A uniquely generated test coupon is created first"],
+      "input": { "code": "{{UNIQUE}}", "type": "percent", "discountValue": "10", "minOrderAmount": "0", "expiredAt": "2099-12-31", "maxUsesPerUser": "1" },
+      "expected": { "outcome": "deleted" }
+    }
+  ]
 }
-

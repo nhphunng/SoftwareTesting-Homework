@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | A | FR-05 Product Listing and Search | Implemented and executed on three browsers |
 | B | FR-09 Discount Coupons | Not implemented yet |
-| C | FR-17 Coupon Management CRUD | Not implemented yet |
+| C | FR-17 Coupon Management CRUD | Implemented; Chromium completed, Firefox/WebKit pending Day 4 |
 
 ## 2. Automation architecture
 
@@ -18,6 +18,9 @@
 - Data: `data/fr05-search.json`.
 - Page Object: `pages/product.page.ts`.
 - Spec: `tests/fr05-product-search.spec.ts`.
+- FR-17 source cases: `HW02/test-cases/FR17-coupon-management-crud.md`.
+- FR-17 data/Page Object/spec: `data/fr17-coupon-crud.json`, `pages/admin-coupon.page.ts`, `tests/fr17-coupon-management.spec.ts`.
+- Reusable admin authentication: `fixtures/auth.fixture.ts`, with credentials read only from `.env`.
 - Browsers: Chromium, Firefox, and WebKit.
 - Evidence: one independent HTML report per feature-browser run.
 
@@ -74,11 +77,38 @@ Not implemented yet.
 
 ## 5. FR-17 – Coupon Management CRUD
 
-Not implemented yet.
+### Automated cases and isolation
+
+The Day 2 suite contains 15 enabled cases traced to HW02:
+
+`FR17-DT-001`–`FR17-DT-008`, `FR17-DT-010`, `FR17-DT-011`, `FR17-DT-013`, `FR17-DT-015`, `FR17-DT-017`, `FR17-DT-019`, and `FR17-BVA-005`.
+
+Coverage includes viewing the seeded list, valid percent/fixed creation, required fields, duplicate code, discount boundaries, past-date display, minimum order, per-user usage limit, whitespace normalization, and delete. Mutable cases use a unique code derived from case ID, timestamp, worker, and retry. Successful creation is verified in the table and after reload. `afterEach` removes only test-owned records, including records created by a failing assertion. After execution, the live table was checked and contained only `SAVE10`, `BIGBUY`, `VIP100`, and `EXPIRED`.
+
+Assertion patterns include `toBeVisible()`, `toBeEnabled()`, `toHaveValue()`, `toHaveCount()`, `toContainText()`, numeric HTTP status assertions, native form-validity assertions, and exact raw stored-code comparison.
+
+### Chromium execution result
+
+Executed on 2026-08-07 against the admin frontend selected by `ADMIN_WEB_URL`.
+
+| Browser | Automated | Passed | Failed | Flaky | HTML report |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Chromium | 15 | 11 | 4 | 0 | `reports/html/fr17-chromium/index.html` |
+| Firefox | Not executed | — | — | — | Day 4 |
+| WebKit | Not executed | — | — | — | Day 4 |
+
+The four Chromium failures were rerun separately and reproduced. The full 15-case run was then repeated to produce the canonical report.
+
+| Case | Expected | Actual | Classification |
+| --- | --- | --- | --- |
+| `FR17-DT-007` | Reject zero discount | POST returned 200 and an extra row was stored | `FR17-BUG-001` |
+| `FR17-DT-008` | Reject negative fixed discount | POST returned 200 and an extra row was stored | `FR17-BUG-001` |
+| `FR17-DT-013` | Reject negative minimum order | POST returned 200 and an extra row was stored | `FR17-BUG-002` |
+| `FR17-DT-019` | Reject or normalize surrounding whitespace | The code was stored with its leading/trailing spaces intact | Requirement gap / potential defect; code-normalization rule is unspecified |
 
 ## 6. Multi-browser execution summary
 
-FR-05 has completed 3 of the assignment's required 9 feature-browser runs. FR-09 and FR-17 remain outstanding.
+FR-05 has completed three browser runs and FR-17 has completed Chromium, for 4 of the required 9 feature-browser runs. FR-09 and the two remaining FR-17 browsers are outstanding.
 
 ## 7. Human review and AI gap analysis
 
@@ -87,6 +117,9 @@ FR-05 has completed 3 of the assignment's required 9 feature-browser runs. FR-09
 | FR05-AI-GAP-001 | Initial project config did not load `.env` and used a single `BASE_URL`. | The scaffold assumed environment variables would be loaded automatically and did not model the separate user/admin frontends. | Added Node `loadEnvFile()` and `TARGET_APP` routing: FR-05/FR-09 use `USER_WEB_URL`; FR-17 uses `ADMIN_WEB_URL`. |
 | FR05-AI-GAP-002 | The first Page Object treated HTTP `304 Not Modified` as an API failure in Firefox. | It assumed every successful GET must have a 2xx status and ignored browser cache semantics. | Accepted `304` for the read-only products request, eliminating three false failures without weakening business assertions. |
 | FR05-AI-GAP-003 | A source-only review could have mistaken the unsafe echo for an unproven defect. | `dangerouslySetInnerHTML` is risky, but source inspection alone is not execution evidence. | Verified the live DOM after search; one `<script>` node was inserted and the literal keyword was not displayed. |
+| FR17-AI-GAP-001 | The first empty-code assertion used a code locator with an empty string, which matched every coupon row. | Text locators normalize an empty matcher broadly; the generated helper assumed every code was non-empty. | Replaced the rejected-case persistence check with a total-row-count assertion, making empty input safe. |
+| FR17-AI-GAP-002 | The first duplicate-code run left an unawaited coupon-list response waiter when POST failed. | The initial Page Object started the success-only refresh waiter before knowing the POST outcome. | Added rejection handling for the unused waiter so a valid backend error does not become an automation failure. |
+| FR17-AI-GAP-003 | A whitespace-only case could not be identified safely for cleanup after the SUT accepted it. | Whitespace normalization makes an empty-looking row ambiguous and could cause deletion of a seed coupon. | Removed the orphan test record, changed the selected source case to unique leading/trailing whitespace (`FR17-DT-019`), and asserted raw stored text so cleanup remains test-owned and deterministic. |
 
 Human Review:
 - Accepted: external data separation, source-ID traceability, Page Object structure, stable accessible search locators, and business assertions.
@@ -95,9 +128,16 @@ Human Review:
 - Added: 12 executable cases, runtime data validation, cross-browser reports, failure evidence, and three defect records.
 - Assumptions to verify: exact wording/icon design for the required friendly empty state; whether the course expects a separate accessibility case ID for the single-`h1` requirement.
 
+FR-17 Human Review:
+- Accepted: external data, source-ID traceability, admin fixture, accessible locators, API-backed synchronization, reload persistence checks, unique data, and cleanup.
+- Modified: empty-code row assertion, failed-POST response waiting, whitespace coverage, and persistent rejected-case assertions.
+- Removed: the unsafe whitespace-only cleanup approach and the skipped FR-17 scaffold.
+- Added: 15 executable cases, native/server/business rejection paths, test-owned cleanup, repeated failure verification, and two confirmed defect records.
+- Assumptions to verify: whether coupon codes must be trimmed or rejected when surrounded by whitespace; whether past-date coupon creation is intentionally allowed; whether 100 is the official maximum percentage.
+
 ## 8. Bugs and unautomated cases
 
-Three FR-05 defects were reproduced across all three browsers. GitHub Issues are pending publication by the student. No selected FR-05 case remains unautomated.
+Three FR-05 defects were reproduced across all three browsers. Two FR-17 validation defects were reproduced twice on Chromium; the whitespace behavior remains a requirement gap. GitHub Issues and stable FR-17 issue screenshots are pending the Day 4 evidence pass. No selected FR-05 or FR-17 case remains unautomated.
 
 ## 9. Demo video and repository links
 
