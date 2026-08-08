@@ -16,6 +16,54 @@
 | Screenshot | `screenshots/FR05-BUG-001-multiple-h1-webkit.png` |
 | GitHub Issue | Pending publication |
 
+## FR09-BUG-001 – Percentage coupon calculation produces negative discount and inflated total
+
+| Field | Content |
+| --- | --- |
+| Feature | FR-09 Discount Coupons |
+| Related tests | `FR09-DT-001`, `FR09-DT-007`, `FR09-BVA-003` |
+| Severity / Priority | Critical / High |
+| Environment | EShop local user frontend; Chromium; 2026-08-08 |
+| Preconditions | User is authenticated; controlled active 10-percent coupon exists; total is above minimum |
+| Steps to reproduce | 1. Add a product and open checkout. 2. Set total to `28,000,000`. 3. Apply an eligible 10-percent coupon. 4. Inspect savings and final totals. |
+| Expected result | Savings is `2,800,000`; coupon final and payment total are `25,200,000`. |
+| Actual result | API/UI report savings `-252,000,000` and final/payment total `280,000,000`. The same formula error occurs for total `300,001`. |
+| Reproducibility | Three cases failed in the full Chromium run and reproduced in a focused rerun |
+| Screenshot | Pending stable issue screenshot during the Day 4 evidence pass; current Playwright evidence is local |
+| GitHub Issue | Pending publication |
+
+## FR09-BUG-002 – Coupon is rejected when cart total equals the minimum order
+
+| Field | Content |
+| --- | --- |
+| Feature | FR-09 Discount Coupons |
+| Related test | `FR09-BVA-002` |
+| Severity / Priority | Major / High |
+| Environment | EShop local user frontend; Chromium; 2026-08-08 |
+| Preconditions | User is authenticated; controlled active coupon has minimum order `300,000` |
+| Steps to reproduce | 1. Open checkout. 2. Set total to exactly `300,000`. 3. Apply the eligible coupon. |
+| Expected result | The coupon is accepted because the rule is total greater than or equal to minimum. |
+| Actual result | API returns 400 and the UI says the order has not reached the minimum. |
+| Reproducibility | Reproduced in the full Chromium run and focused rerun |
+| Screenshot | Pending stable issue screenshot during the Day 4 evidence pass; current Playwright evidence is local |
+| GitHub Issue | Pending publication |
+
+## FR09-BUG-003 – Fixed coupon can produce a negative payable total
+
+| Field | Content |
+| --- | --- |
+| Feature | FR-09 Discount Coupons |
+| Related tests | `FR09-DT-009`, `FR09-BVA-013` |
+| Severity / Priority | Critical / High |
+| Environment | EShop local user frontend; Chromium; 2026-08-08 |
+| Preconditions | User is authenticated; controlled fixed coupon is greater than the checkout total |
+| Steps to reproduce | 1. Open checkout with total `50,000`. 2. Apply a fixed coupon worth `100,000` or `50,001`. |
+| Expected result | Coupon is rejected or capped so savings does not exceed total and final amount is `0`. |
+| Actual result | UI/API show final totals of `-50,000` and `-1`. |
+| Reproducibility | Both cases failed in the full Chromium run and reproduced in a focused rerun |
+| Screenshot | Pending stable issue screenshot during the Day 4 evidence pass; current Playwright evidence is local |
+| GitHub Issue | Pending publication |
+
 ## FR17-BUG-001 – Admin can create coupons with non-positive discount values
 
 | Field | Content |

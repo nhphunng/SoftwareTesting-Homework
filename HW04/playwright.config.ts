@@ -34,7 +34,7 @@ export default defineConfig({
     [
       'html',
       {
-        open: 'never',
+        open: 'always',
         outputFolder: process.env.PLAYWRIGHT_HTML_OUTPUT_DIR ?? 'reports/html/latest',
         title: `HW04 ${runLabel} (${targetApp}) | Run by: ${studentId} | ${runTimestamp}`,
       },

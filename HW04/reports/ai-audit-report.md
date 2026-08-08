@@ -134,3 +134,22 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry – AI-008
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-08T15:18:21+07:00 |
+| Task | Implement and execute the Day 3 FR-09 discount-coupon automation |
+| User Prompt | `Based on [plan.md](HW04/plan.md), let do task of day 3` |
+| Generated/Modified Files | `HW04/data/fr09-coupons.json`, `HW04/fixtures/auth.fixture.ts`, `HW04/fixtures/coupon.fixture.ts`, `HW04/pages/checkout.page.ts`, `HW04/tests/fr09-discount-coupons.spec.ts`, `HW04/README.md`, `HW04/reports/main-report.md`, `HW04/reports/bug-report.md`, `HW04/reports/ai-audit-report.md`, `HW04/reports/html/fr09-chromium/`, `HW04/test-results/` |
+| AI Output | Applied the project-local Playwright automation skill and inspected the live user checkout UI plus current frontend/backend source before selecting locators and formulas. Implemented 14 external-data-driven FR-09 cases traced to HW02, reusable user authentication, numeric VND parsing, controlled unique coupon creation through authenticated FR-17 APIs, usage-limit preparation, and coupon teardown. The first run exposed that visible login labels were not programmatically associated with their inputs, so `getByLabel()` timed out before business execution; the helper was corrected to verified form-scoped inputs and a fixed-discount smoke test passed. Human review also replaced seed-dependent coupons and strengthened calculation diagnostics with soft assertions across displayed savings, coupon final, payment total, and response JSON. TypeScript validation passed and Playwright listed 14 cases. The canonical Chromium run executed 14 tests: 8 passed and 6 failed, with all six failures reproduced in a focused rerun. The failures form three confirmed defects: incorrect percentage calculation, rejection at the exact minimum-order boundary, and negative final totals when fixed discount exceeds cart total. The final HTML report was verified as `targetApp=user`, attributable to the configured student ID, ISO-timestamped, with 14 total, 8 passed, and 6 failed. Live cleanup verification showed only the four seeded coupons remained. The SUT has no usage-record cleanup endpoint, so one orphan usage row per usage-limit setup is disclosed as a non-interfering cleanup limitation. Firefox and WebKit were not run because the plan assigns them to Day 4. No GitHub Issue was posted and no stable FR-09 issue screenshot was claimed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
