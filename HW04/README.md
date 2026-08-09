@@ -32,15 +32,27 @@ Invoke them explicitly as `$playwright-automation-testing` and `$ai-audit-loggin
 | Selected features | 3 |
 | Features automated | 3 / 3 |
 | Logical test cases automated | 41 |
-| Browser test executions | 65 |
-| Passed executions | 46 |
-| Failed executions | 19 |
+| Browser test executions | 123 |
+| Passed executions | 84 |
+| Failed executions | 39 |
 | Unique logical cases passed | 28 |
 | Unique logical cases failed | 13 |
-| Browser runs | 5 / 9 |
+| Browser runs | 9 / 9 |
 | Confirmed bugs | 8 |
 | Open requirement gaps | 1 |
 | Demo video | To be added |
+
+All nine HTML reports include `Run by: 23127194`, an ISO timestamp, the browser-specific run label, and the selected user/admin target. The reports and Playwright runtime artifacts remain local/ignored as required by this repository's `.gitignore` policy.
+
+## Day 4 execution matrix
+
+| Feature | Chromium | Firefox | WebKit |
+| --- | ---: | ---: | ---: |
+| FR-05 | 9 passed / 3 failed | 9 passed / 3 failed | 9 passed / 3 failed |
+| FR-09 | 8 passed / 6 failed | 8 passed / 6 failed | 8 passed / 6 failed |
+| FR-17 | 11 passed / 4 failed | 11 passed / 4 failed | 11 passed / 4 failed |
+
+Confirmed defects are published as [GitHub Issues #14–#21](https://github.com/nhphunng/SoftwareTesting-Homework/issues?q=is%3Aissue%20state%3Aopen%20number%3A14..21), each with a real execution screenshot. FR17-DT-019 remains a requirement gap and was not published as a confirmed defect.
 
 ## Self-assessment
 
