@@ -13,6 +13,12 @@ const studentId = process.env.STUDENT_ID ?? 'YOUR_STUDENT_ID';
 const runTimestamp = new Date().toISOString();
 const runLabel = process.env.RUN_LABEL ?? 'full-suite';
 const targetApp = process.env.TARGET_APP ?? 'user';
+const htmlReportHost = process.env.PLAYWRIGHT_HTML_HOST ?? '127.0.0.1';
+const htmlReportPort = Number(process.env.PLAYWRIGHT_HTML_PORT ?? '9323');
+
+if (!Number.isInteger(htmlReportPort) || htmlReportPort < 1 || htmlReportPort > 65_535) {
+  throw new Error(`PLAYWRIGHT_HTML_PORT must be a valid TCP port, got "${process.env.PLAYWRIGHT_HTML_PORT}"`);
+}
 
 if (targetApp !== 'user' && targetApp !== 'admin') {
   throw new Error(`TARGET_APP must be "user" or "admin", got "${targetApp}"`);
@@ -35,6 +41,8 @@ export default defineConfig({
       'html',
       {
         open: 'always',
+        host: htmlReportHost,
+        port: htmlReportPort,
         outputFolder: process.env.PLAYWRIGHT_HTML_OUTPUT_DIR ?? 'reports/html/latest',
         title: `HW04 ${runLabel} (${targetApp}) | Run by: ${studentId} | ${runTimestamp}`,
       },
