@@ -1,14 +1,14 @@
 # HW04 – Automation Testing Report
 
-> Student ID: loaded from `.env` at execution time. Credentials are not committed.
+> Student ID: `23127194`. Credentials are loaded from `.env` and are not committed.
 
 ## 1. Scope and selected features
 
 | Pool | Feature | Automation status |
 | --- | --- | --- |
 | A | FR-05 Product Listing and Search | Implemented and executed on three browsers |
-| B | FR-09 Discount Coupons | Implemented; Chromium completed, Firefox/WebKit pending Day 4 |
-| C | FR-17 Coupon Management CRUD | Implemented; Chromium completed, Firefox/WebKit pending Day 4 |
+| B | FR-09 Discount Coupons | Implemented and executed on three browsers |
+| C | FR-17 Coupon Management CRUD | Implemented and executed on three browsers |
 
 ## 2. Automation architecture
 
@@ -51,7 +51,7 @@ The implementation uses more than three assertion patterns:
 
 ### Execution results
 
-Executed on 2026-08-06 against the local EShop frontend at `http://localhost:5173`.
+Canonical Day 4 reports were generated on 2026-08-09 against the user frontend selected by `USER_WEB_URL`.
 
 | Browser | Automated | Passed | Failed | Flaky | HTML report |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -86,17 +86,18 @@ Coverage includes a valid percentage coupon, unknown and expired codes, a reache
 
 The checkout Page Object adds a seeded product through the UI, opens checkout as the authenticated user, edits the test total, waits for the actual apply-coupon response, and parses displayed VND text into numbers before comparison. Assertions cover visible messages, input values, element counts, HTTP status, discount amount, coupon final amount, payment total, response JSON, and non-negative safety invariants.
 
-### Chromium execution result
+### Multi-browser execution result
 
-Executed on 2026-08-08 against the user frontend selected by `USER_WEB_URL`.
+Executed on 2026-08-09 against the user frontend selected by `USER_WEB_URL`.
 
 | Browser | Automated | Passed | Failed | Flaky | HTML report |
 | --- | ---: | ---: | ---: | ---: | --- |
 | Chromium | 14 | 8 | 6 | 0 | `reports/html/fr09-chromium/index.html` |
-| Firefox | Not executed | — | — | — | Day 4 |
-| WebKit | Not executed | — | — | — | Day 4 |
+| Firefox | 14 | 8 | 6 | 0 | `reports/html/fr09-firefox/index.html` |
+| WebKit | 14 | 8 | 6 | 0 | `reports/html/fr09-webkit/index.html` |
+| **Total executions** | **42** | **24** | **18** | **0** | 3 reports |
 
-All six failures were rerun as a focused set and reproduced. A final full 14-case run produced the canonical report.
+The same six cases failed on all three browsers. Each report records the browser-specific run label, `targetApp: user`, `Run by: 23127194`, and its own ISO timestamp.
 
 | Cases | Expected | Actual | Defect |
 | --- | --- | --- | --- |
@@ -116,17 +117,18 @@ Coverage includes viewing the seeded list, valid percent/fixed creation, require
 
 Assertion patterns include `toBeVisible()`, `toBeEnabled()`, `toHaveValue()`, `toHaveCount()`, `toContainText()`, numeric HTTP status assertions, native form-validity assertions, and exact raw stored-code comparison.
 
-### Chromium execution result
+### Multi-browser execution result
 
-Executed on 2026-08-07 against the admin frontend selected by `ADMIN_WEB_URL`.
+Executed on 2026-08-09 against the admin frontend selected by `ADMIN_WEB_URL`.
 
 | Browser | Automated | Passed | Failed | Flaky | HTML report |
 | --- | ---: | ---: | ---: | ---: | --- |
 | Chromium | 15 | 11 | 4 | 0 | `reports/html/fr17-chromium/index.html` |
-| Firefox | Not executed | — | — | — | Day 4 |
-| WebKit | Not executed | — | — | — | Day 4 |
+| Firefox | 15 | 11 | 4 | 0 | `reports/html/fr17-firefox/index.html` |
+| WebKit | 15 | 11 | 4 | 0 | `reports/html/fr17-webkit/index.html` |
+| **Total executions** | **45** | **33** | **12** | **0** | 3 reports |
 
-The four Chromium failures were rerun separately and reproduced. The full 15-case run was then repeated to produce the canonical report.
+The first Firefox/WebKit pass exposed an automation-only cache issue: the coupon-list helper rejected HTTP `304 Not Modified`. Human review changed the helper to accept `304` only for GET requests; POST and DELETE remain strict. After rerunning all three browsers, the results stabilized at 11 passed and the same four failed cases per browser.
 
 | Case | Expected | Actual | Classification |
 | --- | --- | --- | --- |
@@ -137,7 +139,16 @@ The four Chromium failures were rerun separately and reproduced. The full 15-cas
 
 ## 6. Multi-browser execution summary
 
-FR-05 has completed three browser runs; FR-09 and FR-17 have each completed Chromium. This is 5 of the required 9 feature-browser runs. Firefox and WebKit remain for FR-09 and FR-17.
+All nine required feature-browser runs completed on 2026-08-09.
+
+| Feature | Executions | Passed | Failed | Flaky | Reports |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| FR-05 | 36 | 27 | 9 | 0 | 3 |
+| FR-09 | 42 | 24 | 18 | 0 | 3 |
+| FR-17 | 45 | 33 | 12 | 0 | 3 |
+| **Total** | **123** | **84** | **39** | **0** | **9** |
+
+All nine embedded reports were parsed and verified. Each contains Student ID `23127194`, an ISO timestamp, the correct browser run label, and the expected target (`user` for FR-05/FR-09; `admin` for FR-17).
 
 ## 7. Human review and AI gap analysis
 
@@ -149,6 +160,7 @@ FR-05 has completed three browser runs; FR-09 and FR-17 have each completed Chro
 | FR17-AI-GAP-001 | The first empty-code assertion used a code locator with an empty string, which matched every coupon row. | Text locators normalize an empty matcher broadly; the generated helper assumed every code was non-empty. | Replaced the rejected-case persistence check with a total-row-count assertion, making empty input safe. |
 | FR17-AI-GAP-002 | The first duplicate-code run left an unawaited coupon-list response waiter when POST failed. | The initial Page Object started the success-only refresh waiter before knowing the POST outcome. | Added rejection handling for the unused waiter so a valid backend error does not become an automation failure. |
 | FR17-AI-GAP-003 | A whitespace-only case could not be identified safely for cleanup after the SUT accepted it. | Whitespace normalization makes an empty-looking row ambiguous and could cause deletion of a seed coupon. | Removed the orphan test record, changed the selected source case to unique leading/trailing whitespace (`FR17-DT-019`), and asserted raw stored text so cleanup remains test-owned and deterministic. |
+| FR17-AI-GAP-004 | The coupon Page Object rejected a cached `304 Not Modified` list response, causing valid create/delete cases to fail on Firefox and WebKit. | The helper assumed all successful GET requests must be 2xx and did not account for browser cache revalidation. | Accepted `304` only for GET requests, reran all three browsers, and obtained identical 11-pass/4-fail results without weakening mutation checks. |
 | FR09-AI-GAP-001 | The initial user-login helper used `getByLabel()` and timed out before any FR-09 business case ran. | The visible Username and Mật khẩu text is not associated with its inputs using `for`/`id` or label wrapping. | Scoped the locator to the verified Sign In form and selected its two inputs in DOM order; a fixed-discount smoke test then passed. |
 | FR09-AI-GAP-002 | Using seeded coupons would make usage counts and browser reruns order-dependent. | FR-09 consumes mutable FR-17 records and usage history, while seed records may already have been consumed. | Added an authenticated API fixture that creates unique coupon records, prepares only the required usage count, and deletes test-owned coupons during teardown. |
 | FR09-AI-GAP-003 | The first percentage assertion stopped after the displayed savings mismatch, hiding the other incorrect totals. | Hard assertions terminate the case at the first calculation difference. | Used soft assertions for displayed savings, coupon final, payment total, and response discount so one run records all related calculation errors without weakening expectations. |
@@ -162,7 +174,7 @@ Human Review:
 
 FR-17 Human Review:
 - Accepted: external data, source-ID traceability, admin fixture, accessible locators, API-backed synchronization, reload persistence checks, unique data, and cleanup.
-- Modified: empty-code row assertion, failed-POST response waiting, whitespace coverage, and persistent rejected-case assertions.
+- Modified: empty-code row assertion, failed-POST response waiting, whitespace coverage, persistent rejected-case assertions, and GET-only HTTP 304 handling.
 - Removed: the unsafe whitespace-only cleanup approach and the skipped FR-17 scaffold.
 - Added: 15 executable cases, native/server/business rejection paths, test-owned cleanup, repeated failure verification, and two confirmed defect records.
 - Assumptions to verify: whether coupon codes must be trimmed or rejected when surrounded by whitespace; whether past-date coupon creation is intentionally allowed; whether 100 is the official maximum percentage.
@@ -176,9 +188,9 @@ FR-09 Human Review:
 
 ## 8. Bugs and unautomated cases
 
-Three FR-05 defects were reproduced across all three browsers. Two FR-17 validation defects and three FR-09 defects were reproduced twice on Chromium; the FR-17 whitespace behavior remains a requirement gap. GitHub Issues and stable FR-09/FR-17 issue screenshots are pending the Day 4 evidence pass. No selected FR-05, FR-09, or FR-17 case remains unautomated.
+Three FR-05 defects, three FR-09 defects, and two FR-17 validation defects were reproduced across all three browsers. Each confirmed defect has a real screenshot and a published GitHub Issue: [#14](https://github.com/nhphunng/SoftwareTesting-Homework/issues/14), [#15](https://github.com/nhphunng/SoftwareTesting-Homework/issues/15), [#16](https://github.com/nhphunng/SoftwareTesting-Homework/issues/16), [#17](https://github.com/nhphunng/SoftwareTesting-Homework/issues/17), [#18](https://github.com/nhphunng/SoftwareTesting-Homework/issues/18), [#19](https://github.com/nhphunng/SoftwareTesting-Homework/issues/19), [#20](https://github.com/nhphunng/SoftwareTesting-Homework/issues/20), and [#21](https://github.com/nhphunng/SoftwareTesting-Homework/issues/21). The FR-17 whitespace behavior remains a requirement gap and was intentionally not published as a confirmed defect. No selected FR-05, FR-09, or FR-17 case remains unautomated.
 
 ## 9. Demo video and repository links
 
 - Demo video: To be added.
-- Public repository: To be added.
+- Public repository: https://github.com/nhphunng/SoftwareTesting-Homework
