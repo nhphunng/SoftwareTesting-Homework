@@ -151,7 +151,10 @@ export class AdminCouponPage {
   }
 
   private assertSuccessfulResponse(response: Response, action: string): void {
-    if (!response.ok()) {
+    const isSuccessfulGet =
+      response.request().method() === 'GET' && (response.ok() || response.status() === 304);
+
+    if (!response.ok() && !isSuccessfulGet) {
       throw new Error(`Coupon API returned ${response.status()} while attempting to ${action}`);
     }
   }
