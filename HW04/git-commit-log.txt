@@ -1,2 +1,8 @@
-Not generated yet. Export the final public repository history before submission.
+HW04 test-script commit log exported on 2026-08-09
 
+07f2dd05d78e5505fad1dd1167a7010714046902 | 2026-08-08T15:30:04+07:00 | feat: Implement FR-09 discount coupon automation with comprehensive test cases
+e6ba54517e9418456218ac4683388617f960de05 | 2026-08-07T16:06:47+07:00 | feat: Implement FR-17 coupon management automation with comprehensive test cases; enhance README and reports with execution results and bug entries
+e7e359cd17b5f734654aa2e64423ec8b5d99e0c0 | 2026-08-06T13:46:02+07:00 | feat: Implement comprehensive product search feature with data-driven test cases; enhance ProductPage class and update search specifications
+be49d3e346bff3a48276d99182bd1688d98bd65b | 2026-08-06T13:09:05+07:00 | Initialize HW04 project structure with Playwright and TypeScript setup
+
+Requirement status: 4 commits currently touch HW04 test scripts across 3 calendar days. The assignment requires at least 8 such commits across at least 4 days, so this criterion is not yet satisfied. Do not backdate or create meaningless commits; continue with meaningful `.spec.ts` improvements on a later real day.
