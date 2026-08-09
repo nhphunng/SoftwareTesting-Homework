@@ -1,10 +1,9 @@
 # AI Critique
 
-Write the mandatory 200–300-word critique after reviewing and executing the generated scripts. Cover:
+AI accelerated the conversion of HW02 cases into a data-driven Playwright suite, but its first outputs were incomplete in ways that only real execution exposed. It initially assumed environment variables were loaded automatically and treated the user and admin applications as one frontend. It also proposed accessible label locators for login fields whose visible labels were not programmatically associated with the inputs. Both assumptions caused setup failures before business behavior could be tested.
 
-- What the AI produced incorrectly, incompletely, or with bias.
-- Why it failed to catch those issues.
-- What principle was learned about collaborating with AI.
+The most important error was handling every HTTP response outside the 2xx range as a failure. Firefox frequently returned `304 Not Modified` for cached product and coupon-list GET requests. The generated helpers therefore reported false failures even though the page loaded correctly. Human review corrected this narrowly: `304` is accepted only for read-only GET requests, while POST and DELETE operations still require successful responses. This change removed cross-browser false negatives without weakening business assertions.
 
-Do not finalize this section before real execution evidence is available.
+AI also missed feature dependencies and diagnostic depth. FR-09 depends on mutable coupons managed by FR-17, so relying on seeded coupons would make usage-limit tests order-dependent. A controlled API fixture was added to create unique coupons and clean them up. Percentage assertions originally stopped at the first mismatch, hiding related errors in savings, final amount, payment total, and response JSON; soft assertions were introduced to capture the complete calculation defect.
 
+The lesson is that AI-generated automation is a hypothesis, not evidence. Prompts and source inspection can suggest selectors and boundaries, but browser-specific caching, accessibility wiring, persistence, and cleanup must be verified against the running SUT. Assertions should be strengthened or corrected from observable behavior, never relaxed merely to make a failing test pass.

@@ -153,3 +153,22 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry – AI-009
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-09T11:08:28+07:00 |
+| Task | Execute the Day 4 multi-browser, evidence, issue, and reporting work |
+| User Prompt | `Based on [plan.md](HW04/plan.md) doing task of day 4` |
+| Generated/Modified Files | `HW04/pages/admin-coupon.page.ts`, `HW04/README.md`, `HW04/reports/main-report.md`, `HW04/reports/bug-report.md`, `HW04/reports/ai-critique.md`, `HW04/reports/ai-audit-report.md`, `HW04/submission-checklist.md`, `HW04/git-commit-log.txt`, `HW04/reports/html/fr05-chromium/`, `HW04/reports/html/fr05-firefox/`, `HW04/reports/html/fr05-webkit/`, `HW04/reports/html/fr09-chromium/`, `HW04/reports/html/fr09-firefox/`, `HW04/reports/html/fr09-webkit/`, `HW04/reports/html/fr17-chromium/`, `HW04/reports/html/fr17-firefox/`, `HW04/reports/html/fr17-webkit/`, `HW04/screenshots/FR09-BUG-001-percent-calculation-webkit.png`, `HW04/screenshots/FR09-BUG-002-minimum-boundary-webkit.png`, `HW04/screenshots/FR09-BUG-003-negative-total-webkit.png`, `HW04/screenshots/FR17-BUG-001-nonpositive-discount-webkit.png`, `HW04/screenshots/FR17-BUG-002-negative-minimum-webkit.png` |
+| AI Output | Applied the project-local Playwright skill and executed all nine feature-browser runs separately. Verified embedded report metadata for Student ID `23127194`, ISO timestamps, run labels, and correct user/admin targets. Final matrix: FR-05 had 9 passed/3 failed per browser; FR-09 had 8 passed/6 failed per browser; FR-17 had 11 passed/4 failed per browser, totaling 123 executions, 84 passed, 39 failed, and 0 flaky. The first FR-17 Firefox/WebKit pass exposed an automation-only HTTP 304 handling defect; `pages/admin-coupon.page.ts` was corrected to accept 304 only for GET requests, and all three FR-17 reports were rerun successfully to stable results. Four test-owned coupons left by the failed cleanup pass were identified by exact IDs and deleted without touching seed data. Five new issue screenshots were retained. Published eight confirmed defects with screenshots as GitHub Issues [#14](https://github.com/nhphunng/SoftwareTesting-Homework/issues/14) through [#21](https://github.com/nhphunng/SoftwareTesting-Homework/issues/21); the FR-17 whitespace behavior remained a requirement gap and was not published as a defect. Updated reporting documents and recorded honestly that the current test-script history has 4 qualifying commits across 3 days, below the required 8 commits across 4 days. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
