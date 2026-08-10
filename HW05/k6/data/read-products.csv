@@ -1,4 +1,4 @@
-product_id,think_time_seconds
-1,1.0
-2,1.5
-3,2.0
+search_keyword,minimum_matches,think_time_seconds
+iPhone,1,1.0
+Samsung,1,1.5
+MacBook,1,2.0

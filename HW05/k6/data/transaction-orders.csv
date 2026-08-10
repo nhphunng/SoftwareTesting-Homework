@@ -1,2 +1,2 @@
-email,password,total_amount,shipping_address,think_time_seconds
-REPLACE_ME_CHECKOUT_USER,REPLACE_ME_PASSWORD,500000,"123 Le Loi, Quan 1, TP.HCM",0.2
+email,password,coupon_code,total_amount,shipping_address,think_time_seconds
+test@eshop.com,Test1234!,BIGBUY,500001,"123 Le Loi, Quan 1, TP.HCM",0.2
