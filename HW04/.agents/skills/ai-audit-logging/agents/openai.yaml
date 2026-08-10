@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Audit Logging"
+  short_description: "Record complete attributable AI interactions"
+  default_prompt: "Use $ai-audit-logging to append this interaction to the HW04 AI Audit Report with pending human review."
