@@ -3,7 +3,7 @@
 - [ ] Load: k6 plan, dedicated CSV, raw output, Web Dashboard HTML, resource screenshot.
 - [ ] Stress: k6 plan, dedicated CSV, raw output, Grafana view/export, resource screenshot.
 - [ ] Spike: k6 plan, dedicated CSV, raw output, end summary, resource screenshot.
-- [ ] Endurance: 10–15 minute k6 plan, raw output, Grafana/resources, stable RPS, p95, error, CPU, memory.
+- [ ] Endurance: 10–15 minute k6 plan, summary export, Web Dashboard/resources, stable RPS, p95, error, dropped iterations, CPU, memory.
 - [ ] Lockout: controlled preflight and reset/wait evidence if triggered.
 - [ ] Hardware: hostname screenshot and spec table.
 - [ ] AI: exact prompts/outputs, human plan corrections, raw-value misinterpretation hunt.
