@@ -1,0 +1,8 @@
+- Phần 1.Fix scope của PLAN.md hãy cập nhật lại dựa trên các FR mà tôi đã thực hiện ở HW02
+- Bổ sung thêm skill AI audit report cho phần HW05, bạn có thể tham khảo skill này của các HW trước đó
+- Tài khoản sẽ bao gồm 2 tài khoản cho 2 trang web là user và admin trong đó
+  - Admin: admin@eshop.com / Admin123!
+  - User test: test@eshop.com / Test1234!
+- Bạn hãy tự xác nhận GRAFANA_OUTPUT hiện có trong eshop-sut-seminar giúp tôi
+- Tôi đã chạy backend
+- Hãy thực hiện việc chạy VU/RPS để tìm ra con số cho tôi thực hiện evidence run
