@@ -1,0 +1,191 @@
+{
+    "metrics": {
+        "http_req_failed{endpoint_group:transactional}": {
+            "passes": 0,
+            "fails": 68,
+            "thresholds": {
+                "rate<0.01": false
+            },
+            "value": 0
+        },
+        "vus_max": {
+            "max": 1,
+            "value": 1,
+            "min": 1
+        },
+        "checks": {
+            "passes": 136,
+            "fails": 0,
+            "thresholds": {
+                "rate>0.99": false
+            },
+            "value": 1
+        },
+        "http_req_duration{endpoint_group:transactional}": {
+            "p(99)": 13.243539999999985,
+            "avg": 3.001191176470587,
+            "min": 0.895,
+            "med": 2.629,
+            "max": 30.689,
+            "p(90)": 3.5362,
+            "p(95)": 3.940999999999999,
+            "thresholds": {
+                "p(95)<1500": false
+            }
+        },
+        "http_req_waiting": {
+            "min": 0.853,
+            "med": 2.561,
+            "max": 30.599,
+            "p(90)": 3.4892000000000003,
+            "p(95)": 3.878999999999999,
+            "p(99)": 12.922399999999985,
+            "avg": 2.9261304347826096
+        },
+        "http_req_connecting": {
+            "avg": 0.005782608695652175,
+            "min": 0,
+            "med": 0,
+            "max": 0.241,
+            "p(90)": 0,
+            "p(95)": 0,
+            "p(99)": 0.18455999999999995
+        },
+        "http_req_sending": {
+            "avg": 0.015898550724637688,
+            "min": 0.004,
+            "med": 0.016,
+            "max": 0.064,
+            "p(90)": 0.0222,
+            "p(95)": 0.027199999999999995,
+            "p(99)": 0.044279999999999986
+        },
+        "iteration_duration": {
+            "p(95)": 208.51383585,
+            "p(99)": 226.7962275,
+            "avg": 207.12959688235296,
+            "min": 203.239541,
+            "med": 206.52050000000003,
+            "max": 235.5555,
+            "p(90)": 207.91423310000002
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_req_duration": {
+            "med": 2.611,
+            "max": 30.689,
+            "p(90)": 3.5338,
+            "p(95)": 3.921999999999999,
+            "p(99)": 12.983159999999984,
+            "avg": 2.9886956521739116,
+            "min": 0.895
+        },
+        "http_req_blocked": {
+            "p(99)": 0.22275999999999993,
+            "avg": 0.01057971014492754,
+            "min": 0.001,
+            "med": 0.003,
+            "max": 0.303,
+            "p(90)": 0.0052000000000000015,
+            "p(95)": 0.010599999999999997
+        },
+        "data_sent": {
+            "rate": 2658.964115267478,
+            "count": 18735
+        },
+        "http_req_failed": {
+            "fails": 69,
+            "passes": 0,
+            "value": 0
+        },
+        "http_reqs": {
+            "rate": 9.792822201945876,
+            "count": 69
+        },
+        "iterations": {
+            "count": 34,
+            "rate": 4.825448621248693
+        },
+        "http_req_tls_handshaking": {
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "p(99)": 0,
+            "avg": 0
+        },
+        "http_req_receiving": {
+            "min": 0.018,
+            "med": 0.036,
+            "max": 0.571,
+            "p(90)": 0.050600000000000006,
+            "p(95)": 0.06319999999999998,
+            "p(99)": 0.2745199999999997,
+            "avg": 0.04666666666666666
+        },
+        "http_req_duration{expected_response:true}": {
+            "p(99)": 12.983159999999984,
+            "avg": 2.9886956521739116,
+            "min": 0.895,
+            "med": 2.611,
+            "max": 30.689,
+            "p(90)": 3.5338,
+            "p(95)": 3.921999999999999
+        },
+        "data_received": {
+            "count": 24834,
+            "rate": 3524.564442943825
+        }
+    },
+    "setup_data": [
+        {
+            "email": "test@eshop.com",
+            "password": "Test1234!",
+            "shipping_address": "123 Le Loi, Quan 1, TP.HCM",
+            "think_time_seconds": "0.2",
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Miwicm9sZSI6InVzZXIiLCJpYXQiOjE3ODYzNTIwODZ9.SRzrCG1W9EU_CG1O8EqErHEz-vlhjHS-Up1n5-c7QP4",
+            "total_amount": "500001",
+            "coupon_code": "BIGBUY"
+        }
+    ],
+    "root_group": {
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {},
+        "checks": {
+                "coupon application returns 200": {
+                    "id": "42155152b3100665ebfc3eed8b6ed1ed",
+                    "passes": 34,
+                    "fails": 0,
+                    "name": "coupon application returns 200",
+                    "path": "::coupon application returns 200"
+                },
+                "fixed coupon produces a positive final amount": {
+                    "name": "fixed coupon produces a positive final amount",
+                    "path": "::fixed coupon produces a positive final amount",
+                    "id": "c44c37330b4b3d232d87af65da07e2f1",
+                    "passes": 34,
+                    "fails": 0
+                },
+                "checkout returns 200": {
+                    "name": "checkout returns 200",
+                    "path": "::checkout returns 200",
+                    "id": "e9f9863ea32e438a316bca31351de67a",
+                    "passes": 34,
+                    "fails": 0
+                },
+                "checkout returns order id": {
+                    "name": "checkout returns order id",
+                    "path": "::checkout returns order id",
+                    "id": "99ea7ffcbfd219bcf0f82ad44f981f88",
+                    "passes": 34,
+                    "fails": 0
+                }
+            }
+    }
+}
