@@ -20,13 +20,9 @@ case "$scenario" in
       "k6/plans/${student_id}_Load_${run_date}.js"
     ;;
   stress)
-    if [[ -z "${GRAFANA_OUTPUT:-}" ]]; then
-      printf 'Set GRAFANA_OUTPUT to the output configured for the local Grafana stack.\n' >&2
-      printf 'Example: GRAFANA_OUTPUT=experimental-prometheus-rw ./k6/run-scenario.sh stress\n' >&2
-      exit 2
-    fi
     k6 run --out "json=results/raw/${student_id}_Stress_${run_date}.json" \
-      --out "$GRAFANA_OUTPUT" "k6/plans/${student_id}_Stress_${run_date}.js"
+      --summary-mode=full "k6/plans/${student_id}_Stress_${run_date}.js" 2>&1 \
+      | tee "results/reports/stress/${student_id}_Stress_${run_date}-console.txt"
     ;;
   spike)
     k6 run --out "json=results/raw/${student_id}_Spike_${run_date}.json" \
@@ -34,8 +30,7 @@ case "$scenario" in
       "k6/plans/${student_id}_Spike_${run_date}.js"
     ;;
   endurance)
-    k6 run --out "json=results/raw/${student_id}_Endurance_${run_date}.json" \
-      --summary-export="results/reports/endurance/${student_id}_Endurance_${run_date}-summary.json" \
+    k6 run --summary-export="results/reports/endurance/${student_id}_Endurance_${run_date}-summary.json" \
       "k6/plans/${student_id}_Endurance_${run_date}.js"
     ;;
   *)
