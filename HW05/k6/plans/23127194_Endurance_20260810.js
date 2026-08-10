@@ -7,7 +7,7 @@ import { parseCsv, requireColumns } from '../lib/csv.js';
 const BASE_URL = __ENV.BASE_URL || 'http://127.0.0.1:3000';
 const products = new SharedArray('endurance-products', () => requireColumns(
   parseCsv(open('../data/read-products.csv')),
-  ['product_id'],
+  ['search_keyword'],
   'read-products.csv',
 ));
 
@@ -15,11 +15,11 @@ export const options = {
   scenarios: {
     calibrated_soak: {
       executor: 'constant-arrival-rate',
-      rate: Number(__ENV.STABLE_RPS || 20),
+      rate: Number(__ENV.STABLE_RPS || 4000),
       timeUnit: '1s',
       duration: __ENV.SOAK_DURATION || '12m',
-      preAllocatedVUs: Number(__ENV.PREALLOCATED_VUS || 30),
-      maxVUs: Number(__ENV.MAX_VUS || 100),
+      preAllocatedVUs: Number(__ENV.PREALLOCATED_VUS || 300),
+      maxVUs: Number(__ENV.MAX_VUS || 1000),
       tags: { scenario_type: 'endurance', endpoint_group: 'read-heavy' },
     },
   },
@@ -34,15 +34,15 @@ export const options = {
 
 export default function () {
   const item = products[exec.scenario.iterationInTest % products.length];
-  const response = http.get(`${BASE_URL}/api/products/${item.product_id}`, {
+  const response = http.get(`${BASE_URL}/api/products?search=${encodeURIComponent(item.search_keyword)}`, {
     tags: {
       scenario_type: 'endurance',
-      endpoint: 'product-detail',
+      endpoint: 'product-search',
       endpoint_group: 'read-heavy',
     },
   });
   check(response, {
-    'endurance product detail returns 200': (res) => res.status === 200,
-    'endurance product id matches': (res) => Number(res.json('id')) === Number(item.product_id),
+    'endurance product search returns 200': (res) => res.status === 200,
+    'endurance product search returns a result': (res) => Array.isArray(res.json()) && res.json().length > 0,
   });
 }
