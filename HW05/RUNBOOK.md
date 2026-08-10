@@ -20,22 +20,18 @@ node server.js
 
 Do not use the repository's current `run_servers.sh`: it contains another machine's absolute path and terminates all Node processes.
 
-## Terminal B — Grafana metrics path
+## Terminal B — Grafana k6 report path
 
-Start the Grafana metrics stack already installed for `eshop-sut-seminar`. Record its exact command, versions, data-source URL, dashboard UID/export, and retention settings in the report. Then set the matching k6 output, for example:
+Repository/process inspection on 2026-08-10 found Grafana k6 v2.0.0 and k6 MCP/skills, but no Grafana server, Prometheus remote-write receiver, InfluxDB, Docker metrics stack, or configured `GRAFANA_OUTPUT`. Therefore do not pass a fabricated external `--out` value.
 
-```bash
-export GRAFANA_OUTPUT=experimental-prometheus-rw
-```
-
-The example is only correct for a configured Prometheus remote-write receiver. If the local stack uses InfluxDB or another output, use that configured output instead and document it.
+Use the integrated Grafana k6 Web Dashboard for the Load view through `K6_WEB_DASHBOARD=true` and its HTML export. Stress uses a full textual summary and Spike uses a JSON summary so the three report views remain distinct. If an external Grafana stack is installed later, record its actual output URI and configuration before changing the runner.
 
 ## Terminal C — k6 plans and artifacts
 
 ```bash
 cd /Users/nguyenhoangphihung/Document/ky_3/SoftwareTesting-Homework/HW05
 BASE_URL=http://127.0.0.1:3000 ./k6/run-scenario.sh load
-BASE_URL=http://127.0.0.1:3000 GRAFANA_OUTPUT="$GRAFANA_OUTPUT" ./k6/run-scenario.sh stress
+BASE_URL=http://127.0.0.1:3000 ./k6/run-scenario.sh stress
 BASE_URL=http://127.0.0.1:3000 ./k6/run-scenario.sh spike
 BASE_URL=http://127.0.0.1:3000 STABLE_RPS=<CALIBRATED_VALUE> ./k6/run-scenario.sh endurance
 ```
