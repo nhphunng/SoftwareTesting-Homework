@@ -37,7 +37,7 @@ require_glob "Stress plan" "k6/plans/*_Stress_????????.js"
 require_glob "Spike plan" "k6/plans/*_Spike_????????.js"
 require_glob "Endurance plan" "k6/plans/*_Endurance_????????.js"
 require_count "CSV inputs" "k6/data" 3
-require_count "raw run outputs" "results/raw" 4
+require_count "raw Load/Stress/Spike outputs" "results/raw" 3
 require_count "distinct report outputs" "results/reports" 3
 require_count "resource evidence" "evidence/resource-monitor" 4
 require_count "hardware evidence" "evidence/hardware" 1

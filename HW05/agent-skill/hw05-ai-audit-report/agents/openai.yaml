@@ -1,0 +1,4 @@
+interface:
+  display_name: "HW05 AI Audit Report"
+  short_description: "Capture and verify HW05 AI interactions"
+  default_prompt: "Use $hw05-ai-audit-report to append this interaction to the HW05 AI Audit Report."
