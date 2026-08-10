@@ -7,7 +7,7 @@ import { parseCsv, requireColumns } from '../lib/csv.js';
 const BASE_URL = __ENV.BASE_URL || 'http://127.0.0.1:3000';
 const orders = new SharedArray('transaction-orders', () => requireColumns(
   parseCsv(open('../data/transaction-orders.csv')),
-  ['email', 'password', 'total_amount', 'shipping_address', 'think_time_seconds'],
+  ['email', 'password', 'coupon_code', 'total_amount', 'shipping_address', 'think_time_seconds'],
   'transaction-orders.csv',
 ));
 
@@ -16,13 +16,13 @@ export const options = {
     transactional_spike: {
       executor: 'ramping-vus',
       stages: [
-        { duration: '30s', target: Number(__ENV.BASELINE_VUS || 5) },
-        { duration: '1m', target: Number(__ENV.BASELINE_VUS || 5) },
-        { duration: __ENV.SPIKE_RAMP || '10s', target: Number(__ENV.SPIKE_VUS || 100) },
-        { duration: __ENV.SPIKE_HOLD || '1m', target: Number(__ENV.SPIKE_VUS || 100) },
-        { duration: '10s', target: Number(__ENV.BASELINE_VUS || 5) },
-        { duration: __ENV.RECOVERY_HOLD || '2m', target: Number(__ENV.BASELINE_VUS || 5) },
-        { duration: '20s', target: 0 },
+        { duration: __ENV.SPIKE_BASELINE_RAMP || '30s', target: Number(__ENV.BASELINE_VUS || 20) },
+        { duration: __ENV.SPIKE_BASELINE_HOLD || '1m', target: Number(__ENV.BASELINE_VUS || 20) },
+        { duration: __ENV.SPIKE_RAMP || '10s', target: Number(__ENV.SPIKE_VUS || 400) },
+        { duration: __ENV.SPIKE_HOLD || '1m', target: Number(__ENV.SPIKE_VUS || 400) },
+        { duration: __ENV.SPIKE_RECOVERY_RAMP || '10s', target: Number(__ENV.BASELINE_VUS || 20) },
+        { duration: __ENV.RECOVERY_HOLD || '2m', target: Number(__ENV.BASELINE_VUS || 20) },
+        { duration: __ENV.SPIKE_RAMP_DOWN || '20s', target: 0 },
       ],
       tags: { scenario_type: 'spike', endpoint_group: 'transactional' },
     },
@@ -53,8 +53,23 @@ export function setup() {
 
 export default function (preparedOrders) {
   const order = preparedOrders[exec.vu.idInTest % preparedOrders.length];
-  const response = http.post(`${BASE_URL}/api/checkout`, JSON.stringify({
+  const couponResponse = http.post(`${BASE_URL}/api/apply-coupon`, JSON.stringify({
+    code: order.coupon_code,
     total_amount: Number(order.total_amount),
+  }), {
+    headers: { 'Content-Type': 'application/json' },
+    tags: { endpoint: 'apply-coupon', endpoint_group: 'transactional' },
+  });
+
+  const couponOk = check(couponResponse, {
+    'coupon application returns 200': (res) => res.status === 200,
+    'fixed coupon produces a positive final amount': (res) => Number(res.json('final_amount')) > 0,
+  });
+
+  if (!couponOk) return;
+
+  const response = http.post(`${BASE_URL}/api/checkout`, JSON.stringify({
+    total_amount: Number(couponResponse.json('final_amount')),
     shipping_address: `${order.shipping_address} - ${exec.scenario.iterationInTest}`,
   }), {
     headers: {
