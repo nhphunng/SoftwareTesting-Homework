@@ -1,0 +1,236 @@
+{
+  "feature": "Mobile-FR04",
+  "source": "HW02/test-cases/Mobile-FR04-profile-management.md",
+  "cases": [
+    {
+      "id": "MFR04-DT-001",
+      "description": "Logged-in user can view the profile page",
+      "enabled": true,
+      "kind": "profile-view",
+      "preconditions": ["User is logged in"],
+      "expected": {
+        "heading": "Hồ sơ của bạn",
+        "emailDisabled": true,
+        "updateButtonVisible": true,
+        "logoutButtonVisible": true
+      }
+    },
+    {
+      "id": "MFR04-DT-002",
+      "description": "Guest cannot access the profile page",
+      "enabled": true,
+      "kind": "guest-access",
+      "preconditions": ["User is logged out"],
+      "expected": {
+        "deniedMessage": "Vui lòng đăng nhập",
+        "signInButtonVisible": true
+      }
+    },
+    {
+      "id": "MFR04-DT-003",
+      "description": "Valid profile update persists after reload",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Test User Updated",
+        "phone": "123456789",
+        "address": "123 Le Loi, Q1"
+      },
+      "expected": {
+        "outcome": "accepted"
+      }
+    },
+    {
+      "id": "MFR04-DT-004",
+      "description": "Vietnamese full name is accepted",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Nguyễn Hoàng Phi Hùng",
+        "phone": "123456789",
+        "address": "123 Lê Lợi, Quận 1"
+      },
+      "expected": {
+        "outcome": "accepted"
+      }
+    },
+    {
+      "id": "MFR04-DT-005",
+      "description": "Empty full name is rejected by required validation",
+      "enabled": true,
+      "kind": "native-required",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "",
+        "phone": "123456789",
+        "address": "123 Le Loi, Q1"
+      },
+      "expected": {
+        "outcome": "rejected"
+      }
+    },
+    {
+      "id": "MFR04-DT-006",
+      "description": "Whitespace-only full name is rejected after trimming",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "   ",
+        "phone": "123456789",
+        "address": "123 Le Loi, Q1"
+      },
+      "expected": {
+        "outcome": "rejected"
+      }
+    },
+    {
+      "id": "MFR04-DT-007",
+      "description": "Ten-digit phone starting with zero is accepted",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Test User",
+        "phone": "0912345678",
+        "address": "123 Le Loi, Q1"
+      },
+      "expected": {
+        "outcome": "accepted"
+      }
+    },
+    {
+      "id": "MFR04-DT-010",
+      "description": "Eleven-digit phone is rejected",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Test User",
+        "phone": "12345678901",
+        "address": "123 Le Loi, Q1"
+      },
+      "expected": {
+        "outcome": "rejected"
+      }
+    },
+    {
+      "id": "MFR04-DT-011",
+      "description": "Phone without leading zero is rejected",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Test User",
+        "phone": "123456789",
+        "address": "123 Le Loi, Q1"
+      },
+      "expected": {
+        "outcome": "rejected"
+      }
+    },
+    {
+      "id": "MFR04-DT-012",
+      "description": "Phone containing a symbol is rejected",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Test User",
+        "phone": "123*56789",
+        "address": "123 Le Loi, Q1"
+      },
+      "expected": {
+        "outcome": "rejected"
+      }
+    },
+    {
+      "id": "MFR04-DT-014",
+      "description": "Default shipping address can be updated",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Test User",
+        "phone": "123456789",
+        "address": "123 Le Loi, Q1, TP HCM"
+      },
+      "expected": {
+        "outcome": "accepted"
+      }
+    },
+    {
+      "id": "MFR04-DT-015",
+      "description": "Empty address is accepted when optional",
+      "enabled": true,
+      "kind": "profile-update",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Test User",
+        "phone": "123456789",
+        "address": ""
+      },
+      "expected": {
+        "outcome": "accepted"
+      }
+    },
+    {
+      "id": "MFR04-DT-016",
+      "description": "Email cannot be changed through the UI",
+      "enabled": true,
+      "kind": "email-readonly",
+      "preconditions": ["User is logged in"],
+      "expected": {
+        "emailDisabled": true
+      }
+    },
+    {
+      "id": "MFR04-DT-017",
+      "description": "Profile update does not change email",
+      "enabled": true,
+      "kind": "email-unchanged",
+      "preconditions": ["User is logged in"],
+      "input": {
+        "fullName": "Email Guard Check",
+        "phone": "123456789",
+        "address": "Email remains unchanged"
+      },
+      "expected": {
+        "outcome": "accepted"
+      }
+    },
+    {
+      "id": "MFR04-DT-020",
+      "description": "User can log out from the profile page",
+      "enabled": true,
+      "kind": "logout",
+      "preconditions": ["User is logged in"],
+      "expected": {
+        "deniedMessage": "Vui lòng đăng nhập",
+        "loginLinkVisible": true
+      }
+    },
+    {
+      "id": "MFR04-DT-022",
+      "description": "Empty order history state is displayed",
+      "enabled": true,
+      "kind": "empty-order-history",
+      "preconditions": ["User is logged in", "User has no orders"],
+      "expected": {
+        "emptyOrderMessage": "Bạn chưa có đơn hàng nào."
+      }
+    }
+  ],
+  "notAutomated": [
+    {
+      "ids": ["MFR04-DT-021", "MFR04-DT-024", "MFR04-DT-025", "MFR04-DT-026", "MFR04-DT-027", "MFR04-BVA-020", "MFR04-BVA-021", "MFR04-BVA-023", "MFR04-BVA-024", "MFR04-BVA-025"],
+      "reason": "Require controlled seeded orders and cancellation state that are unavailable for the configured user account."
+    },
+    {
+      "ids": ["MFR04-DT-018", "MFR04-DT-019"],
+      "reason": "Require a second controlled account or a supported API contract to verify ownership and role immutability safely."
+    }
+  ]
+}
