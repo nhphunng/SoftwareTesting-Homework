@@ -1,8 +1,666 @@
-HW04 test-script commit log exported on 2026-08-09
-
-07f2dd05d78e5505fad1dd1167a7010714046902 | 2026-08-08T15:30:04+07:00 | feat: Implement FR-09 discount coupon automation with comprehensive test cases
-e6ba54517e9418456218ac4683388617f960de05 | 2026-08-07T16:06:47+07:00 | feat: Implement FR-17 coupon management automation with comprehensive test cases; enhance README and reports with execution results and bug entries
-e7e359cd17b5f734654aa2e64423ec8b5d99e0c0 | 2026-08-06T13:46:02+07:00 | feat: Implement comprehensive product search feature with data-driven test cases; enhance ProductPage class and update search specifications
-be49d3e346bff3a48276d99182bd1688d98bd65b | 2026-08-06T13:09:05+07:00 | Initialize HW04 project structure with Playwright and TypeScript setup
-
-Requirement status: 4 commits currently touch HW04 test scripts across 3 calendar days. The assignment requires at least 8 such commits across at least 4 days, so this criterion is not yet satisfied. Do not backdate or create meaningless commits; continue with meaningful `.spec.ts` improvements on a later real day.
+*   commit 67332a2d68557bafc785c0a27646bb9f82f47cb5
+|\  Merge: 955788c 889d09f
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Mon Aug 10 11:34:46 2026 +0700
+| | 
+| |     WIP on hw05: 955788c Merge pull request #13 from nhphunng/feat/HW02
+| | 
+| * commit 889d09febc352ad2f5ca26a89880b67b6a0a7d81
+|/  Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+|   Date:   Mon Aug 10 11:34:46 2026 +0700
+|   
+|       index on hw05: 955788c Merge pull request #13 from nhphunng/feat/HW02
+|   
+| * commit bfb2597e653c2af5c28be868907f76bd81b4bcfa
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:24:11 2026 +0700
+| | 
+| |     feat: Update HW04 commit log with recent test script entries and requirement status
+| | 
+| |  HW04/git-commit-log.txt | 8 +++++++-
+| |  1 file changed, 7 insertions(+), 1 deletion(-)
+| | 
+| * commit 4450056fc1ff47c38cabb39c4b80fb043902a397
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:22:44 2026 +0700
+| | 
+| |     feat: Update HW04 submission checklist with confirmed student ID and completed tasks
+| | 
+| |  HW04/submission-checklist.md | 21 ++++++++++-----------
+| |  1 file changed, 10 insertions(+), 11 deletions(-)
+| | 
+| * commit 34ba2a19f533851ad95edc6bd1ddad2aa19fe125
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:22:40 2026 +0700
+| | 
+| |     feat: Add AI Audit Entry for Day 4 execution results and critique AI-generated automation errors
+| | 
+| |  HW04/reports/ai-audit-report.md | 19 +++++++++++++++++++
+| |  HW04/reports/ai-critique.md     |  9 ++++-----
+| |  2 files changed, 23 insertions(+), 5 deletions(-)
+| | 
+| * commit 5b34924d4521e97fa515d3e522eb748ab847af37
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:22:22 2026 +0700
+| | 
+| |     feat: Enhance response validation in assertSuccessfulResponse method for GET requests
+| | 
+| |  HW04/pages/admin-coupon.page.ts | 5 ++++-
+| |  1 file changed, 4 insertions(+), 1 deletion(-)
+| | 
+| * commit 4c974a10c92f2be413dad1d1b27da59fd7d37920
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:22:15 2026 +0700
+| | 
+| |     feat: Update bug report with execution environment details, reproducibility notes, and GitHub issue links
+| | 
+| |  HW04/reports/bug-report.md | 58 +++++++++++++++++++++---------------------
+| |  1 file changed, 29 insertions(+), 29 deletions(-)
+| | 
+| * commit a96e782c5df52490f21e925b15cda864f3c10f12
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:22:04 2026 +0700
+| | 
+| |     feat: Update HW04 automation report with detailed execution results, multi-browser summaries, and enhanced clarity on test cases
+| | 
+| |  HW04/reports/main-report.md | 48 +++++++++++++++++++++++++----------------
+| |  1 file changed, 30 insertions(+), 18 deletions(-)
+| | 
+| * commit f67f24c936ea8c11ad2b2f70274581679e137e36
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:21:56 2026 +0700
+| | 
+| |     feat: Update HW04 README with enhanced test execution metrics and detailed Day 4 execution matrix
+| | 
+| |  HW04/README.md | 20 ++++++++++++++++----
+| |  1 file changed, 16 insertions(+), 4 deletions(-)
+| | 
+| * commit 5a9a8a8a00019a989db6bd6de4b5802b573ee848
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Aug 9 15:21:30 2026 +0700
+| | 
+| |     feat: Add HTML report host and port configuration with validation in Playwright setup
+| | 
+| |  HW04/playwright.config.ts | 8 ++++++++
+| |  1 file changed, 8 insertions(+)
+| | 
+| * commit 07f2dd05d78e5505fad1dd1167a7010714046902
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sat Aug 8 15:30:04 2026 +0700
+| | 
+| |     feat: Implement FR-09 discount coupon automation with comprehensive test cases
+| |     
+| |     - Updated README.md with new metrics reflecting automation progress.
+| |     - Added detailed test cases for FR-09 discount coupons in fr09-coupons.json.
+| |     - Enhanced auth.fixture.ts to include user login functionality.
+| |     - Developed coupon.fixture.ts for controlled coupon creation and cleanup.
+| |     - Expanded checkout.page.ts with new locators and methods for coupon application.
+| |     - Configured Playwright to always open HTML reports after test runs.
+| |     - Documented AI audit entry and bug reports for FR-09 defects.
+| |     - Created main-report.md to summarize automation status and execution results for FR-09.
+| |     - Implemented fr09-discount-coupons.spec.ts to validate coupon functionality against defined cases.
+| | 
+| |  HW04/2026.HW04.Automation Testing_En.md  | 183 +++++++++++++++++++++++++++
+| |  HW04/README.md                           |  18 +--
+| |  HW04/data/fr09-coupons.json              | 130 ++++++++++++++++++-
+| |  HW04/fixtures/auth.fixture.ts            |  40 ++++++
+| |  HW04/fixtures/coupon.fixture.ts          | 149 +++++++++++++++++++++-
+| |  HW04/pages/checkout.page.ts              |  81 +++++++++++-
+| |  HW04/playwright.config.ts                |   2 +-
+| |  HW04/reports/ai-audit-report.md          |  19 +++
+| |  HW04/reports/bug-report.md               |  48 +++++++
+| |  HW04/reports/main-report.md              |  47 ++++++-
+| |  HW04/tests/fr09-discount-coupons.spec.ts | 118 ++++++++++++++++-
+| |  11 files changed, 808 insertions(+), 27 deletions(-)
+| | 
+| * commit e6ba54517e9418456218ac4683388617f960de05
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Fri Aug 7 16:06:47 2026 +0700
+| | 
+| |     feat: Implement FR-17 coupon management automation with comprehensive test cases; enhance README and reports with execution results and bug entries
+| | 
+| |  HW04/README.md                            |  19 ++-
+| |  HW04/data/fr17-coupon-crud.json           | 142 +++++++++++++++-
+| |  HW04/fixtures/auth.fixture.ts             |  56 +++++-
+| |  HW04/pages/admin-coupon.page.ts           | 158 ++++++++++++++++-
+| |  HW04/reports/ai-audit-report.md           |  19 +++
+| |  HW04/reports/bug-report.md                |  33 +++-
+| |  HW04/reports/main-report.md               |  48 +++++-
+| |  HW04/tests/fr17-coupon-management.spec.ts | 236 +++++++++++++++++++++++++-
+| |  8 files changed, 684 insertions(+), 27 deletions(-)
+| | 
+| * commit 30f28170303b7dae0c11955e2eeaf3b60d60e656
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 13:46:29 2026 +0700
+| | 
+| |     feat: Enhance HW04 automation report with detailed execution results, assertion patterns, and confirmed failures; update structure and content
+| | 
+| |  HW04/reports/main-report.md | 85 ++++++++++++++++++++++++++++++++++++++++-
+| |  1 file changed, 84 insertions(+), 1 deletion(-)
+| | 
+| * commit 7a4d1abb458e21682b77727644461ab067334422
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 13:46:24 2026 +0700
+| | 
+| |     feat: Update HW04 bug report with detailed defect entries for FR-05 features; enhance structure and content
+| | 
+| |  HW04/reports/bug-report.md | 58 ++++++++++++++++++++++++++++++++----------
+| |  1 file changed, 44 insertions(+), 14 deletions(-)
+| | 
+| * commit 883d52cc2acef5ae9dead004de6f8a75ed3c4b27
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 13:46:18 2026 +0700
+| | 
+| |     feat: Add AI audit entries for FR-05 Playwright automation and routing tests to user/admin frontends; update generated files and outputs
+| | 
+| |  HW04/reports/ai-audit-report.md | 37 +++++++++++++++++++++++++++++++++++++
+| |  1 file changed, 37 insertions(+)
+| | 
+| * commit e7e359cd17b5f734654aa2e64423ec8b5d99e0c0
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 13:46:02 2026 +0700
+| | 
+| |     feat: Implement comprehensive product search feature with data-driven test cases; enhance ProductPage class and update search specifications
+| | 
+| |  HW04/data/fr05-search.json             | 129 +++++++++++++++++++++++++-
+| |  HW04/pages/product.page.ts             |  56 +++++++++++-
+| |  HW04/tests/fr05-product-search.spec.ts | 140 +++++++++++++++++++++++++++--
+| |  3 files changed, 314 insertions(+), 11 deletions(-)
+| | 
+| * commit b4eeb6c1c3f20314322d32c63c31911a01bfb041
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 13:45:53 2026 +0700
+| | 
+| |     feat: Enhance README with environment variable details and update Playwright config for dynamic URL selection; modify tsconfig for ESNext module support
+| | 
+| |  HW04/README.md            | 21 +++++++++++++--------
+| |  HW04/playwright.config.ts | 26 ++++++++++++++++++++++----
+| |  HW04/tsconfig.json        |  5 ++---
+| |  3 files changed, 37 insertions(+), 15 deletions(-)
+| | 
+| * commit 264eda8ca0b6036b62c08c28502b3aef6b6a9f8c
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 13:45:40 2026 +0700
+| | 
+| |     fix: Update environment variables and refine .gitignore for better project structure
+| | 
+| |  HW04/.env.example |  4 ++--
+| |  HW04/.gitignore   | 16 +++++++++++++---
+| |  HW04/package.json | 25 ++++++++++++-------------
+| |  3 files changed, 27 insertions(+), 18 deletions(-)
+| | 
+| * commit be49d3e346bff3a48276d99182bd1688d98bd65b
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 13:09:05 2026 +0700
+| | 
+| |     Initialize HW04 project structure with Playwright and TypeScript setup
+| |     
+| |     - Create package.json with necessary scripts and dependencies
+| |     - Add Playwright configuration for multi-browser testing
+| |     - Implement Page Object models for product, checkout, and admin coupon pages
+| |     - Draft initial test specifications for FR-05, FR-09, and FR-17 features
+| |     - Establish a comprehensive plan for automation testing in plan.md
+| |     - Set up reports and audit documentation for AI collaboration
+| |     - Create submission checklist to ensure all requirements are met
+| |     - Add bug report template for tracking defects during testing
+| |     - Include .gitkeep files for empty directories to maintain structure
+| | 
+| |  HW04/.env.example                         |   7 +
+| |  HW04/.gitignore                           |   8 +
+| |  HW04/README.md                            |  48 +++
+| |  HW04/data/fr05-search.json                |   5 +
+| |  HW04/data/fr09-coupons.json               |   5 +
+| |  HW04/data/fr17-coupon-crud.json           |   5 +
+| |  HW04/fixtures/auth.fixture.ts             |   7 +
+| |  HW04/fixtures/coupon.fixture.ts           |   6 +
+| |  HW04/git-commit-log.txt                   |   2 +
+| |  HW04/package-lock.json                    | 472 ++++++++++++++++++++++++++
+| |  HW04/package.json                         |  27 ++
+| |  HW04/pages/admin-coupon.page.ts           |   8 +
+| |  HW04/pages/checkout.page.ts               |   8 +
+| |  HW04/pages/product.page.ts                |   8 +
+| |  HW04/plan.md                              | 242 +++++++++++++
+| |  HW04/playwright.config.ts                 |  42 +++
+| |  HW04/reports/ai-audit-report.md           |  80 +++++
+| |  HW04/reports/ai-critique.md               |  10 +
+| |  HW04/reports/ai-session-logs/AI-003.md    |  14 +
+| |  HW04/reports/bug-report.md                |  20 ++
+| |  HW04/reports/html/.gitkeep                |   1 +
+| |  HW04/reports/main-report.md               |  22 ++
+| |  HW04/screenshots/.gitkeep                 |   1 +
+| |  HW04/submission-checklist.md              |  18 +
+| |  HW04/tests/fr05-product-search.spec.ts    |   8 +
+| |  HW04/tests/fr09-discount-coupons.spec.ts  |   8 +
+| |  HW04/tests/fr17-coupon-management.spec.ts |   8 +
+| |  HW04/tsconfig.json                        |  13 +
+| |  28 files changed, 1103 insertions(+)
+| | 
+| * commit 6f83cb809ccd6322346f1b180e115d2ad0bc69a4
+|/  Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+|   Date:   Thu Aug 6 13:08:49 2026 +0700
+|   
+|       feat: Add AI audit logging and Playwright automation testing skills; create templates for audit entries and external test data contracts
+|   
+|    HW04/.agents/skills/ai-audit-logging/SKILL.md    | 57 ++++++++++++++++
+|    .../skills/ai-audit-logging/agents/openai.yaml   |  4 ++
+|    .../references/audit-entry-template.md           | 25 +++++++
+|    .../playwright-automation-testing/SKILL.md       | 70 ++++++++++++++++++++
+|    .../agents/openai.yaml                           |  4 ++
+|    .../references/hw04-automation-rules.md          | 53 +++++++++++++++
+|    .../references/test-data-contract.md             | 36 ++++++++++
+|    HW04/AGENTS.md                                   | 35 ++++++++++
+|    8 files changed, 284 insertions(+)
+|   
+*   commit 955788cf79acf20b2d4825f4fb533c6ee60ee641
+|\  Merge: 7481d1a 0ceb252
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 12:26:24 2026 +0700
+| | 
+| |     Merge pull request #13 from nhphunng/feat/HW02
+| |     
+| |     Add audit and critique reports; update bug report with screenshots an…
+| | 
+| * commit 0ceb2526701a67fe2b6a2d6568c97739eebbe9f5
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Aug 6 12:25:55 2026 +0700
+| | 
+| |     Add audit and critique reports; update bug report with screenshots and GitHub links; create main report PDF; add .DS_Store to screenshots
+| | 
+| |  .DS_Store                                        | Bin 0 -> 6148 bytes
+| |  HW02/.DS_Store                                   | Bin 0 -> 6148 bytes
+| |  .../skills/domain-boundary-testing/SKILL.md      |   1 +
+| |  HW02/README.md                                   |  82 +++---
+| |  HW02/reports/ai-audit-report.md                  | 256 +++++--------------
+| |  HW02/reports/ai-audit-report.pdf                 | Bin 0 -> 243577 bytes
+| |  HW02/reports/ai-critique.pdf                     | Bin 0 -> 39801 bytes
+| |  HW02/reports/bug-report.md                       |  42 +--
+| |  HW02/reports/main-report.md                      |   2 +-
+| |  HW02/reports/main-report.pdf                     | Bin 0 -> 1424885 bytes
+| |  HW02/screenshots/.DS_Store                       | Bin 0 -> 6148 bytes
+| |  11 files changed, 129 insertions(+), 254 deletions(-)
+| | 
+* | commit 7481d1a29cc7f61c864cdcd60063b6e1a4bf2dc2
+|\| Merge: 94676d7 33f1522
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Mon Jul 6 10:49:45 2026 +0700
+| | 
+| |     Merge pull request #12 from nhphunng/feat/HW02
+| |     
+| |     Feat: Implement HW02: AI First Domain Testing
+| | 
+| * commit 33f15225330c3e8a75c99d3863f68ed0178c791b
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Jul 5 21:18:42 2026 +0700
+| | 
+| |     Add git commit log for HW02, documenting previous commits and changes made in the project
+| | 
+| |  HW02/git-commit-log.txt | 367 ++++++++++++++++++++++++++++++++++++++++++++
+| |  1 file changed, 367 insertions(+)
+| | 
+| * commit 523493bdccd135925e183b689c49926d43817f5e
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Jul 5 20:27:57 2026 +0700
+| | 
+| |     Add AI audit entries for HW02 main testing report, including detailed summaries of Domain Testing and Boundary Value Analysis results, and update README.md with self-assessment and test summary report.
+| | 
+| |  HW02/reports/ai-audit-report.md | 24 ++++++++++++++++++++++++
+| |  1 file changed, 24 insertions(+)
+| | 
+| * commit 870df1dceb78f3142d3d1d732fed978da8af8068
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Jul 5 20:27:52 2026 +0700
+| | 
+| |     Add AI audit entries and critique for HW02, including detailed analysis of AI-generated outputs and their limitations
+| | 
+| |  HW02/reports/ai-critique.md | 3 +++
+| |  1 file changed, 3 insertions(+)
+| | 
+| * commit 3817737b38d22a2d189e34179c76e38c2fdd54bc
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Jul 5 20:27:42 2026 +0700
+| | 
+| |     Add README.md for HW02 - Domain Testing on EShop, including folder structure, selected features, main files, test summary report, self-assessment, and notes
+| | 
+| |  HW02/README.md | 76 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+| |  1 file changed, 76 insertions(+)
+| | 
+| * commit 2a8b02af9743783825530d489702d63b78711c6b
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Sun Jul 5 20:27:27 2026 +0700
+| | 
+| |     Implement code changes to enhance functionality and improve performance
+| | 
+| |  HW02/reports/main-report.md | 581 ++++++++++++++++++++++++++++++++++++++++
+| |  1 file changed, 581 insertions(+)
+| | 
+| * commit ec8beaeca4fe8ad3a19be7ea622a4fd7344559ff
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Fri Jul 3 13:27:25 2026 +0700
+| | 
+| |     Add Mobile-FR04 profile management domain testing and boundary value analysis documentation
+| | 
+| |  .../test-cases/Mobile-FR04-profile-management.md | 264 +++++++++++++++++++
+| |  1 file changed, 264 insertions(+)
+| | 
+| * commit 6ea3905aeccb5170f6d4816fb11057ce26ff996c
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Fri Jul 3 13:27:16 2026 +0700
+| | 
+| |     Add AI audit entries for FR-17 and FR-09 testing artifacts, including updates on execution summaries, bug reports, and AI gap analyses
+| | 
+| |  HW02/reports/ai-audit-report.md | 144 +++++++++++++++++++++++++++++++++++-
+| |  1 file changed, 142 insertions(+), 2 deletions(-)
+| | 
+| * commit a7f7a566c12dc1af7bd2364fe6394769e38c3822
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Fri Jul 3 13:27:07 2026 +0700
+| | 
+| |     Add bug reports for Mobile-FR04 profile management validation issues
+| | 
+| |  HW02/reports/bug-report.md | 62 +++++++++++++++++++++++++++++++++++++++++-
+| |  1 file changed, 61 insertions(+), 1 deletion(-)
+| | 
+| * commit 5ff953816b9d5d6beae189a133b751784411f420
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Fri Jul 3 13:27:00 2026 +0700
+| | 
+| |     Add new screenshots for boundary value analysis and domain testing
+| | 
+| |  HW02/screenshots/MFR04-BVA-006.jpg | Bin 0 -> 211143 bytes
+| |  HW02/screenshots/MFR04-BVA-007.jpg | Bin 0 -> 227900 bytes
+| |  HW02/screenshots/MFR04-DT-005.jpg  | Bin 0 -> 208107 bytes
+| |  HW02/screenshots/MFR04-DT-006.jpg  | Bin 0 -> 208107 bytes
+| |  HW02/screenshots/MFR04-DT-007.jpg  | Bin 0 -> 211143 bytes
+| |  HW02/screenshots/MFR04-DT-009.jpg  | Bin 0 -> 211143 bytes
+| |  HW02/screenshots/MFR04-DT-011.jpg  | Bin 0 -> 227900 bytes
+| |  7 files changed, 0 insertions(+), 0 deletions(-)
+| | 
+| * commit 8679e20e3e0ac675a6fa263d80dd6b6dcffc9484
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Jul 2 19:20:06 2026 +0700
+| | 
+| |     Add bug report and test case templates for domain-boundary-testing
+| | 
+| |  .../skills/domain-boundary-testing/SKILL.md      |  3 +-
+| |  .../assets/bug-report-template.md                | 38 ++++++++++++++++++++
+| |  .../assets/test-case-template.md                 | 18 ++++++++++
+| |  HW02/prompt/prompt_template.md                   | 25 +++++++++++++
+| |  4 files changed, 82 insertions(+), 2 deletions(-)
+| | 
+| * commit ff9fceeb55adc365a5cd8e1ded3f924d1683a3cb
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Jul 2 19:19:52 2026 +0700
+| | 
+| |     Add comprehensive bug report for FR-17 and FR-09 coupon management issues
+| | 
+| |  HW02/reports/bug-report.md | 185 +++++++++++++++++++++++++++++++++++++++++
+| |  1 file changed, 185 insertions(+)
+| | 
+| * commit 4fe10ded1f05e0b8b14c803d781c39bdda2daf1d
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Jul 2 19:19:31 2026 +0700
+| | 
+| |     Add domain testing and boundary value analysis for FR-05 product listing and search
+| | 
+| |  HW02/test-cases/FR05-product-listing-search.md | 181 +++++++++++++++++++++
+| |  1 file changed, 181 insertions(+)
+| | 
+| * commit 1853922c979970e10c0e418b05b138271f4fc3b2
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Jul 2 19:19:24 2026 +0700
+| | 
+| |     Update FR-09 discount coupon tests for expiration and usage limits
+| | 
+| |  HW02/test-cases/FR09-discount-coupons.md | 51 ++++++++--------------------
+| |  1 file changed, 15 insertions(+), 36 deletions(-)
+| | 
+| * commit dd9bf0556641887f82672f2b4f06bff2b0595581
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Thu Jul 2 19:19:10 2026 +0700
+| | 
+| |     Refactor code structure for improved readability and maintainability
+| | 
+| |  HW02/screenshots/FR17-BVA-001.png              | Bin 184448 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-006.png              | Bin 184853 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-007.png              | Bin 183307 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-008.png              | Bin 188646 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-010.png              | Bin 187860 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-013.png              | Bin 186525 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-016.png              | Bin 190885 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-017.png              | Bin 186801 -> 0 bytes
+| |  HW02/screenshots/FR17-BVA-023.png              | Bin 190018 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-006.png               | Bin 194418 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-007.png               | Bin 0 -> 28788 bytes
+| |  HW02/screenshots/FR17-DT-008.png               | Bin 25963 -> 28027 bytes
+| |  HW02/screenshots/FR17-DT-009.png               | Bin 177550 -> 31331 bytes
+| |  HW02/screenshots/FR17-DT-011.png               | Bin 0 -> 32484 bytes
+| |  HW02/screenshots/FR17-DT-012 N:A.png           | Bin 176216 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-012.png               | Bin 0 -> 29415 bytes
+| |  HW02/screenshots/FR17-DT-013.png               | Bin 172217 -> 33940 bytes
+| |  HW02/screenshots/FR17-DT-014.png               | Bin 98099 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-015.png               | Bin 178510 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-017.png               | Bin 174786 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-018.png               | Bin 180183 -> 24209 bytes
+| |  HW02/screenshots/FR17-DT-019.png               | Bin 156700 -> 55415 bytes
+| |  HW02/screenshots/FR17-DT-021.png               | Bin 0 -> 29852 bytes
+| |  HW02/screenshots/FR17-DT-022.png               | Bin 178524 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-023.png               | Bin 181370 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-024.png               | Bin 181127 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-025.png               | Bin 181338 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-026.png               | Bin 181345 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-027.png               | Bin 182533 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-028.png               | Bin 181205 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-029.png               | Bin 183605 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-030.png               | Bin 180367 -> 0 bytes
+| |  HW02/screenshots/FR17-DT-031.png               | Bin 182612 -> 0 bytes
+| |  HW02/test-cases/FR17-coupon-management-crud.md | 362 +++++++++++----------
+| |  34 files changed, 191 insertions(+), 171 deletions(-)
+| | 
+| * commit c8b9186470de0fe7b2f85c4667d877783b2201b6
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Tue Jun 30 11:08:00 2026 +0700
+| | 
+| |     Add screenshots and test cases status for FR-09 Discount Coupons
+| | 
+| |  HW02/screenshots/FR09-BVA-002.png        | Bin 0 -> 120739 bytes
+| |  HW02/screenshots/FR09-BVA-013.png        | Bin 0 -> 130518 bytes
+| |  HW02/screenshots/FR09-DT-001.png         | Bin 0 -> 136147 bytes
+| |  HW02/screenshots/FR09-DT-007.png         | Bin 0 -> 137304 bytes
+| |  HW02/screenshots/FR09-DT-009.png         | Bin 0 -> 138943 bytes
+| |  HW02/test-cases/FR09-discount-coupons.md | 193 +++++++++++++++++++++++++++
+| |  6 files changed, 193 insertions(+)
+| | 
+| * commit feecea7e9f6eccd3e10909def4daf44bbba73bb8
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Tue Jun 23 12:53:14 2026 +0700
+| | 
+| |     Add first draft testing artifacts for FR-17 Coupon Management CRUD
+| | 
+| |  HW02/test-cases/FR17-coupon-management-crud.md | 247 +++++++++++++++++++++
+| |  1 file changed, 247 insertions(+)
+| | 
+| * commit 9db87c4afe9950bb5a57fb12a5af265604d0c747
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Tue Jun 23 12:44:33 2026 +0700
+| | 
+| |     Add multiple screenshots for Boundary Value Analysis and Domain Testing
+| | 
+| |  HW02/screenshots/FR17-BVA-001.png    | Bin 0 -> 184448 bytes
+| |  HW02/screenshots/FR17-BVA-006.png    | Bin 0 -> 184853 bytes
+| |  HW02/screenshots/FR17-BVA-007.png    | Bin 0 -> 183307 bytes
+| |  HW02/screenshots/FR17-BVA-008.png    | Bin 0 -> 188646 bytes
+| |  HW02/screenshots/FR17-BVA-010.png    | Bin 0 -> 187860 bytes
+| |  HW02/screenshots/FR17-BVA-013.png    | Bin 0 -> 186525 bytes
+| |  HW02/screenshots/FR17-BVA-016.png    | Bin 0 -> 190885 bytes
+| |  HW02/screenshots/FR17-BVA-017.png    | Bin 0 -> 186801 bytes
+| |  HW02/screenshots/FR17-BVA-023.png    | Bin 0 -> 190018 bytes
+| |  HW02/screenshots/FR17-DT-006.png     | Bin 0 -> 194418 bytes
+| |  HW02/screenshots/FR17-DT-008.png     | Bin 0 -> 25963 bytes
+| |  HW02/screenshots/FR17-DT-009.png     | Bin 0 -> 177550 bytes
+| |  HW02/screenshots/FR17-DT-012 N:A.png | Bin 0 -> 176216 bytes
+| |  HW02/screenshots/FR17-DT-013.png     | Bin 0 -> 172217 bytes
+| |  HW02/screenshots/FR17-DT-014.png     | Bin 0 -> 98099 bytes
+| |  HW02/screenshots/FR17-DT-015.png     | Bin 0 -> 178510 bytes
+| |  HW02/screenshots/FR17-DT-017.png     | Bin 0 -> 174786 bytes
+| |  HW02/screenshots/FR17-DT-018.png     | Bin 0 -> 180183 bytes
+| |  HW02/screenshots/FR17-DT-019.png     | Bin 0 -> 156700 bytes
+| |  HW02/screenshots/FR17-DT-022.png     | Bin 0 -> 178524 bytes
+| |  HW02/screenshots/FR17-DT-023.png     | Bin 0 -> 181370 bytes
+| |  HW02/screenshots/FR17-DT-024.png     | Bin 0 -> 181127 bytes
+| |  HW02/screenshots/FR17-DT-025.png     | Bin 0 -> 181338 bytes
+| |  HW02/screenshots/FR17-DT-026.png     | Bin 0 -> 181345 bytes
+| |  HW02/screenshots/FR17-DT-027.png     | Bin 0 -> 182533 bytes
+| |  HW02/screenshots/FR17-DT-028.png     | Bin 0 -> 181205 bytes
+| |  HW02/screenshots/FR17-DT-029.png     | Bin 0 -> 183605 bytes
+| |  HW02/screenshots/FR17-DT-030.png     | Bin 0 -> 180367 bytes
+| |  HW02/screenshots/FR17-DT-031.png     | Bin 0 -> 182612 bytes
+| |  29 files changed, 0 insertions(+), 0 deletions(-)
+| | 
+| * commit cb7b9041dcdd58e007ffca54aecbefd10c9fa585
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Mon Jun 22 13:43:43 2026 +0700
+| | 
+| |     Add AI Audit Entry guidelines and mandatory report for HW02
+| | 
+| |  .../skills/domain-boundary-testing/SKILL.md      | 56 +++++++++++++++++++-
+| |  .../assets/ai-audit-template.md                  | 31 +++++++++++
+| |  HW02/AGENTS.md                                   | 38 ++++++++++++-
+| |  HW02/reports/ai-audit-report.md                  | 30 +++++++++++
+| |  4 files changed, 152 insertions(+), 3 deletions(-)
+| | 
+| * commit 90fc30609e6c7147f9ef700ce913993af2657a90
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Mon Jun 22 12:47:36 2026 +0700
+| | 
+| |     Add templates for Assignment Summary, Boundary Value Analysis, and Domain Testing
+| | 
+| |  .../references/assignment-summary.md             | 38 ++++++++++++++++++++
+| |  .../references/boundary-value-template.md        | 11 ++++++
+| |  .../references/domain-testing-template.md        | 24 +++++++++++++
+| |  3 files changed, 73 insertions(+)
+| | 
+| * commit c40aac253d1334b1b7296593c52edb48a943ce9c
+| | Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| | Date:   Mon Jun 22 12:36:53 2026 +0700
+| | 
+| |     Add SKILL.md for Domain Boundary Testing with structured workflow and test case guidelines
+| | 
+| |  .../skills/domain-boundary-testing/SKILL.md      | 186 +++++++++++++++++++
+| |  1 file changed, 186 insertions(+)
+| | 
+| * commit 77051f332f053286bb8bc4271cd449ea37da0159
+|/  Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+|   Date:   Mon Jun 22 12:33:08 2026 +0700
+|   
+|       Add AGENTS.md with project context, assignment requirements, and working rules for Domain Testing
+|   
+|    HW02/AGENTS.md | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+|    1 file changed, 46 insertions(+)
+| 
+* commit 94676d73ba001d76f050101ad0e6e8cb4cefd0d3
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 15:53:39 2026 +0700
+| 
+|     Add QA/QC role map and clarify responsibilities for Code Quality, RCA, and Performance & Security
+| 
+|  HW01/QA-QC-role-map.md | 33 +++++++++++++++++++++++++++++++++
+|  1 file changed, 33 insertions(+)
+| 
+* commit 578bd1d74d55e58dcfc15b84b6ab85ea88162cbc
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 15:39:14 2026 +0700
+| 
+|     Add YouTube links for test cases TC04 to TC08
+| 
+|  HW01/youtubelink.md | 5 +++++
+|  1 file changed, 5 insertions(+)
+| 
+* commit bea4bcffb63c8040c6915d114a34c12a33025d61
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 15:38:55 2026 +0700
+| 
+|     Revise AI-generated content and enhance self-assessment criteria in report
+| 
+|  HW01/report.md | 14 +++++++++++++-
+|  1 file changed, 13 insertions(+), 1 deletion(-)
+| 
+* commit 9c0a879820c0a2988885d72f6a25e9b5ec091dec
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 13:20:04 2026 +0700
+| 
+|     Add AI Critique, Mandatory Disclosure, Appendix
+| 
+|  HW01/report.md | 823 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 823 insertions(+)
+| 
+* commit a102e0c409affac874104d4389058111453e2af4
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 12:01:48 2026 +0700
+| 
+|     Add Requirement 3 with test cases that AI can not find and information of the houseware
+| 
+|  HW01/report.md | 55 ++++++++++++++++++++++++++++++++++++++++++++-----------
+|  1 file changed, 44 insertions(+), 11 deletions(-)
+| 
+* commit 02d5b3bc32aad3a1bd1f4b1c8447dd10a4d1dd15
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 11:45:48 2026 +0700
+| 
+|     Add AI audit requirment 03
+| 
+|  HW01/Appendix A/requirement03.md | 394 +++++++++++++++++++++++++++++++++++++
+|  1 file changed, 394 insertions(+)
+| 
+* commit bcb7f982c556094b26b14b82cbba903df04d994a
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 11:44:36 2026 +0700
+| 
+|     Add Requirement 3 with test cases for physical product functionality by AI
+| 
+|  HW01/report.md | 136 ++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+|  1 file changed, 135 insertions(+), 1 deletion(-)
+| 
+* commit e1bf196c7f946a27d3fea4e3673e645af1644c13
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 10:13:14 2026 +0700
+| 
+|     Add analysis on AI bias and hallucination in defect explanations
+| 
+|  HW01/report.md | 2 ++
+|  1 file changed, 2 insertions(+)
+| 
+* commit f786865ec711d484207a8c4fa48c71851eedd532
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 10:12:54 2026 +0700
+| 
+|     Add Requirement 2 detailing 20 significant software defects from 2022 to 2026
+| 
+|  HW01/report.md | 144 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+|  1 file changed, 144 insertions(+)
+| 
+* commit e1a340a5ea432437f5657ef690bfd4d25d9f4b74
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Mon Jun 1 10:12:29 2026 +0700
+| 
+|     AI audit requirment02
+| 
+|  HW01/Appendix A/requirement02.md | 358 +++++++++++++++++++++++++++++++++++++
+|  1 file changed, 358 insertions(+)
+| 
+* commit afcd20e8f9527d6b653d871a6f00aafe6cc3ac74
+| Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+| Date:   Fri May 29 12:57:09 2026 +0700
+| 
+|     Ad AI audit for requirement 1
+| 
+|  HW01/Appendix A/requirement01.md | 400 +++++++++++++++++++++++++++++++++++++
+|  1 file changed, 400 insertions(+)
+| 
+* commit d2980477b36898ec1ec47e2e0f42517027fda489
+  Author: Nguyễn Hoàng Phi Hùng <nhphung.dev@gmail.com>
+  Date:   Fri May 29 12:56:44 2026 +0700
+  
+      Add initial report for HW01 detailing QA/QC job market analysis for 2026+
+  
+   HW01/report.md | 192 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   1 file changed, 192 insertions(+)
