@@ -1,0 +1,2 @@
+TODO: Generate from the final repository with a command such as:
+git log --date=iso --pretty=fuller --stat

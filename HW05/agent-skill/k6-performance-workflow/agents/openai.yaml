@@ -1,0 +1,4 @@
+interface:
+  display_name: "K6 Performance Workflow"
+  short_description: "Plan, run, and review k6 performance tests"
+  default_prompt: "Use $k6-performance-workflow to design and audit a k6 performance-testing assignment."
