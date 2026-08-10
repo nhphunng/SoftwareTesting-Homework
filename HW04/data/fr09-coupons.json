@@ -1,0 +1,131 @@
+{
+  "feature": "FR-09",
+  "source": "HW02/test-cases/FR09-discount-coupons.md",
+  "cases": [
+    {
+      "id": "FR09-DT-001",
+      "description": "Apply a valid percent coupon",
+      "enabled": true,
+      "preconditions": ["User is logged in", "A controlled active percent coupon exists"],
+      "coupon": { "type": "percent", "discountValue": 10, "minOrderAmount": 300000, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 28000000 },
+      "expected": { "outcome": "success", "discountAmount": 2800000, "finalAmount": 25200000 }
+    },
+    {
+      "id": "FR09-DT-002",
+      "description": "Reject an unknown coupon code",
+      "enabled": true,
+      "preconditions": ["User is logged in"],
+      "input": { "total": 28000000, "code": "NO_SUCH_CODE" },
+      "expected": { "outcome": "error", "errorText": "không tồn tại", "finalAmount": 28000000 }
+    },
+    {
+      "id": "FR09-DT-003",
+      "description": "Reject an expired coupon",
+      "enabled": true,
+      "preconditions": ["User is logged in", "A controlled expired coupon exists"],
+      "coupon": { "type": "percent", "discountValue": 20, "minOrderAmount": 0, "expiredAt": "2020-01-01", "maxUsesPerUser": 5 },
+      "input": { "total": 100000 },
+      "expected": { "outcome": "error", "errorText": "đã hết hạn", "finalAmount": 100000 }
+    },
+    {
+      "id": "FR09-DT-005",
+      "description": "Reject a coupon whose per-user usage limit is reached",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled usage count equals the coupon limit"],
+      "coupon": { "type": "percent", "discountValue": 10, "minOrderAmount": 300000, "expiredAt": "2099-12-31", "maxUsesPerUser": 1, "usageCount": 1 },
+      "input": { "total": 300001 },
+      "expected": { "outcome": "error", "errorText": "đã đạt giới hạn", "finalAmount": 300001 }
+    },
+    {
+      "id": "FR09-DT-006",
+      "description": "Reject a cart below the coupon minimum order",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled coupon minimum is above cart total"],
+      "coupon": { "type": "percent", "discountValue": 10, "minOrderAmount": 30000000, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 28000000 },
+      "expected": { "outcome": "error", "errorText": "chưa đủ giá trị tối thiểu", "finalAmount": 28000000 }
+    },
+    {
+      "id": "FR09-DT-007",
+      "description": "Calculate a ten-percent discount",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled percent coupon is eligible"],
+      "coupon": { "type": "percent", "discountValue": 10, "minOrderAmount": 0, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 28000000 },
+      "expected": { "outcome": "success", "discountAmount": 2800000, "finalAmount": 25200000 }
+    },
+    {
+      "id": "FR09-DT-008",
+      "description": "Calculate a fixed discount",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled fixed coupon is eligible"],
+      "coupon": { "type": "fixed", "discountValue": 50000, "minOrderAmount": 500000, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 28000000 },
+      "expected": { "outcome": "success", "discountAmount": 50000, "finalAmount": 27950000 }
+    },
+    {
+      "id": "FR09-DT-009",
+      "description": "Prevent a fixed discount from producing a negative final amount",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Fixed discount exceeds cart total"],
+      "coupon": { "type": "fixed", "discountValue": 100000, "minOrderAmount": 0, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 50000 },
+      "expected": { "outcome": "safe-nonnegative", "discountAmount": 50000, "finalAmount": 0 }
+    },
+    {
+      "id": "FR09-BVA-001",
+      "description": "Reject a cart one unit below the minimum order",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled coupon minimum is 300000"],
+      "coupon": { "type": "percent", "discountValue": 10, "minOrderAmount": 300000, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 299999 },
+      "expected": { "outcome": "error", "errorText": "chưa đủ giá trị tối thiểu", "finalAmount": 299999 }
+    },
+    {
+      "id": "FR09-BVA-002",
+      "description": "Accept a cart exactly at the minimum order",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled coupon minimum is 300000"],
+      "coupon": { "type": "percent", "discountValue": 10, "minOrderAmount": 300000, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 300000 },
+      "expected": { "outcome": "success", "discountAmount": 30000, "finalAmount": 270000 }
+    },
+    {
+      "id": "FR09-BVA-003",
+      "description": "Accept a cart one unit above the minimum order",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled coupon minimum is 300000"],
+      "coupon": { "type": "percent", "discountValue": 10, "minOrderAmount": 300000, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 300001 },
+      "expected": { "outcome": "success", "discountAmount": 30000, "finalAmount": 270001 }
+    },
+    {
+      "id": "FR09-BVA-007",
+      "description": "Accept a coupon below its per-user usage limit",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled usage count is zero and maximum is one"],
+      "coupon": { "type": "fixed", "discountValue": 1, "minOrderAmount": 0, "expiredAt": "2099-12-31", "maxUsesPerUser": 1, "usageCount": 0 },
+      "input": { "total": 300001 },
+      "expected": { "outcome": "success", "discountAmount": 1, "finalAmount": 300000 }
+    },
+    {
+      "id": "FR09-BVA-012",
+      "description": "Handle a fixed discount equal to the cart total",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled fixed discount equals total"],
+      "coupon": { "type": "fixed", "discountValue": 50000, "minOrderAmount": 0, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 50000 },
+      "expected": { "outcome": "success", "discountAmount": 50000, "finalAmount": 0 }
+    },
+    {
+      "id": "FR09-BVA-013",
+      "description": "Cap a fixed discount one unit above the cart total",
+      "enabled": true,
+      "preconditions": ["User is logged in", "Controlled fixed discount exceeds total by one"],
+      "coupon": { "type": "fixed", "discountValue": 50001, "minOrderAmount": 0, "expiredAt": "2099-12-31", "maxUsesPerUser": 5 },
+      "input": { "total": 50000 },
+      "expected": { "outcome": "safe-nonnegative", "discountAmount": 50000, "finalAmount": 0 }
+    }
+  ]
+}
