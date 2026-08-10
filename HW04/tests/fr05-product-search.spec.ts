@@ -57,11 +57,11 @@ test.describe('FR-05 – Product Listing and Search', () => {
       }
 
       await test.step('verify the product result set', async () => {
-        await expect(productPage.pageHeading).toBeVisible();
-        await expect(productPage.productHeadings).toHaveCount(testCase.expected.resultCount);
+        await expect(productPage.pageHeading).toBeVisible(); // kiểm tra tiêu đề trang có hiển thị hay không
+        await expect(productPage.productHeadings).toHaveCount(testCase.expected.resultCount); // kiểm tra số lượng sản phẩm hiển thị có đúng với số lượng mong đợi hay không
 
         for (const productName of testCase.expected.productNames) {
-          await expect(productPage.productHeading(productName)).toBeVisible();
+          await expect(productPage.productHeading(productName)).toBeVisible(); // kiểm tra từng sản phẩm có hiển thị hay không
         }
       });
 

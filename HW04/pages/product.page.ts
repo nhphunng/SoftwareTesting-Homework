@@ -47,7 +47,7 @@ export class ProductPage {
   }
 
   private async assertSuccessfulResponse(response: Response): Promise<void> {
-    const isSuccessfulProductResponse = response.ok() || response.status() === 304;
+    const isSuccessfulProductResponse = response.ok() || response.status() === 304; // 304 Not Modified is also considered a successful response
 
     if (!isSuccessfulProductResponse) {
       throw new Error(`Product API returned ${response.status()} for ${response.url()}`);
