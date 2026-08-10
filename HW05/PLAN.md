@@ -4,13 +4,15 @@
 
 Student ID: `23127194`
 
-| Scenario | Endpoint group | SUT target | Reason for pairing | Primary report view |
-| --- | --- | --- | --- | --- |
-| Load | Read-heavy | `GET /api/products/:id` | Stable, repeatable reads model normal browsing and expose latency/throughput without mutating state. | k6 Web Dashboard HTML |
-| Stress | Auth-heavy | `POST /api/login` | Increasing VUs can identify the authentication breakpoint; valid dedicated accounts avoid contaminating results with lockout. | Grafana time-series dashboard |
-| Spike | Transactional | `POST /api/checkout` | A sudden flash-sale surge stresses concurrent SQLite writes and recovery behavior. | k6 end-of-test summary |
+HW02 actually executed FR-05 Product Listing and Search, FR-09 Discount Coupons, FR-17 Coupon Management CRUD, and Mobile-FR04 Profile Management. HW05 reuses those tested business areas instead of introducing an unrelated endpoint group.
 
-This mapping covers all three groups exactly once. The account-lockout behavior is verified in a separate controlled preflight; invalid-login traffic is not mixed into the measured Stress workload.
+| Scenario | Endpoint group | HW02 traceability | SUT target/workflow | Account | Reason for pairing | Primary report view |
+| --- | --- | --- | --- | --- | --- | --- |
+| Load | Read-heavy | FR-05 | `GET /api/products?search={keyword}` | Public | Product listing/search is the read-heavy behavior executed successfully in HW02 and is repeatable without state mutation. | k6 Web Dashboard HTML |
+| Stress | Auth-heavy | Mobile-FR04 authenticated access; FR-17 admin access | `POST /api/login` for the web user and web admin, validating returned role/JWT | User + Admin | Increasing valid logins measures authentication capacity for both web surfaces while avoiding lockout contamination. | k6 full textual summary |
+| Spike | Transactional | FR-09 with FR-17 coupon data dependency | User login in setup, then `POST /api/apply-coupon` using `BIGBUY` and `POST /api/checkout` | User | A flash-sale coupon/checkout burst represents the mutable transactional workflow built on the coupon rules tested in HW02. | k6 JSON summary |
+
+This mapping covers read-heavy, auth-heavy, and transactional exactly once across the three required plans. `BIGBUY` is used for calibration because the known percentage-calculation defect makes `SAVE10` unsuitable for clean capacity measurements. Admin is used only for authentication/admin-surface coverage; checkout remains a customer action. Account-lockout behavior is verified in a separate controlled preflight, and invalid-login traffic is not mixed into the measured Stress workload.
 
 ## 2. Definition of done
 
@@ -76,7 +78,21 @@ This mapping covers all three groups exactly once. The account-lockout behavior 
 - A Stress breakpoint is the first sustained stage where an agreed SLO or resource ceiling fails, not simply the highest attempted VU count.
 - A Spike recovery claim requires metrics to return below the defined baseline tolerance within the recovery window.
 
-## 5. Required commit sequence
+## 5. Calibration outcome — 2026-08-10
+
+These are short calibration runs, not final evidence runs. Full details and raw summary exports are in `results/calibration/CALIBRATION.md`.
+
+| Plan | Highest relevant calibration | Result | Evidence-run setting |
+| --- | --- | --- | --- |
+| Load / FR-05 search | 200 VU, about 100.78 req/s | p95 3.758 ms, 0% failed, 100% checks | 50 VU; 1m ramp + 5m hold + 1m down |
+| Stress / login + authenticated user/admin surfaces | 1,200 VU peak, about 1,926.30 HTTP req/s aggregate | p95 9.01 ms, 0% failed, 100% login/role/profile/coupon checks; no breakpoint yet | 50 → 200 → 600 → 1,200 VU with full holds |
+| Spike / BIGBUY + checkout | 400 VU peak, about 1,567.63 HTTP req/s aggregate | p95 32.524 ms, 0% failed, 100% checks; clear latency increase from 200 VU | 20 baseline → 400 spike → 20 recovery |
+| Read-only arrival-rate probe | 6,000 RPS for 10s | p95 0.752 ms, 0 errors, 0 dropped | 4,000 RPS for the 12-minute evidence soak |
+| Read-only saturation probe | 7,000 RPS for 10s | 37 dropped iterations despite 0 HTTP errors | Treat 6k–7k RPS as the short-run knee; do not claim it as endurance capacity |
+
+The 4,000 RPS soak rate is deliberately below the short-run knee. Only the real 12-minute run with CPU/RSS monitoring may establish the reported endurance threshold and memory ceiling.
+
+## 6. Required commit sequence
 
 1. `docs(hw05): map requirements and select endpoint groups`
 2. `test(hw05): add read-heavy load plan and data`
@@ -90,7 +106,7 @@ This mapping covers all three groups exactly once. The account-lockout behavior 
 
 Do not commit generated raw evidence before checking that it contains no reusable secrets or tokens.
 
-## 6. Known risks to address
+## 7. Known risks to address
 
 - The current backend increments failed login attempts by `2` and locks for `180000 ms`, which conflicts with the stated +1 and 30-second rule. Treat this as a functional defect and isolate it from performance measurements.
 - The SUT `run_servers.sh` is machine-specific and calls `killall node`; do not use it for evidence runs. Start only `backend/server.js` from its actual directory.
