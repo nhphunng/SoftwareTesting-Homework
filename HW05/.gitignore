@@ -1,0 +1,21 @@
+.DS_Store
+.env
+node_modules/
+
+# Local credentials and machine-specific test data
+data/*.local.csv
+data/private/
+
+# Real execution evidence is retained locally and packaged for submission.
+results/raw/**
+results/html/**
+results/summary/**
+evidence/screenshots/**
+evidence/hardware/**
+evidence/video/**
+
+# Keep directory guidance tracked.
+!results/README.md
+!evidence/README.md
+
+*.log

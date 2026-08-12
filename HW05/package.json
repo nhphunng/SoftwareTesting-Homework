@@ -1,0 +1,13 @@
+{
+  "name": "hw05-performance-testing-scenario-c",
+  "version": "1.0.0",
+  "private": true,
+  "description": "k6 skeleton for HW05 Scenario C: checkout then cancel",
+  "scripts": {
+    "validate": "npm run validate:load && npm run validate:stress && npm run validate:spike && npm run validate:endurance",
+    "validate:load": "k6 inspect -e SKELETON_VALIDATE=true tests/templates/scenario-c-load.template.js",
+    "validate:stress": "k6 inspect -e SKELETON_VALIDATE=true tests/templates/scenario-c-stress.template.js",
+    "validate:spike": "k6 inspect -e SKELETON_VALIDATE=true tests/templates/scenario-c-spike.template.js",
+    "validate:endurance": "k6 inspect -e SKELETON_VALIDATE=true tests/templates/scenario-c-endurance.template.js"
+  }
+}
