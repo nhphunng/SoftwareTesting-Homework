@@ -2,24 +2,25 @@
 
 ## Phase 1 - Human decisions and data
 
-**Status: Decision gates and API smoke test complete; JMeter installation, user-pool capacity, execution date, and reset policy remain pending.**
+**Status: Phase 1 complete. JMeter, execution identity/date, Scenario C, API smoke validation, backend reset behavior, and parameterized user provisioning are confirmed. Workload sizing remains a Phase 2 decision.**
 
 - [x] Select the class-default tool: **JMeter**.
 - [x] Confirm Student ID: **23127194**.
-- [ ] Confirm the final execution date used in test-plan filenames.
+- [x] Confirm the final execution date: **2026-08-12** (`20260812` in filenames).
 - [x] Confirm Candidate C is unique in the group; Candidate A is already taken.
 - [x] Verify the supplied user and admin demo accounts without storing their passwords in the repository.
 - [x] Verify a real product for Scenario C: product `1`, `iPhone 15 Pro Max`.
-- [ ] Prepare enough dedicated user accounts for the maximum planned JMeter threads. The single supplied user account is not sufficient for isolated concurrent carts.
-- [ ] Decide the SQLite snapshot/reset policy and residual canceled-order handling.
+- [x] Automate dedicated JMeter user provisioning with `scripts/provision-jmeter-users.sh`. Each phase must pass `USER_COUNT >= maximum concurrent threads` after workload review.
+- [x] Confirm reset policy: every backend start drops and reseeds all tables; run user provisioning immediately after each start. This also removes residual orders from the prior process.
 - [x] Smoke-test every Scenario C endpoint.
 
 ### Phase 1 environment check
 
 | Item | Verified result |
 | --- | --- |
-| JMeter | Not installed or not available on `PATH` |
-| Java | Java 24 is installed |
+| JMeter | Apache JMeter 5.6.3 installed under `~/.local/opt/apache-jmeter-5.6.3`; `~/.local/bin/jmeter` is on `PATH` |
+| JMeter integrity | Official binary SHA-512 matched Apache's published checksum |
+| Java | Java 24; JMeter version and non-GUI CLI smoke execution passed |
 | Backend | Started successfully on `http://127.0.0.1:3000` for the smoke test, then stopped |
 | User account | `test@eshop.com` login verified; password intentionally not recorded |
 | Admin account | `admin@eshop.com` login and `GET /api/admin/orders` verified; password intentionally not recorded |
@@ -42,14 +43,25 @@
 
 The backend process was stopped after the smoke test, clearing its in-memory cart. Canceled order `1` remains in SQLite because the SUT has no order-deletion endpoint. This was a functional smoke test, not a performance run; it produced no `.jtl`, report, threshold, or resource evidence.
 
+### Automated JMeter user provisioning
+
+The backend implementation drops and recreates all tables on every start. Therefore, each Load, Stress, Spike, and Endurance preparation must:
+
+1. Start the backend and wait for `GET /api/products` to return HTTP 200.
+2. Run `scripts/provision-jmeter-users.sh` with the reviewed `USER_COUNT` and a local `JMETER_USER_PASSWORD`.
+3. Use the generated Git-ignored `data/scenario-c.local.csv` in JMeter CSV Data Set Config.
+4. Require at least one unique account per maximum concurrent thread.
+
+Automation verification created five temporary accounts for Student ID `23127194`, verified every account by login, and generated a six-line local CSV (header plus five rows) with file mode `600`. A second backend start reset the database, and the script successfully recreated all five accounts (`created=5`, `reused=0`). During verification, immediate post-registration login was briefly inconsistent for one user, so the script now retries that verification up to five times and fails closed if the account remains unusable. Five is only a functional verification count, not a workload recommendation.
+
 Suggested commit: `docs(hw05): select scenario C and define execution controls`
 
 ## Phase 2 - Load test
 
-- Install and verify JMeter.
+- Use final Load filename `23127194_Load_20260812.jmx`.
 - Review baseline latency and throughput.
 - Choose realistic VUs, ramp-up, hold, ramp-down, and think-time.
-- Create the data-driven Scenario C JMeter `.jmx` plan and name it manually using the required convention.
+- Create the data-driven Scenario C JMeter `.jmx` plan.
 - Add reviewed thresholds and response assertions.
 - Run with raw output, report view, resource monitor, and hardware context.
 - Review order creation/cancellation correctness and residual data.
@@ -58,6 +70,7 @@ Suggested commit: `test(hw05): implement reviewed scenario C load plan`
 
 ## Phase 3 - Stress test
 
+- Use final Stress filename `23127194_Stress_20260812.jmx`.
 - Define progressive stress stages from the Load baseline.
 - Identify the first sustainable/unsustainable level without reusing locked or corrupted accounts.
 - Create the Stress JMeter `.jmx` plan by reusing the exact Scenario C functional controllers from Load.
@@ -67,6 +80,7 @@ Suggested commit: `test(hw05): implement scenario C stress breakpoint plan`
 
 ## Phase 4 - Spike test
 
+- Use final Spike filename `23127194_Spike_20260812.jmx`.
 - Define baseline, spike, and recovery stages from prior observations.
 - Create the Spike JMeter `.jmx` plan by reusing the exact Scenario C functional controllers from Load.
 - Execute with isolated evidence and verify post-spike recovery.

@@ -6,7 +6,8 @@
 | --- | --- |
 | Student ID | 23127194 |
 | SUT | EShop backend API |
-| Tool | JMeter - confirmed; installation pending |
+| Tool | Apache JMeter 5.6.3 - installed and CLI verified |
+| Official execution date | 2026-08-12 |
 | Selected workflow | Scenario C - Checkout then cancel |
 | Repository | TBD |
 | Demo video | TBD |
@@ -31,6 +32,8 @@ Document why Scenario C is unique in the group and how it covers auth-heavy, rea
 Describe CSV fields, account isolation, product validation, correlation of `orderId`, cart/order cleanup, assertions, and login-lockout handling.
 
 Phase 1 smoke validation passed for every Scenario C endpoint using the supplied demo user. Product `1` (`iPhone 15 Pro Max`) was added to cart, order `1` was created as `pending`, canceled, and verified as `canceled` in user history. Admin login and the admin order-list endpoint also returned HTTP 200. The backend was then stopped, clearing the in-memory cart; canceled order `1` remains in SQLite. This was not a measured performance run.
+
+Backend source inspection confirmed that each start drops and reseeds all database tables. A parameterized provisioning script now creates one deterministic user per maximum JMeter thread after every start, verifies login, and writes a protected local CSV. Functional verification created and recreated five users across two resets; five is not a performance workload recommendation.
 
 ## 5. Load test
 

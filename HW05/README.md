@@ -6,7 +6,8 @@
 | --- | --- |
 | Student ID | 23127194 |
 | Selected workflow | Scenario C - Checkout then cancel |
-| Tool | JMeter - confirmed class default; not currently installed on this machine |
+| Tool | Apache JMeter 5.6.3 - installed and CLI verified |
+| Official execution date | 2026-08-12 |
 | Endpoint groups | Auth-heavy, read-heavy, transactional |
 | API smoke test | Passed on 2026-08-12; order `1` changed `pending` to `canceled` |
 | Load / Stress / Spike runs | Not executed |
@@ -31,19 +32,28 @@ The same functional sequence must be reused by the final Load, Stress, and Spike
 
 ## Safe setup
 
-1. Install JMeter and verify `jmeter --version`. Java 24 is already present.
-2. Prepare a local JMeter CSV data file from `data/scenario-c.example.csv`.
-3. Replace every placeholder with valid, dedicated test data. Never commit real passwords.
-4. Add enough unique user accounts for the maximum planned thread count; one shared user would create cart interference.
+1. Verify `jmeter --version` returns Apache JMeter 5.6.3.
+2. Start/reset the backend and provision a local user pool:
+
+   ```bash
+   USER_COUNT=<maximum-reviewed-threads> \
+   JMETER_USER_PASSWORD=<local-secret> \
+   scripts/start-backend-and-provision.sh
+   ```
+
+3. Use `data/scenario-c.local.csv` in JMeter CSV Data Set Config. It is mode `600` and Git-ignored.
+4. Require `USER_COUNT` to be at least the maximum planned thread count; one shared user would create cart interference.
 5. Decide workload parameters from a measured baseline and document the human review.
 6. Manually create and name the three JMeter plans using the required pattern:
 
    ```text
-   {StudentID}_{ScenarioType}_{YYYYMMDD}.jmx
+   23127194_Load_20260812.jmx
+   23127194_Stress_20260812.jmx
+   23127194_Spike_20260812.jmx
    ```
 
-7. Configure CSV Data Set Config, JSON extractors, assertions, timers, and cleanup/reset behavior before measured execution.
-8. Replace the provisional k6 runbook with the reviewed JMeter execution commands during Phase 2.
+7. Configure CSV Data Set Config, JSON extractors, assertions, timers, and report listeners before measured execution.
+8. Follow the JMeter preparation and execution rules in [runbook.md](runbook.md).
 
 The existing k6 files are retained only as an earlier scaffold/reference. They are superseded by the confirmed JMeter decision and must not be submitted as the final test plans.
 
@@ -56,6 +66,7 @@ HW05/
 ├── lib/                          Superseded k6 Scenario C reference helpers
 ├── reports/                      Mandatory report templates and AI audit
 ├── results/                      Raw output and HTML/summary guidance
+├── scripts/                      Backend reset/start and user provisioning
 ├── tests/templates/              Superseded k6 templates; JMeter plans pending Phase 2
 ├── plan.md                       Implementation and evidence sequence
 ├── runbook.md                    Safe validation/run procedure

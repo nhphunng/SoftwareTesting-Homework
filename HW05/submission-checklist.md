@@ -2,7 +2,9 @@
 
 ## Test design and execution
 
-- [ ] Scenario C remains unique in the group.
+- [x] Scenario C remains unique in the group.
+- [x] JMeter version evidence identifies Apache JMeter 5.6.3.
+- [ ] Each run provisions at least one unique account per maximum concurrent thread after backend reset.
 - [ ] Three final test-plan filenames match `{StudentID}_{ScenarioType}_{YYYYMMDD}`.
 - [ ] Load, Stress, and Spike reuse the same Scenario C functional flow.
 - [ ] Final CSV data/templates are included without real credentials.

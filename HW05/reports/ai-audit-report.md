@@ -87,3 +87,23 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-005
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T12:33:32+07:00 |
+| Task | Install JMeter and automate user provisioning after backend reset |
+| User Prompt | `- Thực hiện việc cài đặt JMeter`<br>`- Ngày chạy chính thức là 12/08/2026`<br>`- Hãy thực hiện việc đăng ký user account phục vụ cho JMeter thread`<br>`- Khi khởi chạy lại backend thì backend sẽ tự reset, do đó việc khởi tọa user account ở trên nên được automation ở các phase tiếp theo` |
+| Evidence/Input Basis | `HW05/plan.md`, `HW05/scenario.md`, `HW05/reports/smoke-test.md`; external SUT workspace `eshop-sut-seminar/backend/database.js` and running backend API; Apache JMeter official 5.6.3 binary and published SHA-512 checksum |
+| Generated/Modified Files | `HW05/.gitignore`, `HW05/README.md`, `HW05/plan.md`, `HW05/runbook.md`, `HW05/scenario.md`, `HW05/submission-checklist.md`, `HW05/scripts/provision-jmeter-users.sh`, `HW05/scripts/start-backend-and-provision.sh`, `HW05/reports/main-report.md`, `HW05/reports/user-provisioning.md`, `HW05/reports/ai-audit-report.md`; local ignored file `HW05/data/scenario-c.local.csv`; local installation `~/.local/opt/apache-jmeter-5.6.3` and symlink `~/.local/bin/jmeter` |
+| AI Output | Confirmed the official execution date `2026-08-12` and final plan names `23127194_Load_20260812.jmx`, `23127194_Stress_20260812.jmx`, and `23127194_Spike_20260812.jmx`. Homebrew's download queue stalled twice, so installation switched to the official Apache JMeter 5.6.3 binary; its SHA-512 exactly matched Apache's published checksum. Installed JMeter under `~/.local/opt`, created a PATH-visible symlink, verified `jmeter --version`, and completed a non-GUI CLI smoke run. Source inspection confirmed every backend start drops and reseeds all tables. Added parameterized automation that waits for backend readiness, validates the selected product, provisions deterministic per-thread accounts, verifies login, and atomically writes a mode-600 Git-ignored CSV. Verification created five users, then restarted/reset the backend and recreated all five (`created=5`, `reused=0`). A transient immediate-login failure found on the first restart check led to a bounded retry fix; the rerun passed. Five users are explicitly classified as a functional verification pool, not a performance workload. No credential or JWT was printed or committed. Phase 1 is complete; each later phase must pass `USER_COUNT` at least equal to its reviewed maximum threads. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:

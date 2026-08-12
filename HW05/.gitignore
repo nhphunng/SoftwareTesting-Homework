@@ -19,3 +19,6 @@ evidence/video/**
 !evidence/README.md
 
 *.log
+
+# Local backend process bookkeeping
+*.pid
