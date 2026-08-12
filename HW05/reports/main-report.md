@@ -24,8 +24,8 @@ Document why Scenario C is unique in the group and how it covers auth-heavy, rea
 | CPU | 10 logical CPUs; model and utilization not captured |
 | RAM | 16 GiB installed; utilization not captured |
 | Backend/runtime versions | Node.js EShop backend; Java 24; JMeter 5.6.3 |
-| Database state/reset | Reset before run; 292 orders after run, all canceled |
-| Resource-monitor evidence | Unavailable for this run: generated CSV contains only its header and is explicitly excluded |
+| Database state/reset | Reset per phase; final Spike state: 2,363 orders, all canceled |
+| Resource-monitor evidence | Load monitor invalid; Stress and Spike contain valid timestamped CPU/RSS samples, documented in their result reports |
 
 ## 4. Data-driven workflow
 
@@ -59,12 +59,14 @@ Backend source inspection confirmed that each start drops and reseeds all databa
 
 ## 7. Spike test
 
-- Final test-plan filename: TBD
-- Baseline/spike/recovery rationale: TBD
-- Distinct report view: TBD
-- Raw output: TBD
-- Resource evidence: TBD
-- Recovery observations: TBD
+- Final test-plan filename: `tests/23127194_Spike_20260812.jmx`.
+- Human-confirmed workload: 10 threads for 30 seconds, sudden 80 threads for 60 seconds, then 10 threads for 30 seconds; one-second ramps and 250 ms think-time.
+- Distinct report view: Response Time Graph.
+- Raw output: `results/raw/spike/23127194_Spike_20260812.jtl`.
+- Resource evidence: `evidence/spike/23127194_Spike_20260812-resources.csv` with 125 backend samples.
+- Result: 2,363/2,363 flows and 21,267/21,267 HTTP requests passed; Baseline/Spike/Recovery end-to-end p95 values were 36.45/27.00/26.00 ms.
+- Recovery: the first 10-second Recovery window passed and all later full windows remained compliant; CPU returned toward baseline, but RSS did not return to its pre-spike range.
+- Detailed evidence: `reports/spike-test-results.md`.
 
 ## 8. Endurance threshold
 

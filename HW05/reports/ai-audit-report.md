@@ -6,7 +6,7 @@
 
 | AI Tool | Tasks |
 | --- | --- |
-| Codex | Create and maintain the HW05 AI audit; design Scenario C; scaffold, execute, and analyze JMeter Load and Stress testing; prepare evidence guidance. |
+| Codex | Create and maintain the HW05 AI audit; design Scenario C; scaffold, execute, and analyze JMeter Load, Stress, and Spike testing; prepare evidence guidance. |
 
 ## AI Audit Entry - AI-001
 
@@ -321,8 +321,48 @@ Human Review:
 | AI Output | Designed a three-stage standard-JMeter Spike experiment from measured evidence and preserved the exact nine-request Scenario C flow. Proposed, pending human review: a serialized 10-thread Baseline stage for 30 seconds, an abrupt 80-thread Spike stage for 60 seconds, a 10-thread Recovery stage for 30 seconds, one-second thread ramps/transitions, 250 ms think-time, provisioning of at least 80 unique accounts, and Response Time Graph as the third distinct listener after Load Summary Report and Stress Aggregate Report. Proposed per-stage criteria are HTTP errors <= 1%, business success >= 99%, end-to-end p95 <= 250 ms, and every transaction p95 <= 100 ms. Proposed recovery criteria require Recovery end-to-end p95 <= 1.5 times the same run's Baseline-stage p95, recovery within 20 seconds based on consecutive 10-second windows, zero residual non-canceled orders, and valid timestamped resource evidence reported descriptively. The design explicitly states that Stress found no breakpoint through 80 threads, so a passing Spike run would demonstrate resilience at 80 rather than a capacity ceiling or failure point. It specifies serialized stage/account isolation, graceful completion of active flows at each deadline, stage-prefixed JTL labels, required no-default `spike.*` properties, and a fail-fast CSV-capacity gate. The Spike validator self-test and `git diff --check` passed. In accordance with the selected skill, `tests/23127194_Spike_20260812.jmx` was intentionally not generated because the tester has not explicitly confirmed the proposed stages, transition, think-time, thresholds, recovery rule, and listener allocation. No Spike dry run, measured traffic, JTL, report, screenshot, recovery behavior, resource evidence, or human approval was fabricated. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
+- Status: Complete Spike proposal accepted by tester on 2026-08-12
+- Accepted: Serialized 10-thread/30-second Baseline, 80-thread/60-second Spike, and 10-thread/30-second Recovery with one-second ramps, 250 ms think-time, all acceptance/recovery criteria, CSV allocation, and Response Time Graph listener.
+- Modified:
+- Removed:
+- Added:
+- Notes: Approval supplied in the subsequent prompt `Xác nhận toàn bộ Spike proposal`.
+
+## AI Audit Entry - AI-017
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T15:01:44+07:00 |
+| Task | Generate and validate the human-confirmed Scenario C Spike JMX |
+| User Prompt | `Xác nhận toàn bộ Spike proposal` |
+| Evidence/Input Basis | `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/reports/spike-test-design.md`, `HW05/tests/23127194_Load_20260812.jmx`, `HW05/tests/23127194_Stress_20260812.jmx`, `HW05/.agents/skills/design-jmeter-spike-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-spike-test/references/spike-contract.md`; validation-only raw result `HW05/results/raw/validation/23127194_Spike_20260812_dry-run.jtl`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/.agents/skills/design-jmeter-spike-test/scripts/generate_spike_jmx.py`, `HW05/.agents/skills/design-jmeter-spike-test/scripts/validate_spike_jmx.py`, `HW05/tests/23127194_Spike_20260812.jmx`, `HW05/reports/spike-test-design.md`, `HW05/reports/spike-plan-validation.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md`; local ignored validation evidence `HW05/results/raw/validation/23127194_Spike_20260812_dry-run.jtl`, `.jmeter.log`, and `.console.log` |
+| AI Output | Recorded the tester's complete Spike-proposal acceptance and generated exactly `tests/23127194_Spike_20260812.jmx` with overwrite refusal. The standard-JMeter plan contains three serialized Thread Groups implementing the accepted 10-thread/30-second Baseline, sudden 80-thread/60-second Spike, and 10-thread/30-second Recovery; each uses a one-second ramp, 250 ms think-time, stage-prefixed labels, graceful flow deadlines, independent non-recycled CSV allocation, and the unchanged nine-request token/order-correlated Scenario C controller. It requires all ten `spike.*` properties without numeric fallbacks, validates CSV capacity against maximum stage concurrency, enables the confirmed Response Time Graph, disables View Results Tree, and records the accepted absolute/relative recovery contract in Test Plan metadata. The validator was strengthened to compare each stage's actual HTTP sampler, correlation, and paired assertion XML directly with the validated Load JMX; self-test and official validation passed. The final JMX SHA-256 is `6f451d52364f87c4cca719d96a3f90047bd1cbe7180183c221ea7cafd174f827`. A clean-reset validation-only dry run used 2→4→2 VUs, 4/5/4-second stage deadlines, one-second ramps, 50 ms think-time, and four fresh users. Its untouched JTL SHA-256 is `f5e40c0a2ca5fa9f8b36c310ca7de4421e1b1b3e4b39b55eb16ebcfa6741ebb6`: 67/67 complete flows passed, 603/603 HTTP requests passed, all 1,014 JTL rows succeeded, and database verification found 67 canceled orders with zero non-canceled orders. This short run is classified only as functional validation. No measured 10→80→10 Spike run, HTML Spike report, resource-recovery evidence, screenshot, visual review, capacity ceiling, or measured recovery conclusion was claimed. Measured execution remains blocked on tester visual review of the final tree and a separate authorization. |
+
+Human Review:
+- Status: Final Spike tree visually reviewed and accepted by tester on 2026-08-12
+- Accepted: Complete Spike proposal, generated JMX, validation evidence, final visual tree, and authorization for measured execution
+- Modified:
+- Removed:
+- Added:
+- Notes: Visual acceptance and execution authorization supplied in the subsequent prompt `Tôi đã thực hiện việc xác nhận spike tree hãy thực hiện việc execution`.
+
+## AI Audit Entry - AI-018
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T15:18:44+07:00 |
+| Task | Execute and analyze the tester-approved Scenario C measured Spike run |
+| User Prompt | `Tôi đã thực hiện việc xác nhận spike tree hãy thực hiện việc execution` |
+| Evidence/Input Basis | `HW05/tests/23127194_Spike_20260812.jmx`, `HW05/reports/spike-test-design.md`, `HW05/reports/spike-plan-validation.md`, `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/.agents/skills/design-jmeter-spike-test/SKILL.md`; real raw result `HW05/results/raw/spike/23127194_Spike_20260812.jtl`; JMeter-generated `HW05/results/html/spike/23127194_Spike_20260812/statistics.json`; real environment/resource/order-state evidence under `HW05/evidence/spike/`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/scripts/run-measured-spike.sh`, `HW05/reports/spike-test-results.md`, `HW05/plan.md`, `HW05/README.md`, `HW05/results/README.md`, `HW05/evidence/README.md`, `HW05/reports/main-report.md`, `HW05/reports/ai-audit-report.md`; local measured artifacts `HW05/results/raw/spike/23127194_Spike_20260812.jtl`, `.jmeter.log`, `.console.log`, `HW05/results/html/spike/23127194_Spike_20260812/`, `HW05/evidence/spike/23127194_Spike_20260812-environment.txt`, `-resources.csv`, and `-order-state.txt` |
+| AI Output | Recorded the tester's visual acceptance of the final Spike tree and executed the human-confirmed measured workload after a clean backend reset and provisioning of 80 fresh accounts: serialized Baseline 10 threads/30 seconds, sudden Spike 80 threads/60 seconds, Recovery 10 threads/30 seconds, one-second ramps, and 250 ms think-time. The untouched raw JTL SHA-256 is `62592462cb28c12ea3469fa73836db1b91793161b45cba1ebcbc024bb8c53c9e`: 2,363/2,363 complete business flows passed, 21,267/21,267 HTTP requests passed, all 35,546 raw JTL rows succeeded, and database verification found 2,363 canceled orders with zero non-canceled orders. Baseline/Spike/Recovery end-to-end p95 values from JMeter's generated statistics were 36.45/27.00/26.00 ms; highest transaction p95 values were 16.45/14.00/11.00 ms. All per-stage HTTP, business, absolute p95, and transaction thresholds passed. Recovery p95 was 0.71 times same-run Baseline and below the 1.5-times limit. Raw timestamp analysis found the 0-10, 10-20, and 20-30 second Recovery windows had p95 values of 25.00, 23.95, and 26.00 ms, 100% business success, and 0% HTTP errors; since the first window and every later full window passed, application recovery was confirmed at 10 seconds within the reviewed 20-second limit. The resource CSV contained 125 backend samples: whole-run CPU averaged 9.23% and peaked at 25.4%, and RSS averaged 141.38 MiB and peaked at 190.06 MiB. Backend CPU returned toward baseline in the final Recovery window (3.62% versus 2.27% before Spike), while RSS remained elevated (182.17 versus 77.27 MiB); therefore application/CPU recovery was reported, but memory recovery was not claimed. The run demonstrates resilience and recovery at the tested 80-thread spike, not a capacity ceiling. No screenshot, video, defect, or longer-term memory conclusion was fabricated. |
+
+Human Review:
+- Status: Pending human review of measured Spike results
+- Accepted: Final Spike tree and authorization to execute the measured run
 - Modified:
 - Removed:
 - Added:

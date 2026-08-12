@@ -10,9 +10,9 @@
 | Official execution date | 2026-08-12 |
 | Endpoint groups | Auth-heavy, read-heavy, transactional |
 | API smoke test | Passed on 2026-08-12; order `1` changed `pending` to `canceled` |
-| Load / Stress / Spike runs | Load and Stress passed; Spike not executed |
+| Load / Stress / Spike runs | All three measured runs passed their reviewed HTTP, business, and latency criteria |
 | Endurance threshold | TBD - requires a real 10-15 minute run |
-| Bugs / performance issues | No Load/Stress threshold failure; Stress breakpoint not observed through 80 threads |
+| Bugs / performance issues | No Load/Stress/Spike threshold failure; Stress breakpoint not observed through 80 threads; Spike RSS did not return to its pre-spike range during short Recovery |
 | Demo video | TBD |
 
 Scenario C is distinct from Candidate A, which the tester reports is already used by another group member.

@@ -19,3 +19,9 @@ Recording guides:
 
 - `phase-2-recording-script.md`: Load test narration and screenshots.
 - `phase-3-recording-script.md`: progressive Stress test, resource monitoring, and breakpoint evidence.
+
+Measured Spike evidence:
+
+- `spike/23127194_Spike_20260812-environment.txt`
+- `spike/23127194_Spike_20260812-resources.csv`
+- `spike/23127194_Spike_20260812-order-state.txt`
