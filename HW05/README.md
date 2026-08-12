@@ -17,6 +17,11 @@
 
 Scenario C is distinct from Candidate A, which the tester reports is already used by another group member.
 
+## Project skills
+
+- `.agents/skills/design-jmeter-load-test`: gate the Phase 2 workload design, generate the reviewed Load `.jmx`, and validate its Scenario C structure.
+- `.agents/skills/ai-audit-report`: record every material AI-assisted HW05 change with evidence boundaries and pending human review.
+
 ## Scenario C flow
 
 1. Login with a valid user (`POST /api/login`).
@@ -61,6 +66,7 @@ The existing k6 files are retained only as an earlier scaffold/reference. They a
 
 ```text
 HW05/
+├── .agents/skills/                Project-local design and audit workflows
 ├── data/                         CSV schema and local runtime data
 ├── evidence/                     Screenshot, hardware, and video guidance
 ├── lib/                          Superseded k6 Scenario C reference helpers

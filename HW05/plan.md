@@ -58,6 +58,8 @@ Suggested commit: `docs(hw05): select scenario C and define execution controls`
 
 ## Phase 2 - Load test
 
+- [x] Initialize `.agents/skills/design-jmeter-load-test` as the design/generation gate for the Scenario C Load plan.
+- [ ] Use the skill to document a real single-user baseline and obtain human confirmation for VUs, ramp-up, hold, ramp-down, think-time, thresholds, and the Load listener/report allocation.
 - Use final Load filename `23127194_Load_20260812.jmx`.
 - Review baseline latency and throughput.
 - Choose realistic VUs, ramp-up, hold, ramp-down, and think-time.

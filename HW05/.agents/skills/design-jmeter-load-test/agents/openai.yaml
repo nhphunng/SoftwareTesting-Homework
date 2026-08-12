@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design JMeter Load Test"
+  short_description: "Design reviewed Scenario C JMeter load plans"
+  default_prompt: "Use $design-jmeter-load-test to design and generate the reviewed Scenario C JMeter Load Test Plan."

@@ -2,6 +2,7 @@
 
 ## Required project skill
 
+- Use `.agents/skills/design-jmeter-load-test` whenever designing, generating, or reviewing the Phase 2 Scenario C JMeter Load Test Plan. Do not generate the final `.jmx` before workload parameters, thresholds, and the Load listener/report allocation are human-confirmed.
 - Use `.agents/skills/ai-audit-report` after every material AI-assisted HW05 analysis, recommendation, file change, performance-log interpretation, or report update.
 - Record the interaction only after the primary work is complete so the audit entry reflects the actual output and modified paths.
 

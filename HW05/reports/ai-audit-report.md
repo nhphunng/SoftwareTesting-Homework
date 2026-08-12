@@ -107,3 +107,23 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-006
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T12:57:04+07:00 |
+| Task | Initialize the Scenario C JMeter Load Test design and generation skill |
+| User Prompt | `Trước khi thực hiện phase 2 hãy thực hiện việc khởi tạo skill design và generate test plan load testing` |
+| Evidence/Input Basis | `HW05/plan.md`, `HW05/scenario.md`, `HW05/runbook.md`, `HW05/reports/smoke-test.md`, `HW05/reports/user-provisioning.md`, `HW05/.agents/skills/ai-audit-report/`; Codex system `skill-creator` instructions |
+| Generated/Modified Files | `HW05/.agents/skills/design-jmeter-load-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-load-test/agents/openai.yaml`, `HW05/.agents/skills/design-jmeter-load-test/references/scenario-c-load-contract.md`, `HW05/.agents/skills/design-jmeter-load-test/scripts/validate_load_jmx.py`, `HW05/AGENTS.md`, `HW05/README.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Initialized the project-local `$design-jmeter-load-test` skill as a mandatory Phase 2 design/generation gate. The skill requires reading the Phase 1 evidence and Scenario C contract, collecting a real single-user baseline, labeling proposed workload values as pending review, and obtaining human confirmation for threads, ramp-up, hold, ramp-down, think-time, thresholds, and the Load listener/report allocation before generating `tests/23127194_Load_20260812.jmx`. It fixes the nine-step correlated checkout-and-cancel flow, requires one provisioned CSV account per concurrent thread after every backend reset, prohibits embedded credentials and fabricated evidence, and keeps heavy GUI listeners disabled during measured runs. Added a deterministic JMX structural validator with passing self-tests; the official skill validator also passed and `git diff --check` reported no whitespace errors. No `.jmx`, `.jtl`, HTML report, metric, threshold, screenshot, or measured Load result was created or claimed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
