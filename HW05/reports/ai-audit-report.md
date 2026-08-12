@@ -367,3 +367,23 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-019
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T15:28:29+07:00 |
+| Task | Design the Phase 4 Spike recording script and capture existing measured dashboard screenshots |
+| User Prompt | `Thực hiện thiết kế recording script và chụp màn hình cho phase 4` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/.agents/skills/design-jmeter-spike-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-spike-test/references/spike-contract.md`, `HW05/tests/23127194_Spike_20260812.jmx`, `HW05/scripts/run-measured-spike.sh`, `HW05/reports/spike-test-results.md`, real raw result `HW05/results/raw/spike/23127194_Spike_20260812.jtl`, and JMeter-generated HTML dashboard `HW05/results/html/spike/23127194_Spike_20260812/` |
+| Generated/Modified Files | `HW05/evidence/phase-4-recording-script.md`, `HW05/evidence/README.md`, `HW05/evidence/screenshots/spike/09-spike-dashboard-overview.jpg`, `HW05/evidence/screenshots/spike/10-spike-statistics.jpg`, `HW05/evidence/screenshots/spike/11-active-threads-over-time.jpg`, `HW05/evidence/screenshots/spike/12-spike-response-times-over-time.jpg`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Created a Vietnamese 5-6 minute Phase 4 recording guide with a four-region screen layout, exact non-GUI `RUN_SUFFIX=Run02 scripts/run-measured-spike.sh` command, console/resource monitoring commands, time-coded narration, and fifteen evidence groups. The guide covers the reviewed serialized 10-thread/30-second Baseline, 80-thread/60-second sudden Spike, and 10-thread/30-second Recovery workload with one-second ramps and 250 ms think-time; the unchanged nine-request Scenario C flow; CSV/JWT/fresh-order correlation; Response Time Graph; disabled View Results Tree; automated provisioning of 80 users; live Baseline/Spike/Recovery frames; same-run recovery-window analysis; order state; and resource interpretation. It requires Run02 metrics to come only from Run02 evidence, prohibits exposing credentials or mixing run identities, warns that the JMeter one-minute graph alone cannot establish recovery time, and prohibits claiming a capacity ceiling or memory recovery without evidence. Captured four real 1280x720 JPEG screenshots from the existing measured Run01 JMeter HTML dashboard: report identity/request summary, Statistics, Active Threads Over Time, and Response Times Over Time. The Statistics image shows the measured report's real values and the two chart images are JMeter-generated views of the same Run01. No screenshot was fabricated or edited. No Run02 execution, JMeter GUI screenshot, Activity Monitor screenshot, live tool/resource-monitor frame, new raw JTL, new performance result, video, upload, or human narration was created or claimed; those visible-run items remain for the tester to capture. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
