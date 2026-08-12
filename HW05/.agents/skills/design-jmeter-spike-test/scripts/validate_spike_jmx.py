@@ -2,12 +2,14 @@
 """Validate the structural contract of the final HW05 Spike JMX."""
 
 import argparse
+import copy
 import tempfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 
 EXPECTED = "23127194_Spike_20260812.jmx"
+LOAD_PLAN = Path(__file__).resolve().parents[4] / "tests" / "23127194_Load_20260812.jmx"
 STAGES = ("Baseline", "Spike", "Recovery")
 REQUIRED = (
     "Bearer ${token}",
@@ -18,7 +20,50 @@ REQUIRED = (
 )
 
 
-def validate(path: Path) -> list[str]:
+def paired_tree(container: ET.Element, node: ET.Element) -> ET.Element | None:
+    children = list(container)
+    index = children.index(node)
+    if index + 1 < len(children) and children[index + 1].tag == "hashTree":
+        return children[index + 1]
+    return None
+
+
+def sampler_contracts(container: ET.Element) -> list[bytes]:
+    def strip_layout_whitespace(node: ET.Element) -> None:
+        for item in node.iter():
+            if item.text is not None and not item.text.strip():
+                item.text = None
+            if item.tail is not None and not item.tail.strip():
+                item.tail = None
+
+    contracts: list[bytes] = []
+    for parent in container.iter("hashTree"):
+        for sampler in parent.findall("HTTPSamplerProxy"):
+            assertion_tree = paired_tree(parent, sampler)
+            if assertion_tree is None:
+                continue
+            sampler_copy = copy.deepcopy(sampler)
+            sampler_copy.set("testname", "STAGE-INDEPENDENT-LABEL")
+            pair = ET.Element("pair")
+            pair.extend((sampler_copy, copy.deepcopy(assertion_tree)))
+            strip_layout_whitespace(pair)
+            contracts.append(ET.tostring(pair, encoding="utf-8"))
+    return contracts
+
+
+def load_contracts() -> list[bytes]:
+    root = ET.parse(LOAD_PLAN).getroot()
+    group = root.find(".//ThreadGroup")
+    if group is None:
+        raise ValueError("Load reference has no measured Thread Group")
+    for container in root.findall(".//hashTree"):
+        tree = paired_tree(container, group) if group in list(container) else None
+        if tree is not None:
+            return sampler_contracts(tree)
+    raise ValueError("Load reference has no paired measured tree")
+
+
+def validate(path: Path, compare_with_load: bool = True) -> list[str]:
     errors: list[str] = []
     if path.name != EXPECTED:
         errors.append(f"filename must be {EXPECTED}")
@@ -30,6 +75,12 @@ def validate(path: Path) -> list[str]:
     for value in REQUIRED:
         if value not in text:
             errors.append(f"missing {value}")
+    reference_contracts: list[bytes] = []
+    if compare_with_load:
+        try:
+            reference_contracts = load_contracts()
+        except (OSError, ET.ParseError, ValueError) as exc:
+            errors.append(f"cannot read Load functional reference: {exc}")
     for stage in STAGES:
         stage_trees = []
         for container in root.findall(".//hashTree"):
@@ -46,6 +97,10 @@ def validate(path: Path) -> list[str]:
             continue
         if len(stage_trees[0].findall(".//HTTPSamplerProxy")) != 9:
             errors.append(f"{stage} stage must contain exactly 9 HTTP samplers")
+        if compare_with_load and sampler_contracts(stage_trees[0]) != reference_contracts:
+            errors.append(
+                f"{stage} HTTP requests, correlation, or assertion trees differ from Load"
+            )
     for node in root.findall(".//CSVDataSet"):
         props = {item.get("name"): (item.text or "") for item in node.findall("stringProp")}
         if props.get("recycle") != "false" or props.get("stopThread") != "true":
@@ -81,7 +136,7 @@ def main() -> int:
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / EXPECTED
             path.write_text(fixture, encoding="utf-8")
-            errors = validate(path)
+            errors = validate(path, compare_with_load=False)
             if errors:
                 print("self-test failed: " + "; ".join(errors))
                 return 1
