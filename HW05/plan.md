@@ -110,7 +110,13 @@ Suggested commit: `test(hw05): implement scenario C spike recovery plan`
 
 ## Phase 5 - Endurance threshold
 
-- Select a sustained load below the observed stress breakpoint.
+- [x] Initialize and validate `.agents/skills/design-jmeter-endurance-test` as the Phase 5 design/generation gate.
+- [x] Derive and review a 10-15 minute sustained-load proposal from measured Load, Stress, and Spike evidence. See `reports/endurance-test-design.md`.
+- [x] Confirm workload, ramp, duration, think-time, latency/business thresholds, descriptive memory-trend rule, and disabled-listener strategy.
+- [x] Generate and validate `tests/23127194_Endurance_20260812.jmx`; structural parity and a validation-only 2-thread dry run passed. See `reports/endurance-plan-validation.md`.
+- [x] Tester visually reviewed and accepted the final Endurance tree before measured execution.
+- [x] Execute and analyze the measured 60-thread/12-minute Endurance run; all 11 complete steady-state minutes passed, maximum observed stable flow rate was 26.23 flows/s, and maximum observed backend RSS was 188.84 MiB without a demonstrated plateau. See `reports/endurance-test-results.md`.
+- Select a sustained load below the highest tested Stress concurrency; no breakpoint was observed through 80 active threads.
 - Run for approximately 10-15 minutes with resource monitoring.
 - Derive the maximum stable RPS and memory ceiling only from recorded evidence.
 

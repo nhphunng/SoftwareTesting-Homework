@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design JMeter Endurance Test"
+  short_description: "Design Scenario C endurance threshold plans"
+  default_prompt: "Use $design-jmeter-endurance-test to design and generate the reviewed HW05 Scenario C Endurance Test Plan."
