@@ -21,6 +21,7 @@ Scenario C is distinct from Candidate A, which the tester reports is already use
 
 - `.agents/skills/design-jmeter-load-test`: gate the Phase 2 workload design, generate the reviewed Load `.jmx`, and validate its Scenario C structure.
 - `.agents/skills/run-jmeter-stress-test`: design, generate, execute, and analyze the Phase 3 progressive Stress breakpoint test.
+- `.agents/skills/design-jmeter-spike-test`: design the baseline-spike-recovery contract and generate/validate the Phase 4 Spike JMX after human confirmation.
 - `.agents/skills/ai-audit-report`: record every material AI-assisted HW05 change with evidence boundaries and pending human review.
 
 ## Scenario C flow
