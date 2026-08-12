@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run JMeter Stress Test"
+  short_description: "Design and run Scenario C stress breakpoint tests"
+  default_prompt: "Use $run-jmeter-stress-test to design, generate, execute, and analyze the HW05 Scenario C Stress test."
