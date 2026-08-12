@@ -84,13 +84,13 @@ for ((index = 1; index <= user_count; index += 1)); do
     fi
 
     verify_code=000
-    for _ in {1..5}; do
+    for _ in {1..20}; do
       verify_code=$(curl -sS -o /dev/null -w '%{http_code}' \
         -H 'Content-Type: application/json' \
         --data-binary "$login_payload" \
         "$base_url/api/login")
       [[ "$verify_code" == "200" ]] && break
-      sleep 0.2
+      sleep 0.5
     done
     if [[ "$verify_code" != "200" ]]; then
       echo "Post-registration login failed for $email with HTTP $verify_code." >&2
