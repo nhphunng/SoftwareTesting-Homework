@@ -6,7 +6,7 @@
 
 | AI Tool | Tasks |
 | --- | --- |
-| Codex | Create and maintain the HW05 AI audit, design Scenario C, scaffold testing artifacts, and execute/document API smoke validation. |
+| Codex | Create and maintain the HW05 AI audit; design Scenario C; scaffold, execute, and analyze JMeter Load and Stress testing; prepare evidence guidance. |
 
 ## AI Audit Entry - AI-001
 
@@ -202,6 +202,66 @@ Human Review:
 
 Human Review:
 - Status: Pending human review of generated JMX
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-011
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T14:33:01+07:00 |
+| Task | Execute and analyze the tester-approved Scenario C measured Load run |
+| User Prompt | `Tôi đã review final JMeter tree và chấp nhận cho measured Load execution.` |
+| Evidence/Input Basis | `HW05/tests/23127194_Load_20260812.jmx`, `HW05/reports/load-baseline.md`, `HW05/reports/load-plan-validation.md`, `HW05/.agents/skills/design-jmeter-load-test/`; real raw result `HW05/results/raw/load/23127194_Load_20260812.jtl`; JMeter-generated `HW05/results/html/load/23127194_Load_20260812/statistics.json`; real environment and database-state evidence under `HW05/evidence/load/`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/README.md`, `HW05/plan.md`, `HW05/reports/load-baseline.md`, `HW05/reports/load-plan-validation.md`, `HW05/reports/load-test-results.md`, `HW05/reports/main-report.md`, `HW05/results/README.md`, `HW05/scripts/provision-jmeter-users.sh`, `HW05/scripts/run-measured-load.sh`; local evidence `HW05/results/raw/load/23127194_Load_20260812.jtl`, `HW05/results/raw/load/23127194_Load_20260812.jmeter.log`, `HW05/results/raw/load/23127194_Load_20260812.console.log`, `HW05/results/html/load/23127194_Load_20260812/`, `HW05/evidence/load/23127194_Load_20260812-environment.txt`, `HW05/evidence/load/23127194_Load_20260812-order-state.txt`, and `HW05/evidence/load/23127194_Load_20260812-resources.csv` |
+| AI Output | Recorded the tester's explicit visual acceptance of the final JMeter tree and executed the human-confirmed Load contract: 10 VUs, 20-second ramp-up, 140-second flow-start deadline containing the reviewed 120-second full-load hold, and 500 ms think-time. Two sandboxed backend starts stopped before JMeter and produced no measured JTL; unrestricted preparation then exposed delayed post-registration login, so provisioning retry was increased from five attempts at 0.2 seconds to twenty attempts at 0.5 seconds while retaining fail-closed CSV publication. The successful measured run generated an untouched JTL with SHA-256 `85bfb17b1fbc384cb8f2f00836ede96883c59030ba56e246cf103e8fe6ff8014`: 292/292 complete business flows passed, 2,628/2,628 HTTP samples returned 200, all 4,381 JTL rows passed, and database verification found 292/292 orders canceled with zero non-canceled orders. JMeter statistics measured end-to-end p95 38.35 ms and highest transaction p95 16 ms; HTTP errors were 0% and business success was 100%, so all reviewed Load criteria passed. The resource monitor CSV contained only its header and was explicitly rejected as CPU/RAM evidence; no resource-utilization claim was made. The runner was corrected for future attributed runs without overwriting the raw Load evidence. |
+
+Human Review:
+- Status: Pending human review of measured Load results
+- Accepted: Final JMeter tree and authorization to execute the measured Load run
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-012
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T14:33:02+07:00 |
+| Task | Prepare the Phase 2 recording and screenshot script |
+| User Prompt | `Hãy soạn kịch bản quay và chụp màn hình phase 2 cho tôi` |
+| Evidence/Input Basis | `HW05/.agents/skills/design-jmeter-load-test/SKILL.md`, `HW05/reports/load-test-results.md`, `HW05/evidence/README.md`, `HW05/submission-checklist.md`, `HW05/scripts/run-measured-load.sh` |
+| Generated/Modified Files | `HW05/evidence/phase-2-recording-script.md`, `HW05/scripts/run-measured-load.sh` |
+| AI Output | Created a 3-4 minute Vietnamese Phase 2 recording script with window layout, narration, exact JMeter nodes to show, ten required screenshot names, credential-redaction rules, and post-recording checks. The script requires JMeter and Activity Monitor in the same frame, instructs the tester not to open the local credential CSV, and explains that measured metrics must come from the matching raw JTL/HTML report. Updated the Load runner to accept a sanitized `RUN_SUFFIX`, allowing a future `Run02` with separate JTL, HTML, resource, environment, and order-state paths instead of overwriting Run 01. The document truthfully identifies Run 01's resource CSV as invalid and requires a later run to contain actual resource rows before it can support CPU/RAM evidence. No screenshot or video was claimed to exist. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-013
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T14:33:03+07:00 |
+| Task | Create and apply the Scenario C JMeter Stress-test skill for Phase 3 |
+| User Prompt | `Tương tự thực hiện phase 3 bằng cách tạo skill và áp dụng skill đó thực hiện phase 3` |
+| Evidence/Input Basis | `HW05/reports/load-test-results.md`, `HW05/tests/23127194_Load_20260812.jmx`, `HW05/plan.md`; Codex system `skill-creator` instructions; real raw result `HW05/results/raw/stress/23127194_Stress_20260812.jtl`; JMeter-generated `HW05/results/html/stress/23127194_Stress_20260812/statistics.json`; real resource/order-state evidence under `HW05/evidence/stress/`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/.agents/skills/run-jmeter-stress-test/SKILL.md`, `HW05/.agents/skills/run-jmeter-stress-test/agents/openai.yaml`, `HW05/.agents/skills/run-jmeter-stress-test/references/stress-contract.md`, `HW05/.agents/skills/run-jmeter-stress-test/scripts/generate_stress_jmx.py`, `HW05/.agents/skills/run-jmeter-stress-test/scripts/validate_stress_jmx.py`, `HW05/.agents/skills/run-jmeter-stress-test/scripts/analyze_stress_jtl.py`, `HW05/AGENTS.md`, `HW05/README.md`, `HW05/plan.md`, `HW05/tests/23127194_Stress_20260812.jmx`, `HW05/scripts/run-measured-stress.sh`, `HW05/reports/stress-test-design.md`, `HW05/reports/stress-test-results.md`, `HW05/reports/main-report.md`; local dry-run and measured artifacts under `HW05/results/raw/stress/`, `HW05/results/html/stress/`, and `HW05/evidence/stress/` |
+| AI Output | Initialized and officially validated `$run-jmeter-stress-test`, including deterministic JMX generation, structural validation, active-thread-band analysis, progressive-stress rules, and evidence-integrity controls. Derived a Phase 3 experiment from the real 10-VU Load result: linear ramp to 80 threads over 240 seconds, 300-second flow-start deadline, 250 ms think-time, and Aggregate Report distinct from Load's Summary Report. Generated a Stress JMX with the exact same nine HTTP samplers as Load and no embedded credentials. The first dry run connected to a stale backend holding port 3000, produced two HTTP 401 login failures and no orders, and was preserved and excluded. The runner was corrected to fail when port 3000 is occupied and wait for the new database initialization marker; DryRun02 then passed 24/24 flows and 216/216 HTTP samples. The measured run provisioned 80 unique accounts and produced raw JTL SHA-256 `11017bc182bcfa53966964620e5a957a39cdbcf7c42cf1dc3080555c253660b8`: 6,336/6,336 flows passed, 57,024/57,024 HTTP requests passed, all 95,041 JTL rows passed, and 6,336/6,336 orders ended canceled. Active-thread bands 1-20, 21-40, 41-60, and 61-80 had 0% HTTP errors, 100% business success, end-to-end p95 values of 24, 22, 25, and 26 ms, and highest transaction p95 values of 10.90, 10, 12, and 13 ms. No degradation signal breached, so no breakpoint was observed up to 80 active threads; 80 was explicitly not claimed as a capacity ceiling. The resource file contained 294 timestamped samples; backend CPU averaged 9.56% and peaked at 22.7%, while backend RSS averaged 130.88 MiB and peaked at 188.11 MiB. JMeter JVM measurements were separated from SUT measurements. Stress tree/results remain pending tester visual and human review. |
+
+Human Review:
+- Status: Pending human review of Stress design, JMeter tree, and measured results
 - Accepted:
 - Modified:
 - Removed:

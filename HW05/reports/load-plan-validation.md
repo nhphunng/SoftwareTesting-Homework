@@ -13,7 +13,7 @@
 | XML parse and whitespace checks | Passed |
 | Required-property negative test | Passed; missing `-Jload.threads` failed before measured traffic with an explicit message |
 | Final one-thread dry run | Passed |
-| GUI launch | Plan opened in JMeter GUI; automated accessibility could not attach to the Java app, so tester visual confirmation remains pending |
+| GUI launch | Tester visually reviewed and accepted the final tree on 2026-08-12 |
 
 ## 2. Implemented human-confirmed contract
 
@@ -74,17 +74,17 @@ All failed validation attempts are preserved under `results/raw/validation/` and
 
 No attempt file is a measured Load result.
 
-## 5. Remaining human action
+## 5. Human review and execution handoff
 
-- [ ] Open the final plan in JMeter GUI and visually confirm the tree and reviewed values.
+- [x] Open the final plan in JMeter GUI and visually confirm the tree and reviewed values.
 - [ ] Commit the reviewed plan and reports.
-- [ ] Before measured execution, reset the backend and provision at least 10 users.
-- [ ] Capture JMeter and backend resource monitor in the same frame.
-- [ ] Execute with the human-confirmed properties, untouched raw JTL, and a clean HTML report directory.
+- [x] Before measured execution, reset the backend and provision 10 users.
+- [ ] Capture JMeter and backend resource monitor in the same frame; the automated resource CSV failed to collect rows during this run and is not evidence.
+- [x] Execute with the human-confirmed properties, untouched raw JTL, and a clean HTML report directory; see `reports/load-test-results.md`.
 
 Human Review:
-- Status: Pending human review of generated JMX
-- Accepted:
+- Status: Accepted by tester on 2026-08-12
+- Accepted: Final JMeter tree and measured Load execution
 - Modified:
 - Removed:
 - Added:

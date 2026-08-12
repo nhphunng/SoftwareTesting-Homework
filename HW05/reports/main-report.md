@@ -20,12 +20,12 @@ Document why Scenario C is unique in the group and how it covers auth-heavy, rea
 
 | Item | Measured value / evidence path |
 | --- | --- |
-| OS and hostname | TBD |
-| CPU | TBD |
-| RAM | TBD |
-| Backend/runtime versions | TBD |
-| Database state/reset | TBD |
-| Resource-monitor evidence | TBD |
+| OS | macOS 26.3 (Build 25D125), arm64 |
+| CPU | 10 logical CPUs; model and utilization not captured |
+| RAM | 16 GiB installed; utilization not captured |
+| Backend/runtime versions | Node.js EShop backend; Java 24; JMeter 5.6.3 |
+| Database state/reset | Reset before run; 292 orders after run, all canceled |
+| Resource-monitor evidence | Unavailable for this run: generated CSV contains only its header and is explicitly excluded |
 
 ## 4. Data-driven workflow
 
@@ -37,21 +37,25 @@ Backend source inspection confirmed that each start drops and reseeds all databa
 
 ## 5. Load test
 
-- Final test-plan filename: TBD
-- Reviewed workload parameters and rationale: TBD
-- Distinct report view: TBD
-- Raw output: TBD
-- Resource evidence: TBD
-- Results and human review: TBD
+- Final test-plan filename: `tests/23127194_Load_20260812.jmx`
+- Reviewed workload: 10 VUs, 20-second ramp-up, 120-second full-load hold within a 140-second flow-start deadline, and 500 ms think-time.
+- Distinct report view: Summary Report; raw JTL and HTML dashboard are authoritative.
+- Raw output: `results/raw/load/23127194_Load_20260812.jtl`.
+- Result: 292/292 business flows passed; 2,628/2,628 HTTP samples passed; end-to-end p95 38.35 ms; 0% errors.
+- Threshold verdict: Passed for HTTP errors, business success, end-to-end p95, and all transaction p95 limits.
+- Limitation: CPU/RSS monitor produced no samples, so this run supports no resource-utilization claim.
+- Detailed evidence and human review: `reports/load-test-results.md`.
 
 ## 6. Stress test
 
-- Final test-plan filename: TBD
-- Progressive stages and breakpoint rationale: TBD
-- Distinct report view: TBD
-- Raw output: TBD
-- Resource evidence: TBD
-- Breakpoint and recovery observations: TBD
+- Final test-plan filename: `tests/23127194_Stress_20260812.jmx`.
+- Progressive workload: linear ramp to 80 threads over 240 seconds, then approximately 60 seconds at the maximum-started level; 250 ms think-time.
+- Distinct report view: Aggregate Report.
+- Raw output: `results/raw/stress/23127194_Stress_20260812.jtl`.
+- Resource evidence: `evidence/stress/23127194_Stress_20260812-resources.csv` with 294 timestamped samples.
+- Result: 6,336/6,336 flows and 57,024/57,024 HTTP requests passed; whole-run end-to-end p95 was 25 ms.
+- Breakpoint: no threshold breach was observed up to the maximum tested 80 active threads; 80 is not claimed as the capacity ceiling.
+- Detailed band analysis: `reports/stress-test-results.md`.
 
 ## 7. Spike test
 

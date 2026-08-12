@@ -64,7 +64,9 @@ Suggested commit: `docs(hw05): select scenario C and define execution controls`
 - [x] Obtain human confirmation for 10 VUs, 20-second ramp-up, 120-second hold, 0-second staged ramp-down, 500 ms think-time, reviewed thresholds, and Summary Report allocation.
 - [x] Generate `tests/23127194_Load_20260812.jmx` after confirmation.
 - [x] Pass XML/skill validation, required-property negative validation, and a one-thread functional dry run; see `reports/load-plan-validation.md`.
-- [ ] Tester visually reviews the final tree in JMeter GUI before measured execution.
+- [x] Tester visually reviewed and accepted the final tree in JMeter GUI before measured execution.
+- [x] Execute the reviewed measured Load run and retain raw JTL, HTML dashboard, environment context, and database state; see `reports/load-test-results.md`.
+- [ ] Repeat resource capture in a future attributed run if CPU/RSS evidence is required; the measured run's monitor CSV contains only its header and is not accepted as resource evidence.
 - Use final Load filename `23127194_Load_20260812.jmx`.
 - Review baseline latency and throughput.
 - Choose realistic VUs, ramp-up, hold, ramp-down, and think-time.
@@ -77,11 +79,17 @@ Suggested commit: `test(hw05): implement reviewed scenario C load plan`
 
 ## Phase 3 - Stress test
 
+- [x] Initialize and validate `.agents/skills/run-jmeter-stress-test`.
+- [x] Derive a progressive 1-80 thread stress contract from measured Load evidence; see `reports/stress-test-design.md`.
+- [x] Generate and structurally validate `tests/23127194_Stress_20260812.jmx` with Aggregate Report.
+- [x] Complete a short functional dry run after correcting stale-backend/reset control; 24/24 flows passed with 0 residual non-canceled orders.
+- [x] Execute the measured Stress run and analyze active-thread bands; no breakpoint was observed through 80 active threads. See `reports/stress-test-results.md`.
 - Use final Stress filename `23127194_Stress_20260812.jmx`.
 - Define progressive stress stages from the Load baseline.
 - Identify the first sustainable/unsustainable level without reusing locked or corrupted accounts.
 - Create the Stress JMeter `.jmx` plan by reusing the exact Scenario C functional controllers from Load.
 - Execute with isolated evidence and document recovery behavior.
+- [ ] Tester visually reviews the final Stress tree and measured results in JMeter GUI/HTML dashboard.
 
 Suggested commit: `test(hw05): implement scenario C stress breakpoint plan`
 

@@ -79,7 +79,7 @@ The tester confirmed every proposed value on 2026-08-12. The values below are th
 - [x] Propose workload parameters, thresholds, and listener allocation from evidence.
 - [x] Tester confirms every proposed value in Section 4.
 - [x] Generate and structurally validate `tests/23127194_Load_20260812.jmx`.
-- [ ] Tester visually confirms the final plan tree in JMeter GUI; automated accessibility could not attach to the Java app.
+- [x] Tester visually confirmed the final plan tree in JMeter GUI on 2026-08-12.
 - [x] Perform a one-thread functional dry run after provisioning; see `reports/load-plan-validation.md`.
 
 Human Review:

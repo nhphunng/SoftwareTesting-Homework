@@ -10,9 +10,9 @@
 | Official execution date | 2026-08-12 |
 | Endpoint groups | Auth-heavy, read-heavy, transactional |
 | API smoke test | Passed on 2026-08-12; order `1` changed `pending` to `canceled` |
-| Load / Stress / Spike runs | Not executed |
+| Load / Stress / Spike runs | Load and Stress passed; Spike not executed |
 | Endurance threshold | TBD - requires a real 10-15 minute run |
-| Bugs / performance issues | TBD - no execution evidence yet |
+| Bugs / performance issues | No Load/Stress threshold failure; Stress breakpoint not observed through 80 threads |
 | Demo video | TBD |
 
 Scenario C is distinct from Candidate A, which the tester reports is already used by another group member.
@@ -20,6 +20,7 @@ Scenario C is distinct from Candidate A, which the tester reports is already use
 ## Project skills
 
 - `.agents/skills/design-jmeter-load-test`: gate the Phase 2 workload design, generate the reviewed Load `.jmx`, and validate its Scenario C structure.
+- `.agents/skills/run-jmeter-stress-test`: design, generate, execute, and analyze the Phase 3 progressive Stress breakpoint test.
 - `.agents/skills/ai-audit-report`: record every material AI-assisted HW05 change with evidence boundaries and pending human review.
 
 ## Scenario C flow
@@ -48,11 +49,10 @@ The same functional sequence must be reused by the final Load, Stress, and Spike
 
 3. Use `data/scenario-c.local.csv` in JMeter CSV Data Set Config. It is mode `600` and Git-ignored.
 4. Require `USER_COUNT` to be at least the maximum planned thread count; one shared user would create cart interference.
-5. Decide workload parameters from a measured baseline and document the human review.
-6. Manually create and name the three JMeter plans using the required pattern:
+5. The Load workload contract has been baseline-derived, human-reviewed, generated, and executed; see `reports/load-test-results.md`.
+6. Create the remaining Stress and Spike plans using the required pattern:
 
    ```text
-   23127194_Load_20260812.jmx
    23127194_Stress_20260812.jmx
    23127194_Spike_20260812.jmx
    ```
