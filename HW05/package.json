@@ -2,7 +2,7 @@
   "name": "hw05-performance-testing-scenario-c",
   "version": "1.0.0",
   "private": true,
-  "description": "k6 skeleton for HW05 Scenario C: checkout then cancel",
+  "description": "Superseded k6 reference skeleton; final HW05 Scenario C tool is JMeter",
   "scripts": {
     "validate": "npm run validate:load && npm run validate:stress && npm run validate:spike && npm run validate:endurance",
     "validate:load": "k6 inspect -e SKELETON_VALIDATE=true tests/templates/scenario-c-load.template.js",

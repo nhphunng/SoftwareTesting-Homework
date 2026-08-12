@@ -6,7 +6,7 @@
 
 | AI Tool | Tasks |
 | --- | --- |
-| Codex | Create and maintain the HW05 AI audit, design Scenario C, and scaffold the k6 performance-testing project. |
+| Codex | Create and maintain the HW05 AI audit, design Scenario C, scaffold testing artifacts, and execute/document API smoke validation. |
 
 ## AI Audit Entry - AI-001
 
@@ -59,6 +59,26 @@ Human Review:
 | Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/scenario.md`; external SUT workspace `eshop-sut-seminar`: `README.md`, `api_specification.md`, `backend/server.js`, and existing `k6/tests/` |
 | Generated/Modified Files | `HW05/scenario.md`, `HW05/.gitignore`, `HW05/package.json`, `HW05/README.md`, `HW05/data/scenario-c.example.csv`, `HW05/lib/csv.js`, `HW05/lib/workload-config.js`, `HW05/lib/scenario-c.js`, `HW05/tests/templates/scenario-c-load.template.js`, `HW05/tests/templates/scenario-c-stress.template.js`, `HW05/tests/templates/scenario-c-spike.template.js`, `HW05/tests/templates/scenario-c-endurance.template.js`, `HW05/runbook.md`, `HW05/plan.md`, `HW05/results/README.md`, `HW05/evidence/README.md`, `HW05/reports/main-report.md`, `HW05/reports/ai-analysis.md`, `HW05/reports/continuous-performance-proposal.md`, `HW05/reports/ai-critique.md`, `HW05/reports/bug-report.md`, `HW05/submission-checklist.md`, `HW05/reports/ai-audit-report.md` |
 | AI Output | Marked Candidate C as the tester-selected, non-duplicated workflow and created a k6 project skeleton that reuses one shared flow for Load, Stress, and Spike: valid login, product search/detail, backend cart add/read, checkout with correlated `orderId`, order detail, cancellation, and canceled-history verification. Added RFC-style quoted CSV parsing, dedicated-user validation, per-VU account assignment, reviewed-workload guards, endpoint-group tags, business checks, and checkout/cancellation metrics. Added Load, Stress, Spike, and Endurance workload templates without invented production parameters or thresholds; final assignment filenames remain a manual tester action. Added run/evidence guidance, report templates, the required self-assessment and submission checklist, continuous-testing Mermaid template, and explicit warnings about cart/order state growth and k6/JMeter evidence terminology. `package.json` parsed successfully, `git diff --check` passed, and all four templates passed `k6 inspect` using syntax-only validation mode. No SUT execution, raw result, screenshot, report, issue, threshold, hardware evidence, or video was claimed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-004
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T11:56:30+07:00 |
+| Task | Confirm Phase 1 decisions and smoke-test Scenario C APIs |
+| User Prompt | `This is confirmation for phase 1 of [plan.md](/Users/nguyenhoangphihung/Document/ky_3/SoftwareTesting-Homework/HW05/plan.md) , read it and update`<br>`- Class default là JMeter`<br>`- Class ID: 23127194`<br>`- I have confirmed scenario C is unique`<br>`- We have 2 account:`<br>`  - User account: test@eshop.com \| [REDACTED PASSWORD]`<br>`  - Admin account: admin@eshop.com \| [REDACTED PASSWORD]`<br>`- Do smoke test with api endpoint for me`<br><br>Passwords were explicitly redacted from the audit entry and were not stored in repository artifacts. |
+| Evidence/Input Basis | `HW05/plan.md`, `HW05/scenario.md`; external SUT workspace `eshop-sut-seminar`: `backend/server.js`, `backend/database.js`, `api_specification.md`, and the running backend on `http://127.0.0.1:3000` |
+| Generated/Modified Files | `HW05/plan.md`, `HW05/scenario.md`, `HW05/README.md`, `HW05/package.json`, `HW05/runbook.md`, `HW05/evidence/README.md`, `HW05/submission-checklist.md`, `HW05/reports/main-report.md`, `HW05/reports/smoke-test.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Confirmed JMeter as the final class-default tool, Student ID `23127194`, and Scenario C uniqueness. Verified Java 24 is installed and JMeter is not currently available on `PATH`. Started the EShop backend and executed the complete Scenario C API smoke chain with temporary credentials: user login, product search/detail, add/read cart, checkout, order read, cancellation, and user-history verification; also verified admin login and admin order-list access. All eleven requests returned HTTP 200. Product `1` (`iPhone 15 Pro Max`) was used; order `1` transitioned from `pending` to `canceled`. The backend was stopped afterward, clearing the in-memory cart; canceled order `1` remains in SQLite. Updated Phase 1 as decision/smoke complete but not fully closed because JMeter installation, final execution date, a sufficiently large isolated user pool, and database reset policy remain pending. Marked the earlier k6 scaffold as superseded reference material. No password, JWT, `.jtl`, performance metric, HTML report, threshold, resource screenshot, or video evidence was stored or claimed. |
 
 Human Review:
 - Status: Pending human review

@@ -1,5 +1,7 @@
 # Scenario C Runbook
 
+> **Superseded:** Phase 1 confirmed JMeter as the class-default and final project tool. The k6 commands below are retained only as historical scaffold notes. Do not use them for the final HW05 execution. Create the JMeter runbook during Phase 2.
+
 ## 1. Validate the skeleton
 
 ```bash

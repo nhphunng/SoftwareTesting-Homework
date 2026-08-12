@@ -28,7 +28,7 @@
 ## Demonstration and traceability
 
 - [ ] Unlisted YouTube video is at least 6 minutes total.
-- [ ] Video shows k6 and resource monitor in the same frame.
+- [ ] Video shows JMeter and the resource monitor in the same frame.
 - [ ] Video uses the tester's own Vietnamese narration.
 - [ ] Agent Skill and an end-to-end endpoint-group demonstration are included.
 - [ ] A meaningful Git commit exists for each procedural step.

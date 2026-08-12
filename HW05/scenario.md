@@ -3,8 +3,8 @@
 ## 1. Status and decision to make
 
 - Selected scenario: **Candidate C - Checkout then cancel**
-- Target tool: **k6 (selected for the project skeleton; tester to confirm before execution)**
-- Student ID: **TBD**
+- Target tool: **JMeter (confirmed class default)**
+- Student ID: **23127194**
 - Duplicate check with other group members: **Confirmed by tester: Candidate A is already selected by another member**
 
 This document is a selection aid, not an execution record. Workload values, thresholds, and expected performance results must be established from a real baseline run; they are intentionally not invented here.
@@ -205,8 +205,8 @@ Use this only when a resettable order pool is available. Do not let concurrent v
 
 Before marking a scenario as selected, answer all items:
 
-- [ ] The workflow is not duplicated by another group member.
-- [ ] All endpoint paths have been smoke-tested against the running backend.
+- [x] The workflow is not duplicated by another group member.
+- [x] All endpoint paths have been smoke-tested against the running backend.
 - [ ] Test users, products, coupons, and orders are isolated and resettable.
 - [ ] One virtual user cannot corrupt another user's mutable state.
 - [ ] Assertions distinguish HTTP success from business success.
@@ -224,10 +224,10 @@ Complete this section after reviewing the candidates:
 Selected candidate: C - Checkout then cancel
 Reason for selection: Candidate A is already selected by another group member; Candidate C provides a distinct order-lifecycle flow.
 How it differs from other group members: It correlates the newly created order, reads it, cancels it, and verifies the canceled state.
-Tool (JMeter or k6): k6 for the current skeleton; confirm before execution.
-Accounts/data available: Pending tester preparation and smoke validation.
+Tool (JMeter or k6): JMeter, confirmed as the class default.
+Accounts/data available: One user and one admin demo account were supplied and smoke-verified; passwords are not stored. More dedicated user accounts are required for isolated concurrent threads.
 Known risks accepted: Order growth, per-order one-time cancellation, in-memory cart growth, and weak backend checkout/cart coupling.
-Changes required before implementation: Add real local CSV data, choose measured workload parameters from a baseline, define cleanup/reset, and use final test-plan filenames.
+Changes required before implementation: Install JMeter, create a sufficiently large local CSV user pool, choose workload parameters from a baseline, define cleanup/reset, and use final test-plan filenames.
 ```
 
 Human Review:

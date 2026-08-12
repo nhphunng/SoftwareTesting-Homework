@@ -4,9 +4,11 @@
 
 | Item | Current value |
 | --- | --- |
+| Student ID | 23127194 |
 | Selected workflow | Scenario C - Checkout then cancel |
-| Tool | k6 skeleton; tester confirmation required before execution |
+| Tool | JMeter - confirmed class default; not currently installed on this machine |
 | Endpoint groups | Auth-heavy, read-heavy, transactional |
+| API smoke test | Passed on 2026-08-12; order `1` changed `pending` to `canceled` |
 | Load / Stress / Spike runs | Not executed |
 | Endurance threshold | TBD - requires a real 10-15 minute run |
 | Bugs / performance issues | TBD - no execution evidence yet |
@@ -25,25 +27,25 @@ Scenario C is distinct from Candidate A, which the tester reports is already use
 7. Cancel the same fresh order (`PUT /api/orders/{orderId}/cancel`).
 8. Verify its final state in user history (`GET /api/orders/my-orders`).
 
-The same functional sequence is imported by the Load, Stress, and Spike templates. Only their workload models differ.
+The same functional sequence must be reused by the final Load, Stress, and Spike JMeter plans. Only their workload models and report listeners may differ.
 
 ## Safe setup
 
-1. Install k6 separately and verify `k6 version`.
-2. Copy `data/scenario-c.example.csv` to `data/scenario-c.local.csv`.
+1. Install JMeter and verify `jmeter --version`. Java 24 is already present.
+2. Prepare a local JMeter CSV data file from `data/scenario-c.example.csv`.
 3. Replace every placeholder with valid, dedicated test data. Never commit real passwords.
-4. Smoke-test every account and product against the running backend.
+4. Add enough unique user accounts for the maximum planned thread count; one shared user would create cart interference.
 5. Decide workload parameters from a measured baseline and document the human review.
-6. Manually copy and rename the three templates using the required pattern:
+6. Manually create and name the three JMeter plans using the required pattern:
 
    ```text
-   {StudentID}_{ScenarioType}_{YYYYMMDD}.js
+   {StudentID}_{ScenarioType}_{YYYYMMDD}.jmx
    ```
 
-7. Pass `WORKLOAD_CONFIRMED=true`, `DATA_FILE`, `REQUIRED_USER_ROWS`, and `THINK_TIME_SECONDS` to k6 with `-e NAME=value` only after review. `REQUIRED_USER_ROWS` must be at least the maximum configured VUs.
-8. Follow [runbook.md](runbook.md) to execute and collect evidence.
+7. Configure CSV Data Set Config, JSON extractors, assertions, timers, and cleanup/reset behavior before measured execution.
+8. Replace the provisional k6 runbook with the reviewed JMeter execution commands during Phase 2.
 
-The templates refuse a real run when workload confirmation or non-example CSV data is missing.
+The existing k6 files are retained only as an earlier scaffold/reference. They are superseded by the confirmed JMeter decision and must not be submitted as the final test plans.
 
 ## Structure
 
@@ -51,10 +53,10 @@ The templates refuse a real run when workload confirmation or non-example CSV da
 HW05/
 ├── data/                         CSV schema and local runtime data
 ├── evidence/                     Screenshot, hardware, and video guidance
-├── lib/                          Shared Scenario C and CSV helpers
+├── lib/                          Superseded k6 Scenario C reference helpers
 ├── reports/                      Mandatory report templates and AI audit
 ├── results/                      Raw output and HTML/summary guidance
-├── tests/templates/              Load, Stress, Spike, and Endurance templates
+├── tests/templates/              Superseded k6 templates; JMeter plans pending Phase 2
 ├── plan.md                       Implementation and evidence sequence
 ├── runbook.md                    Safe validation/run procedure
 ├── scenario.md                   Scenario decision and endpoint rationale
