@@ -127,3 +127,83 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-007
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T13:01:08+07:00 |
+| Task | Recommend the next Phase 2 action |
+| User Prompt | `Bây giờ tôi cần làm gì tiếp theo?` |
+| Evidence/Input Basis | `HW05/plan.md`, `HW05/.agents/skills/design-jmeter-load-test/SKILL.md`, `HW05/reports/ai-audit-report.md` |
+| Generated/Modified Files | `HW05/reports/ai-audit-report.md` |
+| AI Output | Việc tiếp theo là **xác nhận skill và cho phép bắt đầu baseline của Phase 2**; chưa chạy Load test chính thức. Tester cần review AI-006, sau đó yêu cầu thực hiện baseline Scenario C. Codex sẽ tạo một plan baseline tách biệt, reset backend, provision account, chạy một luồng đơn có kiểm soát, lưu raw `.jtl`, và phân tích latency/throughput/error/business assertions. Từ bằng chứng baseline, Codex sẽ đề xuất workload và thresholds với trạng thái `Proposed - pending human review`. Chỉ sau khi tester xác nhận các giá trị đó mới sinh `tests/23127194_Load_20260812.jmx` và chuẩn bị measured Load run. Credential chỉ được truyền lúc chạy và không được ghi vào repository. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-008
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T13:08:24+07:00 |
+| Task | Design the Scenario C JMeter Load plan and evaluate the final-JMX generation gate |
+| User Prompt | `Using [design-jmeter-load-test](HW05/.agents/skills/design-jmeter-load-test/) thực hiện việc design và generate testplan cho load testing` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/AGENTS.md`, `HW05/plan.md`, `HW05/scenario.md`, `HW05/runbook.md`, `HW05/reports/smoke-test.md`, `HW05/reports/user-provisioning.md`, `HW05/.agents/skills/design-jmeter-load-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-load-test/references/scenario-c-load-contract.md`, `HW05/.agents/skills/design-jmeter-load-test/scripts/validate_load_jmx.py`, `HW05/lib/scenario-c.js`; external SUT workspace `eshop-sut-seminar/backend/server.js` |
+| Generated/Modified Files | `HW05/reports/load-test-design.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Documented the final Load-plan design contract: fixed nine-request Scenario C flow; endpoint-group transaction structure; CSV isolation and reset rules; token, product-price, and fresh-order correlation; separate HTTP and business assertions; failed-iteration handling; standard JMeter 5.6.3 components; required property expressions with no hidden workload defaults; evidence boundaries; and a baseline/human-approval checklist. Proposed `Summary Report` for the Load-specific listener allocation with status `Proposed - pending human review`. The repository contains no real single-user baseline `.jtl`, so no numeric workload or threshold was proposed. In accordance with the selected skill and `HW05/AGENTS.md`, the final `tests/23127194_Load_20260812.jmx` was intentionally not generated until the tester confirms VUs, ramp-up, hold, ramp-down, think-time, thresholds, and listener allocation. The validator self-test passed and `git diff --check` reported no whitespace errors. No Load run, `.jtl`, HTML report, performance metric, screenshot, resource evidence, threshold, or human approval was fabricated. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-009
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T13:22:28+07:00 |
+| Task | Execute and analyse the Scenario C single-user JMeter baseline |
+| User Prompt | `Xác nhận cho phép chạy single-user baseline` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/AGENTS.md`, `HW05/plan.md`, `HW05/scenario.md`, `HW05/runbook.md`, `HW05/reports/smoke-test.md`, `HW05/reports/user-provisioning.md`, `HW05/reports/load-test-design.md`, `HW05/.agents/skills/design-jmeter-load-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-load-test/references/scenario-c-load-contract.md`; real raw result `HW05/results/raw/baseline/23127194_ScenarioC_Baseline_20260812.jtl`; JMeter-generated report `HW05/results/html/baseline/23127194_ScenarioC_Baseline_20260812/statistics.json`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/tests/baseline/23127194_ScenarioC_Baseline_20260812.jmx`, `HW05/reports/load-baseline.md`, `HW05/reports/load-test-design.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md`; local ignored evidence `HW05/results/raw/baseline/23127194_ScenarioC_Baseline_20260812.jtl`, `HW05/results/raw/baseline/attempt-01-connectivity-failure.jtl`, `HW05/results/html/baseline/23127194_ScenarioC_Baseline_20260812/`, and `HW05/data/scenario-c.local.csv` |
+| AI Output | Created a separate standard-JMeter baseline plan with one thread, 20 sequential iterations, 20 unique non-recycled CSV accounts, the fixed nine-request Scenario C flow, JWT/order correlation, separate HTTP/business assertions, and disabled View Results Tree. The first execution attempt contained only connection failures because the backend process did not persist between tool sessions; that raw attempt was preserved separately and excluded from analysis. The valid rerun kept backend start, provisioning, JMeter, and shutdown in one controlled session. Measured from the untouched valid JTL: 180/180 HTTP requests returned 200, all 20/20 end-to-end flows passed, all 300 JTL rows including transaction parents succeeded, and database verification found 20/20 orders `canceled`. JMeter reported end-to-end average 11.00 ms, p95 40.65 ms, and 22.25 flows/s; HTTP total average 1.22 ms, p95 2.00 ms, and 346.15 requests/s. The JTL SHA-256 is `a7d157e1a763e85811da03192a7f1d638031d812096ca68857a0fce730d1fa84`. These are explicitly classified as short local zero-think-time baseline measurements, not Load capacity or Phase 2 evidence. Proposed, pending human review: 10 VUs; 20-second ramp-up; 120-second steady hold; 140-second scheduler duration; no staged ramp-down; 500 ms think-time; HTTP errors <= 1%; business success >= 99%; end-to-end p95 <= 250 ms; each transaction p95 <= 100 ms; Summary Report allocation. The final Load JMX was not generated because these values still require tester confirmation. No credentials, measured Load result, screenshot, resource usage, hardware evidence, or human judgment was fabricated. |
+
+Human Review:
+- Status: Accepted by tester on 2026-08-12
+- Accepted: Entire proposed Load contract: VUs, ramp-up, hold, scheduler duration, ramp-down behavior, think-time, thresholds, and Summary Report allocation.
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-010
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T13:40:11+07:00 |
+| Task | Generate and validate the human-confirmed Scenario C Load JMX |
+| User Prompt | `Xác nhận toàn bộ proposal` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/AGENTS.md`, `HW05/plan.md`, `HW05/reports/load-baseline.md`, `HW05/reports/load-test-design.md`, `HW05/.agents/skills/design-jmeter-load-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-load-test/references/scenario-c-load-contract.md`, `HW05/.agents/skills/design-jmeter-load-test/scripts/validate_load_jmx.py`; final validation result `HW05/results/raw/validation/23127194_Load_20260812_dry-run.jtl`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/tests/23127194_Load_20260812.jmx`, `HW05/reports/load-baseline.md`, `HW05/reports/load-test-design.md`, `HW05/reports/load-plan-validation.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md`; local ignored validation evidence under `HW05/results/raw/validation/` and local `HW05/data/scenario-c.local.csv` |
+| AI Output | Recorded the tester's acceptance of the complete proposal and generated exactly `tests/23127194_Load_20260812.jmx`. The standard-JMeter 5.6.3 plan requires the four reviewed runtime properties without defaults, validates them and CSV capacity before measured traffic, assigns one non-recycled CSV row per thread, reuses that dedicated account inside a deadline-controlled flow loop, preserves the exact nine Scenario C requests, correlates token/product/order data, separates HTTP and business assertions, enables the human-approved Summary Report, disables View Results Tree, and records the accepted aggregate criteria. XML parsing, whitespace validation, the skill structural validator, and a missing-property negative test passed. Validation exposed and corrected four test-plan issues: Java 24/Groovy setup incompatibility, BeanShell null handling, scheduler interruption that left one checkout order pending, and transaction nesting that limited top-level Summary Report visibility. Failed/limited attempts were preserved separately and excluded from final validation. The final one-thread dry run used validation-only overrides of 1 thread, 1-second ramp-up, 8-second deadline, and 100 ms think-time. Its untouched JTL SHA-256 is `6141881d6cb7e291a003e81b6c0a2d111b1e8d670c90792673bbdd98fada45b4`; it contains 72/72 HTTP 200 samples, 8 complete samples for every HTTP and transaction label, 0/121 failures, and database verification found 8/8 orders `canceled` with no residual non-canceled order. The final JMX SHA-256 is `ffb7442c9bba6efe7b5c8c221832981cbaf01bb91f4d5db532440182173fd4ed`. JMeter GUI launched the plan, but automated accessibility could not attach to the Java application; tester visual tree review remains pending and was not fabricated. No measured 10-VU Load run, Load `.jtl`, HTML Load report, screenshot, resource usage, or hardware evidence was claimed. |
+
+Human Review:
+- Status: Pending human review of generated JMX
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
