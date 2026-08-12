@@ -267,3 +267,43 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-014
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T14:37:36+07:00 |
+| Task | Prepare the Phase 3 Stress recording and screenshot script |
+| User Prompt | `Thực hiện việc lên kịch bản quay chụp cho phase 3` |
+| Evidence/Input Basis | `HW05/.agents/skills/run-jmeter-stress-test/SKILL.md`, `HW05/.agents/skills/run-jmeter-stress-test/references/stress-contract.md`, `HW05/reports/stress-test-results.md`, `HW05/scripts/run-measured-stress.sh`, `HW05/evidence/phase-2-recording-script.md`, `HW05/evidence/README.md` |
+| Generated/Modified Files | `HW05/evidence/phase-3-recording-script.md`, `HW05/evidence/README.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Created a Vietnamese Phase 3 recording guide for a 5-6 minute segment with a four-window layout, exact non-GUI `Run02` command, console/resource monitoring commands, active-thread-band analysis command, time-coded narration, and fourteen named screenshots. The guide requires the Stress JMeter tree, the unchanged nine-request Scenario C flow, 80-thread/240-second ramp/300-second deadline/250-ms think-time contract, Aggregate Report, disabled View Results Tree, provisioning of 80 isolated accounts, mid-ramp and high-band evidence, HTML charts, raw-JTL `allThreads` analysis, order state, and matching resource artifacts. It prohibits exposing the credential CSV, password, or JWT; prohibits copying Run 01 metrics into Run 02; and requires saying `no breakpoint observed up to 80 active threads` rather than calling 80 a capacity ceiling when no failure point is measured. Added the guide to the evidence index. No Run 02 execution, screenshot, recording, upload, or human narration was claimed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-015
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T14:45:29+07:00 |
+| Task | Initialize the Phase 4 JMeter Spike Test design and generation skill |
+| User Prompt | `Thực hiện khởi tọ skill cho việc design và khởi tạo test plan cho spike test của phase 4` |
+| Evidence/Input Basis | `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/tests/23127194_Load_20260812.jmx`, `HW05/tests/23127194_Stress_20260812.jmx`, `HW05/plan.md`; Codex system `skill-creator` instructions |
+| Generated/Modified Files | `HW05/.agents/skills/design-jmeter-spike-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-spike-test/agents/openai.yaml`, `HW05/.agents/skills/design-jmeter-spike-test/references/spike-contract.md`, `HW05/.agents/skills/design-jmeter-spike-test/scripts/validate_spike_jmx.py`, `HW05/AGENTS.md`, `HW05/README.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Initialized and officially validated `$design-jmeter-spike-test` as the Phase 4 design/generation gate. The skill requires measured Load and Stress evidence, preserves the exact nine-request Scenario C flow, requires explicit baseline/spike/recovery stage labels, enforces CSV account isolation and JWT/fresh-order correlation, reserves a third listener distinct from Load Summary Report and Stress Aggregate Report, and defines post-spike latency, business-state, resource, and recovery evidence. Added a candidate—not approved—model of 10 baseline threads for 30 seconds, an abrupt rise to 80 threads for 60 seconds, recovery at 10 threads for 30 seconds, transition within one second, 250 ms think-time, and Response Time Graph. The candidate uses 80 because Stress observed no degradation through that measured level and explicitly does not claim it will create a failure or represents a capacity ceiling. The skill requires tester confirmation before creating `tests/23127194_Spike_20260812.jmx` and tester visual tree review before measured execution. Added a deterministic validator for filename, three named stages, nine samplers per stage, CSV controls, token/order correlation, listener choice, disabled View Results Tree, and absence of known credentials. Validator self-test and official skill validation passed. No Spike JMX, dry run, measured Spike traffic, JTL, report, screenshot, recovery result, or human approval was created or claimed. |
+
+Human Review:
+- Status: Pending human review of Spike proposal
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
