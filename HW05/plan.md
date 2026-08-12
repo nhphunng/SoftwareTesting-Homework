@@ -95,6 +95,10 @@ Suggested commit: `test(hw05): implement scenario C stress breakpoint plan`
 
 ## Phase 4 - Spike test
 
+- [x] Initialize and validate `.agents/skills/design-jmeter-spike-test` as the Phase 4 design/generation gate.
+- [x] Derive and document a three-stage Spike/recovery proposal from measured Load and Stress evidence in `reports/spike-test-design.md`.
+- [ ] Review and confirm baseline, spike, recovery, transition, think-time, recovery thresholds, and the third listener allocation.
+- [ ] Apply the skill to generate and validate `tests/23127194_Spike_20260812.jmx` only after explicit confirmation; the final plan is intentionally absent while the gate remains open.
 - Use final Spike filename `23127194_Spike_20260812.jmx`.
 - Define baseline, spike, and recovery stages from prior observations.
 - Create the Spike JMeter `.jmx` plan by reusing the exact Scenario C functional controllers from Load.

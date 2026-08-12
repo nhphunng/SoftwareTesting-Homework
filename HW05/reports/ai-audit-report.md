@@ -307,3 +307,23 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-016
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T14:50:58+07:00 |
+| Task | Design the Phase 4 Scenario C JMeter Spike and recovery contract |
+| User Prompt | `Using [design-jmeter-spike-test](HW05/.agents/skills/design-jmeter-spike-test/) to design and generate test plans for phase 4` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/AGENTS.md`, `HW05/plan.md`, `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/tests/23127194_Load_20260812.jmx`, `HW05/tests/23127194_Stress_20260812.jmx`, `HW05/.agents/skills/design-jmeter-spike-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-spike-test/references/spike-contract.md`, `HW05/.agents/skills/design-jmeter-spike-test/scripts/validate_spike_jmx.py` |
+| Generated/Modified Files | `HW05/reports/spike-test-design.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Designed a three-stage standard-JMeter Spike experiment from measured evidence and preserved the exact nine-request Scenario C flow. Proposed, pending human review: a serialized 10-thread Baseline stage for 30 seconds, an abrupt 80-thread Spike stage for 60 seconds, a 10-thread Recovery stage for 30 seconds, one-second thread ramps/transitions, 250 ms think-time, provisioning of at least 80 unique accounts, and Response Time Graph as the third distinct listener after Load Summary Report and Stress Aggregate Report. Proposed per-stage criteria are HTTP errors <= 1%, business success >= 99%, end-to-end p95 <= 250 ms, and every transaction p95 <= 100 ms. Proposed recovery criteria require Recovery end-to-end p95 <= 1.5 times the same run's Baseline-stage p95, recovery within 20 seconds based on consecutive 10-second windows, zero residual non-canceled orders, and valid timestamped resource evidence reported descriptively. The design explicitly states that Stress found no breakpoint through 80 threads, so a passing Spike run would demonstrate resilience at 80 rather than a capacity ceiling or failure point. It specifies serialized stage/account isolation, graceful completion of active flows at each deadline, stage-prefixed JTL labels, required no-default `spike.*` properties, and a fail-fast CSV-capacity gate. The Spike validator self-test and `git diff --check` passed. In accordance with the selected skill, `tests/23127194_Spike_20260812.jmx` was intentionally not generated because the tester has not explicitly confirmed the proposed stages, transition, think-time, thresholds, recovery rule, and listener allocation. No Spike dry run, measured traffic, JTL, report, screenshot, recovery behavior, resource evidence, or human approval was fabricated. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
