@@ -24,8 +24,8 @@ Document why Scenario C is unique in the group and how it covers auth-heavy, rea
 | CPU | 10 logical CPUs; model and utilization not captured |
 | RAM | 16 GiB installed; utilization not captured |
 | Backend/runtime versions | Node.js EShop backend; Java 24; JMeter 5.6.3 |
-| Database state/reset | Reset per phase; final Spike state: 2,363 orders, all canceled |
-| Resource-monitor evidence | Load monitor invalid; Stress and Spike contain valid timestamped CPU/RSS samples, documented in their result reports |
+| Database state/reset | Reset per phase; final Endurance state: 18,400 orders, all canceled |
+| Resource-monitor evidence | Load monitor invalid; Stress, Spike, and Endurance contain valid timestamped CPU/RSS samples, documented in their result reports |
 
 ## 4. Data-driven workflow
 
@@ -70,7 +70,15 @@ Backend source inspection confirmed that each start drops and reseeds all databa
 
 ## 8. Endurance threshold
 
-Record the real 10-15 minute run, sustained load, stable RPS, p95, error rate, CPU, memory ceiling, instability signal, and exact evidence paths. Do not fill this section from estimates.
+- Final plan: `tests/23127194_Endurance_20260812.jmx`.
+- Measured workload: 60 threads, 30-second ramp, 720-second flow-start duration, and 250 ms think-time.
+- Raw output: `results/raw/endurance/23127194_Endurance_20260812.jtl`.
+- Resource evidence: `evidence/endurance/23127194_Endurance_20260812-resources.csv` with 698 timestamped rows.
+- Result: 18,400/18,400 flows, 165,600/165,600 HTTP requests, 0 failed JTL rows, end-to-end p95 30 ms, and highest transaction p95 14 ms.
+- All eleven complete one-minute steady-state windows passed; maximum observed stable complete-flow rate was 26.23 flows/s.
+- Backend CPU averaged 12.01% and peaked at 23.2%; RSS averaged 99.73 MiB and peaked at 188.84 MiB.
+- Final-five-minute RSS slope was +5.99 MiB/minute, so no stable memory plateau or capacity ceiling is claimed.
+- Detailed evidence: `reports/endurance-test-results.md`.
 
 ## 9. AI analysis and misinterpretation hunt
 

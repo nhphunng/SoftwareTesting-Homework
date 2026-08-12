@@ -11,8 +11,9 @@
 | Endpoint groups | Auth-heavy, read-heavy, transactional |
 | API smoke test | Passed on 2026-08-12; order `1` changed `pending` to `canceled` |
 | Load / Stress / Spike runs | All three measured runs passed their reviewed HTTP, business, and latency criteria |
-| Endurance threshold | TBD - requires a real 10-15 minute run |
-| Bugs / performance issues | No Load/Stress/Spike threshold failure; Stress breakpoint not observed through 80 threads; Spike RSS did not return to its pre-spike range during short Recovery |
+| Endurance | Measured 60-thread/12-minute run passed all reviewed criteria in 11 complete steady-state minutes |
+| Endurance threshold | Maximum observed stable rate 26.23 complete flows/s; maximum observed backend RSS 188.84 MiB; no memory plateau/capacity ceiling claimed |
+| Bugs / performance issues | No reviewed functional/latency threshold failure; Stress breakpoint not observed through 80 threads; Spike memory recovery and Endurance memory plateau were not demonstrated |
 | Demo video | TBD |
 
 Scenario C is distinct from Candidate A, which the tester reports is already used by another group member.
@@ -22,6 +23,7 @@ Scenario C is distinct from Candidate A, which the tester reports is already use
 - `.agents/skills/design-jmeter-load-test`: gate the Phase 2 workload design, generate the reviewed Load `.jmx`, and validate its Scenario C structure.
 - `.agents/skills/run-jmeter-stress-test`: design, generate, execute, and analyze the Phase 3 progressive Stress breakpoint test.
 - `.agents/skills/design-jmeter-spike-test`: design the baseline-spike-recovery contract and generate/validate the Phase 4 Spike JMX after human confirmation.
+- `.agents/skills/design-jmeter-endurance-test`: design the 10-15 minute sustained-load contract and generate/validate the Phase 5 Endurance JMX after human confirmation.
 - `.agents/skills/ai-audit-report`: record every material AI-assisted HW05 change with evidence boundaries and pending human review.
 
 ## Scenario C flow

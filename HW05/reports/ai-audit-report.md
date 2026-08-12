@@ -6,7 +6,8 @@
 
 | AI Tool | Tasks |
 | --- | --- |
-| Codex | Create and maintain the HW05 AI audit; design Scenario C; scaffold, execute, and analyze JMeter Load, Stress, and Spike testing; prepare evidence guidance. |
+| Codex | Create and maintain the HW05 AI audit; design Scenario C; scaffold, execute, and analyze JMeter Load, Stress, and Spike testing; design the Endurance threshold workflow; prepare evidence guidance. |
+| Codex Browser | Attempt local JMeter HTML-dashboard screenshot capture; respect browser URL-policy blocks and avoid fabricating evidence. |
 
 ## AI Audit Entry - AI-001
 
@@ -379,6 +380,86 @@ Human Review:
 | Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/.agents/skills/design-jmeter-spike-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-spike-test/references/spike-contract.md`, `HW05/tests/23127194_Spike_20260812.jmx`, `HW05/scripts/run-measured-spike.sh`, `HW05/reports/spike-test-results.md`, real raw result `HW05/results/raw/spike/23127194_Spike_20260812.jtl`, and JMeter-generated HTML dashboard `HW05/results/html/spike/23127194_Spike_20260812/` |
 | Generated/Modified Files | `HW05/evidence/phase-4-recording-script.md`, `HW05/evidence/README.md`, `HW05/evidence/screenshots/spike/09-spike-dashboard-overview.jpg`, `HW05/evidence/screenshots/spike/10-spike-statistics.jpg`, `HW05/evidence/screenshots/spike/11-active-threads-over-time.jpg`, `HW05/evidence/screenshots/spike/12-spike-response-times-over-time.jpg`, `HW05/reports/ai-audit-report.md` |
 | AI Output | Created a Vietnamese 5-6 minute Phase 4 recording guide with a four-region screen layout, exact non-GUI `RUN_SUFFIX=Run02 scripts/run-measured-spike.sh` command, console/resource monitoring commands, time-coded narration, and fifteen evidence groups. The guide covers the reviewed serialized 10-thread/30-second Baseline, 80-thread/60-second sudden Spike, and 10-thread/30-second Recovery workload with one-second ramps and 250 ms think-time; the unchanged nine-request Scenario C flow; CSV/JWT/fresh-order correlation; Response Time Graph; disabled View Results Tree; automated provisioning of 80 users; live Baseline/Spike/Recovery frames; same-run recovery-window analysis; order state; and resource interpretation. It requires Run02 metrics to come only from Run02 evidence, prohibits exposing credentials or mixing run identities, warns that the JMeter one-minute graph alone cannot establish recovery time, and prohibits claiming a capacity ceiling or memory recovery without evidence. Captured four real 1280x720 JPEG screenshots from the existing measured Run01 JMeter HTML dashboard: report identity/request summary, Statistics, Active Threads Over Time, and Response Times Over Time. The Statistics image shows the measured report's real values and the two chart images are JMeter-generated views of the same Run01. No screenshot was fabricated or edited. No Run02 execution, JMeter GUI screenshot, Activity Monitor screenshot, live tool/resource-monitor frame, new raw JTL, new performance result, video, upload, or human narration was created or claimed; those visible-run items remain for the tester to capture. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-020
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T15:47:30+07:00 |
+| Task | Initialize the Phase 5 JMeter Endurance design and generation skill |
+| User Prompt | `Thiết kế skill để design và generate test plan cho endurance test của phase 5` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/plan.md`, `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/reports/spike-test-results.md`, `HW05/tests/23127194_Load_20260812.jmx`; Codex system `skill-creator` instructions |
+| Generated/Modified Files | `HW05/.agents/skills/design-jmeter-endurance-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-endurance-test/agents/openai.yaml`, `HW05/.agents/skills/design-jmeter-endurance-test/references/endurance-contract.md`, `HW05/.agents/skills/design-jmeter-endurance-test/scripts/generate_endurance_jmx.py`, `HW05/.agents/skills/design-jmeter-endurance-test/scripts/validate_endurance_jmx.py`, `HW05/AGENTS.md`, `HW05/README.md`, `HW05/plan.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Initialized and officially validated `$design-jmeter-endurance-test` as the Phase 5 design/generation gate. The skill requires the measured Load, Stress, and Spike evidence; preserves the exact nine-request Scenario C flow and paired assertions; requires explicit tester confirmation of sustained threads, ramp, 10-15 minute duration, think-time, latency/business thresholds, memory-trend rule, resource interval, analysis windows, and disabled-GUI-listener strategy before creating `tests/23127194_Endurance_20260812.jmx`; and blocks measured traffic until visual JMeter-tree review. Added a starting proposal, explicitly pending human review, of 60 threads, 30-second ramp, 720-second duration, 250 ms think-time, one-second resource samples, 60-second analysis windows, and no enabled GUI listener. The candidate stays below the maximum tested Stress concurrency of 80 because no breakpoint was observed through 80; it does not label 80 a capacity ceiling. Added a deterministic overwrite-refusing generator that clones the validated Load functional flow and requires all four `endurance.*` properties without numeric fallbacks. Added a validator for exact Load sampler/assertion parity, nine HTTP samplers, CSV isolation, JWT/fresh-order correlation, disabled GUI listeners, filename, and credential absence. Official skill validation and validator self-test passed. A temporary 60-thread/30-second-ramp/720-second-duration/250-ms-think-time JMX was generated only under `/tmp` and passed the structural validator; it is not a repository deliverable or execution result. No final Endurance JMX, backend execution, dry run, measured traffic, JTL, HTML report, RPS threshold, memory ceiling, screenshot, or human approval was created or claimed. |
+
+Human Review:
+- Status: Endurance proposal accepted by tester on 2026-08-12
+- Accepted: 60 threads, 30-second ramp, 720-second duration, 250 ms think-time, one-second resource sampling, 60-second analysis windows, acceptance thresholds, descriptive memory-trend rule, disabled GUI listeners, and authorization to generate the final JMX
+- Modified:
+- Removed:
+- Added:
+- Notes: Confirmation supplied in the subsequent prompt `Tôi đã kiểm tra và xác nhận hãy tiếp tục thực hiện`.
+
+## AI Audit Entry - AI-021
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T15:57:53+07:00 |
+| Task | Generate and validate the human-confirmed Scenario C Endurance JMX |
+| User Prompt | `Tôi đã kiểm tra và xác nhận hãy tiếp tục thực hiện` |
+| Evidence/Input Basis | `HW05/.agents/skills/design-jmeter-endurance-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-endurance-test/references/endurance-contract.md`, `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/reports/spike-test-results.md`, `HW05/tests/23127194_Load_20260812.jmx`; validation-only raw result `HW05/results/raw/validation/23127194_Endurance_20260812_dry-run.jtl`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/tests/23127194_Endurance_20260812.jmx`, `HW05/reports/endurance-test-design.md`, `HW05/reports/endurance-plan-validation.md`, `HW05/plan.md`, `HW05/README.md`, `HW05/reports/ai-audit-report.md`; local ignored validation artifacts `HW05/results/raw/validation/23127194_Endurance_20260812_dry-run.jtl` and `HW05/results/raw/validation/23127194_Endurance_20260812_dry-run.jmeter.log`; local ignored credential CSV regenerated for two validation accounts |
+| AI Output | Recorded the tester's acceptance of the complete Endurance proposal and generated exactly `tests/23127194_Endurance_20260812.jmx` with overwrite refusal. The JMX SHA-256 is `9c8e988e338935e904bd7b1a8a36ce84ef918a8fbdaba164aedc5fb5d39bac2d`. The standard-JMeter plan records the accepted 60-thread, 30-second-ramp, 720-second-flow-start-duration, and 250-ms-think-time contract; requires all four `endurance.*` runtime properties without numeric fallbacks; contains one measured Thread Group; preserves exact parity with the Load plan's nine HTTP samplers and paired assertions covering auth-heavy, read-heavy, and transactional groups; keeps non-recycled CSV allocation and JWT/fresh-`orderId` correlation; and disables both Summary Report and View Results Tree for measured execution. Structural validation passed. A clean-reset validation-only dry run provisioned two temporary accounts and used 2 threads, one-second ramp, eight-second flow-start duration, and 50 ms think-time. Its untouched JTL SHA-256 is `a0775dd03a03238bf7f745bcf03c130c1f3de60c24f6cd6c780f86aac497168f`: 30/30 complete flows passed, 270/270 HTTP requests passed, all 451 JTL rows succeeded, and database verification found 30 canceled orders with zero non-canceled orders. This short run is classified only as functional validation and was not used to calculate RPS, latency trend, resource trend, or memory ceiling. The backend was stopped afterward. The final measured 60-thread/12-minute execution remains blocked until the tester visually reviews the final JMeter tree and explicitly authorizes it. No measured Endurance run, HTML Endurance report, resource evidence, maximum stable RPS, memory ceiling, screenshot, or visual approval was created or claimed. |
+
+Human Review:
+- Status: Final Endurance tree visually reviewed and accepted by tester on 2026-08-12
+- Accepted: Complete Endurance proposal, generated JMX, validation evidence, final visual tree, and authorization for measured execution
+- Modified:
+- Removed:
+- Added:
+- Notes: Visual acceptance and execution authorization supplied in the subsequent prompt `Tôi đã xem qua final tree, bạn hãy measure endurance 12 phút`.
+
+## AI Audit Entry - AI-022
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-12T16:26:55+07:00 |
+| Task | Execute and analyze the tester-approved Scenario C measured Endurance run |
+| User Prompt | `Tôi đã xem qua final tree, bạn hãy measure endurance 12 phút` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/tests/23127194_Endurance_20260812.jmx`, `HW05/reports/endurance-test-design.md`, `HW05/reports/endurance-plan-validation.md`, `HW05/.agents/skills/design-jmeter-endurance-test/SKILL.md`; real raw result `HW05/results/raw/endurance/23127194_Endurance_20260812.jtl`; JMeter-generated `HW05/results/html/endurance/23127194_Endurance_20260812/statistics.json`; analyzer output `HW05/results/raw/endurance/23127194_Endurance_20260812-analysis.json`; real environment/resource/order-state evidence under `HW05/evidence/endurance/`; external SUT database `eshop-sut-seminar/backend/database.sqlite` |
+| Generated/Modified Files | `HW05/.agents/skills/design-jmeter-endurance-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-endurance-test/scripts/analyze_endurance.py`, `HW05/scripts/run-measured-endurance.sh`, `HW05/reports/endurance-test-design.md`, `HW05/reports/endurance-plan-validation.md`, `HW05/reports/endurance-test-results.md`, `HW05/plan.md`, `HW05/README.md`, `HW05/results/README.md`, `HW05/evidence/README.md`, `HW05/reports/main-report.md`, `HW05/reports/ai-audit-report.md`; local measured artifacts `HW05/results/raw/endurance/23127194_Endurance_20260812.jtl`, `.jmeter.log`, `.console.log`, `.backend.log`, `HW05/results/raw/endurance/23127194_Endurance_20260812-analysis.json`, `HW05/results/html/endurance/23127194_Endurance_20260812/`, `HW05/evidence/endurance/23127194_Endurance_20260812-environment.txt`, `-resources.csv`, and `-order-state.txt` |
+| AI Output | Recorded the tester's visual acceptance of the final Endurance tree and executed the human-confirmed measured workload after a clean backend reset and provisioning of 60 fresh accounts: 60 threads, 30-second ramp, 720-second flow-start duration, 250 ms think-time, one-second resource sampling, and disabled GUI listeners. The measured flow interval was `2026-08-12T16:08:38.453+07:00` to `2026-08-12T16:20:38.247+07:00` (719.794 seconds). The untouched raw JTL SHA-256 is `15752a8303fc0db4c7696b6da116b899d1c38e79e90aa351dac8daede4f072c9`: 18,400/18,400 complete business flows passed, 165,600/165,600 HTTP requests passed, all 276,001 JTL rows succeeded, and database verification found 18,400 canceled orders with zero non-canceled orders. Whole-run end-to-end average/p95 were 16.03/30 ms, the highest transaction p95 was 14 ms, HTTP errors were 0%, and business success was 100%. Raw timestamp analysis excluded the ramp and evaluated eleven complete one-minute steady windows; all eleven passed, with a maximum observed stable complete-flow rate of 26.23 flows/s in minute 9. The resource CSV contained 698 samples: backend CPU averaged 12.01% and peaked at 23.2%, while backend RSS averaged 99.73 MiB and peaked at 188.84 MiB. The final five complete windows had a positive RSS slope of +5.99 MiB/minute, so no memory plateau or safe memory ceiling was claimed; 188.84 MiB is reported only as the maximum observed backend RSS for this machine and run. The result does not establish a global maximum RPS or capacity ceiling. No screenshot, video, defect, human acceptance of measured results, or longer-term memory conclusion was fabricated. |
+
+Human Review:
+- Status: Pending human review of measured Endurance results
+- Accepted: Final Endurance tree and authorization to execute the measured run
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-023
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex; Codex Browser (capture attempt only) |
+| Date and Time | 2026-08-12T16:37:03+07:00 |
+| Task | Prepare the Phase 5 Endurance recording and screenshot script |
+| User Prompt | `Lên recording script và screenshot cho phase 5` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`, `HW05/.agents/skills/design-jmeter-endurance-test/SKILL.md`, `HW05/.agents/skills/design-jmeter-endurance-test/references/endurance-contract.md`, `HW05/tests/23127194_Endurance_20260812.jmx`, `HW05/scripts/run-measured-endurance.sh`, `HW05/reports/endurance-test-results.md`, real raw result `HW05/results/raw/endurance/23127194_Endurance_20260812.jtl`, JMeter-generated dashboard `HW05/results/html/endurance/23127194_Endurance_20260812/`, analyzer output `HW05/results/raw/endurance/23127194_Endurance_20260812-analysis.json`, and real resource/order-state evidence under `HW05/evidence/endurance/` |
+| Generated/Modified Files | `HW05/evidence/phase-5-recording-script.md`, `HW05/evidence/README.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Created a Vietnamese Phase 5 recording guide for an approximately 5-6 minute narrated segment, with four-region screen layout, exact non-GUI `RUN_SUFFIX=Run02 scripts/run-measured-endurance.sh` command, live console/resource commands, deterministic Run02 analyzer command, time-coded narration, and sixteen screenshot groups. The guide covers the reviewed 60-thread, 30-second-ramp, 720-second-flow-start-duration, and 250-ms-think-time contract; the unchanged nine-request Scenario C flow; CSV/JWT/fresh-`orderId` correlation; disabled GUI listeners; automated provisioning of 60 users; real ramp/mid-run/final-minute frames; JMeter dashboard views; eleven complete one-minute steady windows; same-run stable complete-flow rate; resource separation; memory-tail interpretation; order state; and artifact identity. It includes the real Run01 values only as Run01 narration and prohibits copying them to Run02, mixing run identities, exposing credentials, calling complete-flow rate HTTP RPS, claiming a capacity ceiling, or claiming a memory plateau/ceiling when the observed tail slope remains positive. Browser-based capture of the local `file://` JMeter dashboard was attempted, but the browser URL policy blocked local-file navigation. No workaround was used and no Phase 5 screenshot was created or claimed. The guide and evidence index therefore mark every Phase 5 screenshot as a tester capture, especially the assignment-required JMeter/resource-monitor same-frame evidence. No Run02 execution, new JTL, new performance metric, screenshot, recording, upload, or human narration was created or claimed. |
 
 Human Review:
 - Status: Pending human review

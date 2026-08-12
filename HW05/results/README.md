@@ -12,7 +12,8 @@ results/
 ├── html/
 │   ├── load/
 │   ├── stress/
-│   └── spike/
+│   ├── spike/
+│   └── endurance/
 └── summary/
     ├── load/
     ├── stress/
@@ -39,3 +40,15 @@ The measured Load run passed its reviewed latency, error-rate, and business-succ
 - Analysis and checksums: `../reports/spike-test-results.md`
 
 The measured Spike run passed the reviewed functional, latency, and application-recovery criteria. Its timestamped resource evidence supports CPU recovery, while backend RSS remained above its pre-spike range during the short Recovery stage.
+
+## Completed Endurance run
+
+- Raw JTL: `raw/endurance/23127194_Endurance_20260812.jtl`
+- JMeter log: `raw/endurance/23127194_Endurance_20260812.jmeter.log`
+- Console log: `raw/endurance/23127194_Endurance_20260812.console.log`
+- Backend log: `raw/endurance/23127194_Endurance_20260812.backend.log`
+- HTML dashboard: `html/endurance/23127194_Endurance_20260812/`
+- Deterministic window analysis: `raw/endurance/23127194_Endurance_20260812-analysis.json`
+- Analysis and checksums: `../reports/endurance-test-results.md`
+
+The measured 60-thread/12-minute run passed all eleven complete steady-state windows. Maximum observed stable complete-flow rate was 26.23 flows/s and maximum observed backend RSS was 188.84 MiB; neither is a universal capacity ceiling.
