@@ -1,0 +1,3 @@
+total_orders=6321
+canceled_orders=6321
+non_canceled_orders=0
