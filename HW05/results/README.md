@@ -25,12 +25,22 @@ Do not add placeholder `.jtl`, JSON, CSV, HTML, screenshots, or metric files. Ra
 
 ## Completed Load run
 
-- Raw JTL: `raw/load/23127194_Load_20260812.jtl`
-- JMeter log: `raw/load/23127194_Load_20260812.jmeter.log`
-- HTML dashboard: `html/load/23127194_Load_20260812/`
+- Phase 6 identity: independent `Run02` set selected by the tester
+- Raw JTL: `raw/load/23127194_Load_20260812_Run02.jtl`
+- JMeter log: `raw/load/23127194_Load_20260812_Run02.jmeter.log`
+- HTML dashboard: `html/load/23127194_Load_20260812_Run02/`
 - Analysis and checksum: `../reports/load-test-results.md`
 
-The measured Load run passed its reviewed latency, error-rate, and business-success thresholds. Its resource sampler produced no rows, so no CPU/RSS value from that run is accepted as evidence.
+The selected Load Run02 passed its reviewed latency, error-rate, and business-success thresholds. Its resource CSV has 140 malformed four-field rows under a five-column header and contains no attributable backend CPU/RSS, so no Load backend resource claim is accepted.
+
+## Completed Stress run
+
+- Raw JTL: `raw/stress/23127194_Stress_20260812.jtl`
+- JMeter log: `raw/stress/23127194_Stress_20260812.jmeter.log`
+- HTML dashboard: `html/stress/23127194_Stress_20260812/`
+- Analysis and checksum: `../reports/stress-test-results.md`
+
+The measured Stress run passed through the maximum tested 80 active threads without a threshold breach. This is not a measured capacity ceiling.
 
 ## Completed Spike run
 
