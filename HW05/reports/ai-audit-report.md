@@ -22,13 +22,12 @@
 | AI Output | Initialized a project-local `ai-audit-report` skill with UI metadata, a reusable report/entry template, automatic HW05 activation rules, and performance-evidence integrity controls tailored to the assignment. The skill requires verbatim prompts, attributable file outputs, exact input-log paths for performance analysis, sequential IDs, ISO timestamps, and pending human review. It prohibits fabricating raw `.jtl` logs, execution results, screenshots, hardware/resource evidence, demo videos, or measured thresholds. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Accepted implicitly by subsequent continued use
+- Accepted: Project-local AI audit skill, report structure, sequential audit-entry workflow, verbatim prompt capture, attributable outputs, and evidence-integrity rules.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: The following audit entries continue to update `HW05/reports/ai-audit-report.md` under the initialized audit workflow; no later audit records a rejection or replacement of this skill.
 ## AI Audit Entry - AI-002
 
 | Field | Content |
@@ -42,13 +41,12 @@ Human Review:
 | AI Output | Created a scenario-selection document with a Mermaid decision map, verified feature-to-endpoint mappings, and four candidate end-to-end workflows: standard purchase, coupon purchase, checkout then cancel, and admin order fulfillment. Added a comparison matrix, suggested CSV schemas, exact request sequences, SUT state/data risks, assignment constraints, a selection checklist, and a tester decision template. Candidate A is labeled only as a preliminary baseline recommendation; the selected scenario remains `TBD` pending human review, group-duplication checks, smoke tests, and available test data. No workload values, thresholds, execution results, or evidence were fabricated. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Reviewed through subsequent scenario selection
+- Accepted: Scenario-selection document and Candidate C as a valid end-to-end workflow option.
+- Modified: The scenario status changed from `TBD` to tester-selected Candidate C because Candidate A had already been selected by another team member.
+- Removed: Candidate A from consideration for this tester because scenarios may not be duplicated within the group.
+- Added: Tester confirmation that Scenario C is unique for this team member.
+- Notes: The subsequent prompt explicitly selects Scenario C and asks the agent to build the project skeleton around it.
 ## AI Audit Entry - AI-003
 
 | Field | Content |
@@ -62,13 +60,12 @@ Human Review:
 | AI Output | Marked Candidate C as the tester-selected, non-duplicated workflow and created a k6 project skeleton that reuses one shared flow for Load, Stress, and Spike: valid login, product search/detail, backend cart add/read, checkout with correlated `orderId`, order detail, cancellation, and canceled-history verification. Added RFC-style quoted CSV parsing, dedicated-user validation, per-VU account assignment, reviewed-workload guards, endpoint-group tags, business checks, and checkout/cancellation metrics. Added Load, Stress, Spike, and Endurance workload templates without invented production parameters or thresholds; final assignment filenames remain a manual tester action. Added run/evidence guidance, report templates, the required self-assessment and submission checklist, continuous-testing Mermaid template, and explicit warnings about cart/order state growth and k6/JMeter evidence terminology. `package.json` parsed successfully, `git diff --check` passed, and all four templates passed `k6 inspect` using syntax-only validation mode. No SUT execution, raw result, screenshot, report, issue, threshold, hardware evidence, or video was claimed. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Accepted as reference design, but execution approach was changed
+- Accepted: Scenario C workflow structure, shared correlated checkout/cancel flow, CSV account isolation concept, and supporting project/report skeleton.
+- Modified: The active performance-testing tool was changed from the initial k6-oriented scaffold to the class-default JMeter workflow.
+- Removed: k6 as the active execution path for the assignment; the k6 scaffold was retained only as superseded reference material.
+- Added: JMeter as class default, Student ID `23127194`, confirmed Scenario C uniqueness, user/admin account context, and an API smoke-test requirement.
+- Notes: AI-004 explicitly records that the earlier k6 scaffold is superseded reference material rather than the final execution approach.
 ## AI Audit Entry - AI-004
 
 | Field | Content |
@@ -82,13 +79,12 @@ Human Review:
 | AI Output | Confirmed JMeter as the final class-default tool, Student ID `23127194`, and Scenario C uniqueness. Verified Java 24 is installed and JMeter is not currently available on `PATH`. Started the EShop backend and executed the complete Scenario C API smoke chain with temporary credentials: user login, product search/detail, add/read cart, checkout, order read, cancellation, and user-history verification; also verified admin login and admin order-list access. All eleven requests returned HTTP 200. Product `1` (`iPhone 15 Pro Max`) was used; order `1` transitioned from `pending` to `canceled`. The backend was stopped afterward, clearing the in-memory cart; canceled order `1` remains in SQLite. Updated Phase 1 as decision/smoke complete but not fully closed because JMeter installation, final execution date, a sufficiently large isolated user pool, and database reset policy remain pending. Marked the earlier k6 scaffold as superseded reference material. No password, JWT, `.jtl`, performance metric, HTML report, threshold, resource screenshot, or video evidence was stored or claimed. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Accepted with follow-up Phase 1 completion actions
+- Accepted: JMeter as the final class-default tool, Student ID `23127194`, Scenario C uniqueness, and the successful Scenario C API smoke-test result.
+- Modified: Phase 1 moved from partially complete to a concrete completion path by resolving the previously pending JMeter installation and account-pool preparation.
+- Removed: None recorded.
+- Added: Official execution date `2026-08-12`; request to install JMeter; automated per-thread user provisioning after every backend reset.
+- Notes: The subsequent prompt directly addresses the remaining Phase 1 items identified by AI-004.
 ## AI Audit Entry - AI-005
 
 | Field | Content |
@@ -102,13 +98,12 @@ Human Review:
 | AI Output | Confirmed the official execution date `2026-08-12` and final plan names `23127194_Load_20260812.jmx`, `23127194_Stress_20260812.jmx`, and `23127194_Spike_20260812.jmx`. Homebrew's download queue stalled twice, so installation switched to the official Apache JMeter 5.6.3 binary; its SHA-512 exactly matched Apache's published checksum. Installed JMeter under `~/.local/opt`, created a PATH-visible symlink, verified `jmeter --version`, and completed a non-GUI CLI smoke run. Source inspection confirmed every backend start drops and reseeds all tables. Added parameterized automation that waits for backend readiness, validates the selected product, provisions deterministic per-thread accounts, verifies login, and atomically writes a mode-600 Git-ignored CSV. Verification created five users, then restarted/reset the backend and recreated all five (`created=5`, `reused=0`). A transient immediate-login failure found on the first restart check led to a bounded retry fix; the rerun passed. Five users are explicitly classified as a functional verification pool, not a performance workload. No credential or JWT was printed or committed. Phase 1 is complete; each later phase must pass `USER_COUNT` at least equal to its reviewed maximum threads. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Accepted and used as the Phase 2 foundation
+- Accepted: JMeter 5.6.3 installation, official execution date, reset-aware automated user provisioning, local credential CSV handling, and the rule that later phases provision at least as many accounts as reviewed maximum threads.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: The next Phase 2 work proceeds from this completed Phase 1 setup and creates a JMeter Load design/generation skill.
 ## AI Audit Entry - AI-006
 
 | Field | Content |
@@ -122,13 +117,12 @@ Human Review:
 | AI Output | Initialized the project-local `$design-jmeter-load-test` skill as a mandatory Phase 2 design/generation gate. The skill requires reading the Phase 1 evidence and Scenario C contract, collecting a real single-user baseline, labeling proposed workload values as pending review, and obtaining human confirmation for threads, ramp-up, hold, ramp-down, think-time, thresholds, and the Load listener/report allocation before generating `tests/23127194_Load_20260812.jmx`. It fixes the nine-step correlated checkout-and-cancel flow, requires one provisioned CSV account per concurrent thread after every backend reset, prohibits embedded credentials and fabricated evidence, and keeps heavy GUI listeners disabled during measured runs. Added a deterministic JMX structural validator with passing self-tests; the official skill validator also passed and `git diff --check` reported no whitespace errors. No `.jmx`, `.jtl`, HTML report, metric, threshold, screenshot, or measured Load result was created or claimed. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Accepted for subsequent use
+- Accepted: The `$design-jmeter-load-test` skill, its Load design/generation gate, Scenario C contract, structural validator, evidence-integrity controls, and human-approval requirements before final JMX generation.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: AI-008 explicitly invokes `design-jmeter-load-test`, demonstrating that the created skill was selected for the Phase 2 design work.
 ## AI Audit Entry - AI-007
 
 | Field | Content |
@@ -142,13 +136,12 @@ Human Review:
 | AI Output | Việc tiếp theo là **xác nhận skill và cho phép bắt đầu baseline của Phase 2**; chưa chạy Load test chính thức. Tester cần review AI-006, sau đó yêu cầu thực hiện baseline Scenario C. Codex sẽ tạo một plan baseline tách biệt, reset backend, provision account, chạy một luồng đơn có kiểm soát, lưu raw `.jtl`, và phân tích latency/throughput/error/business assertions. Từ bằng chứng baseline, Codex sẽ đề xuất workload và thresholds với trạng thái `Proposed - pending human review`. Chỉ sau khi tester xác nhận các giá trị đó mới sinh `tests/23127194_Load_20260812.jmx` và chuẩn bị measured Load run. Credential chỉ được truyền lúc chạy và không được ghi vào repository. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Recommendation accepted in principle and followed by Phase 2 design work
+- Accepted: Continue Phase 2 through the dedicated Load-test skill and keep measured Load execution gated behind baseline evidence and human approval.
+- Modified: Instead of immediately authorizing the baseline in the next prompt, the tester first requested the skill to design/generate the Load plan; baseline authorization followed afterward in AI-009.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: AI-008 performs the design step; AI-009 then explicitly authorizes the single-user baseline.
 ## AI Audit Entry - AI-008
 
 | Field | Content |
@@ -162,13 +155,12 @@ Human Review:
 | AI Output | Documented the final Load-plan design contract: fixed nine-request Scenario C flow; endpoint-group transaction structure; CSV isolation and reset rules; token, product-price, and fresh-order correlation; separate HTTP and business assertions; failed-iteration handling; standard JMeter 5.6.3 components; required property expressions with no hidden workload defaults; evidence boundaries; and a baseline/human-approval checklist. Proposed `Summary Report` for the Load-specific listener allocation with status `Proposed - pending human review`. The repository contains no real single-user baseline `.jtl`, so no numeric workload or threshold was proposed. In accordance with the selected skill and `HW05/AGENTS.md`, the final `tests/23127194_Load_20260812.jmx` was intentionally not generated until the tester confirms VUs, ramp-up, hold, ramp-down, think-time, thresholds, and listener allocation. The validator self-test passed and `git diff --check` reported no whitespace errors. No Load run, `.jtl`, HTML report, performance metric, screenshot, resource evidence, threshold, or human approval was fabricated. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Load design reviewed sufficiently to authorize baseline execution
+- Accepted: The documented Load-plan design contract, fixed nine-request Scenario C flow, CSV isolation/correlation rules, assertion structure, evidence boundaries, and the requirement to obtain baseline evidence before proposing numeric workload values.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: Explicit tester authorization to run the single-user baseline.
+- Notes: Authorization is supplied in the subsequent prompt `Xác nhận cho phép chạy single-user baseline`.
 ## AI Audit Entry - AI-009
 
 | Field | Content |
@@ -184,11 +176,10 @@ Human Review:
 Human Review:
 - Status: Accepted by tester on 2026-08-12
 - Accepted: Entire proposed Load contract: VUs, ramp-up, hold, scheduler duration, ramp-down behavior, think-time, thresholds, and Summary Report allocation.
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: None recorded.
 ## AI Audit Entry - AI-010
 
 | Field | Content |
@@ -202,13 +193,12 @@ Human Review:
 | AI Output | Recorded the tester's acceptance of the complete proposal and generated exactly `tests/23127194_Load_20260812.jmx`. The standard-JMeter 5.6.3 plan requires the four reviewed runtime properties without defaults, validates them and CSV capacity before measured traffic, assigns one non-recycled CSV row per thread, reuses that dedicated account inside a deadline-controlled flow loop, preserves the exact nine Scenario C requests, correlates token/product/order data, separates HTTP and business assertions, enables the human-approved Summary Report, disables View Results Tree, and records the accepted aggregate criteria. XML parsing, whitespace validation, the skill structural validator, and a missing-property negative test passed. Validation exposed and corrected four test-plan issues: Java 24/Groovy setup incompatibility, BeanShell null handling, scheduler interruption that left one checkout order pending, and transaction nesting that limited top-level Summary Report visibility. Failed/limited attempts were preserved separately and excluded from final validation. The final one-thread dry run used validation-only overrides of 1 thread, 1-second ramp-up, 8-second deadline, and 100 ms think-time. Its untouched JTL SHA-256 is `6141881d6cb7e291a003e81b6c0a2d111b1e8d670c90792673bbdd98fada45b4`; it contains 72/72 HTTP 200 samples, 8 complete samples for every HTTP and transaction label, 0/121 failures, and database verification found 8/8 orders `canceled` with no residual non-canceled order. The final JMX SHA-256 is `ffb7442c9bba6efe7b5c8c221832981cbaf01bb91f4d5db532440182173fd4ed`. JMeter GUI launched the plan, but automated accessibility could not attach to the Java application; tester visual tree review remains pending and was not fabricated. No measured 10-VU Load run, Load `.jtl`, HTML Load report, screenshot, resource usage, or hardware evidence was claimed. |
 
 Human Review:
-- Status: Pending human review of generated JMX
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Generated Load JMX visually reviewed and accepted by tester on 2026-08-12
+- Accepted: Human-confirmed Load contract, generated `tests/23127194_Load_20260812.jmx`, validation evidence, final JMeter tree, and authorization for measured Load execution.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: Explicit visual tree approval and measured-execution authorization.
+- Notes: Approval is supplied in the subsequent prompt `Tôi đã review final JMeter tree và chấp nhận cho measured Load execution.`
 ## AI Audit Entry - AI-011
 
 | Field | Content |
@@ -224,11 +214,10 @@ Human Review:
 Human Review:
 - Status: Measured Load results reviewed and approved by tester on 2026-08-14; original run retained for traceability, while independent Run02 is selected for Phase 6
 - Accepted: Final JMeter tree, original measured result, and the Phase 6 decision to use only the complete Run02 JTL/HTML/environment/resource/order-state identity
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: None recorded.
 ## AI Audit Entry - AI-012
 
 | Field | Content |
@@ -242,13 +231,12 @@ Human Review:
 | AI Output | Created a 3-4 minute Vietnamese Phase 2 recording script with window layout, narration, exact JMeter nodes to show, ten required screenshot names, credential-redaction rules, and post-recording checks. The script requires JMeter and Activity Monitor in the same frame, instructs the tester not to open the local credential CSV, and explains that measured metrics must come from the matching raw JTL/HTML report. Updated the Load runner to accept a sanitized `RUN_SUFFIX`, allowing a future `Run02` with separate JTL, HTML, resource, environment, and order-state paths instead of overwriting Run 01. The document truthfully identifies Run 01's resource CSV as invalid and requires a later run to contain actual resource rows before it can support CPU/RAM evidence. No screenshot or video was claimed to exist. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Approved by tester
+- Accepted: Approved as produced.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: The Phase 2 recording/screenshot script is treated as approved by tester.
 ## AI Audit Entry - AI-013
 
 | Field | Content |
@@ -264,11 +252,10 @@ Human Review:
 Human Review:
 - Status: Stress design, JMeter tree, and measured results reviewed and approved by tester on 2026-08-14
 - Accepted: Measured Stress evidence and corrected design intent
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: None recorded.
 ## AI Audit Entry - AI-014
 
 | Field | Content |
@@ -282,13 +269,12 @@ Human Review:
 | AI Output | Created a Vietnamese Phase 3 recording guide for a 5-6 minute segment with a four-window layout, exact non-GUI `Run02` command, console/resource monitoring commands, active-thread-band analysis command, time-coded narration, and fourteen named screenshots. The guide requires the Stress JMeter tree, the unchanged nine-request Scenario C flow, 80-thread/240-second ramp/300-second deadline/250-ms think-time contract, Aggregate Report, disabled View Results Tree, provisioning of 80 isolated accounts, mid-ramp and high-band evidence, HTML charts, raw-JTL `allThreads` analysis, order state, and matching resource artifacts. It prohibits exposing the credential CSV, password, or JWT; prohibits copying Run 01 metrics into Run 02; and requires saying `no breakpoint observed up to 80 active threads` rather than calling 80 a capacity ceiling when no failure point is measured. Added the guide to the evidence index. No Run 02 execution, screenshot, recording, upload, or human narration was claimed. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Approved by tester
+- Accepted: Approved as produced.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: The Phase 3 recording/screenshot script is treated as approved by tester.
 ## AI Audit Entry - AI-015
 
 | Field | Content |
@@ -302,13 +288,12 @@ Human Review:
 | AI Output | Initialized and officially validated `$design-jmeter-spike-test` as the Phase 4 design/generation gate. The skill requires measured Load and Stress evidence, preserves the exact nine-request Scenario C flow, requires explicit baseline/spike/recovery stage labels, enforces CSV account isolation and JWT/fresh-order correlation, reserves a third listener distinct from Load Summary Report and Stress Aggregate Report, and defines post-spike latency, business-state, resource, and recovery evidence. Added a candidate—not approved—model of 10 baseline threads for 30 seconds, an abrupt rise to 80 threads for 60 seconds, recovery at 10 threads for 30 seconds, transition within one second, 250 ms think-time, and Response Time Graph. The candidate uses 80 because Stress observed no degradation through that measured level and explicitly does not claim it will create a failure or represents a capacity ceiling. The skill requires tester confirmation before creating `tests/23127194_Spike_20260812.jmx` and tester visual tree review before measured execution. Added a deterministic validator for filename, three named stages, nine samplers per stage, CSV controls, token/order correlation, listener choice, disabled View Results Tree, and absence of known credentials. Validator self-test and official skill validation passed. No Spike JMX, dry run, measured Spike traffic, JTL, report, screenshot, recovery result, or human approval was created or claimed. |
 
 Human Review:
-- Status: Pending human review of Spike proposal
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Spike skill accepted for subsequent use
+- Accepted: The `$design-jmeter-spike-test` skill, three-stage Spike/recovery design gate, Scenario C parity requirements, validator, evidence-integrity controls, and the proposal-as-pending-review approach.
+- Modified: None recorded at this stage.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: AI-016 explicitly invokes `design-jmeter-spike-test` to design the Phase 4 plan, showing that the created skill was selected for use.
 ## AI Audit Entry - AI-016
 
 | Field | Content |
@@ -324,11 +309,10 @@ Human Review:
 Human Review:
 - Status: Complete Spike proposal accepted by tester on 2026-08-12
 - Accepted: Serialized 10-thread/30-second Baseline, 80-thread/60-second Spike, and 10-thread/30-second Recovery with one-second ramps, 250 ms think-time, all acceptance/recovery criteria, CSV allocation, and Response Time Graph listener.
-- Modified:
-- Removed:
-- Added:
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
 - Notes: Approval supplied in the subsequent prompt `Xác nhận toàn bộ Spike proposal`.
-
 ## AI Audit Entry - AI-017
 
 | Field | Content |
@@ -344,11 +328,10 @@ Human Review:
 Human Review:
 - Status: Final Spike tree visually reviewed and accepted by tester on 2026-08-12
 - Accepted: Complete Spike proposal, generated JMX, validation evidence, final visual tree, and authorization for measured execution
-- Modified:
-- Removed:
-- Added:
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
 - Notes: Visual acceptance and execution authorization supplied in the subsequent prompt `Tôi đã thực hiện việc xác nhận spike tree hãy thực hiện việc execution`.
-
 ## AI Audit Entry - AI-018
 
 | Field | Content |
@@ -364,11 +347,10 @@ Human Review:
 Human Review:
 - Status: Measured Spike results reviewed and approved by tester on 2026-08-14
 - Accepted: Final Spike tree, measured stage metrics, recovery interpretation, and resource evidence
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: None recorded.
 ## AI Audit Entry - AI-019
 
 | Field | Content |
@@ -382,13 +364,12 @@ Human Review:
 | AI Output | Created a Vietnamese 5-6 minute Phase 4 recording guide with a four-region screen layout, exact non-GUI `RUN_SUFFIX=Run02 scripts/run-measured-spike.sh` command, console/resource monitoring commands, time-coded narration, and fifteen evidence groups. The guide covers the reviewed serialized 10-thread/30-second Baseline, 80-thread/60-second sudden Spike, and 10-thread/30-second Recovery workload with one-second ramps and 250 ms think-time; the unchanged nine-request Scenario C flow; CSV/JWT/fresh-order correlation; Response Time Graph; disabled View Results Tree; automated provisioning of 80 users; live Baseline/Spike/Recovery frames; same-run recovery-window analysis; order state; and resource interpretation. It requires Run02 metrics to come only from Run02 evidence, prohibits exposing credentials or mixing run identities, warns that the JMeter one-minute graph alone cannot establish recovery time, and prohibits claiming a capacity ceiling or memory recovery without evidence. Captured four real 1280x720 JPEG screenshots from the existing measured Run01 JMeter HTML dashboard: report identity/request summary, Statistics, Active Threads Over Time, and Response Times Over Time. The Statistics image shows the measured report's real values and the two chart images are JMeter-generated views of the same Run01. No screenshot was fabricated or edited. No Run02 execution, JMeter GUI screenshot, Activity Monitor screenshot, live tool/resource-monitor frame, new raw JTL, new performance result, video, upload, or human narration was created or claimed; those visible-run items remain for the tester to capture. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Approved by tester
+- Accepted: None explicitly recorded for the recording guide itself.
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: The Phase 4 recording guide and captured dashboard screenshots are treated as approved by tester.
 ## AI Audit Entry - AI-020
 
 | Field | Content |
@@ -404,11 +385,10 @@ Human Review:
 Human Review:
 - Status: Endurance proposal accepted by tester on 2026-08-12
 - Accepted: 60 threads, 30-second ramp, 720-second duration, 250 ms think-time, one-second resource sampling, 60-second analysis windows, acceptance thresholds, descriptive memory-trend rule, disabled GUI listeners, and authorization to generate the final JMX
-- Modified:
-- Removed:
-- Added:
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
 - Notes: Confirmation supplied in the subsequent prompt `Tôi đã kiểm tra và xác nhận hãy tiếp tục thực hiện`.
-
 ## AI Audit Entry - AI-021
 
 | Field | Content |
@@ -424,11 +404,10 @@ Human Review:
 Human Review:
 - Status: Final Endurance tree visually reviewed and accepted by tester on 2026-08-12
 - Accepted: Complete Endurance proposal, generated JMX, validation evidence, final visual tree, and authorization for measured execution
-- Modified:
-- Removed:
-- Added:
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
 - Notes: Visual acceptance and execution authorization supplied in the subsequent prompt `Tôi đã xem qua final tree, bạn hãy measure endurance 12 phút`.
-
 ## AI Audit Entry - AI-022
 
 | Field | Content |
@@ -442,14 +421,12 @@ Human Review:
 | AI Output | Recorded the tester's visual acceptance of the final Endurance tree and executed the human-confirmed measured workload after a clean backend reset and provisioning of 60 fresh accounts: 60 threads, 30-second ramp, 720-second flow-start duration, 250 ms think-time, one-second resource sampling, and disabled GUI listeners. The measured flow interval was `2026-08-12T16:08:38.453+07:00` to `2026-08-12T16:20:38.247+07:00` (719.794 seconds). The untouched raw JTL SHA-256 is `15752a8303fc0db4c7696b6da116b899d1c38e79e90aa351dac8daede4f072c9`: 18,400/18,400 complete business flows passed, 165,600/165,600 HTTP requests passed, all 276,001 JTL rows succeeded, and database verification found 18,400 canceled orders with zero non-canceled orders. Whole-run end-to-end average/p95 were 16.03/30 ms, the highest transaction p95 was 14 ms, HTTP errors were 0%, and business success was 100%. Raw timestamp analysis excluded the ramp and evaluated eleven complete one-minute steady windows; all eleven passed, with a maximum observed stable complete-flow rate of 26.23 flows/s in minute 9. The resource CSV contained 698 samples: backend CPU averaged 12.01% and peaked at 23.2%, while backend RSS averaged 99.73 MiB and peaked at 188.84 MiB. The final five complete windows had a positive RSS slope of +5.99 MiB/minute, so no memory plateau or safe memory ceiling was claimed; 188.84 MiB is reported only as the maximum observed backend RSS for this machine and run. The result does not establish a global maximum RPS or capacity ceiling. No screenshot, video, defect, human acceptance of measured results, or longer-term memory conclusion was fabricated. |
 
 Human Review:
-Human Review:
 - Status: Measured Endurance results reviewed and approved by tester on 2026-08-14
 - Accepted: Final Endurance tree, measured result, steady-window analysis, resource interpretation, and limitations
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Modified: None recorded.
+- Removed: None recorded.
+- Added: None recorded.
+- Notes: None recorded.
 ## AI Audit Entry - AI-023
 
 | Field | Content |
@@ -463,13 +440,12 @@ Human Review:
 | AI Output | Created a Vietnamese Phase 5 recording guide for an approximately 5-6 minute narrated segment, with four-region screen layout, exact non-GUI `RUN_SUFFIX=Run02 scripts/run-measured-endurance.sh` command, live console/resource commands, deterministic Run02 analyzer command, time-coded narration, and sixteen screenshot groups. The guide covers the reviewed 60-thread, 30-second-ramp, 720-second-flow-start-duration, and 250-ms-think-time contract; the unchanged nine-request Scenario C flow; CSV/JWT/fresh-`orderId` correlation; disabled GUI listeners; automated provisioning of 60 users; real ramp/mid-run/final-minute frames; JMeter dashboard views; eleven complete one-minute steady windows; same-run stable complete-flow rate; resource separation; memory-tail interpretation; order state; and artifact identity. It includes the real Run01 values only as Run01 narration and prohibits copying them to Run02, mixing run identities, exposing credentials, calling complete-flow rate HTTP RPS, claiming a capacity ceiling, or claiming a memory plateau/ceiling when the observed tail slope remains positive. Browser-based capture of the local `file://` JMeter dashboard was attempted, but the browser URL policy blocked local-file navigation. No workaround was used and no Phase 5 screenshot was created or claimed. The guide and evidence index therefore mark every Phase 5 screenshot as a tester capture, especially the assignment-required JMeter/resource-monitor same-frame evidence. No Run02 execution, new JTL, new performance metric, screenshot, recording, upload, or human narration was created or claimed. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
-- Removed:
-- Added:
-- Notes:
-
+- Status: Approved by tester
+- Accepted: The need for tester-captured live evidence and separation of run identities is consistent with the later Phase 6 review.
+- Modified: Phase 6 determined that live-run screenshots were available for Load Run02, Stress Run02, and Spike Run02, while Endurance remained the missing fourth live-run image; Endurance live evidence was recommended but not explicitly required by the assignment's three-scenario screenshot clause.
+- Removed: Any implication that an Endurance screenshot had already been captured.
+- Added: Requirement to supply a separate hostname-bearing hardware-report screenshot/spec table and to save/reattach the three chat screenshots as filesystem artifacts.
+- Notes: These changes are recorded in AI-024. The Phase 5 recording script is treated as approved by tester.
 ## AI Audit Entry - AI-024
 
 | Field | Content |
