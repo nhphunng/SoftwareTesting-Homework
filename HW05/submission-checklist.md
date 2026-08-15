@@ -4,24 +4,24 @@
 
 - [x] Scenario C remains unique in the group.
 - [x] JMeter version evidence identifies Apache JMeter 5.6.3.
-- [ ] Each run provisions at least one unique account per maximum concurrent thread after backend reset.
-- [ ] Three final test-plan filenames match `{StudentID}_{ScenarioType}_{YYYYMMDD}`.
-- [ ] Load, Stress, and Spike reuse the same Scenario C functional flow.
-- [ ] Final CSV data/templates are included without real credentials.
-- [ ] Three distinct report/listener equivalents are confirmed with the lecturer.
-- [ ] Three untouched raw outputs are included.
-- [ ] Three reviewed report views/folders are included.
-- [ ] Load, Stress, and Spike resource-monitor screenshots exist.
-- [ ] Hardware screenshot and spec table use the real matching hostname.
-- [ ] Login lockout/reset handling is documented.
-- [ ] Endurance run is approximately 10-15 minutes and supports concrete threshold numbers.
+- [x] Each run provisions at least one unique account per maximum concurrent thread after backend reset.
+- [x] Three final test-plan filenames match `{StudentID}_{ScenarioType}_{YYYYMMDD}`.
+- [x] Load, Stress, and Spike reuse the same Scenario C functional flow.
+- [x] Final CSV data/templates are included without real credentials.
+- [x] Load, Stress, and Spike use three distinct enabled listener/report types: Summary Report, Aggregate Report, and Response Time Graph.
+- [x] Three untouched raw outputs are present locally; Load uses the independently selected Run02 set.
+- [x] Three reviewed HTML report folders are present locally.
+- [x] Load, Stress, and Spike resource-monitor screenshots exist and show the test/tool output with backend `node` monitoring in the same frame.
+- [x] Hardware screenshot and specification table use the real matching hostname `Phi-Hero.local`.
+- [x] Login lockout prevention, detection, backend reset, account reprovisioning, and isolated rerun handling are documented.
+- [x] Endurance run is approximately 10-15 minutes and supports concrete observed threshold numbers with explicit limitations.
 
 ## Analysis and reporting
 
 - [ ] Main report exists in Markdown and PDF.
-- [ ] AI analysis uses untouched raw results.
-- [ ] Every identified AI misinterpretation cites the correct raw value.
-- [ ] AI optimizations are classified as feasible or hallucinated with reasoning.
+- [x] AI analysis uses untouched raw results.
+- [x] Every identified AI misinterpretation cites the correct raw value or same-run resource/runner source.
+- [x] AI optimizations are classified as feasible, unproven, unsupported, or hallucinated with reasoning.
 - [ ] AI Critique is one human-reviewed 200-300 word paragraph.
 - [ ] Continuous Performance Testing proposal includes a flow chart and cost/false-alarm trade-offs.
 - [ ] AI Audit Report exists in Markdown and PDF with all interactions.

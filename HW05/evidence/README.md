@@ -8,7 +8,8 @@ evidence/
 │   ├── load/
 │   ├── stress/
 │   ├── spike/
-│   └── endurance/
+│   ├── endurance/
+│   └── rejected/
 ├── hardware/
 └── video/
 ```
@@ -42,8 +43,28 @@ Measured Run 01 dashboard screenshots created from the real JMeter HTML report:
 - `screenshots/spike/11-active-threads-over-time.jpg`
 - `screenshots/spike/12-spike-response-times-over-time.jpg`
 
-JMeter-tree, Activity Monitor, provisioning, and live Baseline/Spike/Recovery screenshots must be captured by the tester during a visible run so the tool and backend resource monitor appear in the same frame.
+Tester-captured distinct listener/report evidence loaded from the corresponding Run02 JTL:
+
+- `screenshots/load/01-load-summary-report-tree.png`
+- `screenshots/stress/01-stress-aggregate-report-tree.png`
+- `screenshots/spike/01-spike-response-time-graph-tree.png`
+
+These three images establish the distinct enabled listener/report allocation. The separate live-run screenshots listed below show the testing tool and backend resource monitor in the same frame.
+
+Tester-captured live execution and backend resource-monitor evidence:
+
+- `screenshots/load/06-running-load-and-resource-monitor.png`
+- `screenshots/stress/06-running-stress-and-resource-monitor.png`
+- `screenshots/spike/06-running-spike-and-resource-monitor.png`
+
+All three show the relevant JMeter plan or non-GUI execution together with monitoring of the backend `node` process. The Load image shows backend CPU at 0% at capture time, so a busier mid-load frame would be stronger but is not substituted or fabricated here.
+
+Hardware evidence:
+
+- `hardware/01-hardware-report-with-hostname.png`
+
+The hardware image shows hostname `Phi-Hero.local`, computer name `Phi Hero`, model `MacBookPro18,1`, Apple M1 Pro, 10 cores, 16 GB RAM, and macOS 26.3. It satisfies the assignment's hardware/hostname evidence requirement. Serial-number and UUID fields remain visible, so redact those identifiers before public upload while preserving the hostname and specification lines.
 
 Phase 5 screenshots are planned under `screenshots/endurance/`. No Endurance screenshot is currently claimed as captured; the tester must capture the JMeter tree, visible measured run, dashboard, analysis, resource trend, and business-state evidence listed in `phase-5-recording-script.md`.
 
-The tester supplied three live-run images in chat on 2026-08-14. They were visually classified as Load Run02, Stress Run02, and Spike Run02, but they are not present as filesystem artifacts and therefore are not yet included in repository or ZIP evidence. See `screenshot-requirements-review.md` for target filenames and quality notes. The required hardware-report screenshot remains missing.
+The three live-run images and hostname-bearing hardware report are now present as filesystem artifacts under their normalized names above. They are separate from the listener/report screenshots. See `screenshot-requirements-review.md` for attribution, quality notes, and the remaining privacy-redaction recommendation.

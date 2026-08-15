@@ -31,6 +31,20 @@ The scripts:
 
 Never commit `JMETER_USER_PASSWORD` or `data/scenario-c.local.csv`. Set `USER_COUNT` to at least the maximum concurrent JMeter threads, not merely the average threads.
 
+### Login lockout prevention and recovery
+
+The backend can lock an account after three invalid login attempts. Load, Stress, and Spike must use only the verified credentials produced by the provisioning step; intentional invalid-login traffic belongs in a separate functional/security test and must not be mixed into a measured performance run.
+
+Treat an unexpected authentication response, failed login assertion, or missing JWT as a potentially unusable or locked account. Then:
+
+1. Stop the measured run.
+2. Preserve the partial JTL for diagnosis, but exclude it from the approved result set.
+3. Restart the backend to reset the database and account-lock state.
+4. Rerun provisioning with `USER_COUNT` at least equal to the plan's maximum concurrent threads and confirm that all logins pass.
+5. Rerun the performance test under a new run identity; do not combine its JTL, resource evidence, or report with the failed attempt.
+
+The approved measured runs did not exhibit account lockout. This procedure records prevention and recovery handling, not an observed incident. See `reports/user-provisioning.md` for provisioning and fail-closed behavior.
+
 ## 3. Final test-plan names
 
 ```text
