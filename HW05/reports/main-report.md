@@ -27,14 +27,34 @@ Document why Scenario C is unique in the group and how it covers auth-heavy, rea
 | Backend/runtime versions | Node.js EShop backend; Java 24; JMeter 5.6.3 |
 | Database state/reset | Reset per phase; final Endurance state: 18,400 orders, all canceled |
 | Resource-monitor evidence | Load Run02 CSV is malformed and contains no attributable backend CPU/RSS; Stress, Spike, and Endurance contain valid timestamped CPU/RSS samples |
+| Live tool/resource screenshots | [Load Run02](../evidence/screenshots/load/06-running-load-and-resource-monitor.png), [Stress Run02](../evidence/screenshots/stress/06-running-stress-and-resource-monitor.png), and [Spike Run02](../evidence/screenshots/spike/06-running-spike-and-resource-monitor.png) show the test execution and backend `node` resource monitor in the same frame. The Load frame captured backend CPU at 0%, so it proves process visibility but is weaker than a mid-load utilization frame. |
+| Hardware screenshot | [`01-hardware-report-with-hostname.png`](../evidence/hardware/01-hardware-report-with-hostname.png) visibly corroborates hostname `Phi-Hero.local`, computer name `Phi Hero`, model `MacBookPro18,1`, Apple M1 Pro, 10 cores, 16 GB RAM, and macOS 26.3. The screenshot satisfies the hardware/hostname evidence requirement, but serial and UUID fields should be redacted before public upload. |
 
 ## 4. Data-driven workflow
 
-Describe CSV fields, account isolation, product validation, correlation of `orderId`, cart/order cleanup, assertions, and login-lockout handling.
+The protected local CSV supplies `email`, `password`, `search_keyword`, `product_id`, `quantity`, and `shipping_address`. Each maximum concurrent thread receives a separate verified account. The plan validates the selected product, extracts the login JWT and newly created `orderId`, asserts the fresh order is `pending`, cancels that exact order, and verifies it becomes `canceled` in the user's history. Restarting the backend between measured runs clears in-memory carts and resets the isolated database before a fresh account pool is provisioned.
+
+### Login lockout prevention and reset handling
+
+The backend tracks failed login attempts and can lock an account after three invalid attempts. The measured Load, Stress, and Spike workloads therefore use verified valid credentials, assign one unique account per maximum concurrent thread, and do not intentionally include invalid-login traffic.
+
+Before each measured run, the backend is restarted, which resets the database and any previous account-lock state. The provisioning script then recreates the required account pool and verifies that every account can log in. Verification uses at most five bounded attempts; if an account remains unusable, provisioning stops without replacing the existing local CSV.
+
+If a measured run produces an unexpected authentication response, a failed login assertion, or no JWT token, the run must be stopped. Its partial JTL is preserved for diagnosis but excluded from the approved measured result. The tester must restart the backend, reprovision and reverify the accounts, and rerun the test under a new run identity; artifacts from the failed and replacement runs must not be mixed. No account lockout was observed in the approved measured runs, so this is a preventive and recovery procedure rather than an observed performance-test incident. Operational details are in [`runbook.md`](../runbook.md) and [`user-provisioning.md`](user-provisioning.md).
 
 Phase 1 smoke validation passed for every Scenario C endpoint using the supplied demo user. Product `1` (`iPhone 15 Pro Max`) was added to cart, order `1` was created as `pending`, canceled, and verified as `canceled` in user history. Admin login and the admin order-list endpoint also returned HTTP 200. The backend was then stopped, clearing the in-memory cart; canceled order `1` remains in SQLite. This was not a measured performance run.
 
 Backend source inspection confirmed that each start drops and reseeds all database tables. A parameterized provisioning script now creates one deterministic user per maximum JMeter thread after every start, verifies login, and writes a protected local CSV. Functional verification created and recreated five users across two resets; five is not a performance workload recommendation.
+
+### Distinct listener/report evidence
+
+The three required plans use three different enabled JMeter listener/report types. The screenshots below were captured by the tester after loading the corresponding Run02 JTL solely to populate each view. They prove the listener allocation; they do not change the numerical evidence identities listed in Sections 5-8. The untouched raw JTL and generated HTML dashboards remain the authoritative result sources.
+
+| Test | Enabled listener/report type | Tester-captured evidence |
+| --- | --- | --- |
+| Load | Summary Report - `Summary Report - Human Approved Load Listener` | [`01-load-summary-report-tree.png`](../evidence/screenshots/load/01-load-summary-report-tree.png) |
+| Stress | Aggregate Report - `Aggregate Report - Stress Listener` | [`01-stress-aggregate-report-tree.png`](../evidence/screenshots/stress/01-stress-aggregate-report-tree.png) |
+| Spike | Response Time Graph - `Response Time Graph - Spike Listener` | [`01-spike-response-time-graph-tree.png`](../evidence/screenshots/spike/01-spike-response-time-graph-tree.png) |
 
 ## 5. Load test
 
