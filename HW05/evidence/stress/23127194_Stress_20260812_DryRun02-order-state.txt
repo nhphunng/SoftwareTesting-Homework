@@ -1,0 +1,3 @@
+total_orders=24
+canceled_orders=24
+non_canceled_orders=0

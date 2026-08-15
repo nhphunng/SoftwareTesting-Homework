@@ -1,0 +1,5 @@
+backend_alive=true
+backend_ready_http=200
+total_orders=18400
+canceled_orders=18400
+non_canceled_orders=0

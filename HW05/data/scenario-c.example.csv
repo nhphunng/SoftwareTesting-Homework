@@ -1,0 +1,3 @@
+email,password,search_keyword,product_id,quantity,shipping_address
+replace-user-01@example.invalid,REPLACE_ME,REPLACE_SEARCH,REPLACE_PRODUCT_ID,1,"REPLACE_ADDRESS"
+replace-user-02@example.invalid,REPLACE_ME,REPLACE_SEARCH,REPLACE_PRODUCT_ID,1,"REPLACE_ADDRESS"

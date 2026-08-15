@@ -1,0 +1,4 @@
+interface:
+  display_name: "Design JMeter Spike Test"
+  short_description: "Design Scenario C spike and recovery plans"
+  default_prompt: "Use $design-jmeter-spike-test to design and generate the reviewed HW05 Scenario C Spike Test Plan."

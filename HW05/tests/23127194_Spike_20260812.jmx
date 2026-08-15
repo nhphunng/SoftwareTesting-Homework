@@ -1,0 +1,1498 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="23127194 Spike 20260812 - Scenario C" enabled="true">
+      <stringProp name="TestPlan.comments">Human-confirmed Phase 4 contract: serialized Baseline 10 threads/30 s, sudden Spike 80 threads/60 s, Recovery 10 threads/30 s, each with 1 s ramp and 250 ms think-time. Per-stage acceptance: HTTP errors &lt;= 1%, business success &gt;= 99%, end-to-end p95 &lt;= 250 ms, each transaction p95 &lt;= 100 ms. Recovery end-to-end p95 must return to &lt;= 1.5x this run's Baseline p95 within 20 s. Response Time Graph is the distinct Spike listener; raw JTL and HTML report remain authoritative. Stress found no breakpoint through 80 threads, so this tests resilience/recovery at the maximum tested concurrency, not a capacity ceiling.</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="Reviewed Acceptance Criteria" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="threshold.http_error_percent" elementType="Argument">
+            <stringProp name="Argument.name">threshold.http_error_percent</stringProp>
+            <stringProp name="Argument.value">1.0</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="threshold.business_success_percent" elementType="Argument">
+            <stringProp name="Argument.name">threshold.business_success_percent</stringProp>
+            <stringProp name="Argument.value">99.0</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="threshold.end_to_end_p95_ms" elementType="Argument">
+            <stringProp name="Argument.name">threshold.end_to_end_p95_ms</stringProp>
+            <stringProp name="Argument.value">250</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="threshold.transaction_p95_ms" elementType="Argument">
+            <stringProp name="Argument.name">threshold.transaction_p95_ms</stringProp>
+            <stringProp name="Argument.value">100</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="threshold.recovery_p95_multiplier" elementType="Argument">
+            <stringProp name="Argument.name">threshold.recovery_p95_multiplier</stringProp>
+            <stringProp name="Argument.value">1.5</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="threshold.recovery_seconds" elementType="Argument">
+            <stringProp name="Argument.name">threshold.recovery_seconds</stringProp>
+            <stringProp name="Argument.value">20</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath" />
+    </TestPlan>
+    <hashTree>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Unmeasured Setup - Validate Spike Properties and CSV Capacity" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">stoptest</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Setup Loop" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration" />
+        <stringProp name="ThreadGroup.delay" />
+      </SetupThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Validate required Spike properties and maximum CSV capacity" enabled="true">
+          <stringProp name="scriptLanguage">beanshell</stringProp>
+          <stringProp name="parameters" />
+          <stringProp name="filename" />
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="script">String failMessage = "";
+String[] requiredPositive = {"spike.baseline_threads", "spike.baseline_duration_seconds", "spike.baseline_ramp_seconds", "spike.peak_threads", "spike.peak_duration_seconds", "spike.peak_ramp_seconds", "spike.recovery_threads", "spike.recovery_duration_seconds", "spike.recovery_ramp_seconds"};
+for (int index = 0; index &lt; requiredPositive.length; index++) {
+    String name = requiredPositive[index];
+    String value = props.getProperty(name);
+    if (value == null || !value.matches("[1-9][0-9]*")) {
+        failMessage = "Missing or invalid -J" + name + "; expected a positive integer";
+        break;
+    }
+}
+String think = props.getProperty("spike.think_time_ms");
+if (failMessage.length() == 0 &amp;&amp; (think == null || !think.matches("[0-9]+"))) {
+    failMessage = "Missing or invalid -Jspike.think_time_ms; expected a non-negative integer";
+}
+java.io.File csv = new java.io.File(System.getProperty("user.dir"), "data/scenario-c.local.csv");
+int availableRows = 0;
+if (failMessage.length() == 0 &amp;&amp; !csv.isFile()) {
+    failMessage = "Missing data/scenario-c.local.csv; provision users after backend reset";
+}
+if (failMessage.length() == 0) {
+    java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(csv), "UTF-8"));
+    while (reader.readLine() != null) availableRows++;
+    reader.close();
+    availableRows = availableRows &gt; 0 ? availableRows - 1 : 0;
+    int baselineThreads = Integer.parseInt(props.getProperty("spike.baseline_threads"));
+    int peakThreads = Integer.parseInt(props.getProperty("spike.peak_threads"));
+    int recoveryThreads = Integer.parseInt(props.getProperty("spike.recovery_threads"));
+    int requiredRows = Math.max(baselineThreads, Math.max(peakThreads, recoveryThreads));
+    if (availableRows &lt; requiredRows) {
+        failMessage = "CSV has " + availableRows + " users but maximum stage concurrency=" + requiredRows + "; require USER_COUNT &gt;= maximum stage threads";
+    }
+}
+if (failMessage.length() &gt; 0) {
+    SampleResult.setSuccessful(false);
+    SampleResult.setResponseCode("500");
+    SampleResult.setResponseMessage(failMessage);
+} else {
+    SampleResult.setSuccessful(true);
+    SampleResult.setResponseCode("200");
+    SampleResult.setResponseMessage("Validated Spike properties against " + availableRows + " CSV rows");
+}</stringProp>
+        </JSR223Sampler>
+        <hashTree />
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="01 Baseline Stage - Scenario C" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Assign CSV Once Per Thread" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(spike.baseline_threads,)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(spike.baseline_ramp_seconds,)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(spike.baseline_duration_seconds,)}</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="01 Baseline Stage - Dedicated Users" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="filename">data/scenario-c.local.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">true</boolProp>
+          <stringProp name="recycle">false</stringProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+          <stringProp name="stopThread">true</stringProp>
+          <stringProp name="variableNames" />
+        </CSVDataSet>
+        <hashTree />
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
+          <stringProp name="HTTPSampler.port">3000</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">5000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">10000</stringProp>
+        </ConfigTestElement>
+        <hashTree />
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON and JWT Headers" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="Content-Type" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="Accept" elementType="Header">
+              <stringProp name="Header.name">Accept</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="Authorization" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${token}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree />
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="01 Baseline Stage - Think Time" enabled="true">
+          <stringProp name="ConstantTimer.delay">${__P(spike.think_time_ms,)}</stringProp>
+        </ConstantTimer>
+        <hashTree />
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="01 Baseline Stage - Initialize Deadline" enabled="true">
+          <stringProp name="scriptLanguage">beanshell</stringProp>
+          <stringProp name="parameters" />
+          <stringProp name="filename" />
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="script">String deadlineName = "spike.baseline.deadline_ms";
+long now = System.currentTimeMillis();
+synchronized (props) {
+    String prior = props.getProperty(deadlineName);
+    if (prior == null || Long.parseLong(prior) &lt;= now) {
+        long deadline = now + (Long.parseLong(props.getProperty("spike.baseline_duration_seconds")) * 1000L);
+        props.setProperty(deadlineName, Long.toString(deadline));
+    }
+}
+SampleResult.setSuccessful(true);
+SampleResult.setResponseCode("200");
+SampleResult.setResponseMessage("Baseline stage deadline initialized");</stringProp>
+        </JSR223Sampler>
+        <hashTree />
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="01 Baseline Stage - Start Complete Flows Before Deadline" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(System.currentTimeMillis() &lt; Long.parseLong(props.getProperty("spike.baseline.deadline_ms")))}</stringProp>
+        </WhileController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="01 Baseline | 00 Scenario C End-to-End" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="01 Baseline | 01 Auth Heavy" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 01 Login" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"email":"${email}","password":"${password}"}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/login</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Clear Iteration Correlation" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">['token','productPrice','productName','orderId'].each { vars.remove(it) }</stringProp>
+                </JSR223PreProcessor>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Login" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract token" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.token</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_TOKEN__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Login token present" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def v=vars.get('token'); if(!v || v=='__MISSING_TOKEN__'){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Login token missing')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="01 Baseline | 02 Read Heavy" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 02 Search Products" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="search" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.name">search</stringProp>
+                      <stringProp name="Argument.value">${search_keyword}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/products</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Search Products" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Search contains selected product" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('product_id') as Integer;if(!(b instanceof List)||!b.any{(it.id as Integer)==id}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Selected product missing from search')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 03 Product Detail" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/products/${product_id}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Product Detail" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract product price" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">productPrice</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.price</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_PRICE__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract product name" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">productName</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.name</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_NAME__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Product ID and positive price" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def ok=(b.id as Integer)==(vars.get('product_id') as Integer)&amp;&amp;new BigDecimal(b.price.toString())&gt;0;if(!ok){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Product ID or price invalid')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="01 Baseline | 03 Transactional Cart" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 04 Add To Cart" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"id":${product_id},"name":"${productName}","price":${productPrice},"quantity":${quantity}}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/cart</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Add To Cart" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Business - Cart add accepted" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="added">Added to cart</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">16</intProp>
+                </ResponseAssertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 05 Verify Cart" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/cart</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Verify Cart" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Cart contains selected product" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('product_id') as Integer;if(!(b instanceof List)||!b.any{(it.id as Integer)==id}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Selected product missing from cart')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="01 Baseline | 04 Transactional Checkout" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 06 Checkout" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"total_amount":${__groovy(new BigDecimal(vars.get('productPrice')).multiply(new BigDecimal(vars.get('quantity'))),)},"shipping_address":"${shipping_address}"}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/checkout</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Checkout" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract orderId" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">orderId</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.orderId</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_ORDER_ID__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Checkout returns fresh order ID" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def id=vars.get('orderId');if(!id||id=='__MISSING_ORDER_ID__'||!(id==~/[1-9][0-9]*/)){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Positive orderId missing')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="01 Baseline | 05 Transactional Order Lifecycle" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 07 Read Fresh Order" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/${orderId}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Read Fresh Order" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Fresh order is pending" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());if((b.id as String)!=vars.get('orderId')||b.status!='pending'){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Fresh order is not the correlated pending order')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 08 Cancel Fresh Order" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/${orderId}/cancel</stringProp>
+                <stringProp name="HTTPSampler.method">PUT</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Cancel Fresh Order" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Business - Cancel accepted" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="canceled">Order canceled successfully</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">16</intProp>
+                </ResponseAssertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="01 Baseline | 09 Verify Canceled History" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/my-orders</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Verify Canceled History" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Same order is canceled" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('orderId');if(!(b instanceof List)||!b.any{(it.id as String)==id&amp;&amp;it.status=='canceled'}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Same correlated order is not canceled in history')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="02 Spike Stage - Scenario C" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Assign CSV Once Per Thread" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(spike.peak_threads,)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(spike.peak_ramp_seconds,)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(spike.peak_duration_seconds,)}</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="02 Spike Stage - Dedicated Users" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="filename">data/scenario-c.local.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">true</boolProp>
+          <stringProp name="recycle">false</stringProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+          <stringProp name="stopThread">true</stringProp>
+          <stringProp name="variableNames" />
+        </CSVDataSet>
+        <hashTree />
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
+          <stringProp name="HTTPSampler.port">3000</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">5000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">10000</stringProp>
+        </ConfigTestElement>
+        <hashTree />
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON and JWT Headers" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="Content-Type" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="Accept" elementType="Header">
+              <stringProp name="Header.name">Accept</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="Authorization" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${token}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree />
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="02 Spike Stage - Think Time" enabled="true">
+          <stringProp name="ConstantTimer.delay">${__P(spike.think_time_ms,)}</stringProp>
+        </ConstantTimer>
+        <hashTree />
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="02 Spike Stage - Initialize Deadline" enabled="true">
+          <stringProp name="scriptLanguage">beanshell</stringProp>
+          <stringProp name="parameters" />
+          <stringProp name="filename" />
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="script">String deadlineName = "spike.peak.deadline_ms";
+long now = System.currentTimeMillis();
+synchronized (props) {
+    String prior = props.getProperty(deadlineName);
+    if (prior == null || Long.parseLong(prior) &lt;= now) {
+        long deadline = now + (Long.parseLong(props.getProperty("spike.peak_duration_seconds")) * 1000L);
+        props.setProperty(deadlineName, Long.toString(deadline));
+    }
+}
+SampleResult.setSuccessful(true);
+SampleResult.setResponseCode("200");
+SampleResult.setResponseMessage("Spike stage deadline initialized");</stringProp>
+        </JSR223Sampler>
+        <hashTree />
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="02 Spike Stage - Start Complete Flows Before Deadline" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(System.currentTimeMillis() &lt; Long.parseLong(props.getProperty("spike.peak.deadline_ms")))}</stringProp>
+        </WhileController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="02 Spike | 00 Scenario C End-to-End" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="02 Spike | 01 Auth Heavy" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 01 Login" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"email":"${email}","password":"${password}"}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/login</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Clear Iteration Correlation" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">['token','productPrice','productName','orderId'].each { vars.remove(it) }</stringProp>
+                </JSR223PreProcessor>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Login" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract token" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.token</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_TOKEN__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Login token present" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def v=vars.get('token'); if(!v || v=='__MISSING_TOKEN__'){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Login token missing')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="02 Spike | 02 Read Heavy" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 02 Search Products" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="search" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.name">search</stringProp>
+                      <stringProp name="Argument.value">${search_keyword}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/products</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Search Products" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Search contains selected product" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('product_id') as Integer;if(!(b instanceof List)||!b.any{(it.id as Integer)==id}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Selected product missing from search')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 03 Product Detail" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/products/${product_id}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Product Detail" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract product price" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">productPrice</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.price</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_PRICE__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract product name" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">productName</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.name</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_NAME__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Product ID and positive price" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def ok=(b.id as Integer)==(vars.get('product_id') as Integer)&amp;&amp;new BigDecimal(b.price.toString())&gt;0;if(!ok){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Product ID or price invalid')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="02 Spike | 03 Transactional Cart" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 04 Add To Cart" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"id":${product_id},"name":"${productName}","price":${productPrice},"quantity":${quantity}}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/cart</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Add To Cart" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Business - Cart add accepted" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="added">Added to cart</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">16</intProp>
+                </ResponseAssertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 05 Verify Cart" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/cart</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Verify Cart" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Cart contains selected product" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('product_id') as Integer;if(!(b instanceof List)||!b.any{(it.id as Integer)==id}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Selected product missing from cart')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="02 Spike | 04 Transactional Checkout" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 06 Checkout" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"total_amount":${__groovy(new BigDecimal(vars.get('productPrice')).multiply(new BigDecimal(vars.get('quantity'))),)},"shipping_address":"${shipping_address}"}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/checkout</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Checkout" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract orderId" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">orderId</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.orderId</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_ORDER_ID__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Checkout returns fresh order ID" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def id=vars.get('orderId');if(!id||id=='__MISSING_ORDER_ID__'||!(id==~/[1-9][0-9]*/)){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Positive orderId missing')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="02 Spike | 05 Transactional Order Lifecycle" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 07 Read Fresh Order" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/${orderId}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Read Fresh Order" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Fresh order is pending" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());if((b.id as String)!=vars.get('orderId')||b.status!='pending'){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Fresh order is not the correlated pending order')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 08 Cancel Fresh Order" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/${orderId}/cancel</stringProp>
+                <stringProp name="HTTPSampler.method">PUT</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Cancel Fresh Order" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Business - Cancel accepted" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="canceled">Order canceled successfully</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">16</intProp>
+                </ResponseAssertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="02 Spike | 09 Verify Canceled History" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/my-orders</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Verify Canceled History" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Same order is canceled" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('orderId');if(!(b instanceof List)||!b.any{(it.id as String)==id&amp;&amp;it.status=='canceled'}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Same correlated order is not canceled in history')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="03 Recovery Stage - Scenario C" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">startnextloop</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Assign CSV Once Per Thread" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${__P(spike.recovery_threads,)}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${__P(spike.recovery_ramp_seconds,)}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(spike.recovery_duration_seconds,)}</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="03 Recovery Stage - Dedicated Users" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="filename">data/scenario-c.local.csv</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <boolProp name="quotedData">true</boolProp>
+          <stringProp name="recycle">false</stringProp>
+          <stringProp name="shareMode">shareMode.group</stringProp>
+          <stringProp name="stopThread">true</stringProp>
+          <stringProp name="variableNames" />
+        </CSVDataSet>
+        <hashTree />
+        <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments" />
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">127.0.0.1</stringProp>
+          <stringProp name="HTTPSampler.port">3000</stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">5000</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">10000</stringProp>
+        </ConfigTestElement>
+        <hashTree />
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="JSON and JWT Headers" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="Content-Type" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="Accept" elementType="Header">
+              <stringProp name="Header.name">Accept</stringProp>
+              <stringProp name="Header.value">application/json</stringProp>
+            </elementProp>
+            <elementProp name="Authorization" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">Bearer ${token}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree />
+        <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="03 Recovery Stage - Think Time" enabled="true">
+          <stringProp name="ConstantTimer.delay">${__P(spike.think_time_ms,)}</stringProp>
+        </ConstantTimer>
+        <hashTree />
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="03 Recovery Stage - Initialize Deadline" enabled="true">
+          <stringProp name="scriptLanguage">beanshell</stringProp>
+          <stringProp name="parameters" />
+          <stringProp name="filename" />
+          <stringProp name="cacheKey">false</stringProp>
+          <stringProp name="script">String deadlineName = "spike.recovery.deadline_ms";
+long now = System.currentTimeMillis();
+synchronized (props) {
+    String prior = props.getProperty(deadlineName);
+    if (prior == null || Long.parseLong(prior) &lt;= now) {
+        long deadline = now + (Long.parseLong(props.getProperty("spike.recovery_duration_seconds")) * 1000L);
+        props.setProperty(deadlineName, Long.toString(deadline));
+    }
+}
+SampleResult.setSuccessful(true);
+SampleResult.setResponseCode("200");
+SampleResult.setResponseMessage("Recovery stage deadline initialized");</stringProp>
+        </JSR223Sampler>
+        <hashTree />
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="03 Recovery Stage - Start Complete Flows Before Deadline" enabled="true">
+          <stringProp name="WhileController.condition">${__BeanShell(System.currentTimeMillis() &lt; Long.parseLong(props.getProperty("spike.recovery.deadline_ms")))}</stringProp>
+        </WhileController>
+        <hashTree>
+          <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="03 Recovery | 00 Scenario C End-to-End" enabled="true">
+            <boolProp name="TransactionController.includeTimers">false</boolProp>
+            <boolProp name="TransactionController.parent">false</boolProp>
+          </TransactionController>
+          <hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="03 Recovery | 01 Auth Heavy" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 01 Login" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"email":"${email}","password":"${password}"}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/login</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="Clear Iteration Correlation" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">['token','productPrice','productName','orderId'].each { vars.remove(it) }</stringProp>
+                </JSR223PreProcessor>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Login" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract token" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">token</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.token</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_TOKEN__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Login token present" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def v=vars.get('token'); if(!v || v=='__MISSING_TOKEN__'){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Login token missing')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="03 Recovery | 02 Read Heavy" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 02 Search Products" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="search" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                      <stringProp name="Argument.name">search</stringProp>
+                      <stringProp name="Argument.value">${search_keyword}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                      <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/products</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Search Products" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Search contains selected product" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('product_id') as Integer;if(!(b instanceof List)||!b.any{(it.id as Integer)==id}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Selected product missing from search')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 03 Product Detail" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/products/${product_id}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Product Detail" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract product price" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">productPrice</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.price</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_PRICE__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract product name" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">productName</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.name</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_NAME__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Product ID and positive price" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def ok=(b.id as Integer)==(vars.get('product_id') as Integer)&amp;&amp;new BigDecimal(b.price.toString())&gt;0;if(!ok){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Product ID or price invalid')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="03 Recovery | 03 Transactional Cart" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 04 Add To Cart" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"id":${product_id},"name":"${productName}","price":${productPrice},"quantity":${quantity}}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/cart</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Add To Cart" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Business - Cart add accepted" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="added">Added to cart</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">16</intProp>
+                </ResponseAssertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 05 Verify Cart" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/cart</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Verify Cart" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Cart contains selected product" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('product_id') as Integer;if(!(b instanceof List)||!b.any{(it.id as Integer)==id}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Selected product missing from cart')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="03 Recovery | 04 Transactional Checkout" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 06 Checkout" enabled="true">
+                <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments">
+                    <elementProp name="" elementType="HTTPArgument">
+                      <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                      <stringProp name="Argument.value">{"total_amount":${__groovy(new BigDecimal(vars.get('productPrice')).multiply(new BigDecimal(vars.get('quantity'))),)},"shipping_address":"${shipping_address}"}</stringProp>
+                      <stringProp name="Argument.metadata">=</stringProp>
+                    </elementProp>
+                  </collectionProp>
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/checkout</stringProp>
+                <stringProp name="HTTPSampler.method">POST</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Checkout" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract orderId" enabled="true">
+                  <stringProp name="JSONPostProcessor.referenceNames">orderId</stringProp>
+                  <stringProp name="JSONPostProcessor.jsonPathExprs">$.orderId</stringProp>
+                  <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+                  <stringProp name="JSONPostProcessor.defaultValues">__MISSING_ORDER_ID__</stringProp>
+                </JSONPostProcessor>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Checkout returns fresh order ID" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def id=vars.get('orderId');if(!id||id=='__MISSING_ORDER_ID__'||!(id==~/[1-9][0-9]*/)){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Positive orderId missing')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="03 Recovery | 05 Transactional Order Lifecycle" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
+            </TransactionController>
+            <hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 07 Read Fresh Order" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/${orderId}</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Read Fresh Order" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Fresh order is pending" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());if((b.id as String)!=vars.get('orderId')||b.status!='pending'){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Fresh order is not the correlated pending order')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 08 Cancel Fresh Order" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/${orderId}/cancel</stringProp>
+                <stringProp name="HTTPSampler.method">PUT</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Cancel Fresh Order" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Business - Cancel accepted" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="canceled">Order canceled successfully</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">16</intProp>
+                </ResponseAssertion>
+                <hashTree />
+              </hashTree>
+              <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="03 Recovery | 09 Verify Canceled History" enabled="true">
+                <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+                  <collectionProp name="Arguments.arguments" />
+                </elementProp>
+                <stringProp name="HTTPSampler.path">/api/orders/my-orders</stringProp>
+                <stringProp name="HTTPSampler.method">GET</stringProp>
+                <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+                <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+              </HTTPSamplerProxy>
+              <hashTree>
+                <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="HTTP 200 - Verify Canceled History" enabled="true">
+                  <collectionProp name="Asserion.test_strings">
+                    <stringProp name="200">200</stringProp>
+                  </collectionProp>
+                  <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+                  <boolProp name="Assertion.assume_success">false</boolProp>
+                  <intProp name="Assertion.test_type">8</intProp>
+                </ResponseAssertion>
+                <hashTree />
+                <JSR223Assertion guiclass="TestBeanGUI" testclass="JSR223Assertion" testname="Business - Same order is canceled" enabled="true">
+                  <stringProp name="scriptLanguage">groovy</stringProp>
+                  <stringProp name="parameters" />
+                  <stringProp name="filename" />
+                  <stringProp name="cacheKey">true</stringProp>
+                  <stringProp name="script">def b=new groovy.json.JsonSlurper().parseText(prev.getResponseDataAsString());def id=vars.get('orderId');if(!(b instanceof List)||!b.any{(it.id as String)==id&amp;&amp;it.status=='canceled'}){AssertionResult.setFailure(true);AssertionResult.setFailureMessage('Same correlated order is not canceled in history')}</stringProp>
+                </JSR223Assertion>
+                <hashTree />
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="RespTimeGraphVisualizer" testclass="ResultCollector" testname="Response Time Graph - Spike Listener" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename" />
+      </ResultCollector>
+      <hashTree />
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree - Debug Only - Disabled" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename" />
+      </ResultCollector>
+      <hashTree />
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

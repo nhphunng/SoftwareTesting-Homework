@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI Audit Report"
+  short_description: "Record attributable HW05 AI interactions"
+  default_prompt: "Use $ai-audit-report to append this interaction to the HW05 AI Audit Report with pending human review."
