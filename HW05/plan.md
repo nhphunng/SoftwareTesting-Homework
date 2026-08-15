@@ -89,7 +89,7 @@ Suggested commit: `test(hw05): implement reviewed scenario C load plan`
 - Identify the first sustainable/unsustainable level without reusing locked or corrupted accounts.
 - Create the Stress JMeter `.jmx` plan by reusing the exact Scenario C functional controllers from Load.
 - Execute with isolated evidence and document recovery behavior.
-- [ ] Tester visually reviews the final Stress tree and measured results in JMeter GUI/HTML dashboard.
+- [x] Tester visually reviewed and approved the final Stress design, tree, and measured results.
 
 Suggested commit: `test(hw05): implement scenario C stress breakpoint plan`
 
@@ -101,6 +101,7 @@ Suggested commit: `test(hw05): implement scenario C stress breakpoint plan`
 - [x] Generate and validate `tests/23127194_Spike_20260812.jmx` after explicit confirmation; exact Load request/assertion parity and a validation-only 2→4→2 VU dry run passed. See `reports/spike-plan-validation.md`.
 - [x] Tester visually reviewed and accepted the final Spike tree before measured execution.
 - [x] Execute the measured 10→80→10 Spike run and retain raw JTL, HTML dashboard, environment, resource, and order-state evidence; application recovery was confirmed within 10 seconds. See `reports/spike-test-results.md`.
+- [x] Tester reviewed and approved the measured Spike results.
 - Use final Spike filename `23127194_Spike_20260812.jmx`.
 - Define baseline, spike, and recovery stages from prior observations.
 - Create the Spike JMeter `.jmx` plan by reusing the exact Scenario C functional controllers from Load.
@@ -116,6 +117,7 @@ Suggested commit: `test(hw05): implement scenario C spike recovery plan`
 - [x] Generate and validate `tests/23127194_Endurance_20260812.jmx`; structural parity and a validation-only 2-thread dry run passed. See `reports/endurance-plan-validation.md`.
 - [x] Tester visually reviewed and accepted the final Endurance tree before measured execution.
 - [x] Execute and analyze the measured 60-thread/12-minute Endurance run; all 11 complete steady-state minutes passed, maximum observed stable flow rate was 26.23 flows/s, and maximum observed backend RSS was 188.84 MiB without a demonstrated plateau. See `reports/endurance-test-results.md`.
+- [x] Tester reviewed and approved the measured Endurance results.
 - Select a sustained load below the highest tested Stress concurrency; no breakpoint was observed through 80 active threads.
 - Run for approximately 10-15 minutes with resource monitoring.
 - Derive the maximum stable RPS and memory ceiling only from recorded evidence.
@@ -124,12 +126,14 @@ Suggested commit: `test(hw05): add endurance threshold experiment`
 
 ## Phase 6 - AI analysis and human critique
 
-- Give AI the untouched raw outputs and environment context.
-- Preserve the complete AI output.
-- Verify every AI-cited value against raw logs.
-- Record misinterpretations and corrected values.
-- Classify each proposed optimization as feasible or hallucinated.
-- Write the mandatory 200-300 word critique.
+- [x] Lock evidence identity: independent Load Run02; unsuffixed Stress, Spike, and Endurance; never mix artifacts across run identities.
+- [x] Give AI the untouched raw outputs and environment context.
+- [x] Preserve the complete AI output in `reports/ai-analysis.md`.
+- [x] Verify every AI-cited value against raw logs and generated JMeter statistics.
+- [x] Record misinterpretations and corrected values.
+- [x] Classify each proposed optimization as feasible, unproven, unsupported, or hallucinated.
+- [x] Draft the mandatory 200-300 word critique from the tester's supplied observations.
+- [ ] Tester reviews and approves the final Phase 6 analysis, proposed thresholds, optimization classifications, and 200-300 word critique.
 
 Suggested commit: `docs(hw05): review AI performance analysis against raw logs`
 
