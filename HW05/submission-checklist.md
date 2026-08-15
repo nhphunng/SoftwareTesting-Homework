@@ -34,11 +34,11 @@
 - [ ] Video uses the tester's own Vietnamese narration.
 - [ ] Agent Skill and an end-to-end endpoint-group demonstration are included.
 - [ ] A meaningful Git commit exists for each procedural step.
-- [ ] Real Git commit log is exported as text.
+- [x] Real Git commit log is exported verbatim as `git-commit-log.md`.
 
 ## Package
 
-- [ ] README contains self-assessment, scenarios run, endpoint groups, endurance threshold, issue count, and video link.
+- [x] README contains the self-assessment table, scenarios run, endpoint groups, measured Endurance threshold, issue count, repository link, and demo-video links.
 - [ ] Submission name matches `<StudentID>_HW05_AI_Performance_<SelfAssessedGrade>.zip`.
 - [ ] Public repository link is included.
 - [ ] Required evidence is present in the ZIP even when ignored by Git.

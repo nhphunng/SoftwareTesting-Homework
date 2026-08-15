@@ -545,3 +545,43 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-029
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-15T18:59:53+07:00 |
+| Task | Export the complete Git commit graph and statistics |
+| User Prompt | `Dùng lệnh git log --graph --all --stat sau đó copy nguyên vẹn output của terminal làm git-commit-log.md` |
+| Evidence/Input Basis | Git history for all refs in the current `SoftwareTesting-Homework` repository at commit `4fbd602ca5c9f7c2e917d6dfe9fb9c35ef3122df` |
+| Generated/Modified Files | `HW05/git-commit-log.md`; `HW05/submission-checklist.md`; `HW05/reports/ai-audit-report.md` |
+| AI Output | Executed `git log --graph --all --stat` through raw RTK passthrough and saved the unmodified Git output as `HW05/git-commit-log.md`, without adding a Markdown heading, code fence, commentary, or truncation markers. Generated the same command output independently into a temporary file and verified byte-for-byte equality with `cmp`. The resulting deliverable contains 1,564 lines and 77,403 bytes and records committed history through `4fbd602ca5c9f7c2e917d6dfe9fb9c35ef3122df`. Marked only the checklist item for exporting the real Git log complete; the separate item requiring a meaningful commit for every procedural step remains pending human assessment. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-030
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-15T19:12:44+07:00 |
+| Task | Complete main-report critique inclusion and README submission summary |
+| User Prompt | `Hãy chỉnh sửa:`<br>`-  Main report including the performance-testing report and your AI-analysis critique.`<br>`- A README.md containing the self-assessment table (below) and a test`<br>`  summary report: scenarios run; endpoint groups covered; the`<br>`  endurance threshold (with numbers); number of bugs / performance`<br>`  issues; and the demo video link.` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`; approved result summaries in `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/reports/spike-test-results.md`, and `HW05/reports/endurance-test-results.md`; `HW05/reports/ai-analysis.md`; `HW05/reports/bug-report.md`; tester-provided `demo-link.md`; tester-provided `HW05/github-repo-link.md` |
+| Generated/Modified Files | `HW05/README.md`; `HW05/reports/main-report.md`; `HW05/reports/ai-critique.md`; `HW05/submission-checklist.md`; `HW05/reports/ai-audit-report.md` |
+| AI Output | Replaced README placeholders with a concrete submission summary: the four executed scenarios and their measured results, coverage of auth-heavy/read-heavy/transactional endpoint groups, the maximum observed stable Endurance rate of 26.23 complete flows/s with 188.84 MiB maximum observed RSS and explicit no-ceiling limitation, zero genuine filed bugs/performance issues, the public repository URL, and all five tester-provided YouTube links. Preserved the assignment's six-row self-assessment table and its printed 100-point total while explicitly noting that the published row values sum to 90. Expanded the main report's scenario rationale and conclusion, inserted the complete AI critique instead of only linking to it, and synchronized `ai-critique.md` to the same single 266-word paragraph. The critique remains pending tester approval, and no PDF was created or claimed. Marked only the README-content checklist item complete. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:

@@ -22,3 +22,6 @@ evidence/video/**
 
 # Local backend process bookkeeping
 *.pid
+
+# Local submission package
+23127194_HW05_AI_Performance_100/

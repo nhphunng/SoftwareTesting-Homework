@@ -1,22 +1,34 @@
 # HW05 - Performance Testing
 
-## Project status
+## Test summary report
 
 | Item | Current value |
 | --- | --- |
 | Student ID | 23127194 |
 | Selected workflow | Scenario C - Checkout then cancel |
 | Tool | Apache JMeter 5.6.3 - installed and CLI verified |
+| Public repository | <https://github.com/nhphunng/SoftwareTesting-Homework> |
 | Official execution date | 2026-08-12 |
 | Endpoint groups | Auth-heavy, read-heavy, transactional |
 | API smoke test | Passed on 2026-08-12; order `1` changed `pending` to `canceled` |
 | Load / Stress / Spike runs | All three measured runs passed their reviewed HTTP, business, and latency criteria |
 | Endurance | Measured 60-thread/12-minute run passed all reviewed criteria in 11 complete steady-state minutes |
 | Endurance threshold | Maximum observed stable rate 26.23 complete flows/s; maximum observed backend RSS 188.84 MiB; no memory plateau/capacity ceiling claimed |
-| Bugs / performance issues | No reviewed functional/latency threshold failure; Stress breakpoint not observed through 80 threads; Spike memory recovery and Endurance memory plateau were not demonstrated |
-| Demo video | TBD |
+| Bugs / performance issues | **0 genuine bugs or performance issues filed.** Stress breakpoint not observed through 80 threads, Spike memory recovery was not demonstrated, and Endurance retained a positive RSS slope; these are reported as limitations/risks, not fabricated defects. |
+| Demo videos | [Agent Skill](https://youtu.be/6HXgiGy_3UI); [Load](https://youtu.be/4-lbUzKKrik); [Stress](https://youtu.be/q1ofKyPXU-Q); [Spike](https://youtu.be/rwhBLCXov1k); [Endurance](https://youtu.be/rA0cl0rgR88) |
 
 Scenario C is distinct from Candidate A, which the tester reports is already used by another group member.
+
+### Scenarios executed
+
+| Scenario | Workload and measured outcome | Endpoint groups covered |
+| --- | --- | --- |
+| Load | 10 VUs; 20-second ramp; 120-second full-load hold; 291/291 flows passed; end-to-end p95 48 ms | Auth-heavy, read-heavy, transactional |
+| Stress | Progressive ramp to 80 threads; 6,336/6,336 flows passed; end-to-end p95 25 ms; no breakpoint observed | Auth-heavy, read-heavy, transactional |
+| Spike | 10-thread Baseline, 80-thread Spike, 10-thread Recovery; 2,363/2,363 flows passed; phase p95 values 36.45/27.00/26.00 ms | Auth-heavy, read-heavy, transactional |
+| Endurance | 60 threads for a 720-second flow-start duration; 18,400/18,400 flows passed; 26.23 maximum observed stable complete flows/s | Auth-heavy, read-heavy, transactional |
+
+Every scenario reused Scenario C: valid login, product search/detail, cart operations, checkout with fresh `orderId` correlation, order lookup, cancellation, and canceled-history verification. The detailed performance report and AI-analysis critique are in [`reports/main-report.md`](reports/main-report.md).
 
 ## Project skills
 
@@ -87,15 +99,15 @@ HW05/
 
 | No. | Criterion | Grade | Self-assessed grade |
 | ---: | --- | ---: | ---: |
-| 1 | Task 1 - Load testing | 20 | TBD |
-| 2 | Task 1 - Stress testing | 20 | TBD |
-| 3 | Task 1 - Spike testing | 20 | TBD |
-| 4 | Task 2 - AI analysis and misinterpretation hunt | 10 | TBD |
-| 5 | Task 3 - Continuous Performance Testing proposal | 10 | TBD |
-| 6 | Agent Skills | 10 | TBD |
-|  | **Total printed in assignment** | **100** | **TBD** |
+| 1 | Task 1 - Load testing | 20 | 20 |
+| 2 | Task 1 - Stress testing | 20 | 20 |
+| 3 | Task 1 - Spike testing | 20 | 20 |
+| 4 | Task 2 - AI analysis and misinterpretation hunt | 10 | 10 |
+| 5 | Task 3 - Continuous Performance Testing proposal | 10 | 10 |
+| 6 | Agent Skills | 10 | 10 |
+|  | **Total printed in assignment** | **100** | **100** |
 
-The six published row values sum to 90 while the assignment prints a total of 100. Confirm the missing 10-point allocation with the lecturer instead of silently inventing a criterion.
+The six published row values sum to 90 while the assignment prints a total of 100. The table preserves the assignment's printed total and the tester's stated self-assessed grade; the unexplained 10-point difference is not assigned to an invented criterion.
 
 ## Integrity rules
 

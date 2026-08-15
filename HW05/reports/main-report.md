@@ -9,12 +9,12 @@
 | Tool | Apache JMeter 5.6.3 - installed and CLI verified |
 | Official execution date | 2026-08-12 |
 | Selected workflow | Scenario C - Checkout then cancel |
-| Repository | TBD |
-| Demo video | TBD |
+| Repository | <https://github.com/nhphunng/SoftwareTesting-Homework> |
+| Demo videos | [Agent Skill](https://youtu.be/6HXgiGy_3UI); [Load](https://youtu.be/4-lbUzKKrik); [Stress](https://youtu.be/q1ofKyPXU-Q); [Spike](https://youtu.be/rwhBLCXov1k); [Endurance](https://youtu.be/rA0cl0rgR88) |
 
 ## 2. Scenario and endpoint coverage
 
-Document why Scenario C is unique in the group and how it covers auth-heavy, read-heavy, and transactional endpoints. Reference `scenario.md` and the final test plans.
+The tester selected Scenario C because Candidate A had already been assigned to another group member. Every final plan reuses the same end-to-end workflow: valid login covers the auth-heavy group; product search and product detail cover the read-heavy group; and cart, checkout, fresh-order lookup, cancellation, and canceled-history verification cover the transactional group. The full selection rationale is recorded in [`scenario.md`](../scenario.md).
 
 ## 3. Environment and hardware
 
@@ -112,24 +112,20 @@ Feasible experiments are indexes on `users(email)` and `orders(user_id, id DESC)
 
 ## 11. Continuous Performance Testing proposal
 
-Summarize `reports/continuous-performance-proposal.md`, including the flow chart, p95 regression rule, cost, and false-alarm trade-offs.
+The proposed pipeline classifies each SUT commit and runs Scenario C smoke plus three Load repetitions when backend, authentication, database, cart/order, JMeter, provisioning, or runner files change. Documentation-only changes may skip performance execution with a recorded reason. Stress and Spike run nightly or before release; the 12-minute Endurance profile runs weekly on a controlled hardware class. Results are compared only when plan, workload, account pool, database state, JMeter version, and hardware class match.
+
+The Load baseline is the median of the latest five accepted runs, while a candidate change uses the median of three valid repetitions. HTTP errors above 1% or business success below 99% are hard failures. A latency regression is flagged when median end-to-end p95 rises by more than 20% and at least 10 ms, or exceeds the proposed 75 ms local diagnostic guard. A same-runner confirmation distinguishes a reproducible regression from noise before an issue is filed. The policy trades earlier detection for runner time and false alarms; path-based triggers, isolated serialized execution, fixed reset/seed rules, combined relative/absolute thresholds, and human-reviewed overrides reduce those risks. The complete flowchart, retention policy, and trade-off table are in [`continuous-performance-proposal.md`](continuous-performance-proposal.md).
 
 ## 12. Issues
 
-Reference `reports/bug-report.md` and public GitHub Issues only when real reproducible evidence exists.
+No genuine functional bug or performance issue was filed because all approved JTL rows passed HTTP and business assertions. Stress capacity, Spike RSS recovery, Endurance memory trend, and the malformed Load resource CSV remain documented limitations rather than fabricated defects. See [`bug-report.md`](bug-report.md).
 
 ## 13. AI critique
 
-The critique in `reports/ai-critique.md` records the tester's actual interventions: selecting Scenario C, replacing the early k6 direction with JMeter, requiring reset-safe user provisioning, and selecting Load Run02 as the Phase 6 evidence identity. It also distinguishes these changes from the numerical Load, Stress, Spike, and Endurance proposals, which the tester accepted without parameter modification, and explains why units, run identity, raw logs, runner code, and same-run evidence require human verification. Final wording remains pending tester approval.
+The AI accelerated this assignment by generating JMeter plans, automating evidence collection, and analyzing large JTL files, but it could not independently guarantee experimental validity. Its skills were often tightly coupled to one phase and Scenario C, limiting reuse for other endpoint groups or similar performance tests. Human control was therefore necessary in both design and interpretation. I selected Scenario C instead of the preliminary Candidate A, replaced the early k6 scaffold with JMeter, required account provisioning after every backend reset, and selected Load Run02 as the complete Phase 6 evidence identity when the original resource CSV was unusable. I reviewed and accepted the numerical Load, Stress, Spike, and Endurance workload proposals without changing their parameters because their assumptions were reasonable; human review does not require arbitrary modification. The most important corrections concerned measured-data interpretation. Eighty threads was the maximum tested concurrency, not a capacity ceiling. The measured 26.23 value was complete business flows per second, not HTTP requests per second, while 188.84 MiB was maximum observed RSS rather than a memory ceiling. The Load Run02 resource CSV contained rows, but its fields did not match the header and could not support backend CPU or RSS claims. Spike latency recovered, yet memory recovery was not demonstrated. These errors occurred because AI followed filenames, labels, and numerical patterns without proving run identity, units, attribution, or experimental scope. I learned to define reusable skill boundaries, preserve human approval gates, and validate every conclusion against untouched JTL files, runner code, and same-run evidence. AI can accelerate test engineering, but the tester remains responsible for evidence validity and final judgment.
+
+The standalone copy is preserved in [`ai-critique.md`](ai-critique.md).
 
 ## 14. Conclusion
 
-Summarize scenarios run, endpoint coverage, measured endurance threshold, issue count, limitations, and demo video.
-
-Human Review:
-- Status: Phase 2–5 measured results approved; Phase 6 analysis and critique pending final tester review
-- Accepted: Load Run02 selection and all measured Load, Stress, Spike, and Endurance result reports
-- Modified:
-- Removed:
-- Added:
-- Notes:
+Load, Stress, Spike, and Endurance all executed the same Scenario C flow across auth-heavy, read-heavy, and transactional endpoints without an HTTP or business-flow failure in the approved result sets. The Endurance run demonstrated a maximum observed stable rate of 26.23 complete flows/s over the passing one-minute windows; backend RSS peaked at 188.84 MiB, but its positive final-five-minute slope means neither a memory plateau nor a capacity ceiling was established. No genuine bug or performance issue was filed. Stress did not reach a breakpoint through 80 threads, Spike did not demonstrate memory recovery, and Load Run02 lacked valid attributable backend resource fields; these remain explicit limitations rather than defect claims. The public repository and five unlisted demo-video links are listed in Section 1 and in [`README.md`](../README.md).
