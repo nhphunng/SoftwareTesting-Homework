@@ -105,8 +105,8 @@ For this exact Scenario C configuration, the run supports:
 It does not establish a global maximum RPS, a capacity ceiling, a stable memory plateau, or absence of a longer-term memory issue.
 
 Human Review:
-- Status: Pending human review of measured Endurance results
-- Accepted: Final Endurance tree and authorization to execute the measured run
+- Status: Measured Endurance results reviewed and approved by tester on 2026-08-14
+- Accepted: Final Endurance tree, all eleven steady-state windows, maximum observed stable complete-flow rate, resource interpretation, and stated limitations
 - Modified:
 - Removed:
 - Added:
