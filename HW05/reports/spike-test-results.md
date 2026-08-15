@@ -87,8 +87,8 @@ The measured run passes every reviewed HTTP, business, latency, and application-
 Stress previously found no breakpoint through 80 active threads, and this Spike run also produced no failure condition. Therefore, 80 remains the maximum tested concurrency, not a capacity ceiling. Memory did not return to its pre-spike RSS range during the short Recovery stage; a longer observation would be required to determine whether that reflects retained runtime allocation, delayed reclamation, or continued growth.
 
 Human Review:
-- Status: Pending human review of measured Spike results
-- Accepted: Final Spike tree and authorization to execute the measured run
+- Status: Measured Spike results reviewed and approved by tester on 2026-08-14
+- Accepted: Final Spike tree, measured stage metrics, application-recovery conclusion, resource interpretation, and execution evidence
 - Modified:
 - Removed:
 - Added:
