@@ -34,8 +34,8 @@ If no band breaches, report that no breakpoint was observed up to 80 active thre
 The Stress plan and workload are AI-designed from the real Load result and authorized by the tester's request to execute Phase 3. Raw JTL, HTML report, resource CSV, environment file, and order-state file must use the Stress run identity and must not overwrite Phase 2 evidence.
 
 Human Review:
-- Status: Pending human review of Phase 3 design and measured results
-- Accepted:
+- Status: Phase 3 design, final tree, and measured results reviewed and approved by tester on 2026-08-14
+- Accepted: Progressive one-Thread-Group workload, 80-thread maximum, 240-second ramp, 300-second flow-start deadline, 250 ms think-time, Aggregate Report, active-thread-band analysis, and measured result
 - Modified:
 - Removed:
 - Added:

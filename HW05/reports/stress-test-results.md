@@ -84,8 +84,8 @@ On macOS, process CPU can exceed 100% when multiple logical cores are used. The 
 The first dry run connected to a stale backend already holding port 3000. Provisioning appeared to reuse accounts, but the subsequent JMeter logins returned 401. It produced no checkout order and is excluded from measured results. The runner now refuses to start when port 3000 is occupied and waits for the new backend's database initialization marker. DryRun02 then passed 24/24 flows, 216/216 HTTP requests, and left 24/24 orders canceled before measured execution.
 
 Human Review:
-- Status: Pending human review of Stress design, JMeter tree, and measured results
-- Accepted:
+- Status: Stress design, JMeter tree, and measured results reviewed and approved by tester on 2026-08-14
+- Accepted: Measured results, active-thread-band analysis, resource interpretation, and the conclusion that no breakpoint was observed through 80 active threads
 - Modified:
 - Removed:
 - Added:
