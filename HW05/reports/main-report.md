@@ -21,11 +21,12 @@ Document why Scenario C is unique in the group and how it covers auth-heavy, rea
 | Item | Measured value / evidence path |
 | --- | --- |
 | OS | macOS 26.3 (Build 25D125), arm64 |
-| CPU | 10 logical CPUs; model and utilization not captured |
-| RAM | 16 GiB installed; utilization not captured |
+| Hardware identity | MacBook Pro `MacBookPro18,1`; computer name `Phi Hero`; local hostname `Phi-Hero.local` |
+| CPU | Apple M1 Pro; 10 cores (8 performance, 2 efficiency) |
+| RAM | 16 GiB installed |
 | Backend/runtime versions | Node.js EShop backend; Java 24; JMeter 5.6.3 |
 | Database state/reset | Reset per phase; final Endurance state: 18,400 orders, all canceled |
-| Resource-monitor evidence | Load monitor invalid; Stress, Spike, and Endurance contain valid timestamped CPU/RSS samples, documented in their result reports |
+| Resource-monitor evidence | Load Run02 CSV is malformed and contains no attributable backend CPU/RSS; Stress, Spike, and Endurance contain valid timestamped CPU/RSS samples |
 
 ## 4. Data-driven workflow
 
@@ -40,10 +41,11 @@ Backend source inspection confirmed that each start drops and reseeds all databa
 - Final test-plan filename: `tests/23127194_Load_20260812.jmx`
 - Reviewed workload: 10 VUs, 20-second ramp-up, 120-second full-load hold within a 140-second flow-start deadline, and 500 ms think-time.
 - Distinct report view: Summary Report; raw JTL and HTML dashboard are authoritative.
-- Raw output: `results/raw/load/23127194_Load_20260812.jtl`.
-- Result: 292/292 business flows passed; 2,628/2,628 HTTP samples passed; end-to-end p95 38.35 ms; 0% errors.
+- Phase 6 evidence identity: independent Run02 set; no unsuffixed/Run02 artifacts are mixed.
+- Raw output: `results/raw/load/23127194_Load_20260812_Run02.jtl`.
+- Result: 291/291 business flows passed; 2,619/2,619 HTTP samples passed; end-to-end p95 48 ms; 0% errors.
 - Threshold verdict: Passed for HTTP errors, business success, end-to-end p95, and all transaction p95 limits.
-- Limitation: CPU/RSS monitor produced no samples, so this run supports no resource-utilization claim.
+- Limitation: the Run02 resource CSV has 140 malformed four-field rows under a five-column header and no attributable backend CPU/RSS, so it supports no backend resource-utilization claim.
 - Detailed evidence and human review: `reports/load-test-results.md`.
 
 ## 6. Stress test
@@ -82,11 +84,11 @@ Backend source inspection confirmed that each start drops and reseeds all databa
 
 ## 9. AI analysis and misinterpretation hunt
 
-Summarize `reports/ai-analysis.md`. For every AI error, cite the exact correct value and raw source location.
+The preserved AI analysis in `reports/ai-analysis.md` uses Load Run02 and the unsuffixed Stress, Spike, and Endurance evidence sets. Human verification rejected six overclaims: treating a populated but malformed resource CSV as valid backend evidence; calling 80 VUs a capacity ceiling; calling 26.23 complete flows/s HTTP RPS; calling 188.84 MiB a memory ceiling; treating latency recovery as memory recovery; and generalizing a local demo run to production. Each correction is tied to the raw JTL, resource file, or runner implementation.
 
 ## 10. Optimization feasibility
 
-Classify AI proposals as feasible or hallucinated and connect feasible items to actual EShop architecture/evidence.
+Feasible experiments are indexes on `users(email)` and `orders(user_id, id DESC)`, SQLite WAL/`busy_timeout` A/B testing, and low-priority product-read caching. A conventional server-database connection pool, unchanged horizontal Node scaling, and generic Node thread-pool tuning are classified as inapplicable, unsafe, or unsupported for the current SQLite plus process-local-cart architecture. None is reported as a measured improvement before an A/B run.
 
 ## 11. Continuous Performance Testing proposal
 
@@ -98,15 +100,15 @@ Reference `reports/bug-report.md` and public GitHub Issues only when real reprod
 
 ## 13. AI critique
 
-Insert or reference the final 200-300 word critique from `reports/ai-critique.md`.
+The critique in `reports/ai-critique.md` records the tester's actual interventions: selecting Scenario C, replacing the early k6 direction with JMeter, requiring reset-safe user provisioning, and selecting Load Run02 as the Phase 6 evidence identity. It also distinguishes these changes from the numerical Load, Stress, Spike, and Endurance proposals, which the tester accepted without parameter modification, and explains why units, run identity, raw logs, runner code, and same-run evidence require human verification. Final wording remains pending tester approval.
 
 ## 14. Conclusion
 
 Summarize scenarios run, endpoint coverage, measured endurance threshold, issue count, limitations, and demo video.
 
 Human Review:
-- Status: Pending human review
-- Accepted:
+- Status: Phase 2–5 measured results approved; Phase 6 analysis and critique pending final tester review
+- Accepted: Load Run02 selection and all measured Load, Stress, Spike, and Endurance result reports
 - Modified:
 - Removed:
 - Added:

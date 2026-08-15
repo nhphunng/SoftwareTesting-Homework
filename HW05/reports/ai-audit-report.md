@@ -222,8 +222,8 @@ Human Review:
 | AI Output | Recorded the tester's explicit visual acceptance of the final JMeter tree and executed the human-confirmed Load contract: 10 VUs, 20-second ramp-up, 140-second flow-start deadline containing the reviewed 120-second full-load hold, and 500 ms think-time. Two sandboxed backend starts stopped before JMeter and produced no measured JTL; unrestricted preparation then exposed delayed post-registration login, so provisioning retry was increased from five attempts at 0.2 seconds to twenty attempts at 0.5 seconds while retaining fail-closed CSV publication. The successful measured run generated an untouched JTL with SHA-256 `85bfb17b1fbc384cb8f2f00836ede96883c59030ba56e246cf103e8fe6ff8014`: 292/292 complete business flows passed, 2,628/2,628 HTTP samples returned 200, all 4,381 JTL rows passed, and database verification found 292/292 orders canceled with zero non-canceled orders. JMeter statistics measured end-to-end p95 38.35 ms and highest transaction p95 16 ms; HTTP errors were 0% and business success was 100%, so all reviewed Load criteria passed. The resource monitor CSV contained only its header and was explicitly rejected as CPU/RAM evidence; no resource-utilization claim was made. The runner was corrected for future attributed runs without overwriting the raw Load evidence. |
 
 Human Review:
-- Status: Pending human review of measured Load results
-- Accepted: Final JMeter tree and authorization to execute the measured Load run
+- Status: Measured Load results reviewed and approved by tester on 2026-08-14; original run retained for traceability, while independent Run02 is selected for Phase 6
+- Accepted: Final JMeter tree, original measured result, and the Phase 6 decision to use only the complete Run02 JTL/HTML/environment/resource/order-state identity
 - Modified:
 - Removed:
 - Added:
@@ -262,8 +262,8 @@ Human Review:
 | AI Output | Initialized and officially validated `$run-jmeter-stress-test`, including deterministic JMX generation, structural validation, active-thread-band analysis, progressive-stress rules, and evidence-integrity controls. Derived a Phase 3 experiment from the real 10-VU Load result: linear ramp to 80 threads over 240 seconds, 300-second flow-start deadline, 250 ms think-time, and Aggregate Report distinct from Load's Summary Report. Generated a Stress JMX with the exact same nine HTTP samplers as Load and no embedded credentials. The first dry run connected to a stale backend holding port 3000, produced two HTTP 401 login failures and no orders, and was preserved and excluded. The runner was corrected to fail when port 3000 is occupied and wait for the new database initialization marker; DryRun02 then passed 24/24 flows and 216/216 HTTP samples. The measured run provisioned 80 unique accounts and produced raw JTL SHA-256 `11017bc182bcfa53966964620e5a957a39cdbcf7c42cf1dc3080555c253660b8`: 6,336/6,336 flows passed, 57,024/57,024 HTTP requests passed, all 95,041 JTL rows passed, and 6,336/6,336 orders ended canceled. Active-thread bands 1-20, 21-40, 41-60, and 61-80 had 0% HTTP errors, 100% business success, end-to-end p95 values of 24, 22, 25, and 26 ms, and highest transaction p95 values of 10.90, 10, 12, and 13 ms. No degradation signal breached, so no breakpoint was observed up to 80 active threads; 80 was explicitly not claimed as a capacity ceiling. The resource file contained 294 timestamped samples; backend CPU averaged 9.56% and peaked at 22.7%, while backend RSS averaged 130.88 MiB and peaked at 188.11 MiB. JMeter JVM measurements were separated from SUT measurements. Stress tree/results remain pending tester visual and human review. |
 
 Human Review:
-- Status: Pending human review of Stress design, JMeter tree, and measured results
-- Accepted:
+- Status: Stress design, JMeter tree, and measured results reviewed and approved by tester on 2026-08-14
+- Accepted: Measured Stress evidence and corrected design intent
 - Modified:
 - Removed:
 - Added:
@@ -362,8 +362,8 @@ Human Review:
 | AI Output | Recorded the tester's visual acceptance of the final Spike tree and executed the human-confirmed measured workload after a clean backend reset and provisioning of 80 fresh accounts: serialized Baseline 10 threads/30 seconds, sudden Spike 80 threads/60 seconds, Recovery 10 threads/30 seconds, one-second ramps, and 250 ms think-time. The untouched raw JTL SHA-256 is `62592462cb28c12ea3469fa73836db1b91793161b45cba1ebcbc024bb8c53c9e`: 2,363/2,363 complete business flows passed, 21,267/21,267 HTTP requests passed, all 35,546 raw JTL rows succeeded, and database verification found 2,363 canceled orders with zero non-canceled orders. Baseline/Spike/Recovery end-to-end p95 values from JMeter's generated statistics were 36.45/27.00/26.00 ms; highest transaction p95 values were 16.45/14.00/11.00 ms. All per-stage HTTP, business, absolute p95, and transaction thresholds passed. Recovery p95 was 0.71 times same-run Baseline and below the 1.5-times limit. Raw timestamp analysis found the 0-10, 10-20, and 20-30 second Recovery windows had p95 values of 25.00, 23.95, and 26.00 ms, 100% business success, and 0% HTTP errors; since the first window and every later full window passed, application recovery was confirmed at 10 seconds within the reviewed 20-second limit. The resource CSV contained 125 backend samples: whole-run CPU averaged 9.23% and peaked at 25.4%, and RSS averaged 141.38 MiB and peaked at 190.06 MiB. Backend CPU returned toward baseline in the final Recovery window (3.62% versus 2.27% before Spike), while RSS remained elevated (182.17 versus 77.27 MiB); therefore application/CPU recovery was reported, but memory recovery was not claimed. The run demonstrates resilience and recovery at the tested 80-thread spike, not a capacity ceiling. No screenshot, video, defect, or longer-term memory conclusion was fabricated. |
 
 Human Review:
-- Status: Pending human review of measured Spike results
-- Accepted: Final Spike tree and authorization to execute the measured run
+- Status: Measured Spike results reviewed and approved by tester on 2026-08-14
+- Accepted: Final Spike tree, measured stage metrics, recovery interpretation, and resource evidence
 - Modified:
 - Removed:
 - Added:
@@ -442,8 +442,9 @@ Human Review:
 | AI Output | Recorded the tester's visual acceptance of the final Endurance tree and executed the human-confirmed measured workload after a clean backend reset and provisioning of 60 fresh accounts: 60 threads, 30-second ramp, 720-second flow-start duration, 250 ms think-time, one-second resource sampling, and disabled GUI listeners. The measured flow interval was `2026-08-12T16:08:38.453+07:00` to `2026-08-12T16:20:38.247+07:00` (719.794 seconds). The untouched raw JTL SHA-256 is `15752a8303fc0db4c7696b6da116b899d1c38e79e90aa351dac8daede4f072c9`: 18,400/18,400 complete business flows passed, 165,600/165,600 HTTP requests passed, all 276,001 JTL rows succeeded, and database verification found 18,400 canceled orders with zero non-canceled orders. Whole-run end-to-end average/p95 were 16.03/30 ms, the highest transaction p95 was 14 ms, HTTP errors were 0%, and business success was 100%. Raw timestamp analysis excluded the ramp and evaluated eleven complete one-minute steady windows; all eleven passed, with a maximum observed stable complete-flow rate of 26.23 flows/s in minute 9. The resource CSV contained 698 samples: backend CPU averaged 12.01% and peaked at 23.2%, while backend RSS averaged 99.73 MiB and peaked at 188.84 MiB. The final five complete windows had a positive RSS slope of +5.99 MiB/minute, so no memory plateau or safe memory ceiling was claimed; 188.84 MiB is reported only as the maximum observed backend RSS for this machine and run. The result does not establish a global maximum RPS or capacity ceiling. No screenshot, video, defect, human acceptance of measured results, or longer-term memory conclusion was fabricated. |
 
 Human Review:
-- Status: Pending human review of measured Endurance results
-- Accepted: Final Endurance tree and authorization to execute the measured run
+Human Review:
+- Status: Measured Endurance results reviewed and approved by tester on 2026-08-14
+- Accepted: Final Endurance tree, measured result, steady-window analysis, resource interpretation, and limitations
 - Modified:
 - Removed:
 - Added:
@@ -468,3 +469,23 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-024
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-14T16:08:34+07:00 |
+| Task | Complete Phase 6 AI analysis, human-correction record, critique draft, and screenshot requirement review |
+| User Prompt | `Đây là những thông tin về phần việc của tôi hãy xem qua và cập nhật tương ứng sau đó thực hiện phần việc của bạn:`<br>`1. Bộ run chính thức của phase 6 mặc định là không có hậu tố, tuy nhiên đối với load test phần csv của load run không có hậu tố hiện tại bị mất nên hãy thay thế bằng Run2`<br>`2. Các mesured result tôi đã review qua và approve toàn bộ hãy update toàn bộ`<br>`3. Chọn Run02 làm một run độc lập rồi phân tích toàn bộ JTL, environment và resource của chính Run02.`<br>`4. Cách creator skill khi agent thực hiện, agent thường chỉ thiết kế skill cho task cụ thể, không hoặc hạn chế trong khả năng tái sử dụng ở các tình huống cần loại test tương tự. File jmx ban đầu của phần stress test ban đầu không chi thành 3 mà gom thành 1, tôi đã chỉnh sửa lại chia thành 3 giai đoạn cụ thể. Nguyên nhân một phần là do prompt ban đầu tôi đưa cho agent thực hiện không đủ context`<br>`5. 3 hình ảnh tôi cung cấp là hình ảnh chụp khi đang chạy thực tế 3 loại testing, hiện tại đang thiếu 1 cái bạn hãy kiểm tra cập nhật cho loại testing tương ứng và báo tôi loại testing còn thiếu để tôi thực hiện bổ sung`<br>`6. Hãy xem lại requirement [2026.HW05.Performance Testing_En_2.0_HTThanh.pdf](HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf) xem ảnh screenshot minh chứng đã đủ chưa, nếu chưa hãy liệt kê để tôi bổ sung thêm.`<br><br>Three live-run screenshots were attached to the prompt and visually classified as Load Run02, Stress Run02, and Spike Run02. |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`; tester-provided live-run screenshots; Load Run02 raw JTL, HTML statistics, environment, resource CSV, order state, and runner; unsuffixed Stress, Spike, and Endurance JTL/HTML/resource/environment/order-state evidence; `HW05/tests/23127194_Stress_20260812.jmx`; external SUT `backend/database.js` and `backend/server.js` |
+| Generated/Modified Files | `HW05/reports/load-test-results.md`, `HW05/reports/stress-test-results.md`, `HW05/reports/spike-test-results.md`, `HW05/reports/endurance-test-results.md`, `HW05/reports/ai-analysis.md`, `HW05/reports/ai-critique.md`, `HW05/reports/main-report.md`, `HW05/evidence/screenshot-requirements-review.md`, `HW05/evidence/README.md`, `HW05/results/README.md`, `HW05/plan.md`, `HW05/submission-checklist.md`, `HW05/reports/ai-audit-report.md` |
+| AI Output | Recorded tester approval of all four measured-result reports and selected the complete Load Run02 identity for Phase 6 while retaining the original Load run for traceability. Verified Load Run02 directly: SHA-256 `93339257e0a408a5d591820ac11e591736f2ed40d69abe7a7e2db0fad8ac67b5`, 291/291 successful flows, 2,619/2,619 HTTP 200 samples, 4,366 successful JTL rows, 48 ms end-to-end p95, and 291 canceled orders. The Run02 resource CSV has 140 malformed four-field rows under a five-column header and no attributable backend CPU/RSS, so no Load backend-resource claim was made. Completed the Phase 6 cross-run analysis, six metric/interpretation corrections, candidate diagnostic thresholds, and architecture-based optimization classification. Drafted a 250-word critique incorporating the tester's observations about limited skill reuse, missing Stress-stage context, and human responsibility. Reviewed the assignment PDF visually and textually: the three attached images map to the required Load/Stress/Spike live-run types; among all four locally used test types, Endurance is the missing live image, but the assignment explicitly mandates live screenshots only for Load/Stress/Spike. A separate hostname-bearing hardware-report screenshot/spec table is still required. The chat images are not filesystem artifacts and were not falsely claimed as saved. The existing Stress JMX/raw run remain untouched because changing the plan associated with an existing JTL would break evidence traceability; a future three-stage version requires a new versioned execution. |
+
+Human Review:
+- Status: Tester decisions recorded; Phase 6 AI analysis, proposed thresholds, optimization classifications, and critique wording pending final tester review
+- Accepted: All Phase 2–5 measured result reports; independent Load Run02 evidence identity; tester-authored skill/Stress/prompt critique points
+- Modified: Load Phase 6 source changed from the unsuffixed run to Run02
+- Removed: Unsupported Load backend-resource inference and cross-run evidence mixing
+- Added: Screenshot mapping, missing-evidence list, metric corrections, optimization classification, and 250-word critique draft
+- Notes: Tester must save/reattach the three chat screenshots as files and supply a hardware-report screenshot. An Endurance live screenshot is missing from the four-type set but is recommended rather than explicitly required by the assignment's three-scenario screenshot clause.
