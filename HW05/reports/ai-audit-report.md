@@ -465,3 +465,83 @@ Human Review:
 - Removed: Unsupported Load backend-resource inference and cross-run evidence mixing
 - Added: Screenshot mapping, missing-evidence list, metric corrections, optimization classification, and 250-word critique draft
 - Notes: Tester must save/reattach the three chat screenshots as files and supply a hardware-report screenshot. An Endurance live screenshot is missing from the four-type set but is recommended rather than explicitly required by the assignment's three-scenario screenshot clause.
+
+## AI Audit Entry - AI-025
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-15T18:32:51+07:00 |
+| Task | Complete distinct JMeter listener/report screenshot evidence and documentation |
+| User Prompt | `Tôi keierm tra [submission-checklist.md](HW05/submission-checklist.md) thì có phần nội dung này, tôi cần làm gì để hoàn thành?`<br>`Three distinct report/listener equivalents are confirmed with the lecturer.`<br><br>`Thực hiện`<br>`Chụp JMeter tree của từng test, thể hiện listener tương ứng.`<br><br>`Lưu ảnh vào:`<br>`evidence/screenshots/load/`<br>`evidence/screenshots/stress/`<br>`evidence/screenshots/spike/`<br><br>`Thêm bảng ba listener trên vào main report hoặc dẫn đến các test-design report.`<br><br>`Đổi checklist thành:`<br>`- [x] Load, Stress, and Spike use three d`<br><br>`Hãy chỉ tôi cách chụp để tôi tự chụp`<br><br>`giao diện summary report đang trống`<br><br>`Tương tự hãy hướng dẫn chi tiết với các màn hình còn lại`<br><br>`Tôi đã chụp xong và thêm vào phần evidence hãy tiếp tục phần việc của bạn`<br><br>The Summary Report prompt included a tester-provided screenshot showing an empty enabled Load Summary Report before the Run02 JTL was loaded. |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`; `HW05/tests/23127194_Load_20260812.jmx`; `HW05/tests/23127194_Stress_20260812.jmx`; `HW05/tests/23127194_Spike_20260812.jmx`; tester-captured `HW05/evidence/screenshots/load/01-load-summary-report-tree.png`, `HW05/evidence/screenshots/stress/01-stress-aggregate-report-tree.png`, and `HW05/evidence/screenshots/spike/01-spike-response-time-graph-tree.png`; corresponding Run02 raw JTL files under `HW05/results/raw/load/`, `stress/`, and `spike/` |
+| Generated/Modified Files | Normalized tester-provided screenshot filenames `HW05/evidence/screenshots/stress/01-stress-aggregate-report-tree.png` and `HW05/evidence/screenshots/spike/01-spike-response-time-graph-tree.png`; modified `HW05/reports/main-report.md`, `HW05/submission-checklist.md`, `HW05/evidence/README.md`, `HW05/evidence/screenshot-requirements-review.md`, and `HW05/reports/ai-audit-report.md` |
+| AI Output | Explained that listeners remain empty when a JMX is opened without previous results and instructed the tester to load the matching Run02 JTL without rerunning the tests: Load Summary Report, Stress Aggregate Report, and Spike Response Time Graph. Visually verified all three resulting tester-authored screenshots: each shows the correct JMeter tree and enabled listener/report, Run02 input, and populated table or graph. Normalized two accidental `.png.png` filenames. Added a three-row evidence table to the main report and marked the distinct-listener checklist item complete using the exact types Summary Report, Aggregate Report, and Response Time Graph. Updated the evidence index and screenshot review to record completion. Kept the separate resource-monitor screenshot checklist item open because these listener screenshots do not show the backend resource monitor in the same frame, as required by Section 6. No screenshot, JTL, execution result, or human judgment was fabricated. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-026
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-15T18:40:47+07:00 |
+| Task | Normalize and document live resource-monitor and hardware screenshots |
+| User Prompt | `Tôi đã bổ sung handware-screenshot và Load, Stress, and Spike resource-monitor screenshots hãy thực hiện cập nhật tên cho các file ảnh và các document liên quan` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`; tester-authored Load, Stress, Spike, and hardware screenshots added under `HW05/evidence/`; `HW05/reports/main-report.md`; `HW05/submission-checklist.md`; `HW05/evidence/README.md`; `HW05/evidence/screenshot-requirements-review.md` |
+| Generated/Modified Files | Normalized tester-authored images to `HW05/evidence/screenshots/load/06-running-load-and-resource-monitor.png`, `HW05/evidence/screenshots/stress/06-running-stress-and-resource-monitor.png`, `HW05/evidence/screenshots/spike/06-running-spike-and-resource-monitor.png`, and `HW05/evidence/hardware/01-hardware-report-computer-name-unredacted.png`; moved the duplicate Load copy to `HW05/evidence/screenshots/rejected/duplicate-load-resource-monitor.png`; modified `HW05/reports/main-report.md`, `HW05/submission-checklist.md`, `HW05/evidence/README.md`, `HW05/evidence/screenshot-requirements-review.md`, and `HW05/reports/ai-audit-report.md` |
+| AI Output | Visually reviewed and normalized the tester-authored evidence without editing image content. Verified that the three distinct live images show Load Run02, Stress Run02, and Spike Run02 execution together with monitoring of the backend `node` process in the same frame, then marked the three-scenario resource-monitor screenshot checklist item complete. Preserved the Load screenshot's limitation: backend CPU reads 0% at capture time, so it proves process visibility but is weaker than a busy mid-load frame. An initially observed duplicate Stress image in the Spike directory was not accepted as Spike evidence; the subsequently available `17.44.35` image was visually verified as the distinct Spike Run02 frame before normalization. The hardware screenshot corroborates model, chip, core count, RAM, OS, and computer name, but does not visibly show `LocalHostName`/hostname and exposes serial-number/UUID fields. Therefore the hardware checklist item remains incomplete pending a public-safe replacement with hostname visible. No screenshot content, execution, resource value, or human approval was fabricated. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-027
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-15T18:49:28+07:00 |
+| Task | Verify and document the hostname-bearing hardware report |
+| User Prompt | `Tôi vừa bổ sung ảnh harndware có hostname`<br><br>`đã cập nhật lại` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`; tester-authored hardware screenshots under `HW05/evidence/hardware/`; `HW05/reports/main-report.md`; `HW05/submission-checklist.md`; `HW05/evidence/README.md`; `HW05/evidence/screenshot-requirements-review.md` |
+| Generated/Modified Files | Normalized the accepted tester-authored screenshot to `HW05/evidence/hardware/01-hardware-report-with-hostname.png`; moved the superseded screenshot to `HW05/evidence/hardware/rejected/previous-hardware-report-without-hostname.png`; modified `HW05/reports/main-report.md`, `HW05/submission-checklist.md`, `HW05/evidence/README.md`, `HW05/evidence/screenshot-requirements-review.md`, and `HW05/reports/ai-audit-report.md` |
+| AI Output | Rejected the first replacement as incomplete because it showed only Computer Name and software details, not the actual hostname or the full hardware specification in the same frame. Visually verified the tester's corrected screenshot: it shows `hostname` output `Phi-Hero.local`, computer name `Phi Hero`, model `MacBookPro18,1`, Apple M1 Pro, 10 cores, 16 GB RAM, and macOS 26.3. Updated the main report and evidence review, and marked the hardware screenshot/specification checklist item complete because the hostname and recorded specification match. Preserved a privacy warning because serial-number and UUID fields remain visible; redaction is recommended before public upload but is not treated as a missing assignment requirement. No image content or hardware evidence was generated by AI. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+## AI Audit Entry - AI-028
+
+| Field | Content |
+| --- | --- |
+| AI Tool | Codex |
+| Date and Time | 2026-08-15T18:55:12+07:00 |
+| Task | Document login-lockout prevention, reset, and rerun handling |
+| User Prompt | `Tôi cần làm gì với yêu cầu này`<br>`Login lockout/reset handling is documented.`<br><br>`Thực hiện thêm vào giúp tôi` |
+| Evidence/Input Basis | `HW05/2026.HW05.Performance Testing_En_2.0_HTThanh.pdf`; `HW05/scenario.md`; `HW05/runbook.md`; `HW05/reports/user-provisioning.md`; approved measured-result summaries in `HW05/reports/main-report.md` |
+| Generated/Modified Files | `HW05/reports/main-report.md`; `HW05/runbook.md`; `HW05/submission-checklist.md`; `HW05/reports/ai-audit-report.md` |
+| AI Output | Documented that the backend can lock an account after three invalid login attempts and that the measured Load, Stress, and Spike workloads prevent this by using verified valid credentials with one account per maximum concurrent thread and no intentional invalid-login traffic. Added a fail-closed recovery procedure: detect unexpected authentication responses, failed login assertions, or missing JWT; stop the run; retain but exclude the partial JTL; restart the backend to reset database and lock state; reprovision and verify the full user pool; and rerun under a new run identity without mixing artifacts. Explicitly stated that no account lockout was observed in the approved measured runs, so the text records prevention and contingency handling rather than fabricating an incident. Marked the corresponding submission-checklist item complete. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
