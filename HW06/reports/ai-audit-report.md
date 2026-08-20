@@ -376,3 +376,24 @@ Human Review:
 - Removed: Previous HUM-FR05-001..005 from the retained suite
 - Added: None — AI intentionally did not generate replacement HUMAN cases
 - Notes: Human provenance requirement remains unsatisfied until the reviewer supplies five new cases.
+
+## AI Audit Entry - AI-013
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT |
+| Date and Time | 2026-08-20T17:05:00+07:00 |
+| Stage | Phase 4 / API 1 / Step H — Human-added testcase translation and tightening |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` plus documented product mutation APIs where applicable |
+| User Prompt | Vậy hãy chuyển sang tiếng anh và cập nhật giúp tôi |
+| Evidence/Input Basis | Six reviewer-authored HUMAN-FR05-043..048 proposals supplied directly in chat; previously approved Gate A-E decisions; audit decision to exclude unsupported draft/published lifecycle assumptions |
+| Generated/Modified Files | Conversation artifact `PoolA-FR05-ProductSearch-test-AUDIT-FINAL.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Translated and tightened the reviewer-authored human cases while preserving HUMAN provenance. Retained five cases: 043 cross-user header-context characterization, 044 concurrent search isolation, 046 rename→search state-history, 047 documented delete→search state-history, and 048 repeated expensive-search robustness. Removed 045 because draft/unpublished/published product lifecycle states are unsupported by the current source. Case 043 was constrained to characterization until X-Student-Id semantics are confirmed; 044 now uses a fixed reproducible workload; 046 removes any assumed eventual-consistency window; 047 removes hidden/soft-delete assumptions; 048 remains robustness/characterization because rate/abuse policy is NOT SPECIFIED. No execution evidence or defects were created. |
+
+Human Review:
+- Status: Pending final human confirmation of the five retained HUMAN cases
+- Accepted: Reviewer authorship/provenance of HUMAN-FR05-043, 044, 046, 047, 048
+- Modified: English wording and scope tightened to remove unsupported assumptions
+- Removed: HUMAN-FR05-045 from the retained set
+- Added: None — no new HUMAN testcase invented by AI
+- Notes: The downloadable conversation artifact is the updated review copy. The existing local project testcase source is not overwritten automatically by this entry; synchronize only after the reviewer accepts the five retained cases.
