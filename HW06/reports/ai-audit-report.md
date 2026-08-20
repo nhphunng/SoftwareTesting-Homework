@@ -51,3 +51,12 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+### Human Review Addendum for AI-002 — 2026-08-20T10:48:00+07:00
+
+- Status: Modified after human review
+- Accepted: Use of `$skill-creator`, Human-in-the-Loop gates, contract fidelity, evidence integrity, and reusable references.
+- Modified: Removed HW06-specific API assignments, testcase-count requirements, SEC-01–SEC-07 assumptions, `X-Student-Id`, fixed Postman/Newman requirements, and HW06-specific folder behavior from the skill. Project-specific constraints are now supplied as runtime/task context.
+- Removed: Fixed references to FR-05, FR-10, FR-16 and assignment-specific provenance/count rules as universal skill behavior.
+- Added: Tool/framework neutrality, generic contract extraction, reusable state/security/schema coverage guidance, and configurable project-specific constraints.
+- Notes: The skill remains stored inside HW06 for this project, but its instructions are intentionally reusable for future API-testing work.

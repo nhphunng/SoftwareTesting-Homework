@@ -1,4 +1,4 @@
 interface:
-  display_name: "HW06 API Testing Human Loop"
-  short_description: "Guide reviewed HW06 API testing workflows"
-  default_prompt: "Use $api-testing-human-loop to guide the next reviewed HW06 API-testing stage without skipping human approval gates."
+  display_name: "API Testing Human Loop"
+  short_description: "Guide reviewed reusable API testing workflows"
+  default_prompt: "Use $api-testing-human-loop to guide the next API-testing stage with explicit human review gates and evidence integrity."

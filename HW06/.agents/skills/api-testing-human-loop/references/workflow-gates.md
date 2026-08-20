@@ -1,117 +1,125 @@
-# HW06 API Testing Workflow Gates
+# API Testing Human Review Gates
 
-Use this reference when deciding whether the API-testing workflow may advance to the next stage.
+Use these gates to keep API testing reviewable without turning every project into the same rigid process. A project may rename, combine, or omit gates when the testing contract justifies it.
 
-## Gate A — Requirement mapping accepted
+## Gate A — Contract accepted
 
-Before domain partitioning, the tester reviews the extracted API contract:
+Before relying on the API contract for downstream test design, the tester reviews the extracted expectations:
 
 - endpoint and HTTP method
-- FR mapping
 - authentication/authorization
-- parameters and constraints
-- request/response schemas
-- expected status/error responses
-- applicable SEC requirements
-- state rules
+- inputs and constraints
+- business rules
+- success/error behavior
+- response schema
+- ownership/security rules
+- state/sequence rules
+- project-specific constraints
 
-Any missing material requirement remains `UNRESOLVED`. Do not silently infer it.
+Any material uncertainty remains `UNRESOLVED`. Do not silently infer it.
 
-## Gate B — Domain partition model accepted
+## Gate B — Input/domain model accepted
 
-Before treating domain coverage as complete, the tester checks that:
+Before treating input coverage as adequate, review that:
 
-- every applicable parameter is covered
-- valid/invalid/boundary/missing/empty/null/type/format/length classes are considered where meaningful
-- boundaries come from the specification, not invented limits
+- every applicable input is considered
+- meaningful valid/invalid/boundary/missing/empty/null/type/format/length classes are covered
+- boundaries come from the contract or an explicit test hypothesis
 - redundant partitions are removed or justified
 
-## Gate C — State model accepted
+Not every input needs every generic partition type.
 
-If the API has state-dependent behavior, the tester reviews:
+## Gate C — State/sequence model accepted
 
-- states and initial/precondition state
-- valid transitions
-- invalid transitions
-- terminal/non-cancelable states
-- repeated operations
-- permission/ownership effects
+When behavior depends on state or prior requests, review:
 
-For an API without an explicit state machine, record why state-transition testing is not applicable or what limited state behavior still matters.
+- relevant states/preconditions
+- valid transitions/sequences
+- invalid transitions/sequences
+- terminal states
+- repeated/idempotent operations
+- ownership/permission effects
+- concurrency/race behavior when applicable
+
+If state testing is not applicable, record why rather than creating artificial transitions.
 
 ## Gate D — Security coverage accepted
 
-The tester reviews the mapping between the API and applicable `SEC-01`–`SEC-07` requirements.
-
-Consider only applicable risks, such as:
+Review applicable risks based on the API's threat surface and project requirements, for example:
 
 - unauthenticated access
 - authorization/role escalation
-- IDOR/ownership
+- ownership/IDOR/BOLA
 - injection
-- malformed/unexpected fields
-- token/session validity
+- mass assignment/unexpected fields
+- token/session misuse
 - information disclosure
-- import/file-specific security risks
+- rate/abuse behavior
+- file/upload/import risks
 
-Do not claim full SEC coverage simply because seven generic security cases exist.
+Named security requirements supplied by the project should be mapped explicitly. Do not claim complete security coverage from a generic checklist alone.
 
-## Schema analysis checkpoint
+## Schema/response checkpoint
 
-Schema analysis follows accepted requirement/security context. It should cover the exact success/error response contract, including required fields, types, arrays/nesting, enums, nullability, formats, and additional properties when the specification defines them.
+Review exact success and error response expectations where defined:
 
-This checkpoint does not require a separate approval gate in the current plan, but schema uncertainty must be resolved or marked `UNRESOLVED` before testcase generation relies on it.
+- required fields
+- primitive types
+- arrays/nesting
+- enums
+- nullability
+- formats
+- additional properties
+- headers/content types when relevant
 
-## Gate E — AI-generated testcase audit completed
+Schema uncertainty should remain explicit before tests depend on it.
 
-The assignment requires human review of every AI-generated testcase.
+## Gate E — AI-generated testcase review completed
 
-For each AI testcase, preserve:
+When AI generates testcases, preserve enough information to review each one. The human reviewer should eventually determine whether each case is:
 
-- original AI testcase
-- proposed or human-confirmed status: `VALID`, `INVALID`, or `INCOMPLETE`
-- reason
-- correction where required
+- correct/usable
+- incorrect
+- incomplete
+- duplicate/redundant
+- unsupported by the contract
 
-AI may assist by suggesting a classification, but do not represent AI's own classification as the student's completed human audit without explicit confirmation.
+If the project defines labels such as `VALID / INVALID / INCOMPLETE`, use those labels. AI may propose a classification, but should not represent its own judgment as completed human review.
 
-## Gate F — Human-added testcase set confirmed
+## Gate F — Human-authored additions confirmed when required
 
-The tester must provide at least five genuinely human-added testcases per API that AI missed.
+Some projects or assignments require testcases that must originate from a human reviewer after inspecting AI gaps.
 
-AI may surface coverage gaps and explain likely blind spots, but must not generate those cases and label them as human-created.
+When such a requirement exists:
 
-Each confirmed human-added case should record why AI missed it, such as:
+- AI may identify coverage gaps or risky dimensions
+- the tester authors or explicitly confirms the required human additions
+- provenance is preserved
+- AI-authored content must not be relabeled as human-authored
 
-- prompt limitation
-- missing context
-- model limitation
-- specification ambiguity
-- API-specific behavior
-- cross-request/state-history reasoning
-- ownership/security assumption
+If no such project requirement exists, this gate may simply confirm that the human reviewer is satisfied with coverage gaps and extensions.
 
 ## Gate G — Execution result reviewed
 
-Only real Postman/Newman execution can populate execution status and actual result.
-
-Before progressing to bug analysis, the tester distinguishes each unexpected result as:
+Only real execution can establish observed results. Before defect analysis, distinguish unexpected behavior among:
 
 - test implementation defect
-- test-data/setup issue
-- environment issue
-- specification ambiguity
-- potential SUT defect
+- test-data/setup problem
+- environment problem
+- contract ambiguity
+- potential product defect
 
-## Gate H — Bug confirmed
+Do not populate measured/observed fields from hypothetical execution.
 
-A testcase failure becomes a genuine bug only after review of:
+## Gate H — Defect confirmed
 
-1. applicable specification/requirement
-2. reproducible steps
-3. expected result
-4. actual result
-5. real execution evidence
-6. environment/test data
+A failed testcase becomes a confirmed defect only after review of:
 
-Only then create or finalize the Markdown bug report and GitHub Issue.
+1. expected behavior and its basis
+2. reproducible request/sequence
+3. actual observed behavior
+4. real execution evidence
+5. environment/test data
+6. competing explanations such as test or setup defects
+
+Only after confirmation should the workflow create or finalize an issue/bug record as a genuine product defect.

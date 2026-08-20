@@ -1,94 +1,113 @@
 ---
 name: api-testing-human-loop
-description: Guide the reviewed HW06 API-testing workflow for the three assigned APIs. Use when analyzing the API specification, designing partitions/state/security/schema coverage, generating or auditing test cases, preparing Postman/Newman work, interpreting execution evidence, or evaluating bug candidates; stop at required human approval gates instead of silently advancing.
+description: Guide reusable API testing with explicit human approval gates. Use when analyzing an API contract, designing domain/state/security/schema coverage, generating or auditing test cases, implementing automated API tests, interpreting execution evidence, or evaluating defect candidates without allowing AI to silently replace required human judgment.
 ---
 
-# HW06 API Testing Human-in-the-Loop
+# API Testing Human-in-the-Loop
 
-Guide one HW06 API-testing stage at a time. AI may analyze, propose, generate, and review, but the tester owns requirement acceptance, testcase audit, human-added tests, execution evidence, and bug confirmation.
+Guide API testing as a reusable, evidence-driven workflow. AI may analyze, propose, generate, implement, and review; the human tester owns acceptance of requirements, review judgments, provenance-sensitive work, execution evidence, and defect confirmation.
 
-## Load required context
+## Load the task context
 
-Read before material work:
+Before material work, identify and read the sources that define the current testing task:
 
-1. `HW06/2026.HW06.API Testing_En.md`
-2. `HW06/plan.md`
-3. The SUT `api_specification.md` once it is available locally
-4. The current API folder and existing artifacts for the stage being performed
-5. [references/workflow-gates.md](references/workflow-gates.md)
-6. [references/testcase-evidence-contract.md](references/testcase-evidence-contract.md) when generating, auditing, executing, or reporting tests
+1. API contract/specification (OpenAPI, API documentation, requirements, source contract, or equivalent).
+2. Project/test plan or assignment instructions, if any.
+3. Existing test artifacts and execution evidence for the API under test.
+4. [references/workflow-gates.md](references/workflow-gates.md).
+5. [references/testcase-evidence-contract.md](references/testcase-evidence-contract.md) when generating, reviewing, executing, or reporting tests.
 
-Use these fixed assignments unless the tester explicitly changes them:
+Treat project-specific requirements as **inputs**, not permanent skill rules. Examples include required testcase counts, required headers, named security controls, specific tools, evidence formats, CI requirements, or minimum human-authored cases.
 
-- `PoolA-FR-05-ProductSearch` — `GET /api/products?search=keyword` — FR-05
-- `PoolB-FR-10-CancelOrder` — `PUT /api/orders/:id/cancel` — FR-10
-- `PoolC-FR-16-ImportProducts` — `POST /api/admin/import-products` — FR-16
+## Establish the testing contract
+
+Before designing tests, extract or explicitly mark unknown:
+
+- endpoint and HTTP method
+- authentication and authorization model
+- path/query/header/body/file inputs
+- input constraints and business rules
+- success and error responses
+- response schema
+- resource ownership rules
+- state-dependent behavior
+- relevant security requirements
+- project-specific testing constraints
+
+Do not invent missing contract details. Mark material unknowns as `UNRESOLVED` and identify what source or human decision is needed.
 
 ## Work stage by stage
 
-Determine the current stage from `plan.md` and existing artifacts. Perform only that stage plus the minimum verification needed to make its output reviewable.
-
-The normal progression is:
+Use this progression when applicable:
 
 ```text
-Specification analysis
+Contract analysis
 → Human Gate A
-→ Domain partition design
+→ Input/domain partition design
 → Human Gate B
-→ State-transition analysis
+→ State/sequence analysis
 → Human Gate C
-→ Security analysis
+→ Security/authorization analysis
 → Human Gate D
-→ Schema analysis
+→ Schema/response analysis
 → AI testcase generation
-→ Human Gate E: audit AI cases
-→ Human Gate F: confirm human-added cases
-→ Postman implementation
+→ Human Gate E: review AI-generated cases
+→ Human Gate F: confirm human-authored additions when required
+→ Test implementation
 → Real execution
 → Human Gate G: review execution
-→ Bug analysis
-→ Human Gate H: confirm genuine bugs
+→ Defect analysis
+→ Human Gate H: confirm genuine defects
 ```
 
-Do not advance across a required gate unless the tester has explicitly accepted the relevant artifact or supplied the human judgment required at that gate. See [references/workflow-gates.md](references/workflow-gates.md) for gate semantics.
+Not every API requires every analytical dimension. Skip or collapse stages only when non-applicability is explicit and justified. Do not silently advance across a required human gate. See [references/workflow-gates.md](references/workflow-gates.md).
 
-## Preserve specification fidelity
+## Preserve contract fidelity
 
-- Do not invent endpoints, fields, roles, status codes, schema rules, state transitions, or security requirements.
-- If the specification does not resolve a material expectation, mark it `UNRESOLVED` and identify exactly what evidence is missing.
-- Distinguish specification-derived facts from AI inference or test-design proposals.
-- Trace every testcase to at least one concrete basis: FR, SEC requirement, parameter/domain rule, state rule, schema rule, or explicitly identified risk.
-- Do not force a generic security/state testcase onto an API when it is not applicable; record the non-applicability rationale instead.
+- Do not invent endpoints, fields, roles, status codes, schema rules, state transitions, or security expectations.
+- Distinguish source-derived facts from AI inference and test-design proposals.
+- Trace each testcase to at least one basis: contract rule, input partition, business rule, state/sequence rule, schema rule, security requirement, or explicitly identified risk.
+- Do not force generic security or state cases onto an API when they are not applicable.
+- When implementation behavior and documentation conflict, record the conflict; do not silently redefine the expected result.
 
-## Protect the human work required by the assignment
+## Preserve human ownership and provenance
 
-- AI-generated cases must remain labeled as AI-generated.
-- Do not author the student's required `>=5` human-added cases and present them as human-created work. AI may identify coverage gaps or risk areas for the tester to investigate, but the final human-added cases must be authored/confirmed by the tester.
-- For AI-generated test audit, AI may propose `VALID`, `INVALID`, or `INCOMPLETE` with reasoning, but treat that classification as pending until the tester performs or confirms the human review.
-- Preserve the original AI testcase when correcting it so the audit trail shows original → review → correction.
-- Do not mark a bug genuine until specification, reproducibility, expected result, actual result, and real execution evidence have been checked.
+When a task requires human review or human-authored work:
+
+- Keep AI-generated cases labeled as AI-generated.
+- AI may suggest review classifications and corrections, but do not present those suggestions as completed human review until the tester confirms them.
+- AI may identify coverage gaps for human investigation, but must not relabel AI-authored testcases as human-authored.
+- Preserve original AI output when correcting it if the workflow requires an audit trail.
+- Do not mark a defect genuine until the expected behavior, reproducibility, actual behavior, and real evidence have been reviewed.
+
+If the current project has no provenance-sensitive human requirement, these rules still apply to factual review and defect confirmation, but do not invent artificial approval work.
 
 ## Evidence integrity
 
 Never fabricate or simulate as real evidence:
 
-- `X-Student-Id` console/header proof
-- Postman execution
-- Newman CLI/HTML output
+- API execution
 - request/response results
+- test-run output
+- CLI/HTML reports
 - screenshots
-- GitHub Actions runs
-- GitHub Issues
-- bug reproduction evidence
-- demo video evidence
-- the final self-drawn AI test-generator diagram
+- CI/CD runs
+- issue-tracker records
+- logs or measurements
+- human judgments
 
-When analyzing execution, identify the exact real artifact used and separate observed facts from AI interpretation.
+When analyzing execution, identify the exact evidence source and separate observed facts from AI interpretation.
+
+## Tool and framework neutrality
+
+Do not assume Postman/Newman. Use the tools selected by the project, such as Postman/Newman, Karate, REST Assured, pytest, Playwright APIRequest, curl-based harnesses, or another suitable framework.
+
+When the project mandates a tool or feature, follow that requirement. Otherwise choose based on the existing stack, maintainability, data-driven needs, reporting, and CI integration.
 
 ## Output discipline
 
-Write artifacts into the assigned API folder for the current stage, using the paths defined in `plan.md`. Keep shared Postman/Newman assets under `HW06/postman/` and shared reports under `HW06/reports/`.
+Write artifacts to the locations defined by the current project. Do not impose a folder structure from a previous project on unrelated work.
 
-When creating testcase artifacts, follow [references/testcase-evidence-contract.md](references/testcase-evidence-contract.md).
+When creating testcase artifacts, follow [references/testcase-evidence-contract.md](references/testcase-evidence-contract.md) and adapt optional fields to the API and project.
 
-After any material AI assistance, use `$ai-audit-report` to append the interaction to `HW06/reports/ai-audit-report.md` and leave human review pending unless the tester explicitly provides the review.
+If an AI-audit mechanism exists in the current project, use it after material AI assistance. Do not assume a specific audit skill or report path unless the project defines one.
