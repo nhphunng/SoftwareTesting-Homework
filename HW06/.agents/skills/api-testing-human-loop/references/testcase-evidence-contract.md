@@ -4,36 +4,36 @@ Use this reference when generating, reviewing, implementing, executing, or repor
 
 ## Testcase record
 
-A testcase should be independently reviewable and traceable without forcing every project to use a large fixed schema.
+A testcase should preserve enough information to be independently reviewable and traceable.
 
-Core fields:
+Recommended fields:
 
 | Field | Purpose |
 | --- | --- |
 | ID | Stable testcase identifier |
 | Source | Provenance such as AI / HUMAN / EXISTING |
 | API | Endpoint or feature under test |
-| Requirement Basis | Contract, rule, schema, security requirement, or risk |
+| Requirement Basis | Contract, business rule, security requirement, state rule, schema rule, or risk |
 | Category | Functional / Domain / Boundary / State / Security / Schema / Other |
-| Preconditions | Required setup, identity, data, or state |
-| Input | Request input or test data |
+| Preconditions | Required identity, role, resource data, state, and setup |
+| Input | Path/query/header/body/file/test data |
 | Steps | Reproducible request sequence |
-| Expected Result | Expected status and business outcome |
+| Expected Status | Status code when supported by the contract |
+| Expected Response | Business expectation |
+| Expected Schema | Relevant response/schema expectation |
+| Security Expectation | Authorization/ownership/security expectation when applicable |
+| State Before | Pre-request state when applicable |
+| State After | Expected post-request state when applicable |
 | Rationale | Why this testcase exists |
+| Human Review Status | Project-defined review result when human review is required |
+| Human Review Reason | Basis for the review decision |
+| Corrected Test | Corrected version where auditability matters |
+| Execution Status | PASS / FAIL / BLOCKED or project-defined equivalent after real execution |
+| Actual Result | Real observed result only |
+| Evidence | Evidence path/link/reference |
+| Defect ID | Confirmed defect reference if applicable |
 
-Add only when applicable:
-
-- `Expected Schema`
-- `Security Expectation`
-- `State Before / State After`
-- `Human Review Status / Human Review Reason`
-- `Corrected Test`
-- `Execution Status`
-- `Actual Result`
-- `Evidence`
-- `Defect ID`
-
-Do not invent human-review, execution, or evidence values. Project-specific formats may add or rename fields when needed.
+Do not fill human-review or execution fields with invented values.
 
 ## Coverage design
 

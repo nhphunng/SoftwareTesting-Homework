@@ -24,6 +24,7 @@
 | AI Output | Refactored P1 to follow the established HW05 audit-skill pattern and the system `$skill-creator` guidance. The skill now uses a concise `SKILL.md`, OpenAI interface metadata, a reusable audit-entry reference template, chronological report appending, explicit pending human review, and HW06-specific evidence-integrity rules. The system validator was invoked but could not complete because local Python lacks the `yaml` module; no dependency was installed automatically. |
 
 Human Review:
+
 - Status: Pending human review
 - Accepted:
 - Modified:
@@ -45,6 +46,7 @@ Human Review:
 | AI Output | Created the P2 skill using the system `$skill-creator` initializer with a references resource directory, then replaced the scaffold with HW06-specific Human-in-the-Loop instructions. Added explicit Gate A–H semantics, testcase/evidence provenance rules, protection for the required human-added testcases, real-execution evidence constraints, and integration with `$ai-audit-report`. Fixed an initializer command shell-expansion issue in `agents/openai.yaml`. Manual structure validation passed. The official `quick_validate.py` was attempted but could not run because the local Python environment lacks the `yaml` module; no package was installed. No files were staged and no commit was created. |
 
 Human Review:
+
 - Status: Pending human review
 - Accepted:
 - Modified:
@@ -60,3 +62,25 @@ Human Review:
 - Removed: Fixed references to FR-05, FR-10, FR-16 and assignment-specific provenance/count rules as universal skill behavior.
 - Added: Tool/framework neutrality, generic contract extraction, reusable state/security/schema coverage guidance, and configurable project-specific constraints.
 - Notes: The skill remains stored inside HW06 for this project, but its instructions are intentionally reusable for future API-testing work.
+
+## AI Audit Entry - AI-003
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T11:24:00+07:00 |
+| Stage | Phase 2 — Obtain and Inspect SUT |
+| API | Full SUT inventory; focus later on FR-05, FR-10, FR-16 |
+| User Prompt | Tôi đã thực hiện clone document/eshop-sut dựa vào đó thực hiện phase 2 Obtain and Inspect SUT |
+| Evidence/Input Basis | `/Users/nguyenhoangphihung/Document/eshop-sut/README.md`; `/Users/nguyenhoangphihung/Document/eshop-sut/api_specification.md`; `/Users/nguyenhoangphihung/Document/eshop-sut/backend/server.js`; repository metadata at commit `85af3ba875c88283615e22cb108f13e2fccaf0e9`; `HW06/plan.md` |
+| Generated/Modified Files | `HW06/source/api_specification.md`; `HW06/reports/api-inventory.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Verified the local SUT clone and repository snapshot, copied the API specification into the HW06 source folder, inventoried 30 documented routes and 31 implemented routes, mapped FR/security/state/validation concerns, separated business requirements from API contract and implementation observations, and recorded unresolved/conflicting contract points. Key conflict: FR-16 business requirements describe CSV upload/RFC4180/atomic rollback while the API specification and implementation use a JSON products array. Static mismatch candidates were recorded but explicitly not classified as confirmed bugs without real execution. No runtime API tests were executed and no commit was created. |
+
+Human Review:
+
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:

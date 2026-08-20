@@ -847,7 +847,7 @@ Mỗi case phải có `Source = AI`.
 Tạo matrix:
 
 | Coverage | Count |
-|---|---:|
+| --- | ---: |
 | Functional | |
 | Domain partition | |
 | Boundary | |
@@ -1652,7 +1652,7 @@ Must contain:
 ## Self-assessment
 
 | No. | Criteria | Grade | Self-Assessed |
-|---|---|---:|---:|
+| --- | --- | ---: | ---: |
 | 1 | API 1 full pipeline | 30 | |
 | 2 | API 2 full pipeline | 30 | |
 | 3 | API 3 full pipeline | 30 | |
