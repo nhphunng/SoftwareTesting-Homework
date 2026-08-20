@@ -6,7 +6,7 @@ Primary requirement: FR-10 — Order State Machine
 Gate A: **APPROVED**  
 Gate B: **APPROVED**  
 Gate C: **APPROVED**  
-Human Gate D status: **PENDING HUMAN REVIEW**
+Human Gate D status: **APPROVED**
 
 ## 1. Security scope
 
