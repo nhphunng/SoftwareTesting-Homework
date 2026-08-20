@@ -205,7 +205,9 @@ HUMAN EXTENSION
     ↓
 POSTMAN IMPLEMENTATION
     ↓
-REAL EXECUTION
+RUNTIME TEST DATA & PRECONDITIONS
+    ↓
+SMOKE / REAL EXECUTION
     ↓
 BUG ANALYSIS
     ↓
@@ -268,6 +270,7 @@ Gate C — state model accepted
 Gate D — security coverage accepted
 Gate E — generated tests audited
 Gate F — human-added tests confirmed
+Runtime Readiness — test data/auth/state/preconditions ready
 Gate G — execution result reviewed
 Gate H — bug confirmed
 ```
@@ -1110,9 +1113,118 @@ git commit -m "test(api1): implement Postman API test suite"
 
 ---
 
-# 18. Step J — Execute Real Tests
+# 18. Step J — Prepare Runtime Test Data and Preconditions
 
-## 18.1 Run SUT
+Step này áp dụng cho **cả 3 API**, nhưng dữ liệu/precondition phải được thiết kế riêng theo từng API. Không copy cứng test data của FR-05 sang FR-10 hoặc FR-16.
+
+Mục tiêu:
+
+- chạy SUT thật trước khi official execution;
+- xác định dataset/state/authentication thực tế cần cho testcase;
+- thay các placeholder runtime bằng giá trị thật có thể reproduce;
+- chuẩn bị dedicated/disposable test data cho mutation tests;
+- xác định setup/cleanup strategy;
+- chỉ bật các state-changing/destructive test khi precondition đã an toàn và rõ ràng;
+- không fabricate token, ID, resource, file fixture, expected dataset hoặc execution evidence.
+
+## 18.1 Common preparation contract
+
+Trước khi chạy Newman chính thức, với mỗi API phải xác định tối thiểu:
+
+```text
+Runtime endpoint/base URL
+Required actors/tokens/roles
+Controlled input values
+Required resource IDs
+Required initial states
+Dedicated mutation data if needed
+Setup procedure
+Cleanup/reset procedure
+Remaining unresolved runtime dependencies
+```
+
+Nếu testcase phụ thuộc dữ liệu mà runtime chưa có, phải tạo hoặc discover dữ liệu thật bằng documented setup path. Không điền giá trị giả chỉ để collection chạy.
+
+## 18.2 API 1 — FR-05 Product Search
+
+Chuẩn bị các giá trị thật khi applicable:
+
+```text
+matchingKeyword
+noMatchKeyword
+exactProductName
+partialKeyword
+unicodeKeyword
+normalKeywordA
+normalKeywordB
+```
+
+Ngoài ra:
+
+- tạo dedicated product nếu rename/delete sequence cần mutation;
+- lấy admin token thật nếu documented mutation endpoint yêu cầu;
+- chỉ bật rename/delete tests sau khi disposable product và cleanup path đã sẵn sàng.
+
+## 18.3 API 2 — FR-10 Cancel Order
+
+Chuẩn bị controlled order states và authenticated actors:
+
+```text
+PENDING order
+CONFIRMED order
+SHIPPING order
+DELIVERED order
+CANCELED order
+```
+
+Kèm theo:
+
+- user token thật;
+- admin token nếu testcase cần;
+- order ownership đúng cho ownership/IDOR cases;
+- dedicated/disposable orders;
+- exact `orderId` cho từng state;
+- reset/recreate strategy để các testcase stateful có thể chạy lặp lại.
+
+## 18.4 API 3 — FR-16 Import Products
+
+Chuẩn bị auth và controlled import fixtures:
+
+```text
+admin token
+non-admin token when required
+valid CSV
+invalid-header CSV
+missing-name CSV
+zero/negative-price CSV
+RFC4180 quoted-comma CSV
+mixed valid+invalid rows for atomic rollback
+```
+
+Kèm theo:
+
+- baseline product state/count hoặc unique names khi testcase cần so sánh trước/sau;
+- cleanup strategy cho successful imports;
+- không tạo file fixture giả mạo requirement mà source không định nghĩa.
+
+## 18.5 Runtime-data readiness check
+
+Trước khi sang execution, ghi rõ cho từng testcase/stateful group:
+
+```text
+READY
+BLOCKED — missing runtime data
+BLOCKED — missing auth/role
+BLOCKED — unsafe mutation setup
+```
+
+Official execution chỉ bắt đầu khi các testcase dự kiến chạy có precondition xác định và reproducible.
+
+---
+
+# 19. Step K — Execute Real Tests
+
+## 19.1 Run SUT
 
 Verify real hostname:
 
@@ -1126,7 +1238,7 @@ hoặc:
 127.0.0.1
 ```
 
-## 18.2 Run Postman manually first
+## 19.2 Run Postman manually first
 
 Fix:
 
@@ -1137,7 +1249,7 @@ Fix:
 - cleanup;
 - flaky tests.
 
-## 18.3 Run Newman
+## 19.3 Run Newman
 
 Example:
 
@@ -1153,7 +1265,7 @@ Generate:
 postman/newman/api1-report.html
 ```
 
-## 18.4 Record real evidence
+## 19.4 Record real evidence
 
 Store:
 
@@ -1163,7 +1275,7 @@ Store:
 - actual request/response;
 - X-Student-Id proof.
 
-## 18.5 Never normalize real failures away
+## 19.5 Never normalize real failures away
 
 Nếu testcase fail:
 
@@ -1184,7 +1296,7 @@ git commit -m "test(api1): execute API suite with Newman"
 
 ---
 
-# 19. Step K — Genuine Bug Reporting
+# 20. Step L — Genuine Bug Reporting
 
 Một failure chỉ được report là bug sau Human Confirmation Gate.
 
@@ -1251,7 +1363,7 @@ git commit -m "bug(api1): document confirmed API defects"
 
 ---
 
-# 20. Repeat Phases for API 2
+# 21. Repeat Phases for API 2
 
 Lặp toàn bộ:
 
@@ -1265,6 +1377,7 @@ Schema
 Audit
 >=5 Human Tests
 Postman
+Runtime Data & Preconditions
 Newman
 Bug Report
 ```
@@ -1273,13 +1386,13 @@ Commit riêng cho từng stage.
 
 ---
 
-# 21. Repeat Phases for API 3
+# 22. Repeat Phases for API 3
 
 Lặp toàn bộ pipeline tương tự API 1 và API 2.
 
 ---
 
-# 22. Phase 5 — Consolidate Test Cases into Excel
+# 23. Phase 5 — Consolidate Test Cases into Excel
 
 Required final Excel should include all 3 APIs.
 
@@ -1315,9 +1428,9 @@ AI-missed bugs
 
 ---
 
-# 23. Phase 6 — CI/CD Integration
+# 24. Phase 6 — CI/CD Integration
 
-## 23.1 GitHub Actions pipeline
+## 24.1 GitHub Actions pipeline
 
 Suggested workflow:
 
@@ -1343,7 +1456,7 @@ File example:
 .github/workflows/api-tests.yml
 ```
 
-## 23.2 Required Run A — All Passing
+## 24.2 Required Run A — All Passing
 
 Create a commit where:
 
@@ -1358,7 +1471,7 @@ Capture:
 - screenshot;
 - Newman output.
 
-## 23.3 Required Run B — Exactly One Failing Test
+## 24.3 Required Run B — Exactly One Failing Test
 
 Create intentional test expectation mismatch or controlled failing case.
 
@@ -1376,7 +1489,7 @@ Capture:
 
 Sau evidence, restore valid testcase.
 
-## 23.4 CI/CD report
+## 24.4 CI/CD report
 
 Create:
 
@@ -1404,11 +1517,11 @@ git commit -m "ci(hw06): run Newman API tests in GitHub Actions"
 
 ---
 
-# 24. Phase 7 — AI-Driven API Test Generator
+# 25. Phase 7 — AI-Driven API Test Generator
 
 Đây là phần Agent Skill / G9.5.
 
-## 24.1 Goal
+## 25.1 Goal
 
 Input:
 
@@ -1422,7 +1535,7 @@ Output:
 Structured API Test Cases
 ```
 
-## 24.2 Suggested internal stages
+## 25.2 Suggested internal stages
 
 ```text
 Specification Input
@@ -1450,7 +1563,7 @@ Human Review Gate
 Final Test Cases
 ```
 
-## 24.3 Pseudocode
+## 25.3 Pseudocode
 
 Create:
 
@@ -1458,7 +1571,7 @@ Create:
 agent-skill/pseudocode.md
 ```
 
-## 24.4 Skill implementation
+## 25.4 Skill implementation
 
 Optionally implement:
 
@@ -1480,7 +1593,7 @@ It should generate:
 - candidate tests;
 - audit-ready metadata.
 
-## 24.5 Diagram
+## 25.5 Diagram
 
 IMPORTANT:
 
@@ -1500,7 +1613,7 @@ Save:
 agent-skill/api-test-generator-diagram.png
 ```
 
-## 24.6 Optional demo video
+## 25.6 Optional demo video
 
 Record a real demonstration of generator producing tests for one API.
 
@@ -1513,7 +1626,7 @@ git commit -m "feat(agent): design AI-driven API test generator"
 
 ---
 
-# 25. Phase 8 — AI Audit Report
+# 26. Phase 8 — AI Audit Report
 
 Use logs produced from the beginning.
 
@@ -1558,7 +1671,7 @@ git commit -m "docs(hw06): compile AI audit report"
 
 ---
 
-# 26. Phase 9 — AI Critique
+# 27. Phase 9 — AI Critique
 
 Length:
 
@@ -1597,7 +1710,7 @@ git commit -m "docs(hw06): add evidence-based AI critique"
 
 ---
 
-# 27. Phase 10 — Main Report
+# 28. Phase 10 — Main Report
 
 Create:
 
@@ -1639,7 +1752,7 @@ main-report.pdf
 
 ---
 
-# 28. Phase 11 — README and Self-Assessment
+# 29. Phase 11 — README and Self-Assessment
 
 Create/update:
 
@@ -1683,7 +1796,7 @@ AI-missed bugs
 
 ---
 
-# 29. Phase 12 — Git Commit Log
+# 30. Phase 12 — Git Commit Log
 
 Requirement:
 
@@ -1710,7 +1823,7 @@ documentation
 
 ---
 
-# 30. Phase 13 — Final Compliance Audit
+# 31. Phase 13 — Final Compliance Audit
 
 Before packaging, perform requirement-by-requirement audit.
 
@@ -1806,7 +1919,7 @@ Before packaging, perform requirement-by-requirement audit.
 
 ---
 
-# 31. Phase 14 — Submission Package
+# 32. Phase 14 — Submission Package
 
 Filename:
 
@@ -1852,7 +1965,7 @@ Suggested package:
 
 ---
 
-# 32. Recommended Execution Order
+# 33. Recommended Execution Order
 
 Thứ tự thực hiện thực tế:
 
@@ -1881,7 +1994,7 @@ P19 Create final ZIP
 
 ---
 
-# 33. Definition of Done
+# 34. Definition of Done
 
 HW06 chỉ được xem là DONE khi:
 

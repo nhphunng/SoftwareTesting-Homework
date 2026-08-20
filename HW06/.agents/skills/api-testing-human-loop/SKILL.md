@@ -54,6 +54,7 @@ Contract analysis
 → Human Gate E: review AI-generated cases
 → Human Gate F: confirm human-authored additions when required
 → Test implementation
+→ Runtime test data & preconditions preparation
 → Real execution
 → Human Gate G: review execution
 → Defect analysis
@@ -61,6 +62,42 @@ Contract analysis
 ```
 
 Not every API requires every analytical dimension. Skip or collapse stages only when non-applicability is explicit and justified. Do not silently advance across a required human gate. See [references/workflow-gates.md](references/workflow-gates.md).
+
+## Prepare runtime test data and preconditions before execution
+
+After test implementation and before any official execution/evidence run, establish the real runtime inputs needed to make the suite reproducible.
+
+For each API, identify when applicable:
+
+- real base URL / reachable SUT instance
+- required users, tokens, roles, and ownership relationships
+- controlled matching/non-matching values
+- resource IDs and initial states
+- dedicated/disposable records for mutation tests
+- upload/import fixtures
+- setup path and cleanup/reset strategy
+- unresolved runtime dependencies
+
+This stage is API-specific. Do not reuse another API's fixture model mechanically.
+
+Examples:
+
+- search APIs may need known matching/no-match keywords and disposable products for mutation→search scenarios
+- stateful order APIs may need reproducible resources in several documented states and correct actor ownership
+- import/upload APIs may need controlled valid/invalid files, auth roles, baseline data, rollback verification data, and cleanup rules
+
+Do not fabricate tokens, IDs, resources, state, files, or dataset assumptions merely to make automation pass.
+
+Classify readiness explicitly when useful:
+
+```text
+READY
+BLOCKED — missing runtime data
+BLOCKED — missing auth/role
+BLOCKED — unsafe mutation setup
+```
+
+Do not start the official evidence run for a testcase until its required preconditions are real, known, and reproducible. A syntax-only or smoke validation may happen earlier, but it must not be represented as official execution evidence.
 
 ## Preserve contract fidelity
 

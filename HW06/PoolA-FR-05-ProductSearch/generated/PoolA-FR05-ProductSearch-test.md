@@ -1226,60 +1226,62 @@ No case is automatically reclassified to `VALID` by AI.
 Required human-added cases for FR-05: >= 5
 Current retained human-added cases: 5
 Source: HUMAN
-Status: PENDING FINAL HUMAN CONFIRMATION BEFORE IMPLEMENTATION
+Status: APPROVED FOR IMPLEMENTATION
 ```
 
 The following five cases were authored by the reviewer. Their provenance remains `HUMAN`. The wording below was translated to English and tightened only to remove unsupported assumptions; no additional human-origin case was invented by AI.
 
-## HUMAN-FR05-043 — Cross-user result isolation characterization
+## HUMAN-FR05-043 — Structured query parameter injection
 
 | Field | Value |
 | --- | --- |
 | Source | HUMAN |
-| API | GET /api/products?search=keyword |
-| Requirement Basis | Human-discovered context gap: whether `X-Student-Id` influences data partitioning or cache behavior is not specified |
-| Scope Type | CHARACTERIZATION / CONTEXT DISCOVERY |
-| Category | Security / Ownership / Cross-user |
-| Preconditions | Two valid identifiers A and B are available. If runtime/source evidence shows that data or visibility differs by `X-Student-Id`, prepare distinguishable test data for A and B. |
-| Input | Request 1: `X-Student-Id: A`, `search=<controlled keyword>`; Request 2: `X-Student-Id: B`, same keyword |
-| Steps | Send the request with A; then send the same search with B; compare result sets and any context-sensitive fields. |
-| Expected Status | UNRESOLVED |
-| Expected Response | Record whether changing `X-Student-Id` changes search results. If the endpoint is confirmed public/shared, equivalent results are valid. Only if runtime/source evidence confirms that `X-Student-Id` is a partition key should cross-context leakage be treated as a defect. |
+| API | GET /api/products |
+| Requirement Basis | Human-discovered API-specific parser/security gap for duplicate and structured query-parameter forms |
+| Scope Type | SECURITY / API-SPECIFIC BEHAVIOR |
+| Category | Security / API-specific behavior |
+| Preconditions | A keyword is known to match no product, using the fixed value `__NO_MATCH_23127194__`. |
+| Input | Baseline: `?search=__NO_MATCH_23127194__`; Attack: `?search=__NO_MATCH_23127194__&search[$ne]=x` |
+| Headers | `X-Student-Id: 23127194` |
+| Steps | 1. Send the baseline request and record the returned product IDs. 2. Send the attack request with the additional bracket-notation parameter. 3. Compare status, response body, and returned product IDs. |
+| Expected Status | The attack request must not cause a `5xx` response. |
+| Expected Response | `search[$ne]` must not turn `search` into an object/operator, bypass the intended filter, or expose the full product list. The attack result must not become broader than the baseline because of operator-style interpretation. |
 | Expected Schema | UNRESOLVED BY DESIGN |
-| Security Expectation | Do not assume tenancy. Characterize whether the header affects data scope or cache behavior before applying an ownership verdict. |
-| State Before | Stable dataset; A/B contexts available if supported by the system |
+| Security Expectation | Query parameters must be handled as typed input. `$ne` must be treated as an unsupported parameter name rather than a query operator. |
+| State Before | Stable dataset |
 | State After | No mutation expected |
-| Why AI missed this | The AI treated `X-Student-Id` as a mandatory assignment header and did not vary it, so it did not characterize whether the runtime gives the header any data-scoping semantics. |
-| Root Cause | security ownership assumption / context missing |
-| Human Audit Status | PENDING HUMAN CONFIRMATION |
-| Human Audit Reason | Reviewer-authored case retained only as characterization until the header semantics are confirmed. |
+| Why AI missed this | The AI covered classic SQL-oriented payloads and duplicate `search` parameters, but did not combine a normal `search` value with bracket-notation syntax that may be parsed differently by query parsers or middleware. |
+| Root Cause | API-specific behavior / structured-parameter parser gap |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reviewer-authored replacement case; executable sequentially in Postman/Newman while preserving the mandatory fixed student header. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
 | Defect ID | |
 
-## HUMAN-FR05-044 — Concurrent searches must not contaminate each other
+## HUMAN-FR05-044 — Encoded null-byte inside search value
 
 | Field | Value |
 | --- | --- |
 | Source | HUMAN |
 | API | GET /api/products?search=keyword |
-| Requirement Basis | Human-discovered concurrency gap beyond approved sequential request-isolation cases |
-| Scope Type | ROBUSTNESS / CONCURRENCY |
-| Category | Race / Concurrency / Cross-request |
-| Preconditions | Controlled keyword A and keyword B match distinguishable product sets; dataset remains stable during the run. |
-| Input | 20 concurrent requests with `search=A` and 20 concurrent requests with `search=B`, all using `X-Student-Id: 23127194`; repeat for 3 rounds. |
-| Steps | Send both request groups concurrently; attach a client-side request ID; map every response back to its originating keyword; repeat for three identical rounds. |
-| Expected Status | UNRESOLVED |
-| Expected Response | Each response must follow the semantics of its own request keyword. Results for A must not be swapped, mixed, or contaminated by B, and vice versa. |
+| Requirement Basis | Human-discovered unusual-input/parser-differential gap |
+| Scope Type | SECURITY / ROBUSTNESS |
+| Category | Security / Unusual input / Parser differential |
+| Preconditions | The keyword `phone` matches at least one product, and no product name contains the full string `phone\u0000__NO_MATCH_23127194__`. |
+| Input | `?search=phone%00__NO_MATCH_23127194__` |
+| Headers | `X-Student-Id: 23127194` |
+| Steps | 1. Send the request with `%00` between a valid keyword and the non-matching suffix. 2. Record status and response. 3. Send a normal search immediately afterward to verify that the endpoint remains operational. |
+| Expected Status | The request must not return `5xx`; the server may reject it with `4xx` or process the entire value as data. |
+| Expected Response | The value must not be truncated at `%00` and then treated as `search=phone`. The response must not expose stack traces, database errors, or other internal details. The subsequent normal search must still operate normally. |
 | Expected Schema | UNRESOLVED BY DESIGN |
-| Security Expectation | No shared mutable search state or request-context contamination across concurrent requests. |
+| Security Expectation | No dangerous null-byte truncation or parser differential between URL parsing, application handling, and database processing. |
 | State Before | Stable dataset |
-| State After | Dataset unchanged; no persistent request state |
-| Why AI missed this | The AI generated sequential A→B independence tests, but sequential execution cannot reveal race conditions or shared mutable request state. |
-| Root Cause | model limitation / concurrency gap |
-| Human Audit Status | PENDING HUMAN CONFIRMATION |
-| Human Audit Reason | Reviewer-authored concurrency extension of the existing sequential state/sequence coverage. |
+| State After | No mutation; endpoint remains operational |
+| Why AI missed this | The AI covered punctuation, encoded reserved characters, and SQL-oriented payloads, but did not test an encoded null byte that can produce parser/application/database interpretation differences. |
+| Root Cause | parser differential / unusual-input gap |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reviewer-authored replacement case; fully executable as two sequential Postman/Newman requests. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1305,8 +1307,8 @@ The following five cases were authored by the reviewer. Their provenance remains
 | State After | Product name = `NewName` |
 | Why AI missed this | The AI generated tests against a stable dataset and did not compose a documented write operation with later search behavior. |
 | Root Cause | state-history dependency |
-| Human Audit Status | PENDING HUMAN CONFIRMATION |
-| Human Audit Reason | Reviewer-authored mutation→search scenario; retained because it does not invent a new product lifecycle state. |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reviewer-approved mutation→search scenario; retained because it does not invent a new product lifecycle state. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1332,35 +1334,36 @@ The following five cases were authored by the reviewer. Their provenance remains
 | State After | Product has been successfully deleted through the documented API |
 | Why AI missed this | The AI tested GET search independently and did not compose the documented delete operation with subsequent search behavior. |
 | Root Cause | API-specific state-history behavior |
-| Human Audit Status | PENDING HUMAN CONFIRMATION |
-| Human Audit Reason | Reviewer-authored delete→search scenario; hidden/soft-delete assumptions were intentionally removed. |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reviewer-approved delete→search scenario; hidden/soft-delete assumptions were intentionally removed. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
 | Defect ID | |
 
-## HUMAN-FR05-048 — Repeated expensive-search robustness
+## HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products
 
 | Field | Value |
 | --- | --- |
 | Source | HUMAN |
-| API | GET /api/products?search=keyword |
-| Requirement Basis | Human-discovered robustness gap; Gate D explicitly marks rate/abuse policy as `NOT SPECIFIED` |
-| Scope Type | ROBUSTNESS / CHARACTERIZATION |
-| Category | Repeated Operation / Resource Exhaustion |
-| Preconditions | Safe non-production test environment; one fixed long/complex keyword and one fixed normal keyword; baseline normal-search behavior recorded before the burst. |
-| Input | 30 long/complex search requests plus 10 normal search requests during one controlled run, all using `X-Student-Id: 23127194`. |
-| Steps | Record baseline normal-search behavior; send the 30 expensive searches while also sending 10 normal searches; record status, latency, and error behavior; after the burst, send the same normal search again and record recovery behavior. |
-| Expected Status | UNRESOLVED; `429` or any throttling behavior is characterization only because no rate-limit contract is specified. |
-| Expected Response | Record whether burst traffic causes errors, material temporary degradation, internal-error disclosure, or persistent effects on later normal searches. Do not require a rate limit or user-isolation policy that the source does not define. |
+| API | GET /api/products → POST /api/products?search=keyword → GET /api/products |
+| Requirement Basis | Human-discovered unusual-sequence and method-confusion gap around the product collection endpoint |
+| Scope Type | SECURITY / STATE TRANSITION |
+| Category | Unusual sequence / State transition / Method confusion |
+| Preconditions | Product listing works; use only `X-Student-Id: 23127194`; do not send a JWT. |
+| Input | `POST /api/products?search=phone` with JSON body `{"unexpectedSearchField":"phone"}` |
+| Headers | `X-Student-Id: 23127194`; `Content-Type: application/json` |
+| Steps | 1. Send GET listing and save the product ID set. 2. Send the malformed/unauthorized POST with the `search` query. 3. Send GET listing again. 4. Compare product IDs before and after. |
+| Expected Status | The POST must be rejected with an appropriate `4xx` response and must not be accepted as a GET-style search. |
+| Expected Response | The POST must not return search results as though it were a GET and must not create or update a product. The product ID set before and after must remain unchanged. |
 | Expected Schema | UNRESOLVED BY DESIGN |
-| Security Expectation | No invented DoS/rate-limit contract. Internal-error disclosure remains evaluated under the already approved information-disclosure risk. |
-| State Before | Service operating normally in the controlled test environment |
-| State After | Record whether normal search behavior returns to baseline; any persistent degradation is execution evidence requiring later analysis. |
-| Why AI missed this | AI-FR05-020 covers one long input only; it does not evaluate cumulative effects from repeated expensive operations or recovery of normal traffic afterward. |
-| Root Cause | cross-request reasoning / robustness gap |
-| Human Audit Status | PENDING HUMAN CONFIRMATION |
-| Human Audit Reason | Reviewer-authored repeated-operation case retained strictly as characterization because rate/abuse requirements are not specified. |
+| Security Expectation | No HTTP method confusion, mass assignment, or unintended product mutation. |
+| State Before | Snapshot of current product IDs is stored |
+| State After | Product IDs remain unchanged |
+| Why AI missed this | The AI focused FR-05 on GET search behavior and did not compose a malformed unauthenticated POST attempt with before/after listing verification for unintended mutation. |
+| Root Cause | unusual-sequence / method-confusion gap |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reviewer-authored replacement case; executable as a deterministic three-request Postman/Newman sequence. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |

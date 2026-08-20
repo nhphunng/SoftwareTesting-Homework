@@ -99,6 +99,34 @@ When such a requirement exists:
 
 If no such project requirement exists, this gate may simply confirm that the human reviewer is satisfied with coverage gaps and extensions.
 
+## Runtime-data readiness checkpoint
+
+After test implementation and before official execution, verify that the runtime setup required by the suite is real and reproducible.
+
+Review when applicable:
+
+- reachable SUT/base URL
+- required users, tokens, roles, and ownership relationships
+- controlled input values and fixture files
+- resource IDs and required initial states
+- dedicated/disposable records for mutation tests
+- setup procedure
+- cleanup/reset procedure
+- unresolved runtime dependencies
+
+Do not fabricate data, IDs, tokens, files, state, or expected dataset values merely to unblock automation.
+
+A useful readiness classification is:
+
+```text
+READY
+BLOCKED — missing runtime data
+BLOCKED — missing auth/role
+BLOCKED — unsafe mutation setup
+```
+
+Official execution evidence should not begin for a testcase until its required runtime preconditions are known and reproducible. Syntax validation or a clearly labeled smoke check may occur earlier, but it is not official evidence.
+
 ## Gate G — Execution result reviewed
 
 Only real execution can establish observed results. Before defect analysis, distinguish unexpected behavior among:
