@@ -28,6 +28,29 @@ Three source types are kept separate:
 
 When these sources disagree, this report records the conflict rather than silently reconciling it. Static implementation observations are **not confirmed bugs** until reproduced through real API execution.
 
+### Human Gate A decision — Option B
+
+The tester selected the following source hierarchy for all later phases:
+
+1. `README.md` = **business truth / expected business behavior**.
+2. `api_specification.md` = **API interface contract**.
+3. `backend/server.js` and runtime behavior = **implementation observation / actual behavior**.
+
+Conflicts are preserved explicitly instead of being merged. Later testcases should distinguish:
+
+- **Business Compliance Tests** — validate behavior against FR/SEC/business rules from `README.md`.
+- **API Contract Tests** — validate the documented method/endpoint/request/response contract from `api_specification.md`.
+
+Use these labels consistently in later analysis:
+
+- `REQUIREMENT`
+- `API CONTRACT`
+- `UNRESOLVED / CONFLICT`
+- `IMPLEMENTATION OBSERVATION`
+- `CONFIRMED DEFECT` only after real runtime verification and human confirmation.
+
+This decision resolves the Phase 2 source-precedence question without rewriting either specification source.
+
 A verbatim copy of the API specification used for this homework is stored at:
 
 ```text

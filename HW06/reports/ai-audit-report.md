@@ -84,3 +84,12 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+### Human Review Addendum for AI-003 — 2026-08-20T13:32:00+07:00
+
+- Status: Accepted with source-handling decision
+- Accepted: Phase 2 inventory, conflict preservation, FR/SEC/state mapping, and separation of static observations from confirmed defects.
+- Modified: Adopt Option B as the authoritative source-handling rule for later phases.
+- Removed: None.
+- Added: `README.md` = business truth; `api_specification.md` = API interface contract; implementation/runtime = actual behavior. Later tests must distinguish Business Compliance Tests from API Contract Tests and use `CONFIRMED DEFECT` only after real execution plus human confirmation.
+- Notes: Gate A source-precedence decision is approved. Existing unresolved response/status/schema items remain unresolved unless supported by requirement/contract evidence.
