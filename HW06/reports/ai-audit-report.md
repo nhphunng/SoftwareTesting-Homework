@@ -636,3 +636,20 @@ Human Review:
 - Gate A: APPROVED
 - Gate B: PENDING
 - Ownership/IDOR provenance: RISK-BASED AUTHORIZATION EXPECTATION, not direct FR-10 wording
+
+## AI Audit Entry - AI-026
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T23:09:00+07:00 |
+| Stage | API 2 / FR-10 — Gate C approval + Step D Security Analysis |
+| API | `PUT /api/orders/:id/cancel` |
+| User Prompt | Thực hiện step D — Security Analysis. |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/analysis/state-transitions.md`; `PoolB-FR-10-CancelOrder/analysis/security.md`; `reports/ai-audit-report.md` |
+| AI Output | Marked Gate C approved and created FR-10 security analysis. Mapped SEC-01..SEC-07 with SEC-02 directly applicable and SEC-05 potentially applicable; preserved cross-user cancellation as mandatory risk-based BOLA/IDOR coverage rather than direct FR-10 wording. Added JWT negative cases, ownership isolation, state/status/user/id override attempts, selected injection/path probes, information-disclosure handling, fixture-isolation guidance, and optional concurrency/race characterization. No exact rejection status codes were invented where the contract is silent. |
+
+Human Review:
+- Gate C: APPROVED
+- Gate D: PENDING
+- Concurrency: optional unless deterministic harness becomes available
