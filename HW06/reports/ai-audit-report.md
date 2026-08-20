@@ -460,3 +460,45 @@ Human Review:
 - Removed: HUMAN-FR05-045 remains excluded from the retained suite
 - Added: None
 - Notes: Step H / Human Gate F is complete for FR-05. The suite is ready for Postman implementation and subsequent real Newman execution.
+
+## AI Audit Entry - AI-017
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T18:01:00+07:00 |
+| Stage | Phase 4 / API 1 / Human-added testcase replacement before Postman execution |
+| API | FR-05 Product Search plus one malformed POST sequence against the product collection endpoint |
+| User Prompt | Replace HUMAN-FR05-043, HUMAN-FR05-044, and HUMAN-FR05-048 with three new reviewer-authored cases, translate them to English, and update `PoolA-FR05-ProductSearch-test.md`. |
+| Evidence/Input Basis | Three replacement testcases authored directly by the reviewer in chat; previously approved HUMAN-FR05-046 and HUMAN-FR05-047 remain retained. |
+| Generated/Modified Files | `HW06/PoolA-FR-05-ProductSearch/generated/PoolA-FR05-ProductSearch-test.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Replaced HUMAN-FR05-043 with structured query parameter injection using `search[$ne]`; replaced HUMAN-FR05-044 with an encoded null-byte parser-differential sequence; replaced HUMAN-FR05-048 with a deterministic GET→malformed unauthenticated POST→GET mutation-safety sequence. All three were translated to English while preserving `Source = HUMAN`, the mandatory `X-Student-Id: 23127194`, and empty execution/evidence fields. HUMAN-FR05-046 and 047 were left semantically unchanged and their already-approved Human Audit Status was synchronized to VALID. The retained human-added set remains five cases: 043, 044, 046, 047, 048. |
+
+Human Review:
+- Status: APPROVED / reviewer-authored replacements received
+- Accepted: HUMAN-FR05-043, HUMAN-FR05-044, HUMAN-FR05-048 replacement definitions; HUMAN-FR05-046 and HUMAN-FR05-047 remain approved
+- Modified: English translation and formatting only for the three replacement definitions
+- Removed: Previous versions of HUMAN-FR05-043, 044, 048
+- Added: No AI-authored HUMAN cases
+- Notes: Postman implementation must now be synchronized to these replacement definitions before the official Newman run.
+
+## AI Audit Entry - AI-018
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T18:08:00+07:00 |
+| Stage | HW06 workflow refinement — runtime-data preparation stage |
+| API | Applies to FR-05, FR-10, and FR-16 |
+| User Prompt | Vậy hãy bổ sung step này vào plan và skill $api-testing-human-loop |
+| Evidence/Input Basis | Existing `plan.md`; `.agents/skills/api-testing-human-loop/SKILL.md`; workflow gate reference; prior decision that runtime test-data preparation is required for all three APIs but must be API-specific |
+| Generated/Modified Files | `HW06/plan.md`; `HW06/.agents/skills/api-testing-human-loop/SKILL.md`; `HW06/.agents/skills/api-testing-human-loop/references/workflow-gates.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Added a mandatory runtime-data/preconditions stage between test implementation and official execution. Plan Step J now prepares real runtime data, auth, IDs, states, fixtures, setup, cleanup, and readiness for all three APIs with API-specific examples for FR-05 search data, FR-10 controlled order states/actors, and FR-16 import fixtures/roles. Previous execution moved to Step K and bug reporting to Step L. The reusable skill and workflow-gates reference now prohibit starting official evidence execution until required preconditions are real and reproducible, and define READY/BLOCKED readiness states. No runtime data or execution evidence was fabricated. |
+
+Human Review:
+- Status: REQUESTED / workflow update applied
+- Accepted: Runtime test data and preconditions preparation as a reusable stage for all three APIs
+- Modified: Plan step numbering and reusable skill workflow
+- Removed: None
+- Added: Runtime-data readiness checkpoint before official execution
+- Notes: No files were staged or committed by this update.

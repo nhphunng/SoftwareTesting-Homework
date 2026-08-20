@@ -1,0 +1,3171 @@
+{
+  "info": {
+    "_postman_id": "23127194-fr05-product-search-collection",
+    "name": "HW06 — FR-05 Product Search — 23127194",
+    "description": "Finalized FR-05 suite: 42 AI cases and 5 HUMAN cases. Status codes and formal response schema remain unresolved. CHARACTERIZATION cases record observations. Destructive HUMAN state cases are opt-in; concurrency cases are documentation-only because ordinary Postman execution is sequential.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Assignment-wide required header. Runs before every executable request.",
+          "pm.request.headers.upsert({ key: \"X-Student-Id\", value: \"23127194\" });",
+          "pm.variables.set(\"fr05RequestStartedAt\", Date.now());",
+          "pm.variables.set(\"fr05ClientRequestId\", pm.variables.replaceIn(\"{{$guid}}\"));"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const testcaseName = pm.info.requestName || \"FR-05 request\";",
+          "pm.test(testcaseName + \" | required X-Student-Id header\", function () {",
+          "  pm.expect(pm.request.headers.get(\"X-Student-Id\")).to.eql(\"23127194\");",
+          "});",
+          "",
+          "// Status codes and response schema are intentionally not asserted: both are UNRESOLVED.",
+          "const observation = {",
+          "  testcase: testcaseName,",
+          "  requestId: pm.variables.get(\"fr05ClientRequestId\"),",
+          "  status: pm.response.code,",
+          "  contentType: pm.response.headers.get(\"Content-Type\") || null,",
+          "  elapsedMs: pm.response.responseTime,",
+          "  bodyLength: pm.response.text().length",
+          "};",
+          "console.log(\"FR-05 CHARACTERIZATION\", JSON.stringify(observation));"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "studentId",
+      "value": "23127194",
+      "type": "string"
+    },
+    {
+      "key": "enableDestructiveStateTests",
+      "value": "false",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "B1 & B7 — Functional / Business",
+      "item": [
+        {
+          "name": "[AI] AI-FR05-001 — Listing with search omitted",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-001 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-001\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-001 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-002 — Controlled matching keyword",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"knownMatchingKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-002 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-002\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "const items = fr05Items();",
+                  "const names = fr05Names(items);",
+                  "const expectedName = String(pm.variables.get(\"expectedMatchingProductName\") || \"\");",
+                  "if (names && expectedName) {",
+                  "  pm.test(pm.info.requestName + \" | configured matching product is discoverable\", function () {",
+                  "    pm.expect(names).to.include(expectedName);",
+                  "  });",
+                  "} else {",
+                  "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or expectedMatchingProductName is unset.\");",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-002 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-003 — Controlled no-match keyword",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"knownNoMatchKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownNoMatchKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-003 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-003\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "const items = fr05Items();",
+                  "const names = fr05Names(items);",
+                  "const forbiddenName = String(pm.variables.get(\"knownNoMatchProductName\") || \"\");",
+                  "if (names && forbiddenName) {",
+                  "  pm.test(pm.info.requestName + \" | no fabricated or non-name-only match\", function () {",
+                  "    pm.expect(names).not.to.include(forbiddenName);",
+                  "  });",
+                  "} else {",
+                  "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or knownNoMatchProductName is unset.\");",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-003 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-004 — Exact existing product name",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"exactProductName\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"exactProductName\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-004 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-004\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "const items = fr05Items();",
+                  "const names = fr05Names(items);",
+                  "const expectedName = String(pm.variables.get(\"exactProductName\") || \"\");",
+                  "if (names && expectedName) {",
+                  "  pm.test(pm.info.requestName + \" | configured matching product is discoverable\", function () {",
+                  "    pm.expect(names).to.include(expectedName);",
+                  "  });",
+                  "} else {",
+                  "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or exactProductName is unset.\");",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-004 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-005 — Keyword present only outside product name",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"nonNameOnlyKeyword\",\"nonNameOnlyProductName\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"nonNameOnlyKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-005 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-005\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "const items = fr05Items();",
+                  "const names = fr05Names(items);",
+                  "const forbiddenName = String(pm.variables.get(\"nonNameOnlyProductName\") || \"\");",
+                  "if (names && forbiddenName) {",
+                  "  pm.test(pm.info.requestName + \" | no fabricated or non-name-only match\", function () {",
+                  "    pm.expect(names).not.to.include(forbiddenName);",
+                  "  });",
+                  "} else {",
+                  "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or nonNameOnlyProductName is unset.\");",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-005 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-006 — Public request without Authorization header",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-006 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-006\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-006 | Source=AI | Public-access contract. No Authorization header is sent; exact status/schema are UNRESOLVED."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-041 — Whole result-set name-search consistency",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"knownMatchingKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-041 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-041\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "const items = fr05Items();",
+                  "const names = fr05Names(items);",
+                  "const keyword = String(pm.variables.get(\"knownMatchingKeyword\") || \"\");",
+                  "if (names && keyword && String(pm.variables.get(\"assertCaseSensitiveSearch\") || \"false\") === \"true\") {",
+                  "  pm.test(pm.info.requestName + \" | every evaluable name follows configured literal semantics\", function () {",
+                  "    pm.expect(names.every(function (name) { return name.includes(keyword); })).to.eql(true);",
+                  "  });",
+                  "} else {",
+                  "  console.warn(\"Whole-set strict assertion not evaluated; case sensitivity/schema is unresolved. Names are logged for review.\", names);",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-041 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "B2 — Domain / Characterization",
+      "item": [
+        {
+          "name": "[AI] AI-FR05-007 — Empty search characterization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-007 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-007\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?search=",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "AI-FR05-007 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-008 — Whitespace-only search characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"   \" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-008 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-008\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-008 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-009 — Padded keyword characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"knownMatchingKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: \" \" + pm.variables.get(\"knownMatchingKeyword\") + \" \" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-009 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-009\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-009 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-010 — Partial-name search characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"partialProductName\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"partialProductName\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-010 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-010\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-010 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-011 — Vietnamese/Unicode search characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"unicodeKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"unicodeKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-011 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-011\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-011 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-012 — Fixed punctuation and symbols characterization (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"!@#$^*()_+-=[]{};,.?\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-012 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-012\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-012 | Source=AI | Corrected input approved in FR05-incomplete-corrections.md. Characterization only."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-013 — Script-like API input characterization (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"<script>alert(1)</script>\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-013 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-013\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "console.log(\"PARTIAL SEC-04 only: API evidence does not prove browser/DOM rendering safety.\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-013 | Source=AI | Corrected exact payload. Records API transport only; UI/E2E is required for a full SEC-04 verdict."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-014 — URL-encoded literal plus sign characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"+\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-014 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-014\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-014 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-015 — Lower-case variation characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"lowercaseKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"lowercaseKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-015 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-015\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-015 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-016 — Upper/mixed-case variation characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"uppercaseKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"uppercaseKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-016 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-016\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-016 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-017 — Numeric-looking text characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"123\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-017 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-017\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-017 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-018 — Literal null text characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"null\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-018 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-018\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-018 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "B3 — Boundary / Negative",
+      "item": [
+        {
+          "name": "[AI] AI-FR05-019 — One-character keyword characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"oneCharacterKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"oneCharacterKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-019 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-019\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-019 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-020 — Exactly 2,000 ASCII A characters (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"A\".repeat(2000) });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-020 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-020\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-020 | Source=AI | Corrected fixed-length robustness characterization; no contractual maximum is assumed."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-021 — Duplicate search parameters characterization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-021 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-021\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products?search=phone&search=laptop",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "phone"
+                },
+                {
+                  "key": "search",
+                  "value": "laptop"
+                }
+              ]
+            },
+            "description": "AI-FR05-021 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-022 — URL-encoded literal percent characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"%\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-022 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-022\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-022 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-023 — URL-encoded literal ampersand characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"&\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-023 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-023\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-023 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-024 — URL-encoded literal equals sign characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"=\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-024 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-024\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-024 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "B4 — State / Sequence",
+      "item": [
+        {
+          "name": "[AI] AI-FR05-025 — Repeat listing; read-only semantics",
+          "description": "Execution order is significant. Dataset must remain stable. Exact byte/order equality is not required.",
+          "item": [
+            {
+              "name": "[AI] AI-FR05-025 — Step 1 of 2 — first listing",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-025 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-025\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});",
+                      "pm.collectionVariables.set(\"AI_FR05_025_first_observation\", pm.response.text());"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-025 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[AI] AI-FR05-025 — Step 2 of 2 — repeated listing",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-025 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-025\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});",
+                      "console.log(\"First/second listing bodies retained for review; byte/order identity is not asserted.\", pm.collectionVariables.get(\"AI_FR05_025_first_observation\"), pm.response.text());"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-025 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR05-026 — Repeat controlled search",
+          "item": [
+            {
+              "name": "[AI] AI-FR05-026 — Step 1 of 2 — first controlled search",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const required = [\"knownMatchingKeyword\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-026 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-026\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});",
+                      "pm.collectionVariables.set(\"AI_FR05_026_first_observation\", pm.response.text());"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-026 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[AI] AI-FR05-026 — Step 2 of 2 — repeated controlled search",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const required = [\"knownMatchingKeyword\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-026 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-026\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});",
+                      "console.log(\"Repeated search observations retained; semantic review does not assume byte/order identity.\", pm.collectionVariables.get(\"AI_FR05_026_first_observation\"), pm.response.text());"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-026 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR05-027 — Search A then Search B independence",
+          "item": [
+            {
+              "name": "[AI] AI-FR05-027 — Step 1 of 2 — search keyword A",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const required = [\"keywordA\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"keywordA\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-027 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-027\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-027 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[AI] AI-FR05-027 — Step 2 of 2 — search keyword B",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const required = [\"keywordB\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"keywordB\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-027 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-027\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-027 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR05-028 — Filtered search then unfiltered listing",
+          "item": [
+            {
+              "name": "[AI] AI-FR05-028 — Step 1 of 2 — filtered search",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const required = [\"knownMatchingKeyword\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-028 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-028\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-028 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[AI] AI-FR05-028 — Step 2 of 2 — unfiltered listing",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-028 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-028\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-028 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR05-029 — Unmatched quote then normal search (corrected)",
+          "description": "Corrected sequence: exact AI-FR05-030 payload followed immediately by AI-FR05-002 controlled normal input.",
+          "item": [
+            {
+              "name": "[AI] AI-FR05-029 — Step 1 of 2 — reuse AI-FR05-030 unmatched quote",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.request.url.query.upsert({ key: \"search\", value: \"'\" });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-029 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-029\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-029 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[AI] AI-FR05-029 — Step 2 of 2 — reuse AI-FR05-002 normal search",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "const required = [\"knownMatchingKeyword\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-029 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-029\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});",
+                      "function fr05Items() {",
+                      "  let body;",
+                      "  try { body = pm.response.json(); } catch (e) { return null; }",
+                      "  if (Array.isArray(body)) return body;",
+                      "  if (body && typeof body === \"object\") {",
+                      "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                      "      if (Array.isArray(body[key])) return body[key];",
+                      "    }",
+                      "  }",
+                      "  return null;",
+                      "}",
+                      "function fr05Names(items) {",
+                      "  if (!items) return null;",
+                      "  const names = items.map(function (item) {",
+                      "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                      "  });",
+                      "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                      "}",
+                      "const items = fr05Items();",
+                      "const names = fr05Names(items);",
+                      "const expectedName = String(pm.variables.get(\"expectedMatchingProductName\") || \"\");",
+                      "if (names && expectedName) {",
+                      "  pm.test(pm.info.requestName + \" | configured matching product is discoverable\", function () {",
+                      "    pm.expect(names).to.include(expectedName);",
+                      "  });",
+                      "} else {",
+                      "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or expectedMatchingProductName is unset.\");",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-029 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "B5 — Security",
+      "item": [
+        {
+          "name": "[AI] AI-FR05-030 — Unmatched quote SQL-injection probe",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"'\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-030 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-030\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-030 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-031 — Boolean/operator SQL-injection probe (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"' OR '1'='1\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-031 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-031\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-031 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-032 — SQL comment probe (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"x'--\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-032 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-032\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-032 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-033 — UNION query-structure probe (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"x' UNION SELECT NULL --\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-033 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-033\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-033 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-034 — Encoded wildcard/quote/boolean/comment probe (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"%' OR '1'='1'--\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-034 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-034\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-034 | Source=AI | Raw value is %' OR '1'='1'--. Postman serializes it as one encoded search query value."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-035 — Conditional internal-information disclosure probe (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"'\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-035 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-035\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "const body = pm.response.text();",
+                  "if (pm.response.code >= 400) {",
+                  "  const indicators = [/SQLITE/i, /SELECT\\s+/i, /stack/i, /database error/i, /syntax error/i];",
+                  "  const found = indicators.filter(function (re) { return re.test(body); }).map(String);",
+                  "  console.log(\"Conditional disclosure review indicators\", found);",
+                  "} else {",
+                  "  console.log(\"Disclosure path not reached by this fixed probe.\");",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-035 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-036 — Invalid token on public endpoint characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"knownMatchingKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-036 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-036\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{invalidOrExpiredToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-036 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "B6 — Schema Characterization",
+      "item": [
+        {
+          "name": "[AI] AI-FR05-037 — Top-level response shape characterization",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-037 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-037\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "let parsed = null;",
+                  "try { parsed = pm.response.json(); } catch (e) {}",
+                  "const shape = Array.isArray(parsed) ? \"array\" : (parsed === null ? \"non-JSON/null\" : typeof parsed);",
+                  "console.log(\"CHARACTERIZATION top-level shape:\", shape);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-037 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-038 — Product item keys/types characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"knownMatchingKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownMatchingKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-038 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-038\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "const items = fr05Items();",
+                  "if (items && items.length && items[0] && typeof items[0] === \"object\") {",
+                  "  const observed = Object.fromEntries(Object.entries(items[0]).map(function (entry) { return [entry[0], entry[1] === null ? \"null\" : Array.isArray(entry[1]) ? \"array\" : typeof entry[1]]; }));",
+                  "  console.log(\"CHARACTERIZATION first-item keys/types; extra fields do not fail:\", observed);",
+                  "} else { console.log(\"Item schema characterization not available for this response.\"); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-038 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-039 — No-match payload shape characterization",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const required = [\"knownNoMatchKeyword\"];",
+                  "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                  "if (missing.length) {",
+                  "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                  "  pm.execution.skipRequest();",
+                  "}",
+                  "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"knownNoMatchKeyword\") });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-039 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-039\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "const items = fr05Items();",
+                  "const names = fr05Names(items);",
+                  "const forbiddenName = String(pm.variables.get(\"knownNoMatchProductName\") || \"\");",
+                  "if (names && forbiddenName) {",
+                  "  pm.test(pm.info.requestName + \" | no fabricated or non-name-only match\", function () {",
+                  "    pm.expect(names).not.to.include(forbiddenName);",
+                  "  });",
+                  "} else {",
+                  "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or knownNoMatchProductName is unset.\");",
+                  "}",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "let parsed = null;",
+                  "try { parsed = pm.response.json(); } catch (e) {}",
+                  "const shape = Array.isArray(parsed) ? \"array\" : (parsed === null ? \"non-JSON/null\" : typeof parsed);",
+                  "console.log(\"CHARACTERIZATION top-level shape:\", shape);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-039 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        },
+        {
+          "name": "[AI] AI-FR05-040 — Conditional error response shape characterization (corrected)",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.request.url.query.upsert({ key: \"search\", value: \"'\" });"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[AI] AI-FR05-040 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-040\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                  "});",
+                  "console.log(\"Error-schema characterization is reached only if this fixed probe produces an error.\");",
+                  "function fr05Items() {",
+                  "  let body;",
+                  "  try { body = pm.response.json(); } catch (e) { return null; }",
+                  "  if (Array.isArray(body)) return body;",
+                  "  if (body && typeof body === \"object\") {",
+                  "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                  "      if (Array.isArray(body[key])) return body[key];",
+                  "    }",
+                  "  }",
+                  "  return null;",
+                  "}",
+                  "function fr05Names(items) {",
+                  "  if (!items) return null;",
+                  "  const names = items.map(function (item) {",
+                  "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                  "  });",
+                  "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                  "}",
+                  "let parsed = null;",
+                  "try { parsed = pm.response.json(); } catch (e) {}",
+                  "const shape = Array.isArray(parsed) ? \"array\" : (parsed === null ? \"non-JSON/null\" : typeof parsed);",
+                  "console.log(\"CHARACTERIZATION top-level shape:\", shape);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "AI-FR05-040 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "B7 — Cross-check",
+      "item": [
+        {
+          "name": "[AI] AI-FR05-042 — Omitted versus empty search characterization",
+          "item": [
+            {
+              "name": "[AI] AI-FR05-042 — Step 1 of 2 — search omitted",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-042 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-042\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});",
+                      "pm.collectionVariables.set(\"AI_FR05_042_omitted_observation\", pm.response.text());"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "AI-FR05-042 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[AI] AI-FR05-042 — Step 2 of 2 — explicit empty search",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[AI] AI-FR05-042 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"AI-FR05-042\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[AI]\");",
+                      "});",
+                      "console.log(\"Omitted and empty observations; equivalence is not asserted.\", pm.collectionVariables.get(\"AI_FR05_042_omitted_observation\"), pm.response.text());"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products?search=",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": ""
+                    }
+                  ]
+                },
+                "description": "AI-FR05-042 | Source=AI | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HUMAN — Reviewer-authored additions",
+      "item": [
+        {
+          "name": "[HUMAN] HUMAN-FR05-043 — Cross-user result isolation — documentation-only under fixed student header",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "console.warn(\"HUMAN-FR05-043 is not executed in the assignment collection: varying X-Student-Id conflicts with the mandatory fixed value 23127194. Use a separately authorized run with two valid identifiers if header partition semantics are confirmed.\");",
+                  "pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[HUMAN] HUMAN-FR05-043 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-043\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "HUMAN-FR05-043 | Source=HUMAN | DOCUMENTATION ONLY. The assignment requires every request to use X-Student-Id: 23127194, while this characterization needs two different valid identifiers. It is intentionally skipped rather than faking A/B isolation."
+          },
+          "response": []
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR05-044 — 40-way concurrent A/B searches × 3 rounds — external runner required",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "console.warn(\"HUMAN-FR05-044 requires real concurrency (20 A + 20 B requests, 3 rounds). Normal Postman/Newman collection execution is sequential, so this placeholder is skipped and must not be treated as evidence.\");",
+                  "pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[HUMAN] HUMAN-FR05-044 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-044\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "HUMAN-FR05-044 | Source=HUMAN | DOCUMENTATION ONLY. Requires 20 concurrent search=A and 20 concurrent search=B requests for three rounds with client request IDs. An ordinary Postman/Newman run cannot accurately provide this concurrency."
+          },
+          "response": []
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR05-046 — Search consistency after product rename — opt-in destructive sequence",
+          "description": "Execution order is mandatory. Disabled by default because it mutates a product. Configure all rename variables and adminToken in a controlled environment.",
+          "item": [
+            {
+              "name": "[HUMAN] HUMAN-FR05-046 — Step 1 of 4 — confirm OldName search",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "if (String(pm.variables.get(\"enableDestructiveStateTests\") || \"false\") !== \"true\") {",
+                      "  console.warn(\"SKIPPED: destructive state tests are opt-in. Set enableDestructiveStateTests=true only in a controlled environment.\");",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "const required = [\"renameOldName\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"renameOldName\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[HUMAN] HUMAN-FR05-046 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-046\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                      "});",
+                      "function fr05Items() {",
+                      "  let body;",
+                      "  try { body = pm.response.json(); } catch (e) { return null; }",
+                      "  if (Array.isArray(body)) return body;",
+                      "  if (body && typeof body === \"object\") {",
+                      "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                      "      if (Array.isArray(body[key])) return body[key];",
+                      "    }",
+                      "  }",
+                      "  return null;",
+                      "}",
+                      "function fr05Names(items) {",
+                      "  if (!items) return null;",
+                      "  const names = items.map(function (item) {",
+                      "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                      "  });",
+                      "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                      "}",
+                      "const items = fr05Items();",
+                      "const target = String(pm.variables.get(\"renameOldName\") || \"\");",
+                      "if (items && target) {",
+                      "  const found = items.find(function (item) { return item && item.name === target && item.id !== undefined; });",
+                      "  if (found) pm.collectionVariables.set(\"renameProductId\", String(found.id));",
+                      "}",
+                      "console.log(\"Resolved renameProductId:\", pm.collectionVariables.get(\"renameProductId\") || pm.variables.get(\"renameProductId\") || \"NOT RESOLVED\");"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "HUMAN-FR05-046 | Source=HUMAN | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[HUMAN] HUMAN-FR05-046 — Step 2 of 4 — update OldName to NewName",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "if (String(pm.variables.get(\"enableDestructiveStateTests\") || \"false\") !== \"true\") {",
+                      "  console.warn(\"SKIPPED: destructive state tests are opt-in. Set enableDestructiveStateTests=true only in a controlled environment.\");",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "const required = [\"renameProductId\",\"adminToken\",\"renameNewName\",\"renameProductPrice\",\"renameProductDescription\",\"renameProductImageUrl\",\"renameProductCategoryId\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[HUMAN] HUMAN-FR05-046 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-046\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products/{{renameProductId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "{{renameProductId}}"
+                  ]
+                },
+                "description": "HUMAN-FR05-046 | Source=HUMAN | Opt-in documented product update. No status/schema assertion is invented.",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"{{renameNewName}}\",\n  \"price\": {{renameProductPrice}},\n  \"description\": \"{{renameProductDescription}}\",\n  \"imageUrl\": \"{{renameProductImageUrl}}\",\n  \"category_id\": {{renameProductCategoryId}}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "[HUMAN] HUMAN-FR05-046 — Step 3 of 4 — search OldName after update",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "if (String(pm.variables.get(\"enableDestructiveStateTests\") || \"false\") !== \"true\") {",
+                      "  console.warn(\"SKIPPED: destructive state tests are opt-in. Set enableDestructiveStateTests=true only in a controlled environment.\");",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "const required = [\"renameOldName\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"renameOldName\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[HUMAN] HUMAN-FR05-046 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-046\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                      "});",
+                      "function fr05Items() {",
+                      "  let body;",
+                      "  try { body = pm.response.json(); } catch (e) { return null; }",
+                      "  if (Array.isArray(body)) return body;",
+                      "  if (body && typeof body === \"object\") {",
+                      "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                      "      if (Array.isArray(body[key])) return body[key];",
+                      "    }",
+                      "  }",
+                      "  return null;",
+                      "}",
+                      "function fr05Names(items) {",
+                      "  if (!items) return null;",
+                      "  const names = items.map(function (item) {",
+                      "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                      "  });",
+                      "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                      "}",
+                      "const items = fr05Items();",
+                      "const names = fr05Names(items);",
+                      "const forbiddenName = String(pm.variables.get(\"renameOldName\") || \"\");",
+                      "if (names && forbiddenName) {",
+                      "  pm.test(pm.info.requestName + \" | no fabricated or non-name-only match\", function () {",
+                      "    pm.expect(names).not.to.include(forbiddenName);",
+                      "  });",
+                      "} else {",
+                      "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or renameOldName is unset.\");",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "HUMAN-FR05-046 | Source=HUMAN | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[HUMAN] HUMAN-FR05-046 — Step 4 of 4 — search NewName after update",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "if (String(pm.variables.get(\"enableDestructiveStateTests\") || \"false\") !== \"true\") {",
+                      "  console.warn(\"SKIPPED: destructive state tests are opt-in. Set enableDestructiveStateTests=true only in a controlled environment.\");",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "const required = [\"renameNewName\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"renameNewName\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[HUMAN] HUMAN-FR05-046 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-046\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                      "});",
+                      "function fr05Items() {",
+                      "  let body;",
+                      "  try { body = pm.response.json(); } catch (e) { return null; }",
+                      "  if (Array.isArray(body)) return body;",
+                      "  if (body && typeof body === \"object\") {",
+                      "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                      "      if (Array.isArray(body[key])) return body[key];",
+                      "    }",
+                      "  }",
+                      "  return null;",
+                      "}",
+                      "function fr05Names(items) {",
+                      "  if (!items) return null;",
+                      "  const names = items.map(function (item) {",
+                      "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                      "  });",
+                      "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                      "}",
+                      "const items = fr05Items();",
+                      "const names = fr05Names(items);",
+                      "const expectedName = String(pm.variables.get(\"renameNewName\") || \"\");",
+                      "if (names && expectedName) {",
+                      "  pm.test(pm.info.requestName + \" | configured matching product is discoverable\", function () {",
+                      "    pm.expect(names).to.include(expectedName);",
+                      "  });",
+                      "} else {",
+                      "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or renameNewName is unset.\");",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "HUMAN-FR05-046 | Source=HUMAN | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR05-047 — Deleted product must not remain searchable — opt-in destructive sequence",
+          "description": "Execution order is mandatory. Disabled by default because deletion is irreversible. Use only disposable test data.",
+          "item": [
+            {
+              "name": "[HUMAN] HUMAN-FR05-047 — Step 1 of 3 — search unique product before deletion",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "if (String(pm.variables.get(\"enableDestructiveStateTests\") || \"false\") !== \"true\") {",
+                      "  console.warn(\"SKIPPED: destructive state tests are opt-in. Set enableDestructiveStateTests=true only in a controlled environment.\");",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "const required = [\"deleteProductName\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"deleteProductName\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[HUMAN] HUMAN-FR05-047 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-047\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                      "});",
+                      "function fr05Items() {",
+                      "  let body;",
+                      "  try { body = pm.response.json(); } catch (e) { return null; }",
+                      "  if (Array.isArray(body)) return body;",
+                      "  if (body && typeof body === \"object\") {",
+                      "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                      "      if (Array.isArray(body[key])) return body[key];",
+                      "    }",
+                      "  }",
+                      "  return null;",
+                      "}",
+                      "function fr05Names(items) {",
+                      "  if (!items) return null;",
+                      "  const names = items.map(function (item) {",
+                      "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                      "  });",
+                      "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                      "}",
+                      "const items = fr05Items();",
+                      "const target = String(pm.variables.get(\"deleteProductName\") || \"\");",
+                      "if (items && target) {",
+                      "  const found = items.find(function (item) { return item && item.name === target && item.id !== undefined; });",
+                      "  if (found) pm.collectionVariables.set(\"deleteProductId\", String(found.id));",
+                      "}",
+                      "console.log(\"Resolved deleteProductId:\", pm.collectionVariables.get(\"deleteProductId\") || pm.variables.get(\"deleteProductId\") || \"NOT RESOLVED\");"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "HUMAN-FR05-047 | Source=HUMAN | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            },
+            {
+              "name": "[HUMAN] HUMAN-FR05-047 — Step 2 of 3 — delete resolved product",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "if (String(pm.variables.get(\"enableDestructiveStateTests\") || \"false\") !== \"true\") {",
+                      "  console.warn(\"SKIPPED: destructive state tests are opt-in. Set enableDestructiveStateTests=true only in a controlled environment.\");",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "const required = [\"deleteProductId\",\"adminToken\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[HUMAN] HUMAN-FR05-047 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-047\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                      "});"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{adminToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products/{{deleteProductId}}",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products",
+                    "{{deleteProductId}}"
+                  ]
+                },
+                "description": "HUMAN-FR05-047 | Source=HUMAN | Opt-in irreversible delete in a controlled dataset. No undocumented status/schema assertion."
+              },
+              "response": []
+            },
+            {
+              "name": "[HUMAN] HUMAN-FR05-047 — Step 3 of 3 — search same unique name after deletion",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "if (String(pm.variables.get(\"enableDestructiveStateTests\") || \"false\") !== \"true\") {",
+                      "  console.warn(\"SKIPPED: destructive state tests are opt-in. Set enableDestructiveStateTests=true only in a controlled environment.\");",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "const required = [\"deleteProductName\"];",
+                      "const missing = required.filter(function (name) { return !String(pm.variables.get(name) || \"\").trim(); });",
+                      "if (missing.length) {",
+                      "  console.warn(\"SKIPPED: configure runtime variables: \" + missing.join(\", \"));",
+                      "  pm.execution.skipRequest();",
+                      "}",
+                      "pm.request.url.query.upsert({ key: \"search\", value: pm.variables.get(\"deleteProductName\") });"
+                    ]
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"[HUMAN] HUMAN-FR05-047 | testcase traceability\", function () {",
+                      "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-047\");",
+                      "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                      "});",
+                      "function fr05Items() {",
+                      "  let body;",
+                      "  try { body = pm.response.json(); } catch (e) { return null; }",
+                      "  if (Array.isArray(body)) return body;",
+                      "  if (body && typeof body === \"object\") {",
+                      "    for (const key of [\"products\", \"data\", \"items\", \"results\"]) {",
+                      "      if (Array.isArray(body[key])) return body[key];",
+                      "    }",
+                      "  }",
+                      "  return null;",
+                      "}",
+                      "function fr05Names(items) {",
+                      "  if (!items) return null;",
+                      "  const names = items.map(function (item) {",
+                      "    return item && typeof item === \"object\" && typeof item.name === \"string\" ? item.name : null;",
+                      "  });",
+                      "  return names.every(function (name) { return name !== null; }) ? names : null;",
+                      "}",
+                      "const items = fr05Items();",
+                      "const names = fr05Names(items);",
+                      "const forbiddenName = String(pm.variables.get(\"deleteProductName\") || \"\");",
+                      "if (names && forbiddenName) {",
+                      "  pm.test(pm.info.requestName + \" | no fabricated or non-name-only match\", function () {",
+                      "    pm.expect(names).not.to.include(forbiddenName);",
+                      "  });",
+                      "} else {",
+                      "  console.warn(\"Semantic assertion not evaluated: response shape/name field is unresolved or deleteProductName is unset.\");",
+                      "}"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/products",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "products"
+                  ]
+                },
+                "description": "HUMAN-FR05-047 | Source=HUMAN | FR-05. Exact status and formal response schema remain UNRESOLVED unless stated otherwise."
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR05-048 — Repeated expensive-search burst and recovery — external runner required",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "console.warn(\"HUMAN-FR05-048 requires overlapping 30 expensive and 10 normal requests plus recovery measurement. Sequential Postman/Newman execution would fake the concurrency, so this placeholder is skipped.\");",
+                  "pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"[HUMAN] HUMAN-FR05-048 | testcase traceability\", function () {",
+                  "  pm.expect(pm.info.requestName).to.include(\"HUMAN-FR05-048\");",
+                  "  pm.expect(pm.info.requestName).to.include(\"[HUMAN]\");",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/products",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "products"
+              ]
+            },
+            "description": "HUMAN-FR05-048 | Source=HUMAN | DOCUMENTATION ONLY. Requires controlled concurrent/burst execution and latency mapping. Rate limiting/status remains characterization only; no 429 expectation is asserted."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

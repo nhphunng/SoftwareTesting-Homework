@@ -1,0 +1,31 @@
+[
+  {
+    "baseUrl": "http://localhost:3000",
+    "knownMatchingKeyword": "",
+    "expectedMatchingProductName": "",
+    "knownNoMatchKeyword": "",
+    "knownNoMatchProductName": "",
+    "exactProductName": "",
+    "nonNameOnlyKeyword": "",
+    "nonNameOnlyProductName": "",
+    "partialProductName": "",
+    "unicodeKeyword": "",
+    "lowercaseKeyword": "",
+    "uppercaseKeyword": "",
+    "oneCharacterKeyword": "",
+    "keywordA": "",
+    "keywordB": "",
+    "invalidOrExpiredToken": "invalid-or-expired-token",
+    "assertCaseSensitiveSearch": "false",
+    "enableDestructiveStateTests": "false",
+    "renameProductId": "",
+    "renameOldName": "",
+    "renameNewName": "",
+    "renameProductPrice": "",
+    "renameProductDescription": "",
+    "renameProductImageUrl": "",
+    "renameProductCategoryId": "",
+    "deleteProductId": "",
+    "deleteProductName": ""
+  }
+]
