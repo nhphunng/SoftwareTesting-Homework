@@ -502,3 +502,24 @@ Human Review:
 - Removed: None
 - Added: Runtime-data readiness checkpoint before official execution
 - Notes: No files were staged or committed by this update.
+
+## AI Audit Entry - AI-019
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T18:24:00+07:00 |
+| Stage | API 1 / Step J — Prepare Runtime Test Data and Preconditions |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` |
+| User Prompt | Bây giờ, bạn hãy thực hiện step J giúp tôi |
+| Evidence/Input Basis | Live SUT on `http://localhost:3000`; current SQLite dataset; documented login/product endpoints; finalized FR-05 testcase source; current Postman environment/data/collection |
+| Generated/Modified Files | `postman/environment/HW06-FR05-Local.postman_environment.json`; git-ignored `postman/environment/HW06-FR05-Local.private.postman_environment.json`; `postman/data/FR05-runtime-data.json`; `postman/data/README.md`; `postman/data/FR05-runtime-readiness.md`; `.gitignore`; `reports/ai-audit-report.md` |
+| AI Output | Verified the live FR-05 SUT at `http://localhost:3000` and discovered that `127.0.0.1:3000` currently maps to another local Node process returning 404 for `/api/products`. Verified the 5 seeded products and selected real controlled search values for matching, no-match, exact, partial, Unicode, case, one-character, A/B, and non-name-only scenarios. Performed a real admin login with the mandatory student header and verified the token maps to role `admin`; stored the JWT only in a git-ignored private Postman environment. Created two disposable products through the product API for HUMAN-FR05-046 and HUMAN-FR05-047, IDs 6 and 7, and populated all non-secret mutation variables. Marked the 42 AI cases plus HUMAN-FR05-046/047 runtime-ready. Marked HUMAN-FR05-043/044/048 blocked because the current Postman collection still contains their superseded implementations. No official Newman execution, PASS/FAIL evidence, screenshot, or defect was produced. |
+
+Human Review:
+- Status: Step J runtime-data preparation completed; collection synchronization remains required before Step K
+- Accepted: Real runtime values, admin actor/token handling, disposable fixtures, readiness classification
+- Modified: Runtime/environment data and documentation
+- Removed: Old Postman limitation wording for superseded HUMAN cases
+- Added: FR-05 runtime-readiness report and private token environment policy
+- Notes: Official execution remains blocked until HUMAN-FR05-043/044/048 are reimplemented in the Postman collection.
