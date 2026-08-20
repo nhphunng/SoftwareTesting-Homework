@@ -584,3 +584,21 @@ Human Review:
 - Cleanup: ID 8 deleted; fixture ID 6 reset; delete fixture recreated as ID 9
 - Rerun readiness: restored
 - Git staging/commit: not performed
+
+## AI Audit Entry - AI-023
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T22:25:00+07:00 |
+| Stage | API 1 / P1-P4 compliance cleanup |
+| User Prompt | Thực hiện từ P1-P4 giúp tôi |
+| Generated/Modified Files | `PoolA-FR-05-ProductSearch/generated/PoolA-FR05-ProductSearch-test.md`; `PoolA-FR-05-ProductSearch/audit/audit-summary.md`; `PoolA-FR-05-ProductSearch/human-added/human-tests.md`; `PoolA-FR-05-ProductSearch/evidence/FR05-X-Student-Id-evidence.md`; `reports/ai-audit-report.md` |
+| AI Output | Synchronized stale master status with the completed official execution; preserved original 32 VALID / 10 INCOMPLETE audit history while marking the 10 corrected cases as explicitly human re-review approved; created a standalone audit summary; extracted the five HUMAN-authored cases into a dedicated Step H artifact and populated PASS evidence for the three non-defect HUMAN cases; verified from the official Newman JSON that all 62/62 executions carried `X-Student-Id: 23127194`. Attempted two real macOS Terminal screenshot capture paths; both were blocked by Screen Recording permissions, so no screenshot was fabricated. |
+
+Human Review:
+- P1: COMPLETE
+- P2: COMPLETE
+- P3: COMPLETE
+- P4 evidence verification: COMPLETE (62/62 official executions verified)
+- P4 screenshot artifact: BLOCKED by macOS Screen Recording permission; manual capture still required unless permission is granted

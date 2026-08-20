@@ -6,19 +6,19 @@
 API: GET /api/products?search=keyword
 Source: MIXED (AI + HUMAN)
 Total testcases currently retained: 47 (42 AI-generated + 5 human-added)
-AI-generated audit result: 32 VALID / 10 INCOMPLETE / 0 INVALID
+AI-generated audit result: 32 initially VALID / 10 initially INCOMPLETE / 0 INVALID; all 42 approved after correction/re-review
 Primary source from Step G onward: this Markdown file
 XLSX role: export/summary artifact only
 Human Audit Status: COMPLETE (AI-FR05-001..042)
-Human-added testcase status: 5 reviewer-authored cases retained; pending final human confirmation before implementation
-Execution Status: NOT EXECUTED
+Human-added testcase status: 5 reviewer-authored cases approved, implemented, and included in official execution
+Execution Status: OFFICIAL NEWMAN EXECUTION COMPLETE — 47 testcase IDs / 62 requests / 142 assertions / 138 passed / 4 failed; 3 confirmed defects
 Required per-request header: X-Student-Id: 23127194 (fixed value, no longer a template placeholder)
 ```
 
 ## Provenance and evidence rules
 
 - Every AI-FR05-xxx testcase preserves `Source = AI`. Every HUMAN-FR05-xxx testcase preserves genuine `Source = HUMAN` provenance and was supplied by the reviewer; AI only translated and tightened wording to remove unsupported assumptions.
-- `Human Audit Status` and `Human Audit Reason` are now filled for all 42 AI-generated cases (see labels below). `Execution Status`, `Actual Result`, `Evidence`, and `Defect ID` remain blank until real execution (Newman run).
+- `Human Audit Status` and `Human Audit Reason` are filled for all 42 AI-generated cases. The official execution completed on 2026-08-20; execution-level evidence is recorded in `evidence/FR05-execution-summary.md` and the Newman reports. Per-case execution fields in this design master are retained primarily for defect-bearing HUMAN cases; the official Newman report is the execution source of truth for the full suite.
 - `UNRESOLVED` and `CHARACTERIZATION` labels are intentional and must not be silently converted into pass/fail contract expectations.
 - Every request carries the project-required header `X-Student-Id: 23127194`, sendable via a Postman/Newman pre-request script.
 - Audit labels used: `VALID` (correct, adequately grounded), `INVALID` (not applicable / duplicate / wrong expectation), `INCOMPLETE` (right idea, but missing a concrete value, precondition, or traceability needed before implementation).
@@ -32,7 +32,7 @@ Required per-request header: X-Student-Id: 23127194 (fixed value, no longer a te
 | INCOMPLETE | 10 | 012, 013, 020, 029, 031, 032, 033, 034, 035, 040 |
 | INVALID | 0 | — |
 
-INCOMPLETE cases are conceptually useful but not yet implementation-ready. The dominant issue is **reproducibility**: several cases use descriptive categories or conditional triggers instead of concrete literal inputs (for example, "boolean/operator injection-oriented payload", "deliberately long safely generated string", or "error-triggering input"). `AI-FR05-029` also needs the exact prior case ID it reuses. `AI-FR05-013` is incomplete for a different reason: API-only evidence can characterize handling of script-like input, but it cannot by itself prove the UI escaping requirement in SEC-04; its API-layer assertion boundary must remain explicit rather than inventing a mandatory response Content-Type. Fix these gaps before Postman implementation.
+The 10 cases labeled `INCOMPLETE` below preserve their **original Step G audit status** for provenance. They were corrected with concrete inputs, human re-reviewed, approved, implemented, and included in the official execution. Originally, these cases were not implementation-ready because The dominant issue is **reproducibility**: several cases use descriptive categories or conditional triggers instead of concrete literal inputs (for example, "boolean/operator injection-oriented payload", "deliberately long safely generated string", or "error-triggering input"). `AI-FR05-029` also needs the exact prior case ID it reuses. `AI-FR05-013` is incomplete for a different reason: API-only evidence can characterize handling of script-like input, but it cannot by itself prove the UI escaping requirement in SEC-04; its API-layer assertion boundary must remain explicit rather than inventing a mandatory response Content-Type. Fix these gaps before Postman implementation.
 
 
 ## Audit revision note
@@ -40,18 +40,18 @@ INCOMPLETE cases are conceptually useful but not yet implementation-ready. The d
 - Reviewer-requested cleanup applied before Postman implementation.
 - `AI-FR05-035` and `AI-FR05-040` were changed from `VALID` to `INCOMPLETE` because their error triggers are not concrete/reproducible.
 - `AI-FR05-013` remains `INCOMPLETE`, but its audit reason now preserves the SEC-04 boundary: API tests cannot by themselves prove browser escaping/rendering safety.
-- Previous `HUM-FR05-001..005` cases were removed from the retained suite. Five new genuinely human-authored cases are pending reviewer proposal.
-- No execution status, actual result, evidence, or defect field was populated.
+- Previous `HUM-FR05-001..005` cases were removed from the retained suite. Five replacement cases `HUMAN-FR05-043`, `044`, `046`, `047`, and `048` were human-authored, approved, implemented, and executed.
+- Official execution completed on 2026-08-20. Three confirmed defects were reported as FR05-BUG-01/02/03 and linked to GitHub Issues #24/#25/#26.
 
 ## Correction status for previously INCOMPLETE AI cases
 
-The original Human Audit labels are preserved for provenance. Ten AI cases previously marked `INCOMPLETE` now contain a concrete corrected version for human re-review before Postman implementation.
+The original Human Audit labels are preserved for provenance. Ten AI cases previously marked `INCOMPLETE` were corrected with concrete, reproducible versions and subsequently approved by human re-review before Postman implementation.
 
 | Case IDs | Original Audit | Correction Status |
 | --- | --- | --- |
-| AI-FR05-012, 013, 020, 029, 031, 032, 033, 034, 035, 040 | INCOMPLETE | Corrected for reproducibility; `PENDING HUMAN RE-REVIEW` |
+| AI-FR05-012, 013, 020, 029, 031, 032, 033, 034, 035, 040 | INCOMPLETE | Corrected for reproducibility; `VALID — HUMAN RE-REVIEW APPROVED` |
 
-No case is automatically reclassified to `VALID` by AI.
+No case was automatically reclassified by AI; the corrected versions were explicitly human re-reviewed and approved before execution.
 
 ## Coverage summary
 
@@ -389,7 +389,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | Send exactly the fixed punctuation string above as the search value; record status, response body shape, and whether the request is parsed as one search value. |
 | Corrected Expected | CHARACTERIZATION: no specific match set is required. The fixed symbol string must be treated as request data rather than altering request parsing or SQL structure. |
 | Correction Notes | Replaces the descriptive `<punctuation/symbol text>` placeholder with one fixed literal so the same case can be rerun identically. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -420,7 +420,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | Send the exact script-like string; record status, response Content-Type, and response body. Do not treat API-only evidence as proof of browser/DOM XSS safety. |
 | Corrected Expected | PARTIAL SEC-04 CHARACTERIZATION: record how the API transports/returns data for this exact input. Full SEC-04 verdict remains dependent on UI/E2E rendering behavior; no mandatory JSON Content-Type is invented. |
 | Correction Notes | Keeps the concrete payload and adds an explicit API-level observation target without turning JSON Content-Type into an unsupported contract requirement. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -607,7 +607,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | Generate `A.repeat(2000)` in the test data/pre-request script; send it as the search value; record actual status/body and confirm the request does not cause persistent mutation. |
 | Corrected Expected | ROBUSTNESS CHARACTERIZATION: no contractual maximum length is assumed. Record actual behavior for the fixed 2,000-character input. |
 | Correction Notes | Fixes the length at exactly 2,000 characters so regression runs exercise the same boundary representative. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -846,7 +846,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | Run `AI-FR05-030` input first; immediately run the same controlled normal search used by `AI-FR05-002`; compare Request 2 against the normal-search semantics expected for `AI-FR05-002`. |
 | Corrected Expected | The unusual first request must not create persistent search/error state that changes the semantics of the immediately following normal search. |
 | Correction Notes | Pins both sequence inputs to exact prior testcase IDs instead of leaving 'approved unusual input' undefined. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -903,7 +903,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | URL-encode and send exactly `' OR '1'='1`; compare behavior with controlled normal/no-match searches and inspect for evidence that boolean SQL logic changed the query. |
 | Corrected Expected | SEC-05: the payload must remain data and must not broaden/alter database query logic through SQL injection. |
 | Correction Notes | Replaces the boolean/operator payload family placeholder with one fixed literal. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -934,7 +934,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | URL-encode and send exactly `x'--`; record actual response and inspect whether SQL comment syntax changes query structure or exposes an internal database error. |
 | Corrected Expected | SEC-05: SQL comment syntax supplied by the user must remain data and must not alter query structure. |
 | Correction Notes | Uses a fixed quote-plus-comment literal distinct from the unmatched quote and boolean-expression cases. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -965,7 +965,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | URL-encode and send exactly `x' UNION SELECT NULL --`; record actual response and inspect for evidence of UNION/query-structure manipulation. Do not require the payload to succeed. |
 | Corrected Expected | SEC-05: user input must not extend or restructure the database query. A database rejection/error does not itself prove safety; actual handling is recorded. |
 | Correction Notes | Provides a concrete UNION-family probe without assuming a column count or successful exploitation. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -996,7 +996,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | Send the exact encoded value; verify the server receives one search value; record whether decoding plus mixed wildcard/quote/comment syntax changes SQL behavior. |
 | Corrected Expected | SEC-05: URL encoding must not make the mixed payload capable of altering query structure; the decoded value must still be treated as data. |
 | Correction Notes | Fixes both the raw and encoded forms and explains why this case is distinct: it combines percent wildcard + quote + boolean expression + comment after transport decoding. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1027,7 +1027,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | Send the exact unmatched quote. If the runtime returns an error, capture actual status, Content-Type, and body and inspect for SQL/database/stack/internal implementation details. If no error occurs, record that the disclosure path was not reached by this probe. |
 | Corrected Expected | RISK-BASED: no formal error schema/status is assumed. If an error response is produced, it should be evaluated for unnecessary internal-information disclosure. |
 | Correction Notes | Makes the conditional disclosure test reproducible by pinning its trigger to the exact `AI-FR05-030` payload. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1162,7 +1162,7 @@ No case is automatically reclassified to `VALID` by AI.
 | Corrected Steps | Send the exact unmatched quote. If an error response is reached, record actual status, Content-Type, top-level/body shape, and representative fields/text. If no error is reached, record the error-schema characterization as not reached for this probe. |
 | Corrected Expected | SCHEMA CHARACTERIZATION: formal error schema remains unresolved; only the actual error response shape is recorded when the fixed probe reaches an error path. |
 | Correction Notes | Uses the same fixed trigger as `AI-FR05-035` but keeps a distinct purpose: 035 evaluates disclosure risk, while 040 characterizes error response shape. |
-| Re-review Status | PENDING HUMAN RE-REVIEW |
+| Re-review Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1254,9 +1254,9 @@ The following five cases were authored by the reviewer. Their provenance remains
 | Root Cause | API-specific behavior / structured-parameter parser gap |
 | Human Audit Status | VALID |
 | Human Audit Reason | Reviewer-authored replacement case; executable sequentially in Postman/Newman while preserving the mandatory fixed student header. |
-| Execution Status | |
-| Actual Result | |
-| Evidence | |
+| Execution Status | PASSED — official Newman execution |
+| Actual Result | All assertions for this testcase passed in the official run. |
+| Evidence | `PoolA-FR-05-ProductSearch/evidence/FR05-execution-summary.md`; `postman/newman/FR05-official-report.json` |
 | Defect ID | |
 
 ## HUMAN-FR05-044 — Encoded null-byte inside search value
@@ -1309,9 +1309,9 @@ The following five cases were authored by the reviewer. Their provenance remains
 | Root Cause | state-history dependency |
 | Human Audit Status | VALID |
 | Human Audit Reason | Reviewer-approved mutation→search scenario; retained because it does not invent a new product lifecycle state. |
-| Execution Status | |
-| Actual Result | |
-| Evidence | |
+| Execution Status | PASSED — official Newman execution |
+| Actual Result | All assertions for this testcase passed in the official run. |
+| Evidence | `PoolA-FR-05-ProductSearch/evidence/FR05-execution-summary.md`; `postman/newman/FR05-official-report.json` |
 | Defect ID | |
 
 ## HUMAN-FR05-047 — Deleted product must not remain searchable
@@ -1336,9 +1336,9 @@ The following five cases were authored by the reviewer. Their provenance remains
 | Root Cause | API-specific state-history behavior |
 | Human Audit Status | VALID |
 | Human Audit Reason | Reviewer-approved delete→search scenario; hidden/soft-delete assumptions were intentionally removed. |
-| Execution Status | |
-| Actual Result | |
-| Evidence | |
+| Execution Status | PASSED — official Newman execution |
+| Actual Result | All assertions for this testcase passed in the official run. |
+| Evidence | `PoolA-FR-05-ProductSearch/evidence/FR05-execution-summary.md`; `postman/newman/FR05-official-report.json` |
 | Defect ID | |
 
 ## HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products
