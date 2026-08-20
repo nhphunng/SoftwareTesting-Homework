@@ -687,3 +687,56 @@ Human Review:
 - Schema/response checkpoint: APPROVED
 - Step F: COMPLETE — 42 AI-generated cases
 - Step G human audit: NOT STARTED
+
+## AI Audit Entry - AI-029
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T23:43:00+07:00 |
+| Stage | API 2 / FR-10 — Step G human-audit localization + correction pass |
+| API | `PUT /api/orders/:id/cancel` |
+| User Input | Supplied completed human audit for all 42 AI-generated FR10 testcases: 36 VALID / 0 INVALID / 6 INCOMPLETE, with Human Audit Reason for every case. |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/generated/PoolB-FR10-CancelOrder-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Translated all Human Audit Reason entries into English while preserving the user's Human Audit Status decisions. Added a Step G audit summary and preserved the six original INCOMPLETE labels for provenance. Added deterministic `Corrected Test` content for AI-FR10-004, 011, 012, 017, 038, and 042: Newman JSON header evidence for 004; `curl --path-as-is` for 011; fixed `%27` path probe for 012; exact 4096-character safe payload for 017; fixed encoded SQL-style probe for 038; and suite-wide official Newman header verification bound to AI-FR10-001 for 042. No AI reclassification to VALID was performed; human re-review remains required for those six corrected cases. |
+
+Human Review:
+- Original Step G audit: 36 VALID / 0 INVALID / 6 INCOMPLETE
+- Human Audit Reason language: translated to English
+- Corrections prepared: 6/6 INCOMPLETE cases
+- Corrected-case re-review: PENDING HUMAN APPROVAL
+
+## AI Audit Entry - AI-030
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T23:58:00+07:00 |
+| Stage | API 2 / FR-10 — Human re-review approval for corrected AI cases |
+| API | `PUT /api/orders/:id/cancel` |
+| User Decision | Explicitly approved all six corrected AI testcases: AI-FR10-004, 011, 012, 017, 038, 042. |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/generated/PoolB-FR10-CancelOrder-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Preserved the six original Human Audit Status values as INCOMPLETE for provenance, marked each corrected version `VALID — HUMAN RE-REVIEW APPROVED`, and updated the Step G summary to state that all 42 AI-generated cases are implementation-ready after correction/re-review. |
+
+Human Review:
+- Original audit: 36 VALID / 6 INCOMPLETE / 0 INVALID
+- Corrected cases human re-reviewed: 6/6 APPROVED
+- Final implementation-ready AI cases: 42/42
+
+## AI Audit Entry - AI-031
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T00:01:00+07:00 |
+| Stage | API 2 / FR-10 — Step H Human-authored Testcase Addition |
+| API | `PUT /api/orders/:id/cancel` |
+| User Input | Proposed six HUMAN-authored cases HUMAN-FR10-043..048 covering forged-body ownership bypass, foreign-vs-nonexistent enumeration, unauthorized-attempt history effects, JWT `alg:none`, duplicate JSON keys, and HTTP method override. |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/human-added/human-tests.md`; `reports/ai-audit-report.md` |
+| AI Output | Reviewed all six cases and accepted them for Step H. Preserved Source=HUMAN provenance and refined wording for HUMAN-FR10-044 and HUMAN-FR10-048 so enumeration/method-override behavior is treated as risk-based security characterization rather than silently promoted to direct FR-10 contract requirements. Added execution-ready steps, expected state oracles, Why-AI-missed rationale, and Step H coverage mapping. |
+
+Human Review:
+- HUMAN cases accepted: 6/6
+- Required minimum: >=5
+- Provenance: HUMAN
+- Step H: COMPLETE

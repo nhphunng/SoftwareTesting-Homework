@@ -8,7 +8,7 @@ Source: AI
 AI-generated testcase count: 42
 Required minimum: >=35
 Schema/response checkpoint: APPROVED
-Human Audit Status: NOT STARTED — Step G required for AI-FR10-001..042
+Human Audit Status: COMPLETE — 36 initially VALID / 6 initially INCOMPLETE / 0 INVALID; all 42 approved after correction/re-review
 Execution Status: NOT EXECUTED
 Required per-request header: X-Student-Id: 23127194
 ```
@@ -16,11 +16,27 @@ Required per-request header: X-Student-Id: 23127194
 ## Provenance and review rules
 
 - Every testcase in this artifact has `Source = AI`.
-- No testcase is marked `VALID`, `INVALID`, or `INCOMPLETE` yet. Those labels belong to **Step G human audit**.
+- `VALID`, `INVALID`, and `INCOMPLETE` are **Step G human audit** labels. The original audit produced 36 VALID / 0 INVALID / 6 INCOMPLETE. The six original `INCOMPLETE` labels are preserved for audit provenance; their corrected versions were explicitly human re-reviewed and approved on 2026-08-20.
 - `UNRESOLVED` and `CHARACTERIZATION` are deliberate where the contract does not define exact HTTP status/body/schema.
 - State transition/state preservation is the primary FR-10 oracle; follow-up `GET /api/orders/:id` should verify before/after state when runtime-ready.
 - Cross-user cancellation is a **risk-based authorization expectation approved at Gate A**, not direct FR-10 wording.
 - Expired-token and concurrency cases are intentionally not included in the mandatory 42 because runtime reproducibility/determinism is not yet guaranteed; they remain optional candidates from prior analysis.
+
+## Step G human audit summary
+
+| Label | Count | Case IDs |
+| --- | ---: | --- |
+| VALID | 36 | AI-FR10-001..003, 005..010, 013..016, 018..037, 039..041 |
+| INCOMPLETE | 6 | AI-FR10-004, 011, 012, 017, 038, 042 |
+| INVALID | 0 | — |
+
+The six `INCOMPLETE` cases below preserve their **original human audit decision**. Their `Corrected Test` fields contain deterministic, reproducible corrections. The reviewer explicitly approved all six corrections on 2026-08-20, so all 42 AI-generated cases are now implementation-ready while the original audit labels remain unchanged for provenance.
+
+## Correction status for originally INCOMPLETE cases
+
+| Case IDs | Original Human Audit | Correction Status |
+| --- | --- | --- |
+| AI-FR10-004, 011, 012, 017, 038, 042 | INCOMPLETE | VALID — HUMAN RE-REVIEW APPROVED |
 
 ## Coverage summary
 
@@ -64,8 +80,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled |
 | AI Rationale | Covers functional behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Preconditions, input, execution steps, and the State Before/After oracle are complete, clear, and independently reproducible. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -91,8 +107,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | confirmed |
 | State After | canceled |
 | AI Rationale | Covers functional behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The scenario is clear, the confirmed→canceled state oracle is explicit, and it aligns with FR-10/ST-02. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -118,8 +134,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | confirmed + shipping |
 | State After | canceled + shipping |
 | AI Rationale | Covers functional behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The testcase combines two branches (confirmed allowed vs shipping rejected) to compare the state boundary. It remains executable and assessable, although splitting it into two atomic cases later would make failure isolation easier. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -145,9 +161,10 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled |
 | AI Rationale | Covers functional behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | The step 'verify outgoing student header' does not specify how the actually transmitted request will be captured (for example, Newman JSON evidence or Postman Console), so it is not independently reproducible as written. It also overlaps in purpose with AI-FR10-042. |
+| Corrected Test | Scope this case to one concrete canonical request: execute AI-FR10-001 with no body, no query string, and no explicit Content-Type. In the official Newman JSON report, locate the execution for AI-FR10-001 and assert that its recorded request headers contain exactly `X-Student-Id: 23127194`. Then verify that the same order changed from `pending` to `canceled`. AI-FR10-042 remains the suite-wide header-evidence case; this case verifies the header on one canonical request only. |
+| Correction Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -172,8 +189,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The domain testcase is clear; the precondition that known orders are recorded before the test is sufficient to establish the oracle that no unrelated resource is affected. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -199,8 +216,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Input, oracle, and steps are clear for the ID=0 boundary case. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -226,8 +243,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Input, oracle, and steps are clear for the negative-ID boundary case. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -253,8 +270,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Input, oracle, and steps are clear for a non-numeric order ID. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -280,8 +297,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Input, oracle, and steps are clear for a decimal-like order ID. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -307,8 +324,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Input, oracle, and steps are clear for a very large numeric ID and overflow-oriented behavior. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -334,9 +351,10 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | The input uses 'if client permits', showing that the testcase itself does not guarantee that an empty path segment reaches the server unchanged. Many HTTP clients normalize double slashes, so a specific raw-request method such as `curl --path-as-is` is required for reproducibility. |
+| Corrected Test | Use a raw-path-capable client outside the normal Postman request when necessary: `curl --path-as-is -X PUT 'http://localhost:3000/api/orders//cancel' -H 'Authorization: Bearer <User-A-token>' -H 'X-Student-Id: 23127194'`. Before and after this request, retrieve the controlled fixture orders with valid authenticated requests and verify that none changed state. Record the raw curl command/output as supporting evidence; exact HTTP status/body remain CHARACTERIZATION. |
+| Correction Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -361,9 +379,10 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers domain behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | The input 'encoded quote-like/special value' does not provide a concrete literal value, so different runs or testers cannot reproduce the same probe. A fixed encoded value such as `%27` must be specified. |
+| Corrected Test | Use one fixed encoded path probe: `%27` (URL-encoded single quote). Send `PUT /api/orders/%27/cancel` with a valid User A JWT and `X-Student-Id: 23127194`. Record the states of the known fixture orders before the request and verify all remain unchanged afterward. Do not infer SEC-05 compliance or violation from the status code alone. |
+| Correction Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -388,8 +407,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled OR pending if request rejected |
 | AI Rationale | Covers boundary behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The `{}` input is concrete, and the oracle correctly allows the two contract-compatible outcomes: canceled if processed or pending if rejected. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -415,8 +434,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending unless request is legitimately processed despite malformed body |
 | AI Rationale | Covers boundary behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The malformed JSON literal `{invalid` is concrete and reproducible, and the oracle prevents unintended mutation. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -442,8 +461,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled OR pending if rejected |
 | AI Rationale | Covers boundary behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The `null` body is concrete, and the oracle clearly limits the acceptable outcomes. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -469,8 +488,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled OR pending if rejected |
 | AI Rationale | Covers boundary behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The `[]` body is concrete, and the oracle clearly limits the acceptable outcomes. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -496,9 +515,10 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled OR pending if rejected |
 | AI Rationale | Covers boundary behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | 'Large JSON object with irrelevant field' does not define an exact size or field count even though the steps call it a deterministic payload. A concrete byte/character size is required for reproducibility. |
+| Corrected Test | Use one deterministic safe payload: JSON body `{"padding":"<4096 literal A characters>"}` where `padding` contains exactly 4096 ASCII `A` characters, generated by the Postman pre-request script with `'A'.repeat(4096)`. Send it with `Content-Type: application/json` to a dedicated User A `pending` order. Verify that the service remains responsive and the order is either `canceled` if the undocumented body is ignored or remains `pending` if the request is rejected; no other state/ownership mutation is allowed. |
+| Correction Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -523,8 +543,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled OR pending if rejected |
 | AI Rationale | Covers boundary behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The unknown query `?foo=bar` is concrete, and the oracle clearly limits acceptable behavior without inventing an undocumented status code. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -550,8 +570,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The two sequential cancel calls on the same order are explicit, with a clear oracle for both the first valid transition and the second invalid transition. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -577,8 +597,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | confirmed |
 | State After | canceled |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | This is the same repeated-cancel sequence starting from `confirmed`; the oracle is clear and state-aware. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -604,8 +624,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | shipping |
 | State After | shipping |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The state-machine scenario is clear: a user cannot cancel a `shipping` order, and the post-state oracle is explicit. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -631,8 +651,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | delivered |
 | State After | delivered |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The state-machine scenario is clear: `delivered` is a final state and must remain unchanged. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -658,8 +678,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | canceled |
 | State After | canceled |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The state-machine scenario is clear: `canceled` is final and cannot be canceled again. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -685,8 +705,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The scenario is valid. It partially overlaps AI-FR10-028 because both omit Authorization, but this case specifically verifies state preservation, so it provides a distinct useful oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -712,8 +732,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | confirmed |
 | State After | confirmed |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The scenario is valid. It partially overlaps AI-FR10-032 because both use a tampered JWT, but this case specifically verifies preservation of a `confirmed` order state, so it remains useful. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -739,8 +759,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled OR pending; never delivered |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The body `status` override scenario is concrete, and the oracle correctly prevents an undocumented direct transition to `delivered`. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -766,8 +786,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | confirmed |
 | State After | canceled OR confirmed; never delivered |
 | AI Rationale | Covers state/sequence behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The query-string status override scenario is concrete, and the oracle correctly prevents an undocumented direct transition to `delivered`. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -793,8 +813,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Missing Authorization is a standard SEC-02 negative-authentication scenario with a clear no-mutation oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -820,8 +840,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | An empty Authorization value is a clear SEC-02 negative-authentication scenario with a clear no-mutation oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -847,8 +867,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Bearer authentication without a token is a clear SEC-02 negative-authentication scenario with a clear no-mutation oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -874,8 +894,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The malformed JWT literal `not-a-jwt` is concrete and provides a clear SEC-02 negative-authentication scenario. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -901,8 +921,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | A JWT with a deliberately invalid signature is a clear SEC-02 scenario; the testcase also explains how to derive it from a real token without the signing key. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -928,8 +948,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Using the wrong authentication scheme (`Basic` instead of `Bearer`) is a clear SEC-02 scenario with an explicit no-authentication oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -955,8 +975,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | User B order pending |
 | State After | pending |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | This is a clear BOLA scenario: User A must not cancel User B's `pending` order, and the state-preservation oracle is explicit. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -982,8 +1002,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | User B order confirmed |
 | State After | confirmed |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | This is a clear BOLA scenario: User A must not cancel User B's `confirmed` order, and the state-preservation oracle is explicit. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1009,8 +1029,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | User A owns pending order |
 | State After | Owner unchanged; state canceled OR pending if rejected |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The body `user_id` override is a clear mass-assignment-style authorization scenario, with explicit ownership and state oracles. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1036,8 +1056,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | two known orders |
 | State After | no unintended cross-target mutation |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | The path-ID versus query-ID conflict is concrete, and the oracle clearly requires that the query value cannot override the path target. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1063,9 +1083,10 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | known fixture states |
 | State After | unchanged |
 | AI Rationale | Covers security behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | Like AI-FR10-012, 'deterministic encoded boolean-style SQL probe' does not provide the actual payload, so the test cannot be reproduced exactly. A fixed encoded SQL-style probe must be specified. |
+| Corrected Test | Use the fixed encoded SQL-style boolean probe `1%27%20OR%20%271%27%3D%271` (decoded: `1' OR '1'='1`) as the entire `:id` value. Send `PUT /api/orders/1%27%20OR%20%271%27%3D%271/cancel` with a valid User A JWT and `X-Student-Id: 23127194`. Verify that no known fixture order is canceled or otherwise changed. Treat the response as characterization; a 4xx/5xx alone does not establish SEC-05 compliance or violation. |
+| Correction Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1090,8 +1111,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | canceled |
 | AI Rationale | Covers schema behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | This is a valid response-characterization testcase for successful cancellation: the state oracle is authoritative while response shape is recorded without being promoted to contract. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1117,8 +1138,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | shipping |
 | State After | shipping |
 | AI Rationale | Covers schema behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | This is a valid response-characterization testcase for an invalid `shipping` transition, with the state oracle remaining authoritative. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1144,8 +1165,8 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | pending |
 | State After | pending |
 | AI Rationale | Covers schema behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | This is a valid authentication-failure response-characterization testcase. It partially overlaps AI-FR10-024/028 but has a distinct purpose: characterize response shape rather than only state/auth behavior. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1171,9 +1192,10 @@ Required per-request header: X-Student-Id: 23127194
 | State Before | N/A |
 | State After | N/A |
 | AI Rationale | Covers schema behavior traced to approved FR-10 analysis. |
-| Human Audit Status | PENDING HUMAN REVIEW |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | The precondition 'Any runtime-ready testcase execution' is too vague because it does not identify a concrete request as the evidence source. It also overlaps with AI-FR10-004, so one specific official request should be bound to this evidence assertion. |
+| Corrected Test | Bind this evidence assertion to the official FR10 Newman run. After the run, parse `postman/newman/FR10-official-report.json` and verify two things: (1) every execution contains `X-Student-Id`, and (2) every such header value is exactly `23127194`. Also use AI-FR10-001 as the representative request when producing human-readable header evidence. This case is suite-wide evidence verification and does not duplicate AI-FR10-004's canonical-request/state objective. |
+| Correction Status | VALID — HUMAN RE-REVIEW APPROVED |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
