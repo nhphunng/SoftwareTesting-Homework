@@ -275,7 +275,7 @@ Gate H — bug confirmed
 ## 4.6 Commit
 
 ```bash
-git add skills/api-testing-human-loop
+git add .agents/skills/api-testing-human-loop
 git commit -m "feat(skill): add human-in-the-loop API testing skill"
 ```
 
