@@ -7,7 +7,7 @@ Gate A: **APPROVED**
 Gate B: **APPROVED**  
 Gate C: **APPROVED**  
 Gate D: **APPROVED**  
-Schema/response checkpoint status: **PENDING HUMAN REVIEW**
+Schema/response checkpoint status: **APPROVED**
 
 ## 1. Contract evidence available
 

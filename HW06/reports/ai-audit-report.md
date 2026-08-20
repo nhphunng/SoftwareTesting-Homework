@@ -653,3 +653,37 @@ Human Review:
 - Gate C: APPROVED
 - Gate D: PENDING
 - Concurrency: optional unless deterministic harness becomes available
+
+## AI Audit Entry - AI-027
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T23:13:00+07:00 |
+| Stage | API 2 / FR-10 — Gate D approval + Step E Schema/Response Analysis |
+| API | `PUT /api/orders/:id/cancel` |
+| User Prompt | bước tiếp theo đúng workflow là Step E — Schema/Response Analysis |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/analysis/security.md`; `PoolB-FR-10-CancelOrder/analysis/schema.md`; `reports/ai-audit-report.md` |
+| AI Output | Marked Gate D approved and created schema/response analysis for FR-10. The exact success/error HTTP codes and JSON schemas remain UNRESOLVED because the supplied contract does not define them. State transition/state preservation is used as the primary oracle, with follow-up `GET /api/orders/:id` recommended for before/after verification. Runtime response shape is treated as characterization unless later human review promotes it to a stable regression expectation. |
+
+Human Review:
+- Gate D: APPROVED
+- Schema/response checkpoint: PENDING
+- Primary oracle: state transition/state preservation, not invented response schema
+
+## AI Audit Entry - AI-028
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T23:20:00+07:00 |
+| Stage | API 2 / FR-10 — Schema checkpoint approval + Step F AI Testcase Generation |
+| API | `PUT /api/orders/:id/cancel` |
+| User Prompt | Thực hiện Step F — AI Testcase Generation: tạo ≥35 AI-generated testcases cho FR10, dựa trên toàn bộ Requirement + Domain + State + Security + Schema vừa được approve. |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/analysis/schema.md`; `PoolB-FR-10-CancelOrder/generated/PoolB-FR10-CancelOrder-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Marked the schema/response checkpoint approved and generated 42 AI-provenance FR-10 testcases. Coverage: 4 Functional, 8 Domain, 6 Boundary, 9 State/Sequence, 11 Security, 4 Schema. All 42 preserve `Source = AI`, `Human Audit Status = PENDING HUMAN REVIEW`, blank execution evidence, and explicit UNRESOLVED/CHARACTERIZATION boundaries where the contract does not define exact HTTP status/body/schema. Cross-user cancellation remains labeled as Gate A-approved risk-based authorization coverage. Expired-token and concurrency cases were left outside the mandatory 42 because reproducible runtime setup/determinism is not yet established. |
+
+Human Review:
+- Schema/response checkpoint: APPROVED
+- Step F: COMPLETE — 42 AI-generated cases
+- Step G human audit: NOT STARTED
