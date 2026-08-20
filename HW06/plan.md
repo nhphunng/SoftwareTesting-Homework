@@ -100,11 +100,13 @@ HW06/
 ├── plan.md
 ├── source/
 │   └── api_specification.md
-├── skills/
+├── .agents/skills/
 │   ├── api-testing-human-loop/
 │   │   └── SKILL.md
-│   └── ai-audit/
-│       └── SKILL.md
+│   └── ai-audit-report/
+│       ├── SKILL.md
+│       ├── agents/openai.yaml
+│       └── references/audit-entry-template.md
 ├── PoolA-FR-05-ProductSearch/
 │   ├── analysis/
 │   ├── generated/
@@ -124,8 +126,9 @@ HW06/
 │   └── newman/
 ├── cicd/
 ├── agent-skill/
-├── ai-audit/
 ├── reports/
+│   ├── ai-audit-report.md
+│   └── ai-session-logs/
 ├── screenshots/
 └── submission/
 ```
@@ -347,20 +350,21 @@ Audit skill phải:
 ## 5.4 Suggested files
 
 ```text
-ai-audit/
-├── audit-log.md
-├── interactions/
-│   ├── AI-001.md
-│   ├── AI-002.md
-│   └── ...
-└── AI-Audit-Report.md
+.agents/skills/ai-audit-report/
+├── SKILL.md
+├── agents/openai.yaml
+└── references/audit-entry-template.md
+
+reports/
+├── ai-audit-report.md
+└── ai-session-logs/
 ```
 
 ## 5.5 Commit
 
 ```bash
-git add skills/ai-audit ai-audit
-git commit -m "feat(skill): add AI interaction audit skill"
+git add .agents/skills/ai-audit-report reports/ai-audit-report.md reports/ai-session-logs
+git commit -m "refactor(skill): align HW06 AI audit skill with reusable audit pattern"
 ```
 
 ---
@@ -1516,7 +1520,7 @@ Use logs produced from the beginning.
 Generate:
 
 ```text
-ai-audit/AI-Audit-Report.md
+reports/ai-audit-report.md
 ```
 
 For every significant interaction include:
@@ -1548,7 +1552,7 @@ Export PDF later.
 ## Commit
 
 ```bash
-git add ai-audit
+git add reports/ai-audit-report.md reports/ai-session-logs
 git commit -m "docs(hw06): compile AI audit report"
 ```
 
