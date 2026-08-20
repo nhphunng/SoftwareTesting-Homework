@@ -397,3 +397,66 @@ Human Review:
 - Removed: HUMAN-FR05-045 from the retained set
 - Added: None — no new HUMAN testcase invented by AI
 - Notes: The downloadable conversation artifact is the updated review copy. The existing local project testcase source is not overwritten automatically by this entry; synchronize only after the reviewer accepts the five retained cases.
+
+## AI Audit Entry - AI-014
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT |
+| Date and Time | 2026-08-20T17:15:00+07:00 |
+| Stage | Phase 4 / API 1 / Step G correction pass before Postman implementation |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` |
+| User Prompt | sửa 10 AI cases `INCOMPLETE` thành executable/reproducibl |
+| Evidence/Input Basis | Final audited FR-05 testcase artifact plus the previously approved Gate A-E constraints and Human Audit reasons for AI-FR05-012, 013, 020, 029, 031, 032, 033, 034, 035, 040 |
+| Generated/Modified Files | `HW06/PoolA-FR-05-ProductSearch/generated/FR05-incomplete-corrections.md`; downloadable corrected audit artifact `PoolA-FR05-ProductSearch-test-AUDIT-CORRECTED.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Added concrete corrected inputs/steps/expectations for all ten previously INCOMPLETE AI cases while preserving the original `Human Audit Status = INCOMPLETE` labels. Corrections include: a fixed punctuation literal (012); explicit API-observation target without inventing JSON Content-Type contract (013); exactly 2,000 ASCII `A` characters for long-input robustness (020); exact reuse of AI-FR05-030 then AI-FR05-002 for the sequence case (029); fixed SQL-oriented literals for boolean, comment, UNION, and encoded mixed payloads (031-034); and a fixed unmatched-quote probe reused from AI-FR05-030 for the disclosure/error-schema cases (035, 040). Each corrected case is marked `PENDING HUMAN RE-REVIEW`; AI did not reclassify any Human Audit decision to VALID. No API execution, Newman evidence, or defects were fabricated. |
+
+Human Review:
+- Status: Pending human re-review of the ten corrected AI cases
+- Accepted:
+- Modified:
+- Removed: None
+- Added: Corrected executable/reproducible versions only; original AI records and audit labels remain preserved
+- Notes: After reviewer approval, these corrected versions can be used as the implementation basis for Postman/Newman.
+
+## AI Audit Entry - AI-015
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T17:22:00+07:00 |
+| Stage | Phase 4 / API 1 / Step G — Human re-review approval |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` |
+| User Prompt | Tôi đã kiểm tra qua và 10 AI case đó đã valid bạn hãy cập nhật giúp tôi |
+| Evidence/Input Basis | Reviewer explicitly approved the corrected versions of AI-FR05-012, 013, 020, 029, 031, 032, 033, 034, 035, 040 as VALID |
+| Generated/Modified Files | `HW06/PoolA-FR-05-ProductSearch/generated/FR05-incomplete-corrections.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Updated all ten corrected AI cases from `PENDING HUMAN RE-REVIEW` to `VALID — HUMAN RE-REVIEW APPROVED`. The original audit history is preserved, but the corrected versions are now the approved implementation basis. As a result, the final human audit outcome for the 42 AI-generated FR-05 cases is 42 VALID / 0 INCOMPLETE / 0 INVALID. No testcase content, execution status, evidence, or defect data was fabricated or changed. |
+
+Human Review:
+- Status: APPROVED
+- Accepted: AI-FR05-012, 013, 020, 029, 031, 032, 033, 034, 035, 040 corrected versions
+- Modified: Re-review status only
+- Removed: None
+- Added: None
+- Notes: Step G human audit is now complete for all 42 AI-generated FR-05 testcases.
+
+## AI Audit Entry - AI-016
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T17:25:00+07:00 |
+| Stage | Phase 4 / API 1 / Step H — Human-added testcase approval |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` plus documented product mutation APIs where applicable |
+| User Prompt | 5 Human added case đã được tôi xem qua và approve |
+| Evidence/Input Basis | Reviewer explicitly approved the retained human-authored cases `HUMAN-FR05-043`, `HUMAN-FR05-044`, `HUMAN-FR05-046`, `HUMAN-FR05-047`, `HUMAN-FR05-048` |
+| Generated/Modified Files | `HW06/reports/ai-audit-report.md` |
+| AI Output | Recorded final human approval of the five retained reviewer-authored FR-05 testcases. Their provenance remains `Source = HUMAN`; no testcase content was generated or relabeled by AI. Together with the completed audit of 42 AI-generated cases, the FR-05 suite is now finalized at 47 retained testcases: 42 AI cases approved VALID and 5 genuinely human-authored cases approved by the reviewer. No execution status, evidence, Newman result, or defect data was created. |
+
+Human Review:
+- Status: APPROVED
+- Accepted: HUMAN-FR05-043, HUMAN-FR05-044, HUMAN-FR05-046, HUMAN-FR05-047, HUMAN-FR05-048
+- Modified: None
+- Removed: HUMAN-FR05-045 remains excluded from the retained suite
+- Added: None
+- Notes: Step H / Human Gate F is complete for FR-05. The suite is ready for Postman implementation and subsequent real Newman execution.

@@ -1,24 +1,57 @@
-# API 1 — FR-05 Product Search — AI-Generated Test Cases
+# API 1 — FR-05 Product Search — Audited Test Cases
 
-## Step F status
+## Step G status
 
 ```text
 API: GET /api/products?search=keyword
-Source: AI
-Total AI-generated testcases: 42
+Source: MIXED (AI + HUMAN)
+Total testcases currently retained: 47 (42 AI-generated + 5 human-added)
+AI-generated audit result: 32 VALID / 10 INCOMPLETE / 0 INVALID
 Primary source from Step G onward: this Markdown file
 XLSX role: export/summary artifact only
-Human Audit Status: PENDING
+Human Audit Status: COMPLETE (AI-FR05-001..042)
+Human-added testcase status: 5 reviewer-authored cases retained; pending final human confirmation before implementation
 Execution Status: NOT EXECUTED
+Required per-request header: X-Student-Id: 23127194 (fixed value, no longer a template placeholder)
 ```
 
 ## Provenance and evidence rules
 
-- Every testcase below preserves `Source = AI`.
-- `Human Audit Status`, `Human Audit Reason`, `Execution Status`, `Actual Result`, `Evidence`, and `Defect ID` remain blank until the corresponding human-review or real-execution step.
+- Every AI-FR05-xxx testcase preserves `Source = AI`. Every HUMAN-FR05-xxx testcase preserves genuine `Source = HUMAN` provenance and was supplied by the reviewer; AI only translated and tightened wording to remove unsupported assumptions.
+- `Human Audit Status` and `Human Audit Reason` are now filled for all 42 AI-generated cases (see labels below). `Execution Status`, `Actual Result`, `Evidence`, and `Defect ID` remain blank until real execution (Newman run).
 - `UNRESOLVED` and `CHARACTERIZATION` labels are intentional and must not be silently converted into pass/fail contract expectations.
-- Every request retains the project-required `X-Student-Id: 23127194` input.
+- Every request carries the project-required header `X-Student-Id: 23127194`, sendable via a Postman/Newman pre-request script.
+- Audit labels used: `VALID` (correct, adequately grounded), `INVALID` (not applicable / duplicate / wrong expectation), `INCOMPLETE` (right idea, but missing a concrete value, precondition, or traceability needed before implementation).
 - This file is the review source of truth for Step G onward. The XLSX file remains a generated export/summary, not the editable review master.
+
+## Audit summary (AI-FR05-001 .. 042)
+
+| Label | Count | Case IDs |
+| --- | ---: | --- |
+| VALID | 32 | 001–011, 014–019, 021–028, 030, 036–039, 041–042 |
+| INCOMPLETE | 10 | 012, 013, 020, 029, 031, 032, 033, 034, 035, 040 |
+| INVALID | 0 | — |
+
+INCOMPLETE cases are conceptually useful but not yet implementation-ready. The dominant issue is **reproducibility**: several cases use descriptive categories or conditional triggers instead of concrete literal inputs (for example, "boolean/operator injection-oriented payload", "deliberately long safely generated string", or "error-triggering input"). `AI-FR05-029` also needs the exact prior case ID it reuses. `AI-FR05-013` is incomplete for a different reason: API-only evidence can characterize handling of script-like input, but it cannot by itself prove the UI escaping requirement in SEC-04; its API-layer assertion boundary must remain explicit rather than inventing a mandatory response Content-Type. Fix these gaps before Postman implementation.
+
+
+## Audit revision note
+
+- Reviewer-requested cleanup applied before Postman implementation.
+- `AI-FR05-035` and `AI-FR05-040` were changed from `VALID` to `INCOMPLETE` because their error triggers are not concrete/reproducible.
+- `AI-FR05-013` remains `INCOMPLETE`, but its audit reason now preserves the SEC-04 boundary: API tests cannot by themselves prove browser escaping/rendering safety.
+- Previous `HUM-FR05-001..005` cases were removed from the retained suite. Five new genuinely human-authored cases are pending reviewer proposal.
+- No execution status, actual result, evidence, or defect field was populated.
+
+## Correction status for previously INCOMPLETE AI cases
+
+The original Human Audit labels are preserved for provenance. Ten AI cases previously marked `INCOMPLETE` now contain a concrete corrected version for human re-review before Postman implementation.
+
+| Case IDs | Original Audit | Correction Status |
+| --- | --- | --- |
+| AI-FR05-012, 013, 020, 029, 031, 032, 033, 034, 035, 040 | INCOMPLETE | Corrected for reproducibility; `PENDING HUMAN RE-REVIEW` |
+
+No case is automatically reclassified to `VALID` by AI.
 
 ## Coverage summary
 
@@ -30,7 +63,7 @@ Execution Status: NOT EXECUTED
 | State/Sequence | 5 |
 | Security | 7 |
 | Schema | 4 |
-| **Total** | **42** |
+| **Total currently retained** | **42** |
 | Required | ≥35 |
 
 ## Batch summary
@@ -64,8 +97,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Valid omission of optional search and base listing behavior |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Sound baseline listing test; correctly avoids asserting an undocumented default status/schema for the omitted-search case. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -90,8 +123,8 @@ Execution Status: NOT EXECUTED
 | State Before | Matching product exists |
 | State After | No mutation expected |
 | AI Rationale | Core positive search behavior |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reproducible positive-match case with a controlled precondition; core requirement coverage. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -116,8 +149,8 @@ Execution Status: NOT EXECUTED
 | State Before | No matching product |
 | State After | No mutation expected |
 | AI Rationale | No-match semantics without inventing [] or status |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Correctly separates the no-match business rule from any status/schema assumption not in the contract. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -142,8 +175,8 @@ Execution Status: NOT EXECUTED
 | State Before | Exact product name exists |
 | State After | No mutation expected |
 | AI Rationale | Positive representative for search by product name |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Distinct partition from AI-FR05-002 (exact full-name match vs partial keyword match); minor overlap is acceptable and does not make the case incorrect, though the two could be merged for efficiency. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -168,8 +201,8 @@ Execution Status: NOT EXECUTED
 | State Before | Keyword exists only outside name |
 | State After | No mutation expected |
 | AI Rationale | Strong negative rule from search-by-name requirement |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Important negative business rule (search-by-name only, not by description/category); well scoped and testable. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -194,8 +227,8 @@ Execution Status: NOT EXECUTED
 | State Before | N/A |
 | State After | No mutation expected |
 | AI Rationale | Confirms public endpoint context |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Confirms the documented public-access contract without inventing an authentication requirement that is not specified. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -220,8 +253,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Empty-string semantics are unresolved |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Empty-string search=<blank> is a distinct domain partition from omitted search; correctly scoped as characterization. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -246,8 +279,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Separates whitespace-only from omitted/empty |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Whitespace-only search is a distinct partition from both omitted and empty string; justified separation. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -272,8 +305,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Distinct request form retained by Gate B |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Leading/trailing whitespace around a real keyword is a reasonable and reproducible characterization case. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -298,8 +331,8 @@ Execution Status: NOT EXECUTED
 | State Before | Matching product exists |
 | State After | No mutation expected |
 | AI Rationale | Preserves partial-name coverage without inventing substring contract |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Substring/partial-name matching characterization is reproducible given the stated precondition. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -324,8 +357,8 @@ Execution Status: NOT EXECUTED
 | State Before | Unicode product data exists |
 | State After | No mutation expected |
 | AI Rationale | Covers Vietnamese/Unicode text |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Unicode/Vietnamese text coverage is directly relevant to the product domain and is a real risk area (encoding, normalization). |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -350,8 +383,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Covers textual domain outside alphanumerics |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | The input value 'punctuation/symbol text' is a placeholder, not a concrete literal. A tester cannot reproduce or automate this case without a fixed example string (e.g. a defined set of symbol characters). Needs a concrete value before implementation. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; `search=!@#$^*()_+-=[]{};,.?` (URL-encode through the client/request library) |
+| Corrected Steps | Send exactly the fixed punctuation string above as the search value; record status, response body shape, and whether the request is parsed as one search value. |
+| Corrected Expected | CHARACTERIZATION: no specific match set is required. The fixed symbol string must be treated as request data rather than altering request parsing or SQL structure. |
+| Correction Notes | Replaces the descriptive `<punctuation/symbol text>` placeholder with one fixed literal so the same case can be rerun identically. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -376,8 +414,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Script-like input retained as an input-domain class |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | The payload is concrete, but the case does not define a sufficiently clear API-layer assertion. SEC-04 is a UI rendering/escaping requirement, so API-only evidence cannot prove that script text is safely rendered in the browser. Keep this case as partial characterization and explicitly limit its assertion to safe request/response handling; full SEC-04 verification requires UI/E2E evidence. Do not invent a mandatory Content-Type requirement that the contract does not define. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; `search=<script>alert(1)</script>` (URL-encoded by the client) |
+| Corrected Steps | Send the exact script-like string; record status, response Content-Type, and response body. Do not treat API-only evidence as proof of browser/DOM XSS safety. |
+| Corrected Expected | PARTIAL SEC-04 CHARACTERIZATION: record how the API transports/returns data for this exact input. Full SEC-04 verdict remains dependent on UI/E2E rendering behavior; no mandatory JSON Content-Type is invented. |
+| Correction Notes | Keeps the concrete payload and adds an explicit API-level observation target without turning JSON Content-Type into an unsupported contract requirement. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -402,8 +445,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Reserved-character transport coverage |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reserved-character transport encoding (%2B) is a legitimate, low-cost boundary case. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -428,8 +471,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Case-variation representative |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Lower-case variation is a reasonable representative for the case-sensitivity partition. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -454,8 +497,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Second case-variation representative |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Upper/mixed-case variation complements AI-FR05-015 as the other side of the same partition. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -480,8 +523,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Avoids false numeric type-mismatch classification |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Numeric-as-text input is a real ambiguity worth characterizing explicitly. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -506,8 +549,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Preserves HTTP query-string semantics |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Literal 'null' string vs JSON null is a genuine and common implementation pitfall worth covering. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -532,8 +575,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Short representative without fabricated min boundary |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | One-character keyword is a reasonable minimum-length representative without inventing a contractual minimum. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -558,8 +601,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Approved long-input robustness coverage |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | 'Deliberately long safely generated string' has no concrete length. Without a fixed number of characters (e.g. 2,000 or 10,000), the case is not reproducible and cannot be re-run identically during regression. Needs an explicit length parameter. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; `search=` followed by exactly 2,000 ASCII `A` characters |
+| Corrected Steps | Generate `A.repeat(2000)` in the test data/pre-request script; send it as the search value; record actual status/body and confirm the request does not cause persistent mutation. |
+| Corrected Expected | ROBUSTNESS CHARACTERIZATION: no contractual maximum length is assumed. Record actual behavior for the fixed 2,000-character input. |
+| Correction Notes | Fixes the length at exactly 2,000 characters so regression runs exercise the same boundary representative. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -584,8 +632,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Preserves duplicate-query human decision |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Duplicate query parameter handling (?search=phone&search=laptop) is a legitimate and often-overlooked precedence/parsing case. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -610,8 +658,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | LIKE-sensitive character coverage |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Literal '%' as a SQL LIKE wildcard character is a well-targeted case bridging boundary and injection-adjacent risk. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -636,8 +684,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Delimiter-sensitive reserved character |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Literal '&' as an encoded reserved character is a legitimate transport-boundary case, distinct from AI-FR05-014/024. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -662,8 +710,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Key/value delimiter character as data |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Literal '=' as an encoded reserved character rounds out the reserved-character family started by AI-FR05-014/023. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -688,8 +736,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | Stable dataset; no mutation |
 | AI Rationale | Read-only repeatability |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Read-only repeatability (idempotent GET, no mutation) is a correct and necessary state/sequence case. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -714,8 +762,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | Stable dataset; no mutation |
 | AI Rationale | Repeated read/idempotency-style behavior |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Repeated identical search is a reasonable idempotency-style check, correctly scoped to semantic equivalence rather than byte-identity. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -740,8 +788,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No persistent search state |
 | AI Rationale | Request independence |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Request-scoped independence between two different searches (A then B) is a correct and necessary sequence case. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -766,8 +814,8 @@ Execution Status: NOT EXECUTED
 | State Before | Filtered request completed |
 | State After | No persistent filter state |
 | AI Rationale | Optional query is request-scoped |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Verifying that a prior filtered search does not leak into a later unfiltered listing is an important state-isolation case. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -792,8 +840,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | Normal search remains independent |
 | AI Rationale | State safety after unusual input |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | 'Approved unusual input' is a forward reference to an unspecified case with no ID cited. To be independently reproducible and auditable, this must name the exact prior input it reuses (e.g., 'reuse the payload from AI-FR05-013' or 'AI-FR05-030'). As written, two different testers would not necessarily choose the same 'unusual input'. |
+| Corrected Input | Request 1: reuse the exact unmatched-quote payload from `AI-FR05-030` (`search='`). Request 2: immediately reuse the normal controlled search input from `AI-FR05-002`. |
+| Corrected Steps | Run `AI-FR05-030` input first; immediately run the same controlled normal search used by `AI-FR05-002`; compare Request 2 against the normal-search semantics expected for `AI-FR05-002`. |
+| Corrected Expected | The unusual first request must not create persistent search/error state that changes the semantics of the immediately following normal search. |
+| Correction Notes | Pins both sequence inputs to exact prior testcase IDs instead of leaving 'approved unusual input' undefined. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -818,8 +871,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | High-priority unmatched-quote family |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Unmatched single quote is the canonical, well-justified representative for classic SQL injection resistance (SEC-05). |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -844,8 +897,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Boolean/operator family |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | 'Boolean/operator injection-oriented payload' is a placeholder with no concrete example (e.g. "' OR '1'='1"). Without a literal value the case cannot be executed identically twice and cannot be distinguished from AI-FR05-030/032/033 during review. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; exact search value: `' OR '1'='1` |
+| Corrected Steps | URL-encode and send exactly `' OR '1'='1`; compare behavior with controlled normal/no-match searches and inspect for evidence that boolean SQL logic changed the query. |
+| Corrected Expected | SEC-05: the payload must remain data and must not broaden/alter database query logic through SQL injection. |
+| Correction Notes | Replaces the boolean/operator payload family placeholder with one fixed literal. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -870,8 +928,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | SQL comment family |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | Same issue as AI-FR05-031: 'SQL comment-oriented payload' needs a concrete literal (e.g. "admin'--") to be reproducible and to justify it as a distinct family from the quote and boolean cases. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; exact search value: `x'--` |
+| Corrected Steps | URL-encode and send exactly `x'--`; record actual response and inspect whether SQL comment syntax changes query structure or exposes an internal database error. |
+| Corrected Expected | SEC-05: SQL comment syntax supplied by the user must remain data and must not alter query structure. |
+| Correction Notes | Uses a fixed quote-plus-comment literal distinct from the unmatched quote and boolean-expression cases. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -896,8 +959,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Structurally distinct injection family |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | Same issue as AI-FR05-031/032: 'UNION-like injection-oriented payload' needs a concrete literal value before this can be implemented or audited as materially different from the other SEC-05 cases. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; exact search value: `x' UNION SELECT NULL --` |
+| Corrected Steps | URL-encode and send exactly `x' UNION SELECT NULL --`; record actual response and inspect for evidence of UNION/query-structure manipulation. Do not require the payload to succeed. |
+| Corrected Expected | SEC-05: user input must not extend or restructure the database query. A database rejection/error does not itself prove safety; actual handling is recorded. |
+| Correction Notes | Provides a concrete UNION-family probe without assuming a column count or successful exploitation. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -922,8 +990,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Encoded mixed-character family |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | 'Percent/quote/comment combination, encoded' is described only as a category, not a value. Also, since it deliberately combines the payload classes from AI-FR05-022/030/032, the case should say so explicitly to justify why it is not simply redundant with those three. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; raw search value `%' OR '1'='1'--`, transmitted URL-encoded as `%25%27%20OR%20%271%27%3D%271%27--` |
+| Corrected Steps | Send the exact encoded value; verify the server receives one search value; record whether decoding plus mixed wildcard/quote/comment syntax changes SQL behavior. |
+| Corrected Expected | SEC-05: URL encoding must not make the mixed payload capable of altering query structure; the decoded value must still be treated as data. |
+| Correction Notes | Fixes both the raw and encoded forms and explains why this case is distinct: it combines percent wildcard + quote + boolean expression + comment after transport decoding. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -948,8 +1021,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Separates disclosure risk from injection root cause |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | The risk dimension is valid, but `<error-triggering input>` is still an unspecified placeholder. Without one fixed literal trigger or an explicit reference to a concrete prior testcase, the case is not reproducible. Pin the exact input before Postman implementation; keep the disclosure assertion separate from the SQL-injection root cause. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; exact error-probe search value: `'` (reuse `AI-FR05-030`) |
+| Corrected Steps | Send the exact unmatched quote. If the runtime returns an error, capture actual status, Content-Type, and body and inspect for SQL/database/stack/internal implementation details. If no error occurs, record that the disclosure path was not reached by this probe. |
+| Corrected Expected | RISK-BASED: no formal error schema/status is assumed. If an error response is produced, it should be evaluated for unnecessary internal-information disclosure. |
+| Correction Notes | Makes the conditional disclosure test reproducible by pinning its trigger to the exact `AI-FR05-030` payload. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -974,8 +1052,8 @@ Execution Status: NOT EXECUTED
 | State Before | N/A |
 | State After | No mutation expected |
 | AI Rationale | Preserves public contract while characterizing auth header behavior |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Invalid/expired token on a documented public endpoint is a correct characterization case that avoids inventing a rejection requirement. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1000,8 +1078,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Schema coverage without promoting implementation shape |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Top-level response shape characterization is appropriately scoped and non-committal about implementation. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1026,8 +1104,8 @@ Execution Status: NOT EXECUTED
 | State Before | Matching data exists |
 | State After | No mutation expected |
 | AI Rationale | Fields/types/extra-properties characterization |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Item-level keys/types characterization, with an explicit rule not to fail on undocumented extra fields, is good practice for contract-first testing. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1052,8 +1130,8 @@ Execution Status: NOT EXECUTED
 | State Before | No matching product |
 | State After | No mutation expected |
 | AI Rationale | Source-backed semantics plus no-match schema characterization |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Combining the no-match business assertion with no-match payload-shape characterization is a reasonable, non-redundant pairing. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1078,8 +1156,13 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Error-path schema characterization |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | Error-path schema characterization is a useful, distinct lens from AI-FR05-035, but `input selected to reach error path` is not a concrete reproducible input. Pin this case to the same fixed error-triggering literal (or an exact prior testcase ID) before implementation, then record actual status/content-type/body as characterization only. |
+| Corrected Input | Header: `X-Student-Id: 23127194`; exact error-probe search value: `'` (reuse `AI-FR05-030`) |
+| Corrected Steps | Send the exact unmatched quote. If an error response is reached, record actual status, Content-Type, top-level/body shape, and representative fields/text. If no error is reached, record the error-schema characterization as not reached for this probe. |
+| Corrected Expected | SCHEMA CHARACTERIZATION: formal error schema remains unresolved; only the actual error response shape is recorded when the fixed probe reaches an error path. |
+| Correction Notes | Uses the same fixed trigger as `AI-FR05-035` but keeps a distinct purpose: 035 evaluates disclosure risk, while 040 characterizes error response shape. |
+| Re-review Status | PENDING HUMAN RE-REVIEW |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1104,8 +1187,8 @@ Execution Status: NOT EXECUTED
 | State Before | Stable controlled dataset |
 | State After | No mutation expected |
 | AI Rationale | Checks whole result-set consistency, not only one expected item |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Whole-result-set consistency check (not just a single expected item) is a meaningful cross-check that individual positive-match cases do not cover. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1130,8 +1213,154 @@ Execution Status: NOT EXECUTED
 | State Before | Stable dataset |
 | State After | No mutation expected |
 | AI Rationale | Cross-checks two approved domain partitions |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Omitted-vs-empty-search equivalence check is a useful, correctly-scoped cross-check between two previously approved partitions. |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## Human-added testcases — Reviewer-authored additions
+
+```text
+Required human-added cases for FR-05: >= 5
+Current retained human-added cases: 5
+Source: HUMAN
+Status: PENDING FINAL HUMAN CONFIRMATION BEFORE IMPLEMENTATION
+```
+
+The following five cases were authored by the reviewer. Their provenance remains `HUMAN`. The wording below was translated to English and tightened only to remove unsupported assumptions; no additional human-origin case was invented by AI.
+
+## HUMAN-FR05-043 — Cross-user result isolation characterization
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | GET /api/products?search=keyword |
+| Requirement Basis | Human-discovered context gap: whether `X-Student-Id` influences data partitioning or cache behavior is not specified |
+| Scope Type | CHARACTERIZATION / CONTEXT DISCOVERY |
+| Category | Security / Ownership / Cross-user |
+| Preconditions | Two valid identifiers A and B are available. If runtime/source evidence shows that data or visibility differs by `X-Student-Id`, prepare distinguishable test data for A and B. |
+| Input | Request 1: `X-Student-Id: A`, `search=<controlled keyword>`; Request 2: `X-Student-Id: B`, same keyword |
+| Steps | Send the request with A; then send the same search with B; compare result sets and any context-sensitive fields. |
+| Expected Status | UNRESOLVED |
+| Expected Response | Record whether changing `X-Student-Id` changes search results. If the endpoint is confirmed public/shared, equivalent results are valid. Only if runtime/source evidence confirms that `X-Student-Id` is a partition key should cross-context leakage be treated as a defect. |
+| Expected Schema | UNRESOLVED BY DESIGN |
+| Security Expectation | Do not assume tenancy. Characterize whether the header affects data scope or cache behavior before applying an ownership verdict. |
+| State Before | Stable dataset; A/B contexts available if supported by the system |
+| State After | No mutation expected |
+| Why AI missed this | The AI treated `X-Student-Id` as a mandatory assignment header and did not vary it, so it did not characterize whether the runtime gives the header any data-scoping semantics. |
+| Root Cause | security ownership assumption / context missing |
+| Human Audit Status | PENDING HUMAN CONFIRMATION |
+| Human Audit Reason | Reviewer-authored case retained only as characterization until the header semantics are confirmed. |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUMAN-FR05-044 — Concurrent searches must not contaminate each other
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | GET /api/products?search=keyword |
+| Requirement Basis | Human-discovered concurrency gap beyond approved sequential request-isolation cases |
+| Scope Type | ROBUSTNESS / CONCURRENCY |
+| Category | Race / Concurrency / Cross-request |
+| Preconditions | Controlled keyword A and keyword B match distinguishable product sets; dataset remains stable during the run. |
+| Input | 20 concurrent requests with `search=A` and 20 concurrent requests with `search=B`, all using `X-Student-Id: 23127194`; repeat for 3 rounds. |
+| Steps | Send both request groups concurrently; attach a client-side request ID; map every response back to its originating keyword; repeat for three identical rounds. |
+| Expected Status | UNRESOLVED |
+| Expected Response | Each response must follow the semantics of its own request keyword. Results for A must not be swapped, mixed, or contaminated by B, and vice versa. |
+| Expected Schema | UNRESOLVED BY DESIGN |
+| Security Expectation | No shared mutable search state or request-context contamination across concurrent requests. |
+| State Before | Stable dataset |
+| State After | Dataset unchanged; no persistent request state |
+| Why AI missed this | The AI generated sequential A→B independence tests, but sequential execution cannot reveal race conditions or shared mutable request state. |
+| Root Cause | model limitation / concurrency gap |
+| Human Audit Status | PENDING HUMAN CONFIRMATION |
+| Human Audit Reason | Reviewer-authored concurrency extension of the existing sequential state/sequence coverage. |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUMAN-FR05-046 — Search consistency after product rename
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | Documented product-update API → GET /api/products?search=keyword |
+| Requirement Basis | Human-discovered state-history dependency: search after a documented product-name mutation |
+| Scope Type | STATE TRANSITION / CHARACTERIZATION |
+| Category | State Transition / State-history / Cache |
+| Preconditions | A product with a unique searchable name `OldName` exists; the documented product-update endpoint is available and the tester has the required authorization to update the product. |
+| Input | Search `OldName`; update the product name to `NewName`; then search both `OldName` and `NewName`. |
+| Steps | Confirm the product is searchable by `OldName`; update `OldName` → `NewName` through the documented API; after the update request completes successfully, immediately search `OldName`, then search `NewName`; record any observed delay as runtime characterization only. |
+| Expected Status | Follow each documented API contract; where GET status is unspecified, keep it `UNRESOLVED`. |
+| Expected Response | Subsequent search behavior should reflect the updated product name according to search-by-name semantics. Do not assume an eventual-consistency window; if stale behavior is observed, record the actual delay before deciding whether it is a defect. |
+| Expected Schema | UNRESOLVED BY DESIGN |
+| Security Expectation | No unsupported cache/index assumption; stale behavior is evidence to characterize, not automatically a defect without a defined consistency requirement. |
+| State Before | Product name = `OldName` |
+| State After | Product name = `NewName` |
+| Why AI missed this | The AI generated tests against a stable dataset and did not compose a documented write operation with later search behavior. |
+| Root Cause | state-history dependency |
+| Human Audit Status | PENDING HUMAN CONFIRMATION |
+| Human Audit Reason | Reviewer-authored mutation→search scenario; retained because it does not invent a new product lifecycle state. |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUMAN-FR05-047 — Deleted product must not remain searchable
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | Documented product-delete API → GET /api/products?search=keyword |
+| Requirement Basis | Human-discovered state-history dependency after a documented product deletion |
+| Scope Type | STATE TRANSITION / BUSINESS |
+| Category | State Transition / Cache |
+| Preconditions | A documented product-delete endpoint exists; a product with a unique searchable name is present; the tester has the required authorization to delete it. |
+| Input | Search the unique product name before and after successful deletion. |
+| Steps | Search the unique name and record the product ID; delete that product through the documented endpoint; after successful deletion completes, search the same unique name again. |
+| Expected Status | Follow each documented API contract; where GET status is unspecified, keep it `UNRESOLVED`. |
+| Expected Response | After successful deletion, the deleted product must not continue to appear as an existing searchable product. This case does not assume `hidden`, `soft-delete`, or visibility states unless later source evidence defines them. |
+| Expected Schema | UNRESOLVED BY DESIGN |
+| Security Expectation | Search must not expose a product that the documented delete operation has removed from the active product set. |
+| State Before | Product exists and is searchable |
+| State After | Product has been successfully deleted through the documented API |
+| Why AI missed this | The AI tested GET search independently and did not compose the documented delete operation with subsequent search behavior. |
+| Root Cause | API-specific state-history behavior |
+| Human Audit Status | PENDING HUMAN CONFIRMATION |
+| Human Audit Reason | Reviewer-authored delete→search scenario; hidden/soft-delete assumptions were intentionally removed. |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUMAN-FR05-048 — Repeated expensive-search robustness
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | GET /api/products?search=keyword |
+| Requirement Basis | Human-discovered robustness gap; Gate D explicitly marks rate/abuse policy as `NOT SPECIFIED` |
+| Scope Type | ROBUSTNESS / CHARACTERIZATION |
+| Category | Repeated Operation / Resource Exhaustion |
+| Preconditions | Safe non-production test environment; one fixed long/complex keyword and one fixed normal keyword; baseline normal-search behavior recorded before the burst. |
+| Input | 30 long/complex search requests plus 10 normal search requests during one controlled run, all using `X-Student-Id: 23127194`. |
+| Steps | Record baseline normal-search behavior; send the 30 expensive searches while also sending 10 normal searches; record status, latency, and error behavior; after the burst, send the same normal search again and record recovery behavior. |
+| Expected Status | UNRESOLVED; `429` or any throttling behavior is characterization only because no rate-limit contract is specified. |
+| Expected Response | Record whether burst traffic causes errors, material temporary degradation, internal-error disclosure, or persistent effects on later normal searches. Do not require a rate limit or user-isolation policy that the source does not define. |
+| Expected Schema | UNRESOLVED BY DESIGN |
+| Security Expectation | No invented DoS/rate-limit contract. Internal-error disclosure remains evaluated under the already approved information-disclosure risk. |
+| State Before | Service operating normally in the controlled test environment |
+| State After | Record whether normal search behavior returns to baseline; any persistent degradation is execution evidence requiring later analysis. |
+| Why AI missed this | AI-FR05-020 covers one long input only; it does not evaluate cumulative effects from repeated expensive operations or recovery of normal traffic afterward. |
+| Root Cause | cross-request reasoning / robustness gap |
+| Human Audit Status | PENDING HUMAN CONFIRMATION |
+| Human Audit Reason | Reviewer-authored repeated-operation case retained strictly as characterization because rate/abuse requirements are not specified. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
