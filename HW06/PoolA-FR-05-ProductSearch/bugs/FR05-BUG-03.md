@@ -114,7 +114,7 @@ The before/after product ID comparison also confirmed that a new persistent reco
 
 ## Evidence state
 
-Product ID `8` is intentionally preserved after Human Gate G so the malformed persisted state can be inspected during Step L documentation.
+Product ID `8` was preserved through Human Gate G and Step L while screenshots and GitHub Issue evidence were captured. After the user confirmed PNG evidence was attached to Issues #24/#25/#26, ID `8` was deleted during post-evidence cleanup. The historical Newman/JSON/PNG evidence remains the authoritative record of the defect.
 
 ## Confirmation
 

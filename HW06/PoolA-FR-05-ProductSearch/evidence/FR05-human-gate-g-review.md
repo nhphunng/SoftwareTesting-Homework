@@ -201,8 +201,8 @@ Human Gate G is complete. Three contract-backed defect records may now proceed t
 2. FR05-BUG-02 — unauthenticated product creation despite admin-only requirement.
 3. FR05-BUG-03 — missing required product-field validation allows an all-null product.
 
-No GitHub Issue has been created at this gate.
+Step L subsequently created GitHub Issues #24, #25, and #26 for FR05-BUG-01, FR05-BUG-02, and FR05-BUG-03 respectively, and the user confirmed the verified PNG evidence was attached to each issue.
 
 ## Evidence-state handling
 
-Product ID 8 is intentionally retained at the completion of this review so the persisted mutation remains directly inspectable for Step L bug documentation. Cleanup should occur only after the required bug evidence has been captured/documented.
+Product ID 8 was intentionally retained through Gate G and Step L until the required screenshots and GitHub Issue evidence were captured. Post-evidence cleanup is now complete: ID 8 was deleted, rename fixture ID 6 was reset to `HW06_FR05_RENAME_23127194_OLD`, and delete fixture was recreated as ID 9 for future reruns.

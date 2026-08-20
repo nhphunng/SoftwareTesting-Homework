@@ -1,7 +1,7 @@
 # FR-05 Confirmed Bug Summary
 
 Date: 2026-08-20
-Status: **Step L screenshots and GitHub Issues created; screenshot attachment pending Chrome sign-in**
+Status: **Step L complete — confirmed bugs documented, GitHub Issues created, PNG evidence attached, and post-evidence cleanup completed**
 GitHub Issues: **CREATED**
 
 | Bug ID | Requirement | Severity | Confirmed behavior | Found by |
@@ -31,8 +31,8 @@ GitHub Issues: **CREATED**
 
 ## Evidence-state note
 
-Product ID `8` remains intentionally preserved in the live SQLite database at the end of Step L documentation so the malformed persisted product can still be inspected. Cleanup should be done only after any required screenshot/GitHub Issue evidence is captured.
+Product ID `8` was intentionally preserved until all required screenshot/GitHub Issue evidence was captured. After the user confirmed the PNGs were attached to Issues #24/#25/#26, cleanup was completed: ID 8 was deleted; rename fixture ID 6 was reset to `HW06_FR05_RENAME_23127194_OLD`; delete fixture was recreated as ID 9 with name `HW06_FR05_DELETE_23127194` for future reruns.
 
-## Remaining Step L action
+## Step L completion
 
-Screenshot evidence has been generated from the real official Newman responses and visually verified. Uploading the PNGs as GitHub Issue attachments requires an authenticated GitHub browser session; GitHub CLI does not expose issue-attachment upload.
+The user confirmed that the verified PNG evidence was attached to GitHub Issues #24, #25, and #26. No remaining Step L evidence action is pending for FR-05.

@@ -16,4 +16,4 @@ This folder contains setup data only. It contains no execution result, PASS/FAIL
 - `HUMAN-FR05-048` executes GET listing → unauthenticated malformed POST → GET listing and compares observable product IDs.
 - These cases do not impose an undocumented response envelope. Product-ID comparisons run when the response representation exposes product IDs; raw observations are retained otherwise.
 
-No official Newman evidence phase has been run.
+Official Newman execution was completed in Step K. Human Gate G confirmed three defects, Step L created GitHub Issues #24/#25/#26 with PNG evidence, and post-evidence cleanup restored the disposable fixtures for future reruns.

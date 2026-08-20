@@ -565,3 +565,22 @@ Human Review:
 - Confirmed bug records: FR05-BUG-01, FR05-BUG-02, FR05-BUG-03
 - External issue/screenshot evidence: PENDING
 - Cleanup: PENDING until external evidence is captured
+
+## AI Audit Entry - AI-022
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T22:10:00+07:00 |
+| Stage | API 1 / FR-05 — Post-evidence cleanup and final traceability |
+| User Prompt | thực hiện luôn phần cleanup + update traceability cuối cho FR-05. |
+| Evidence/Input Basis | User confirmed PNG evidence was attached to GitHub Issues #24/#25/#26; Step K official Newman evidence; Human Gate G; Step L bug reports and summary |
+| Generated/Modified Files | `postman/data/FR05-runtime-data.json`; `postman/environment/HW06-FR05-Local.postman_environment.json`; git-ignored private environment; `postman/data/FR05-runtime-readiness.md`; `postman/data/README.md`; `PoolA-FR-05-ProductSearch/bugs/FR05-bug-summary.md`; `PoolA-FR-05-ProductSearch/bugs/FR05-BUG-03.md`; `PoolA-FR-05-ProductSearch/evidence/FR05-human-gate-g-review.md`; `PoolA-FR-05-ProductSearch/generated/PoolA-FR05-ProductSearch-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Performed cleanup only after the user confirmed issue PNG attachments. Deleted unintended product ID 8, reset rename fixture ID 6 to `HW06_FR05_RENAME_23127194_OLD`, recreated delete fixture as ID 9, and synchronized runtime data/environments. Updated final traceability: FR05-BUG-01 → GitHub #24, FR05-BUG-02 → #25, FR05-BUG-03 → #26. Updated Step J/runtime notes, Gate G evidence-state note, bug summary, and BUG-03 evidence-state note to reflect completed evidence capture and cleanup. No Newman rerun, staging, or commit was performed. |
+
+Human Review:
+- Status: COMPLETE — FR-05 cleanup and final traceability
+- GitHub Issues: #24, #25, #26 with user-confirmed PNG attachments
+- Cleanup: ID 8 deleted; fixture ID 6 reset; delete fixture recreated as ID 9
+- Rerun readiness: restored
+- Git staging/commit: not performed
