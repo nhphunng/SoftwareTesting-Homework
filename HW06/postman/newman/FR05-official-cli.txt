@@ -1,0 +1,1087 @@
+newman
+
+HW06 — FR-05 Product Search — 23127194
+
+❏ B1 & B7 — Functional / Business
+↳ [AI] AI-FR05-001 — Listing with search omitted
+  GET http://localhost:3000/api/products [200 OK, 1.61kB, 17ms]
+  ✓  [AI] AI-FR05-001 — Listing with search omitted | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 01 — Listing with search omitted","requestId":"8fbb415
+  │ a-65aa-495c-a91f-40d1fb28cbbb","status":200,"contentTy
+  │ pe":"application/json; charset=utf-8","elapsedMs":17,"
+  │ bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-001 | testcase traceability
+
+↳ [AI] AI-FR05-002 — Controlled matching keyword
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 2ms]
+  ✓  [AI] AI-FR05-002 — Controlled matching keyword | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 02 — Controlled matching keyword","requestId":"b3363e3
+  │ a-dea3-4ed1-8ccf-6c90ab02ae5d","status":200,"contentTy
+  │ pe":"application/json; charset=utf-8","elapsedMs":2,"b
+  │ odyLength":176}'
+  └
+  ✓  [AI] AI-FR05-002 | testcase traceability
+  ✓  [AI] AI-FR05-002 — Controlled matching keyword | configured matching product is discoverable
+
+↳ [AI] AI-FR05-003 — Controlled no-match keyword
+  GET http://localhost:3000/api/products?search=__NO_MATCH_23127194__ [200 OK, 267B, 2ms]
+  ✓  [AI] AI-FR05-003 — Controlled no-match keyword | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 03 — Controlled no-match keyword","requestId":"3cf65d4
+  │ 0-0f80-43d7-8431-7f3973f10593","status":200,"contentTy
+  │ pe":"application/json; charset=utf-8","elapsedMs":2,"b
+  │ odyLength":2}'
+  └
+  ✓  [AI] AI-FR05-003 | testcase traceability
+  ✓  [AI] AI-FR05-003 — Controlled no-match keyword | no fabricated or non-name-only match
+
+↳ [AI] AI-FR05-004 — Exact existing product name
+  GET http://localhost:3000/api/products?search=iPhone 15 Pro Max [200 OK, 453B, 1ms]
+  ✓  [AI] AI-FR05-004 — Exact existing product name | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 04 — Exact existing product name","requestId":"fb556a4
+  │ e-f540-4486-9b28-d458c4d9815f","status":200,"contentTy
+  │ pe":"application/json; charset=utf-8","elapsedMs":1,"b
+  │ odyLength":176}'
+  └
+  ✓  [AI] AI-FR05-004 | testcase traceability
+  ✓  [AI] AI-FR05-004 — Exact existing product name | configured matching product is discoverable
+
+↳ [AI] AI-FR05-005 — Keyword present only outside product name
+  GET http://localhost:3000/api/products?search=camera [200 OK, 267B, 2ms]
+  ✓  [AI] AI-FR05-005 — Keyword present only outside product name | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 05 — Keyword present only outside product name","reque
+  │ stId":"d63db99f-f90c-430c-ab55-6945f9e71abc","status":
+  │ 200,"contentType":"application/json; charset=utf-8","e
+  │ lapsedMs":2,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-005 | testcase traceability
+  ✓  [AI] AI-FR05-005 — Keyword present only outside product name | no fabricated or non-name-only match
+
+↳ [AI] AI-FR05-006 — Public request without Authorization header
+  GET http://localhost:3000/api/products [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-006 — Public request without Authorization header | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 06 — Public request without Authorization header","req
+  │ uestId":"ba66ec92-abeb-40e3-b64e-d1a6a847c6fb","status
+  │ ":200,"contentType":"application/json; charset=utf-8",
+  │ "elapsedMs":1,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-006 | testcase traceability
+
+↳ [AI] AI-FR05-041 — Whole result-set name-search consistency
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 2ms]
+  ✓  [AI] AI-FR05-041 — Whole result-set name-search consistency | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 41 — Whole result-set name-search consistency","reques
+  │ tId":"89e7a4bb-6588-4cbe-aa98-aad8a0599053","status":2
+  │ 00,"contentType":"application/json; charset=utf-8","el
+  │ apsedMs":2,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-041 | testcase traceability
+  ┌
+  │ 'Whole-set strict assertion not evaluated; case sensit
+  │ ivity/schema is unresolved. Names are logged for revie
+  │ w.', [ 'iPhone 15 Pro Max' ]
+  └
+
+❏ B2 — Domain / Characterization
+↳ [AI] AI-FR05-007 — Empty search characterization
+  GET http://localhost:3000/api/products?search= [200 OK, 1.61kB, 2ms]
+  ✓  [AI] AI-FR05-007 — Empty search characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 07 — Empty search characterization","requestId":"563cc
+  │ 1cd-cf2d-4916-8c5f-9dcb6edcef83","status":200,"content
+  │ Type":"application/json; charset=utf-8","elapsedMs":2,
+  │ "bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-007 | testcase traceability
+
+↳ [AI] AI-FR05-008 — Whitespace-only search characterization
+  GET http://localhost:3000/api/products?search=    [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-008 — Whitespace-only search characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 08 — Whitespace-only search characterization","request
+  │ Id":"9c162135-f611-48bd-9653-32cfe2a925f9","status":20
+  │ 0,"contentType":"application/json; charset=utf-8","ela
+  │ psedMs":1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-008 | testcase traceability
+
+↳ [AI] AI-FR05-009 — Padded keyword characterization
+  GET http://localhost:3000/api/products?search= iPhone  [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-009 — Padded keyword characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 09 — Padded keyword characterization","requestId":"226
+  │ d0a70-3060-4218-be9b-12a662b01c3b","status":200,"conte
+  │ ntType":"application/json; charset=utf-8","elapsedMs":
+  │ 1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-009 | testcase traceability
+
+↳ [AI] AI-FR05-010 — Partial-name search characterization
+  GET http://localhost:3000/api/products?search=iPhone 15 [200 OK, 453B, 2ms]
+  ✓  [AI] AI-FR05-010 — Partial-name search characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 10 — Partial-name search characterization","requestId"
+  │ :"d36a683a-7fdf-4a41-84d9-45a2d259a703","status":200,"
+  │ contentType":"application/json; charset=utf-8","elapse
+  │ dMs":2,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-010 | testcase traceability
+
+↳ [AI] AI-FR05-011 — Vietnamese/Unicode search characterization
+  GET http://localhost:3000/api/products?search=Bàn [200 OK, 469B, 1ms]
+  ✓  [AI] AI-FR05-011 — Vietnamese/Unicode search characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 11 — Vietnamese/Unicode search characterization","requ
+  │ estId":"e57f830a-dbd5-441f-b6ca-8c4d2fd187fb","status"
+  │ :200,"contentType":"application/json; charset=utf-8","
+  │ elapsedMs":1,"bodyLength":186}'
+  └
+  ✓  [AI] AI-FR05-011 | testcase traceability
+
+↳ [AI] AI-FR05-012 — Fixed punctuation and symbols characterization (corrected)
+  GET http://localhost:3000/api/products?search=!@%23$^*()_+-=[]{};,.? [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-012 — Fixed punctuation and symbols characterization (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 12 — Fixed punctuation and symbols characterization (c
+  │ orrected)","requestId":"6f046922-4dcc-430c-af40-16fbdb
+  │ 4fc674","status":200,"contentType":"application/json; 
+  │ charset=utf-8","elapsedMs":1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-012 | testcase traceability
+
+↳ [AI] AI-FR05-013 — Script-like API input characterization (corrected)
+  GET http://localhost:3000/api/products?search=<script>alert(1)</script> [200 OK, 267B, 2ms]
+  ✓  [AI] AI-FR05-013 — Script-like API input characterization (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 13 — Script-like API input characterization (corrected
+  │ )","requestId":"cd5228d0-28f8-4008-9a38-6340287f4a81",
+  │ "status":200,"contentType":"application/json; charset=
+  │ utf-8","elapsedMs":2,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-013 | testcase traceability
+  ┌
+  │ 'PARTIAL SEC-04 only: API evidence does not prove brow
+  │ ser/DOM rendering safety.'
+  └
+
+↳ [AI] AI-FR05-014 — URL-encoded literal plus sign characterization
+  GET http://localhost:3000/api/products?search=+ [200 OK, 1.24kB, 1ms]
+  ✓  [AI] AI-FR05-014 — URL-encoded literal plus sign characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 14 — URL-encoded literal plus sign characterization","
+  │ requestId":"6eff1b80-2f80-459e-8bcc-b9c4ad43cede","sta
+  │ tus":200,"contentType":"application/json; charset=utf-
+  │ 8","elapsedMs":1,"bodyLength":914}'
+  └
+  ✓  [AI] AI-FR05-014 | testcase traceability
+
+↳ [AI] AI-FR05-015 — Lower-case variation characterization
+  GET http://localhost:3000/api/products?search=iphone [200 OK, 453B, 2ms]
+  ✓  [AI] AI-FR05-015 — Lower-case variation characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 15 — Lower-case variation characterization","requestId
+  │ ":"36b727a4-f9c4-4fc7-af54-bebabd0ff96a","status":200,
+  │ "contentType":"application/json; charset=utf-8","elaps
+  │ edMs":2,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-015 | testcase traceability
+
+↳ [AI] AI-FR05-016 — Upper/mixed-case variation characterization
+  GET http://localhost:3000/api/products?search=IPHONE [200 OK, 453B, 4ms]
+  ✓  [AI] AI-FR05-016 — Upper/mixed-case variation characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 16 — Upper/mixed-case variation characterization","req
+  │ uestId":"f458fb8d-a8fa-49b2-8e1a-73efaaeb7fb8","status
+  │ ":200,"contentType":"application/json; charset=utf-8",
+  │ "elapsedMs":4,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-016 | testcase traceability
+
+↳ [AI] AI-FR05-017 — Numeric-looking text characterization
+  GET http://localhost:3000/api/products?search=123 [200 OK, 267B, 2ms]
+  ✓  [AI] AI-FR05-017 — Numeric-looking text characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 17 — Numeric-looking text characterization","requestId
+  │ ":"0b504779-46c7-4d6c-ada9-734e5ef75234","status":200,
+  │ "contentType":"application/json; charset=utf-8","elaps
+  │ edMs":2,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-017 | testcase traceability
+
+↳ [AI] AI-FR05-018 — Literal null text characterization
+  GET http://localhost:3000/api/products?search=null [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-018 — Literal null text characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 18 — Literal null text characterization","requestId":"
+  │ 1ddc8e99-260c-4b9c-96f9-4b59a9f047c2","status":200,"co
+  │ ntentType":"application/json; charset=utf-8","elapsedM
+  │ s":1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-018 | testcase traceability
+
+❏ B3 — Boundary / Negative
+↳ [AI] AI-FR05-019 — One-character keyword characterization
+  GET http://localhost:3000/api/products?search=i [200 OK, 646B, 1ms]
+  ✓  [AI] AI-FR05-019 — One-character keyword characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 19 — One-character keyword characterization","requestI
+  │ d":"fccc2400-0f43-4711-a5a9-e6f715405967","status":200
+  │ ,"contentType":"application/json; charset=utf-8","elap
+  │ sedMs":1,"bodyLength":355}'
+  └
+  ✓  [AI] AI-FR05-019 | testcase traceability
+
+↳ [AI] AI-FR05-020 — Exactly 2,000 ASCII A characters (corrected)
+  GET http://localhost:3000/api/products?search=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-020 — Exactly 2,000 ASCII A characters (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 20 — Exactly 2,000 ASCII A characters (corrected)","re
+  │ questId":"a89d30a6-ba4f-4191-8e33-3b73294eaa21","statu
+  │ s":200,"contentType":"application/json; charset=utf-8"
+  │ ,"elapsedMs":1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-020 | testcase traceability
+
+↳ [AI] AI-FR05-021 — Duplicate search parameters characterization
+  GET http://localhost:3000/api/products?search=phone&search=laptop [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-021 — Duplicate search parameters characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 21 — Duplicate search parameters characterization","re
+  │ questId":"36f731be-028c-4759-8d64-f3a2b13c7cd9","statu
+  │ s":200,"contentType":"application/json; charset=utf-8"
+  │ ,"elapsedMs":1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-021 | testcase traceability
+
+↳ [AI] AI-FR05-022 — URL-encoded literal percent characterization
+  GET http://localhost:3000/api/products?search=% [200 OK, 1.61kB, 2ms]
+  ✓  [AI] AI-FR05-022 — URL-encoded literal percent characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 22 — URL-encoded literal percent characterization","re
+  │ questId":"5a96321c-1e13-4e60-bdb8-5ac2772c7843","statu
+  │ s":200,"contentType":"application/json; charset=utf-8"
+  │ ,"elapsedMs":2,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-022 | testcase traceability
+
+↳ [AI] AI-FR05-023 — URL-encoded literal ampersand characterization
+  GET http://localhost:3000/api/products?search=%26 [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-023 — URL-encoded literal ampersand characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 23 — URL-encoded literal ampersand characterization","
+  │ requestId":"549bc9de-b7a5-4ad9-8996-fd5bd4c784e8","sta
+  │ tus":200,"contentType":"application/json; charset=utf-
+  │ 8","elapsedMs":1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-023 | testcase traceability
+
+↳ [AI] AI-FR05-024 — URL-encoded literal equals sign characterization
+  GET http://localhost:3000/api/products?search== [200 OK, 267B, 2ms]
+  ✓  [AI] AI-FR05-024 — URL-encoded literal equals sign characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 24 — URL-encoded literal equals sign characterization"
+  │ ,"requestId":"f535aab6-2848-4b7b-99fc-3c7b12913686","s
+  │ tatus":200,"contentType":"application/json; charset=ut
+  │ f-8","elapsedMs":2,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-024 | testcase traceability
+
+❏ B4 — State / Sequence / [AI] AI-FR05-025 — Repeat listing; read-only semantics
+↳ [AI] AI-FR05-025 — Step 1 of 2 — first listing
+  GET http://localhost:3000/api/products [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-025 — Step 1 of 2 — first listing | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 25 — Step 1 of 2 — first listing","requestId":"68a535a
+  │ b-b142-4f5b-9dc6-a3bdf5948c4b","status":200,"contentTy
+  │ pe":"application/json; charset=utf-8","elapsedMs":1,"b
+  │ odyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-025 | testcase traceability
+
+↳ [AI] AI-FR05-025 — Step 2 of 2 — repeated listing
+  GET http://localhost:3000/api/products [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-025 — Step 2 of 2 — repeated listing | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 25 — Step 2 of 2 — repeated listing","requestId":"c023
+  │ fecf-5e1c-46e7-8be6-d094baae03de","status":200,"conten
+  │ tType":"application/json; charset=utf-8","elapsedMs":1
+  │ ,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-025 | testcase traceability
+  ┌
+  │ 'First/second listing bodies retained for review; byte
+  │ /order identity is not asserted.', '[{"id":1,"name":"i
+  │ Phone 15 Pro Max","price":30000000,"description":"Điện
+  │  thoại cao cấp của Apple","imageUrl":"https://placehol
+  │ d.co/300x300/png?text=iPhone+15","category_id":1},{"id
+  │ ":2,"name":"Samsung Galaxy S24 Ultra","price":28000000
+  │ ,"description":"Màn hình hiển thị xuất sắc, camera siê
+  │ u zoom","imageUrl":"https://placehold.co/300x300/png?t
+  │ ext=Samsung+S24","category_id":1},{"id":3,"name":"MacB
+  │ ook Pro M3","price":45000000,"description":"Laptop chu
+  │ yên nghiệp mạnh mẽ","imageUrl":"https://placehold.co/3
+  │ 00x300/png?text=Macbook+Pro","category_id":2},{"id":4,
+  │ "name":"Tai nghe AirPods Pro 2","price":6000000,"descr
+  │ iption":"Chống ồn chủ động xuất sắc","imageUrl":"https
+  │ ://placehold.co/300x300/png?text=AirPods+Pro","categor
+  │ y_id":3},{"id":5,"name":"Bàn phím cơ Keychron Q1","pri
+  │ ce":4000000,"description":"Gõ cực sướng, thiết kế kim 
+  │ loại","imageUrl":"https://placehold.co/300x300/png?tex
+  │ t=Keychron+Q1","category_id":3},{"id":6,"name":"HW06_F
+  │ R05_RENAME_23127194_OLD","price":23127194,"description
+  │ ":"Disposable fixture for HUMAN-FR05-046","imageUrl":"
+  │ https://example.test/hw06-fr05.png","category_id":3},{
+  │ "id":7,"name":"HW06_FR05_DELETE_23127194","price":2312
+  │ 7194,"description":"Disposable fixture for HUMAN-FR05-
+  │ 047","imageUrl":"https://example.test/hw06-fr05-delete
+  │ .png","category_id":3}]', '[{"id":1,"name":"iPhone 15 
+  │ Pro Max","price":30000000,"description":"Điện thoại ca
+  │ o cấp của Apple","imageUrl":"https://placehold.co/300x
+  │ 300/png?text=iPhone+15","category_id":1},{"id":2,"name
+  │ ":"Samsung Galaxy S24 Ultra","price":28000000,"descrip
+  │ tion":"Màn hình hiển thị xuất sắc, camera siêu zoom","
+  │ imageUrl":"https://placehold.co/300x300/png?text=Samsu
+  │ ng+S24","category_id":1},{"id":3,"name":"MacBook Pro M
+  │ 3","price":45000000,"description":"Laptop chuyên nghiệ
+  │ p mạnh mẽ","imageUrl":"https://placehold.co/300x300/pn
+  │ g?text=Macbook+Pro","category_id":2},{"id":4,"name":"T
+  │ ai nghe AirPods Pro 2","price":6000000,"description":"
+  │ Chống ồn chủ động xuất sắc","imageUrl":"https://placeh
+  │ old.co/300x300/png?text=AirPods+Pro","category_id":3},
+  │ {"id":5,"name":"Bàn phím cơ Keychron Q1","price":40000
+  │ 00,"description":"Gõ cực sướng, thiết kế kim loại","im
+  │ ageUrl":"https://placehold.co/300x300/png?text=Keychro
+  │ n+Q1","category_id":3},{"id":6,"name":"HW06_FR05_RENAM
+  │ E_23127194_OLD","price":23127194,"description":"Dispos
+  │ able fixture for HUMAN-FR05-046","imageUrl":"https://e
+  │ xample.test/hw06-fr05.png","category_id":3},{"id":7,"n
+  │ ame":"HW06_FR05_DELETE_23127194","price":23127194,"des
+  │ cription":"Disposable fixture for HUMAN-FR05-047","ima
+  │ geUrl":"https://example.test/hw06-fr05-delete.png","ca
+  │ tegory_id":3}]'
+  └
+
+❏ B4 — State / Sequence / [AI] AI-FR05-026 — Repeat controlled search
+↳ [AI] AI-FR05-026 — Step 1 of 2 — first controlled search
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 1ms]
+  ✓  [AI] AI-FR05-026 — Step 1 of 2 — first controlled search | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 26 — Step 1 of 2 — first controlled search","requestId
+  │ ":"de6bf7e1-9c0f-4388-b1bd-374481a30fe3","status":200,
+  │ "contentType":"application/json; charset=utf-8","elaps
+  │ edMs":1,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-026 | testcase traceability
+
+↳ [AI] AI-FR05-026 — Step 2 of 2 — repeated controlled search
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 1ms]
+  ✓  [AI] AI-FR05-026 — Step 2 of 2 — repeated controlled search | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 26 — Step 2 of 2 — repeated controlled search","reques
+  │ tId":"7b0f6be6-47c3-45ad-94a6-7fa79044345d","status":2
+  │ 00,"contentType":"application/json; charset=utf-8","el
+  │ apsedMs":1,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-026 | testcase traceability
+  ┌
+  │ 'Repeated search observations retained; semantic revie
+  │ w does not assume byte/order identity.', '[{"id":1,"na
+  │ me":"iPhone 15 Pro Max","price":30000000,"description"
+  │ :"Điện thoại cao cấp của Apple","imageUrl":"https://pl
+  │ acehold.co/300x300/png?text=iPhone+15","category_id":1
+  │ }]', '[{"id":1,"name":"iPhone 15 Pro Max","price":3000
+  │ 0000,"description":"Điện thoại cao cấp của Apple","ima
+  │ geUrl":"https://placehold.co/300x300/png?text=iPhone+1
+  │ 5","category_id":1}]'
+  └
+
+❏ B4 — State / Sequence / [AI] AI-FR05-027 — Search A then Search B independence
+↳ [AI] AI-FR05-027 — Step 1 of 2 — search keyword A
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 1ms]
+  ✓  [AI] AI-FR05-027 — Step 1 of 2 — search keyword A | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 27 — Step 1 of 2 — search keyword A","requestId":"c4c2
+  │ 2ea1-aae2-47f3-b309-ae3ed3e313b1","status":200,"conten
+  │ tType":"application/json; charset=utf-8","elapsedMs":1
+  │ ,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-027 | testcase traceability
+
+↳ [AI] AI-FR05-027 — Step 2 of 2 — search keyword B
+  GET http://localhost:3000/api/products?search=Samsung [200 OK, 480B, 2ms]
+  ✓  [AI] AI-FR05-027 — Step 2 of 2 — search keyword B | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 27 — Step 2 of 2 — search keyword B","requestId":"e8fe
+  │ f6ef-d571-4542-8504-5bd1f99b5d8a","status":200,"conten
+  │ tType":"application/json; charset=utf-8","elapsedMs":2
+  │ ,"bodyLength":201}'
+  └
+  ✓  [AI] AI-FR05-027 | testcase traceability
+
+❏ B4 — State / Sequence / [AI] AI-FR05-028 — Filtered search then unfiltered listing
+↳ [AI] AI-FR05-028 — Step 1 of 2 — filtered search
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 2ms]
+  ✓  [AI] AI-FR05-028 — Step 1 of 2 — filtered search | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 28 — Step 1 of 2 — filtered search","requestId":"8e2f2
+  │ 7fd-f0db-4038-a17a-92f9015df99d","status":200,"content
+  │ Type":"application/json; charset=utf-8","elapsedMs":2,
+  │ "bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-028 | testcase traceability
+
+↳ [AI] AI-FR05-028 — Step 2 of 2 — unfiltered listing
+  GET http://localhost:3000/api/products [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-028 — Step 2 of 2 — unfiltered listing | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 28 — Step 2 of 2 — unfiltered listing","requestId":"32
+  │ 3d7b0e-e2c4-407b-8db3-2c81fc2cacb6","status":200,"cont
+  │ entType":"application/json; charset=utf-8","elapsedMs"
+  │ :1,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-028 | testcase traceability
+
+❏ B4 — State / Sequence / [AI] AI-FR05-029 — Unmatched quote then normal search (corrected)
+↳ [AI] AI-FR05-029 — Step 1 of 2 — reuse AI-FR05-030 unmatched quote
+  GET http://localhost:3000/api/products?search=' [500 Internal Server Error, 346B, 2ms]
+  ✓  [AI] AI-FR05-029 — Step 1 of 2 — reuse AI-FR05-030 unmatched quote | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 29 — Step 1 of 2 — reuse AI-FR05-030 unmatched quote",
+  │ "requestId":"c8a06101-3c1d-4bbb-94a6-b3a69cd47339","st
+  │ atus":500,"contentType":"text/html; charset=utf-8","el
+  │ apsedMs":2,"bodyLength":67}'
+  └
+  ✓  [AI] AI-FR05-029 | testcase traceability
+
+↳ [AI] AI-FR05-029 — Step 2 of 2 — reuse AI-FR05-002 normal search
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 1ms]
+  ✓  [AI] AI-FR05-029 — Step 2 of 2 — reuse AI-FR05-002 normal search | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 29 — Step 2 of 2 — reuse AI-FR05-002 normal search","r
+  │ equestId":"ba394f8b-9da3-4c97-a2d8-820e04071f5c","stat
+  │ us":200,"contentType":"application/json; charset=utf-8
+  │ ","elapsedMs":1,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-029 | testcase traceability
+  ✓  [AI] AI-FR05-029 — Step 2 of 2 — reuse AI-FR05-002 normal search | configured matching product is discoverable
+
+❏ B5 — Security
+↳ [AI] AI-FR05-030 — Unmatched quote SQL-injection probe
+  GET http://localhost:3000/api/products?search=' [500 Internal Server Error, 346B, 1ms]
+  ✓  [AI] AI-FR05-030 — Unmatched quote SQL-injection probe | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 30 — Unmatched quote SQL-injection probe","requestId":
+  │ "f04d36d0-0e8d-4bb9-8d1e-d0e0e3c69360","status":500,"c
+  │ ontentType":"text/html; charset=utf-8","elapsedMs":1,"
+  │ bodyLength":67}'
+  └
+  ✓  [AI] AI-FR05-030 | testcase traceability
+
+↳ [AI] AI-FR05-031 — Boolean/operator SQL-injection probe (corrected)
+  GET http://localhost:3000/api/products?search=' OR '1'='1 [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-031 — Boolean/operator SQL-injection probe (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 31 — Boolean/operator SQL-injection probe (corrected)"
+  │ ,"requestId":"d8eee363-3eba-4285-bf7b-95380453ba64","s
+  │ tatus":200,"contentType":"application/json; charset=ut
+  │ f-8","elapsedMs":1,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-031 | testcase traceability
+
+↳ [AI] AI-FR05-032 — SQL comment probe (corrected)
+  GET http://localhost:3000/api/products?search=x'-- [200 OK, 453B, 1ms]
+  ✓  [AI] AI-FR05-032 — SQL comment probe (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 32 — SQL comment probe (corrected)","requestId":"bb11c
+  │ e8e-56aa-4699-b95c-b48ff858bffb","status":200,"content
+  │ Type":"application/json; charset=utf-8","elapsedMs":1,
+  │ "bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-032 | testcase traceability
+
+↳ [AI] AI-FR05-033 — UNION query-structure probe (corrected)
+  GET http://localhost:3000/api/products?search=x' UNION SELECT NULL -- [500 Internal Server Error, 408B, 1ms]
+  ✓  [AI] AI-FR05-033 — UNION query-structure probe (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 33 — UNION query-structure probe (corrected)","request
+  │ Id":"628e5e04-6316-4752-bd8c-5b00b87b2069","status":50
+  │ 0,"contentType":"text/html; charset=utf-8","elapsedMs"
+  │ :1,"bodyLength":128}'
+  └
+  ✓  [AI] AI-FR05-033 | testcase traceability
+
+↳ [AI] AI-FR05-034 — Encoded wildcard/quote/boolean/comment probe (corrected)
+  GET http://localhost:3000/api/products?search=%' OR '1'='1'-- [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-034 — Encoded wildcard/quote/boolean/comment probe (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 34 — Encoded wildcard/quote/boolean/comment probe (cor
+  │ rected)","requestId":"ddcd72e5-d6bc-4bb6-98e1-c8db66bf
+  │ 7d82","status":200,"contentType":"application/json; ch
+  │ arset=utf-8","elapsedMs":1,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-034 | testcase traceability
+
+↳ [AI] AI-FR05-035 — Conditional internal-information disclosure probe (corrected)
+  GET http://localhost:3000/api/products?search=' [500 Internal Server Error, 346B, 2ms]
+  ✓  [AI] AI-FR05-035 — Conditional internal-information disclosure probe (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 35 — Conditional internal-information disclosure probe
+  │  (corrected)","requestId":"90116c68-2bf4-4424-88b1-1de
+  │ 19ab59b2b","status":500,"contentType":"text/html; char
+  │ set=utf-8","elapsedMs":2,"bodyLength":67}'
+  └
+  ✓  [AI] AI-FR05-035 | testcase traceability
+  ┌
+  │ 'Conditional disclosure review indicators', [
+  │   '/SQLITE/i',
+  │   '/database error/i'
+  │ ]
+  └
+
+↳ [AI] AI-FR05-036 — Invalid token on public endpoint characterization
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 1ms]
+  ✓  [AI] AI-FR05-036 — Invalid token on public endpoint characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 36 — Invalid token on public endpoint characterization
+  │ ","requestId":"434ab8d8-e029-41d4-91ca-d96fb1d400c9","
+  │ status":200,"contentType":"application/json; charset=u
+  │ tf-8","elapsedMs":1,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-036 | testcase traceability
+
+❏ B6 — Schema Characterization
+↳ [AI] AI-FR05-037 — Top-level response shape characterization
+  GET http://localhost:3000/api/products [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-037 — Top-level response shape characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 37 — Top-level response shape characterization","reque
+  │ stId":"b4072925-a588-4217-ae16-db1e25ea2a57","status":
+  │ 200,"contentType":"application/json; charset=utf-8","e
+  │ lapsedMs":1,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-037 | testcase traceability
+  ┌
+  │ 'CHARACTERIZATION top-level shape:', 'array'
+  └
+
+↳ [AI] AI-FR05-038 — Product item keys/types characterization
+  GET http://localhost:3000/api/products?search=iPhone [200 OK, 453B, 2ms]
+  ✓  [AI] AI-FR05-038 — Product item keys/types characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 38 — Product item keys/types characterization","reques
+  │ tId":"b9bb3996-b25c-4af1-afbe-2e9ec45842c9","status":2
+  │ 00,"contentType":"application/json; charset=utf-8","el
+  │ apsedMs":2,"bodyLength":176}'
+  └
+  ✓  [AI] AI-FR05-038 | testcase traceability
+  ┌
+  │ 'CHARACTERIZATION first-item keys/types; extra fields 
+  │ do not fail:', {
+  │   id: 'number',
+  │   name: 'string',
+  │   price: 'number',
+  │   description: 'string',
+  │   imageUrl: 'string',
+  │   category_id: 'number'
+  │ }
+  └
+
+↳ [AI] AI-FR05-039 — No-match payload shape characterization
+  GET http://localhost:3000/api/products?search=__NO_MATCH_23127194__ [200 OK, 267B, 1ms]
+  ✓  [AI] AI-FR05-039 — No-match payload shape characterization | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 39 — No-match payload shape characterization","request
+  │ Id":"7f7ddfe4-2337-4cdf-905a-3645a0eb0e02","status":20
+  │ 0,"contentType":"application/json; charset=utf-8","ela
+  │ psedMs":1,"bodyLength":2}'
+  └
+  ✓  [AI] AI-FR05-039 | testcase traceability
+  ✓  [AI] AI-FR05-039 — No-match payload shape characterization | no fabricated or non-name-only match
+  ┌
+  │ 'CHARACTERIZATION top-level shape:', 'array'
+  └
+
+↳ [AI] AI-FR05-040 — Conditional error response shape characterization (corrected)
+  GET http://localhost:3000/api/products?search=' [500 Internal Server Error, 346B, 2ms]
+  ✓  [AI] AI-FR05-040 — Conditional error response shape characterization (corrected) | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 40 — Conditional error response shape characterization
+  │  (corrected)","requestId":"8846daad-351c-471f-9106-083
+  │ 634826740","status":500,"contentType":"text/html; char
+  │ set=utf-8","elapsedMs":2,"bodyLength":67}'
+  └
+  ✓  [AI] AI-FR05-040 | testcase traceability
+  ┌
+  │ 'Error-schema characterization is reached only if this
+  │  fixed probe produces an error.'
+  │ 'CHARACTERIZATION top-level shape:', 'non-JSON/null'
+  └
+
+❏ B7 — Cross-check / [AI] AI-FR05-042 — Omitted versus empty search characterization
+↳ [AI] AI-FR05-042 — Step 1 of 2 — search omitted
+  GET http://localhost:3000/api/products [200 OK, 1.61kB, 1ms]
+  ✓  [AI] AI-FR05-042 — Step 1 of 2 — search omitted | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 42 — Step 1 of 2 — search omitted","requestId":"c1c1b8
+  │ df-3331-4e95-9eb8-c422b2b5b619","status":200,"contentT
+  │ ype":"application/json; charset=utf-8","elapsedMs":1,"
+  │ bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-042 | testcase traceability
+
+↳ [AI] AI-FR05-042 — Step 2 of 2 — explicit empty search
+  GET http://localhost:3000/api/products?search= [200 OK, 1.61kB, 2ms]
+  ✓  [AI] AI-FR05-042 — Step 2 of 2 — explicit empty search | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[AI] AI-FR05-0
+  │ 42 — Step 2 of 2 — explicit empty search","requestId":
+  │ "32c65402-be93-4267-845d-fc39ae2136be","status":200,"c
+  │ ontentType":"application/json; charset=utf-8","elapsed
+  │ Ms":2,"bodyLength":1283}'
+  └
+  ✓  [AI] AI-FR05-042 | testcase traceability
+  ┌
+  │ 'Omitted and empty observations; equivalence is not as
+  │ serted.', '[{"id":1,"name":"iPhone 15 Pro Max","price"
+  │ :30000000,"description":"Điện thoại cao cấp của Apple"
+  │ ,"imageUrl":"https://placehold.co/300x300/png?text=iPh
+  │ one+15","category_id":1},{"id":2,"name":"Samsung Galax
+  │ y S24 Ultra","price":28000000,"description":"Màn hình 
+  │ hiển thị xuất sắc, camera siêu zoom","imageUrl":"https
+  │ ://placehold.co/300x300/png?text=Samsung+S24","categor
+  │ y_id":1},{"id":3,"name":"MacBook Pro M3","price":45000
+  │ 000,"description":"Laptop chuyên nghiệp mạnh mẽ","imag
+  │ eUrl":"https://placehold.co/300x300/png?text=Macbook+P
+  │ ro","category_id":2},{"id":4,"name":"Tai nghe AirPods 
+  │ Pro 2","price":6000000,"description":"Chống ồn chủ độn
+  │ g xuất sắc","imageUrl":"https://placehold.co/300x300/p
+  │ ng?text=AirPods+Pro","category_id":3},{"id":5,"name":"
+  │ Bàn phím cơ Keychron Q1","price":4000000,"description"
+  │ :"Gõ cực sướng, thiết kế kim loại","imageUrl":"https:/
+  │ /placehold.co/300x300/png?text=Keychron+Q1","category_
+  │ id":3},{"id":6,"name":"HW06_FR05_RENAME_23127194_OLD",
+  │ "price":23127194,"description":"Disposable fixture for
+  │  HUMAN-FR05-046","imageUrl":"https://example.test/hw06
+  │ -fr05.png","category_id":3},{"id":7,"name":"HW06_FR05_
+  │ DELETE_23127194","price":23127194,"description":"Dispo
+  │ sable fixture for HUMAN-FR05-047","imageUrl":"https://
+  │ example.test/hw06-fr05-delete.png","category_id":3}]',
+  │  '[{"id":1,"name":"iPhone 15 Pro Max","price":30000000
+  │ ,"description":"Điện thoại cao cấp của Apple","imageUr
+  │ l":"https://placehold.co/300x300/png?text=iPhone+15","
+  │ category_id":1},{"id":2,"name":"Samsung Galaxy S24 Ult
+  │ ra","price":28000000,"description":"Màn hình hiển thị 
+  │ xuất sắc, camera siêu zoom","imageUrl":"https://placeh
+  │ old.co/300x300/png?text=Samsung+S24","category_id":1},
+  │ {"id":3,"name":"MacBook Pro M3","price":45000000,"desc
+  │ ription":"Laptop chuyên nghiệp mạnh mẽ","imageUrl":"ht
+  │ tps://placehold.co/300x300/png?text=Macbook+Pro","cate
+  │ gory_id":2},{"id":4,"name":"Tai nghe AirPods Pro 2","p
+  │ rice":6000000,"description":"Chống ồn chủ động xuất sắ
+  │ c","imageUrl":"https://placehold.co/300x300/png?text=A
+  │ irPods+Pro","category_id":3},{"id":5,"name":"Bàn phím 
+  │ cơ Keychron Q1","price":4000000,"description":"Gõ cực 
+  │ sướng, thiết kế kim loại","imageUrl":"https://placehol
+  │ d.co/300x300/png?text=Keychron+Q1","category_id":3},{"
+  │ id":6,"name":"HW06_FR05_RENAME_23127194_OLD","price":2
+  │ 3127194,"description":"Disposable fixture for HUMAN-FR
+  │ 05-046","imageUrl":"https://example.test/hw06-fr05.png
+  │ ","category_id":3},{"id":7,"name":"HW06_FR05_DELETE_23
+  │ 127194","price":23127194,"description":"Disposable fix
+  │ ture for HUMAN-FR05-047","imageUrl":"https://example.t
+  │ est/hw06-fr05-delete.png","category_id":3}]'
+  └
+
+❏ HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-043 — Structured query parameter injection
+↳ [HUMAN] HUMAN-FR05-043 — Step 1 of 2 — fixed no-match baseline
+  GET http://localhost:3000/api/products?search=__NO_MATCH_23127194__ [200 OK, 267B, 2ms]
+  ✓  [HUMAN] HUMAN-FR05-043 — Step 1 of 2 — fixed no-match baseline | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-043 — Step 1 of 2 — fixed no-match baseline","req
+  │ uestId":"9a7ceaa4-c652-45b8-9b00-f44f612c16e8","status
+  │ ":200,"contentType":"application/json; charset=utf-8",
+  │ "elapsedMs":2,"bodyLength":2}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-043 | testcase traceability
+  ┌
+  │ 'HUMAN-FR05-043 baseline observation', {
+  │   status: 200,
+  │   productIds: [],
+  │   body: '[]'
+  │ }
+  └
+
+↳ [HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack
+  GET http://localhost:3000/api/products?search=__NO_MATCH_23127194__&search[$ne]=x [200 OK, 267B, 8ms]
+  ✓  [HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-043 — Step 2 of 2 — bracket-notation $ne attack",
+  │ "requestId":"12ee6c72-0fb7-4807-b87e-d98835110a54","st
+  │ atus":200,"contentType":"application/json; charset=utf
+  │ -8","elapsedMs":8,"bodyLength":2}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-043 | testcase traceability
+  ✓  [HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack | structured-parameter attack does not return 5xx
+  ✓  [HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack | attack product IDs are not broader than baseline
+  ┌
+  │ 'HUMAN-FR05-043 sequential comparison', {
+  │   baselineStatus: '200',
+  │   attackStatus: 200,
+  │   baselineProductIds: [],
+  │   attackProductIds: [],
+  │   baselineBody: '[]',
+  │   attackBody: '[]'
+  │ }
+  └
+
+❏ HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-044 — Encoded null-byte inside search value
+↳ [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack
+  GET http://localhost:3000/api/products?search=phone __NO_MATCH_23127194__ [500 Internal Server Error, 352B, 1ms]
+  ✓  [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-044 — Step 1 of 2 — encoded null-byte attack","re
+  │ questId":"361e7681-0944-42e8-99bc-0cd3659d548c","statu
+  │ s":500,"contentType":"text/html; charset=utf-8","elaps
+  │ edMs":1,"bodyLength":73}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-044 | testcase traceability
+  1. [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | null-byte attack does not return 5xx
+  2. [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | no obvious internal-error disclosure
+  ┌
+  │ 'HUMAN-FR05-044 null-byte observation', {
+  │   status: 500,
+  │   productIds: null,
+  │   body: `<h1>Database Error</h1><p>SQLITE_ERROR: unrec
+  │ ognized token: "'%phone"</p>`
+  │ }
+  └
+
+↳ [HUMAN] HUMAN-FR05-044 — Step 2 of 2 — normal phone search after attack
+  GET http://localhost:3000/api/products?search=phone [200 OK, 453B, 1ms]
+  ✓  [HUMAN] HUMAN-FR05-044 — Step 2 of 2 — normal phone search after attack | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-044 — Step 2 of 2 — normal phone search after att
+  │ ack","requestId":"342fd7e7-2245-4718-bfb4-f8d2bf560e12
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","elapsedMs":1,"bodyLength":176}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-044 | testcase traceability
+  ✓  [HUMAN] HUMAN-FR05-044 — Step 2 of 2 — normal phone search after attack | subsequent normal search remains operational
+  ┌
+  │ 'ID-set truncation assertion not evaluated because the
+  │  response schema is unresolved or the normal search ex
+  │ posed no product IDs.'
+  │ 'HUMAN-FR05-044 sequential comparison', {
+  │   attackStatus: '500',
+  │   normalStatus: 200,
+  │   attackProductIds: null,
+  │   normalProductIds: [ '1' ],
+  │   attackBody: `<h1>Database Error</h1><p>SQLITE_ERROR:
+  │  unrecognized token: "'%phone"</p>`,
+  │   normalBody: '[{"id":1,"name":"iPhone 15 Pro Max","pr
+  │ ice":30000000,"description":"Điện thoại cao cấp của Ap
+  │ ple","imageUrl":"https://placehold.co/300x300/png?text
+  │ =iPhone+15","category_id":1}]'
+  │ }
+  └
+
+❏ HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-046 — Search consistency after product rename — opt-in destructive sequence
+↳ [HUMAN] HUMAN-FR05-046 — Step 1 of 4 — confirm OldName search
+  GET http://localhost:3000/api/products?search=HW06_FR05_RENAME_23127194_OLD [200 OK, 452B, 2ms]
+  ✓  [HUMAN] HUMAN-FR05-046 — Step 1 of 4 — confirm OldName search | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-046 — Step 1 of 4 — confirm OldName search","requ
+  │ estId":"1a585146-9649-4bd8-a5c9-991a73295663","status"
+  │ :200,"contentType":"application/json; charset=utf-8","
+  │ elapsedMs":2,"bodyLength":184}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-046 | testcase traceability
+  ┌
+  │ 'Resolved renameProductId:', '6'
+  └
+
+↳ [HUMAN] HUMAN-FR05-046 — Step 2 of 4 — update OldName to NewName
+  PUT http://localhost:3000/api/products/6 [200 OK, 296B, 3ms]
+  ✓  [HUMAN] HUMAN-FR05-046 — Step 2 of 4 — update OldName to NewName | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-046 — Step 2 of 4 — update OldName to NewName","r
+  │ equestId":"58186dfe-ae96-4628-a404-d84570993f48","stat
+  │ us":200,"contentType":"application/json; charset=utf-8
+  │ ","elapsedMs":3,"bodyLength":29}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-046 | testcase traceability
+
+↳ [HUMAN] HUMAN-FR05-046 — Step 3 of 4 — search OldName after update
+  GET http://localhost:3000/api/products?search=HW06_FR05_RENAME_23127194_OLD [200 OK, 267B, 1ms]
+  ✓  [HUMAN] HUMAN-FR05-046 — Step 3 of 4 — search OldName after update | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-046 — Step 3 of 4 — search OldName after update",
+  │ "requestId":"5206eef9-6588-4fce-9c00-a0ef3896164f","st
+  │ atus":200,"contentType":"application/json; charset=utf
+  │ -8","elapsedMs":1,"bodyLength":2}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-046 | testcase traceability
+  ✓  [HUMAN] HUMAN-FR05-046 — Step 3 of 4 — search OldName after update | no fabricated or non-name-only match
+
+↳ [HUMAN] HUMAN-FR05-046 — Step 4 of 4 — search NewName after update
+  GET http://localhost:3000/api/products?search=HW06_FR05_RENAME_23127194_NEW [200 OK, 452B, 1ms]
+  ✓  [HUMAN] HUMAN-FR05-046 — Step 4 of 4 — search NewName after update | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-046 — Step 4 of 4 — search NewName after update",
+  │ "requestId":"97828a4a-b8d8-4b7f-b1be-d4545be934e2","st
+  │ atus":200,"contentType":"application/json; charset=utf
+  │ -8","elapsedMs":1,"bodyLength":184}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-046 | testcase traceability
+  ✓  [HUMAN] HUMAN-FR05-046 — Step 4 of 4 — search NewName after update | configured matching product is discoverable
+
+❏ HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-047 — Deleted product must not remain searchable — opt-in destructive sequence
+↳ [HUMAN] HUMAN-FR05-047 — Step 1 of 3 — search unique product before deletion
+  GET http://localhost:3000/api/products?search=HW06_FR05_DELETE_23127194 [200 OK, 455B, 1ms]
+  ✓  [HUMAN] HUMAN-FR05-047 — Step 1 of 3 — search unique product before deletion | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-047 — Step 1 of 3 — search unique product before 
+  │ deletion","requestId":"b7931743-63db-412e-8016-72dcd9e
+  │ 21e14","status":200,"contentType":"application/json; c
+  │ harset=utf-8","elapsedMs":1,"bodyLength":187}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-047 | testcase traceability
+  ┌
+  │ 'Resolved deleteProductId:', '7'
+  └
+
+↳ [HUMAN] HUMAN-FR05-047 — Step 2 of 3 — delete resolved product
+  DELETE http://localhost:3000/api/products/7 [200 OK, 296B, 3ms]
+  ✓  [HUMAN] HUMAN-FR05-047 — Step 2 of 3 — delete resolved product | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-047 — Step 2 of 3 — delete resolved product","req
+  │ uestId":"21f94f45-4037-46b2-9832-9772b1e22117","status
+  │ ":200,"contentType":"application/json; charset=utf-8",
+  │ "elapsedMs":3,"bodyLength":29}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-047 | testcase traceability
+
+↳ [HUMAN] HUMAN-FR05-047 — Step 3 of 3 — search same unique name after deletion
+  GET http://localhost:3000/api/products?search=HW06_FR05_DELETE_23127194 [200 OK, 267B, 2ms]
+  ✓  [HUMAN] HUMAN-FR05-047 — Step 3 of 3 — search same unique name after deletion | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-047 — Step 3 of 3 — search same unique name after
+  │  deletion","requestId":"58e83ff4-2a4d-468c-8968-134028
+  │ 23bae8","status":200,"contentType":"application/json; 
+  │ charset=utf-8","elapsedMs":2,"bodyLength":2}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-047 | testcase traceability
+  ✓  [HUMAN] HUMAN-FR05-047 — Step 3 of 3 — search same unique name after deletion | no fabricated or non-name-only match
+
+❏ HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products
+↳ [HUMAN] HUMAN-FR05-048 — Step 1 of 3 — save product IDs before POST
+  GET http://localhost:3000/api/products [200 OK, 1.42kB, 1ms]
+  ✓  [HUMAN] HUMAN-FR05-048 — Step 1 of 3 — save product IDs before POST | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-048 — Step 1 of 3 — save product IDs before POST"
+  │ ,"requestId":"0830e9fb-5287-40a8-ae58-3a3b66088eb2","s
+  │ tatus":200,"contentType":"application/json; charset=ut
+  │ f-8","elapsedMs":1,"bodyLength":1097}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-048 | testcase traceability
+  ┌
+  │ 'HUMAN-FR05-048 IDs before POST', [ '1', '2', '3', '4'
+  │ , '5', '6' ]
+  └
+
+↳ [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query
+  POST http://localhost:3000/api/products?search=phone [200 OK, 303B, 2ms]
+  ✓  [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-048 — Step 2 of 3 — unauthenticated malformed POS
+  │ T with search query","requestId":"799772f6-2d2d-4f27-b
+  │ f58-ccaa2900e1e1","status":200,"contentType":"applicat
+  │ ion/json; charset=utf-8","elapsedMs":2,"bodyLength":36
+  │ }'
+  └
+  ✓  [HUMAN] HUMAN-FR05-048 | testcase traceability
+  3. [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | unsupported unauthenticated POST is rejected with 4xx
+  ✓  [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | request has no Authorization header
+  ✓  [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | JSON Content-Type is sent
+  ┌
+  │ 'HUMAN-FR05-048 POST observation', {
+  │   status: 200,
+  │   body: '{"message":"Product created","id":8}'
+  │ }
+  └
+
+↳ [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST
+  GET http://localhost:3000/api/products [200 OK, 1.51kB, 1ms]
+  ✓  [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | required X-Student-Id header
+  ┌
+  │ 'FR-05 CHARACTERIZATION', '{"testcase":"[HUMAN] HUMAN-
+  │ FR05-048 — Step 3 of 3 — verify product IDs after POST
+  │ ","requestId":"fc5c159d-e51d-492a-933e-b77432f10e57","
+  │ status":200,"contentType":"application/json; charset=u
+  │ tf-8","elapsedMs":1,"bodyLength":1185}'
+  └
+  ✓  [HUMAN] HUMAN-FR05-048 | testcase traceability
+  4. [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | product ID set is unchanged after rejected POST
+  ┌
+  │ 'HUMAN-FR05-048 before/after comparison', {
+  │   beforeProductIds: [ '1', '2', '3', '4', '5', '6' ],
+  │   afterProductIds: [
+  │     '1', '2', '3',
+  │     '4', '5', '6',
+  │     '8'
+  │   ],
+  │   beforeBody: '[{"id":1,"name":"iPhone 15 Pro Max","pr
+  │ ice":30000000,"description":"Điện thoại cao cấp của Ap
+  │ ple","imageUrl":"https://placehold.co/300x300/png?text
+  │ =iPhone+15","category_id":1},{"id":2,"name":"Samsung G
+  │ alaxy S24 Ultra","price":28000000,"description":"Màn h
+  │ ình hiển thị xuất sắc, camera siêu zoom","imageUrl":"h
+  │ ttps://placehold.co/300x300/png?text=Samsung+S24","cat
+  │ egory_id":1},{"id":3,"name":"MacBook Pro M3","price":4
+  │ 5000000,"description":"Laptop chuyên nghiệp mạnh mẽ","
+  │ imageUrl":"https://placehold.co/300x300/png?text=Macbo
+  │ ok+Pro","category_id":2},{"id":4,"name":"Tai nghe AirP
+  │ ods Pro 2","price":6000000,"description":"Chống ồn chủ
+  │  động xuất sắc","imageUrl":"https://placehold.co/300x3
+  │ 00/png?text=AirPods+Pro","category_id":3},{"id":5,"nam
+  │ e":"Bàn phím cơ Keychron Q1","price":4000000,"descript
+  │ ion":"Gõ cực sướng, thiết kế kim loại","imageUrl":"htt
+  │ ps://placehold.co/300x300/png?text=Keychron+Q1","categ
+  │ ory_id":3},{"id":6,"name":"HW06_FR05_RENAME_23127194_N
+  │ EW","price":23127194,"description":"Disposable fixture
+  │  for HUMAN-FR05-046","imageUrl":"https://example.test/
+  │ hw06-fr05.png","category_id":3}]',
+  │   afterBody: '[{"id":1,"name":"iPhone 15 Pro Max","pri
+  │ ce":30000000,"description":"Điện thoại cao cấp của App
+  │ le","imageUrl":"https://placehold.co/300x300/png?text=
+  │ iPhone+15","category_id":1},{"id":2,"name":"Samsung Ga
+  │ laxy S24 Ultra","price":28000000,"description":"Màn hì
+  │ nh hiển thị xuất sắc, camera siêu zoom","imageUrl":"ht
+  │ tps://placehold.co/300x300/png?text=Samsung+S24","cate
+  │ gory_id":1},{"id":3,"name":"MacBook Pro M3","price":45
+  │ 000000,"description":"Laptop chuyên nghiệp mạnh mẽ","i
+  │ mageUrl":"https://placehold.co/300x300/png?text=Macboo
+  │ k+Pro","category_id":2},{"id":4,"name":"Tai nghe AirPo
+  │ ds Pro 2","price":6000000,"description":"Chống ồn chủ 
+  │ động xuất sắc","imageUrl":"https://placehold.co/300x30
+  │ 0/png?text=AirPods+Pro","category_id":3},{"id":5,"name
+  │ ":"Bàn phím cơ Keychron Q1","price":4000000,"descripti
+  │ on":"Gõ cực sướng, thiết kế kim loại","imageUrl":"http
+  │ s://placehold.co/300x300/png?text=Keychron+Q1","catego
+  │ ry_id":3},{"id":6,"name":"HW06_FR05_RENAME_23127194_NE
+  │ W","price":23127194,"description":"Disposable fixture 
+  │ for HUMAN-FR05-046","imageUrl":"https://example.test/h
+  │ w06-fr05.png","category_id":3},{"id":8,"name":null,"pr
+  │ ice":null,"description":null,"imageUrl":null,"category
+  │ _id":null}]'
+  │ }
+  └
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              62 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │             124 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │             107 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │             142 │               4 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 1184ms                                  │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 24.13kB (approx)                       │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 1ms [min: 1ms, max: 17ms, s.d.: 2ms] │
+└─────────────────────────────────────────────────────────────┘
+
+[31m  # [39m[31m failure        [39m[31m detail                                                                                                                                                                                                                   [39m
+[90m    [39m[90m                [39m[90m                                                                                                                                                                                                                          [39m
+ 1.  AssertionError  [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | null-byte attack does not return 5xx                                                                                                                   
+                     expected 500 to be below 500                                                                                                                                                                                             
+                     at assertion:1 in test-script                                                                                                                                                                                            
+                     inside "HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-044 — Encoded null-byte inside search value / [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack"                                          
+[90m    [39m[90m                [39m[90m                                                                                                                                                                                                                          [39m
+ 2.  AssertionError  [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | no obvious internal-error disclosure                                                                                                                   
+                     expected '<h1>Database Error</h1><p>SQLITE_ERRO…' not to match /(?:SQLITE(?:_ERROR)?|SELECT\s+.+FROM|(?:Error|Exception):\s+.+\n\s+at\s+)/i                                                                              
+                     at assertion:2 in test-script                                                                                                                                                                                            
+                     inside "HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-044 — Encoded null-byte inside search value / [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack"                                          
+[90m    [39m[90m                [39m[90m                                                                                                                                                                                                                          [39m
+ 3.  AssertionError  [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | unsupported unauthenticated POST is rejected with 4xx                                                                          
+                     expected 200 to be within 400..499                                                                                                                                                                                       
+                     at assertion:1 in test-script                                                                                                                                                                                            
+                     inside "HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products / [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query" 
+[90m    [39m[90m                [39m[90m                                                                                                                                                                                                                          [39m
+ 4.  AssertionError  [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | product ID set is unchanged after rejected POST                                                                                                   
+                     expected [ '1', '2', '3', '4', '5', '6', '8' ] to deeply equal [ '1', '2', '3', '4', '5', '6' ]                                                                                                                          
+                     at assertion:1 in test-script                                                                                                                                                                                            
+                     inside "HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products / [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST"                    

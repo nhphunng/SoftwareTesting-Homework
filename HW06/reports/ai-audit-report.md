@@ -523,3 +523,26 @@ Human Review:
 - Removed: Old Postman limitation wording for superseded HUMAN cases
 - Added: FR-05 runtime-readiness report and private token environment policy
 - Notes: Official execution remains blocked until HUMAN-FR05-043/044/048 are reimplemented in the Postman collection.
+
+## AI Audit Entry - AI-020
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T21:42:00+07:00 |
+| Stage | API 1 / Human Gate G — Review real execution failures |
+| API | FR-05 Product Search plus documented product-create mutation used by HUMAN-FR05-048 |
+| User Prompt | Review each failure against testcase expectation, README/business requirements, api_specification.md, and actual request/response evidence; determine the source basis for HUMAN-FR05-044 and HUMAN-FR05-048; only then approve confirmed defects and keep ID 8 until review finishes. |
+| Evidence/Input Basis | Final HUMAN testcase source; SUT README from repository HEAD; `source/api_specification.md`; official Newman execution summary; `FR05-official-failure-evidence.json`; backend source inspected only for root-cause confirmation after execution evidence was established |
+| Generated/Modified Files | `PoolA-FR-05-ProductSearch/evidence/FR05-human-gate-g-review.md`; `reports/ai-audit-report.md` |
+| AI Output | Gate G review approved three contract-backed defect bases. HUMAN-FR05-044: the standalone expectations “no 5xx” and “no DB disclosure” are not directly specified for FR-05, but the observed SQLite failure plus backend inspection confirms direct search-input SQL interpolation, violating README SEC-05 parameterized-query requirement. HUMAN-FR05-048: `POST /api/products` is documented and therefore not an unsupported method; however README FR-12 requires valid JWT + admin role for all data-changing product APIs, and README FR-15 requires name, positive price, and valid category. The no-JWT malformed POST returned 200, created ID 8, and persisted null required fields, supporting two separate confirmed contract violations. ID 8 remains preserved for Step L evidence. No GitHub Issue or cleanup was performed. |
+
+Human Review:
+- Status: APPROVED — Human Gate G complete
+- Approved confirmed defect bases:
+  1. FR05-BUG-01 — SEC-05 violation: product search concatenates user input into SQL instead of using a parameterized query.
+  2. FR05-BUG-02 — FR-12 violation: unauthenticated client can create products through an admin-only data-changing product API.
+  3. FR05-BUG-03 — FR-15 violation: product creation accepts missing required fields and persists an all-null product.
+- Not promoted as standalone confirmed defects: HTTP 500 itself for unusual search input; SQLite-error disclosure itself, because no exact generic error-status/disclosure contract was found in the supplied requirements.
+- Evidence state: product ID 8 intentionally retained until Step L documentation is complete.
+- Notes: Step L may now create formal bug records; no staging or commit was performed here.
