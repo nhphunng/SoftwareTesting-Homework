@@ -410,21 +410,89 @@ with long/short behavior treated as characterization until a contract limit is a
 
 Human Gate B should verify:
 
-- [ ] The only documented API parameter, `search`, is fully considered.
-- [ ] Omitted `search` is treated separately from empty and whitespace-only values.
-- [ ] Matching and no-match partitions use controlled test data.
-- [ ] Search correctness is evaluated against **product name**, not unrelated fields.
-- [ ] SEC-05 injection-oriented coverage is retained.
-- [ ] SEC-04 API-vs-UI scope is not conflated.
-- [ ] No artificial min/max search length was invented.
-- [ ] Case, trimming, duplicate-query and long-input behavior remain characterization where unresolved.
-- [ ] `search=null`/`123`/`true` are understood as textual query values, not true JSON type mismatches.
-- [ ] Irrelevant generic categories are not forced onto the endpoint.
+- [x] The only documented API parameter, `search`, is fully considered.
+- [x] Omitted `search` is treated separately from empty and whitespace-only values.
+- [x] Matching and no-match partitions require controlled test data.
+- [x] Search correctness is evaluated against **product name**, not unrelated fields.
+- [x] SEC-05 injection-oriented coverage is retained.
+- [x] SEC-04 API-vs-UI scope is not conflated.
+- [x] No artificial min/max search length was invented.
+- [x] Case, trimming, duplicate-query and long-input behavior remain characterization where unresolved.
+- [x] `search=null`/`123`/`true` are understood as textual query values, not true JSON type mismatches.
+- [x] Irrelevant generic categories are not forced onto the endpoint.
+
+The checks above are AI review findings under `$api-testing-human-loop`; they do not replace the human Gate B decision below.
+
+### Human Gate B — review options
+
+#### Review Item 1 — Exact-name and partial-name partitions
+
+The contract says search is by product name but does not formally define exact-vs-substring matching semantics.
+
+- **Option A:** Keep both P-FR05-07 exact-name and P-FR05-08 partial-name as separate functional partitions, and treat partial matching as expected behavior.
+- **Option B:** Keep both, but classify partial-name behavior as **characterization** because substring semantics are not explicitly specified.
+- **Option C:** Remove the partial-name partition and test only generic matching/non-matching semantics.
+
+**Recommended: B** — preserves useful coverage without inventing substring matching as a requirement.
+
+#### Review Item 2 — Empty, whitespace-only, and padded-whitespace partitions
+
+These three inputs are operationally different but their normalization semantics are unresolved.
+
+- **Option A:** Merge them into one generic "blank/whitespace" partition.
+- **Option B:** Keep all three as separate characterization partitions.
+- **Option C:** Keep only empty and whitespace-only; remove leading/trailing whitespace as redundant.
+
+**Recommended: B** — they exercise distinct request forms while preserving `UNRESOLVED` expectations.
+
+#### Review Item 3 — Security-oriented inputs inside Domain Partition Step
+
+P-FR05-12 and P-FR05-13 cover HTML/script-like and SQL-injection-oriented inputs even though a dedicated Security Analysis step follows later.
+
+- **Option A:** Remove them from Step B and leave all security inputs exclusively to Step D.
+- **Option B:** Keep them in Step B as **input-domain classes**, then perform detailed risk/payload design in Step D.
+- **Option C:** Keep only SQL-injection input here because SEC-05 is directly API-testable; defer HTML/script input to UI/security testing.
+
+**Recommended: B** — avoids losing user-input domain coverage while preventing Step B from pretending to be the complete security analysis.
+
+#### Review Item 4 — Long keyword representative
+
+The contract defines no length boundary.
+
+- **Option A:** Remove long-input coverage entirely because there is no specified maximum.
+- **Option B:** Keep one or more deliberately long values as robustness/characterization representatives, with no pass/fail boundary assertion.
+- **Option C:** Infer a maximum from implementation/database limits and use it as a test boundary.
+
+**Recommended: B** — tests robustness without converting implementation detail into contract truth.
+
+#### Review Item 5 — Duplicate `search` parameter
+
+Step A Human Gate selected Option B for duplicate query semantics.
+
+- **Option A:** Remove duplicate-query coverage because it is not part of FR-05.
+- **Option B:** Keep P-FR05-18 as robustness/characterization only; observed precedence cannot alone establish a defect.
+- **Option C:** Define first-value or last-value precedence as expected behavior.
+
+**Recommended: B** — directly preserves the approved Step A decision.
+
+### Human Gate B decisions
+
+The tester selected:
+
+```text
+1B — Keep exact-name and partial-name partitions; partial-name remains characterization
+2B — Keep empty, whitespace-only, and padded-whitespace as separate characterization partitions
+3B — Keep security-oriented inputs as input-domain classes; defer detailed security analysis to Step D
+4B — Keep long keyword representatives as robustness/characterization only, with no contractual max-length assertion
+5B — Keep duplicate `search` parameters as robustness/characterization only
+```
+
+These decisions approve the partition structure without introducing new business requirements or turning exploratory behavior into defect criteria.
 
 ## 10. Step B status
 
 ```text
-Partition model: COMPLETE FOR HUMAN REVIEW
-Gate B: PENDING HUMAN REVIEW
-Next step after approval: Step C — State Transition Analysis
+Partition model: APPROVED
+Gate B: COMPLETE
+Next step: Step C — State/Sequence Analysis
 ```

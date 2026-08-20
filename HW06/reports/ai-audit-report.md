@@ -144,3 +144,63 @@ Human Review:
 - Removed: None.
 - Added: Case sensitivity, whitespace, search length, no-result payload/status, success status, and full schema remain `UNRESOLVED`; pagination/sort/filter is `NOT SPECIFIED / NOT IN SCOPE`; duplicate `search` parameters may be tested only as robustness/characterization behavior and cannot alone establish FR-05 non-compliance.
 - Notes: Human Gate A for API 1 Step A is complete. Proceed to Step B — Domain Partition Design using these constraints.
+
+## AI Audit Entry - AI-006
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T14:20:00+07:00 |
+| Stage | Phase 4 / API 1 / Step B — Domain Partition Design |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` |
+| User Prompt | Using $api-testing-human-loop để thự hiện Step B |
+| Evidence/Input Basis | `HW06/.agents/skills/api-testing-human-loop/SKILL.md`; `HW06/.agents/skills/api-testing-human-loop/references/workflow-gates.md`; approved Step A decisions in `PoolA-FR-05-ProductSearch/analysis/requirements.md`; `HW06/plan.md`; existing `PoolA-FR-05-ProductSearch/analysis/domain-partitions.md` |
+| Generated/Modified Files | `HW06/PoolA-FR-05-ProductSearch/analysis/domain-partitions.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Applied `$api-testing-human-loop` Gate B rules to review the existing FR-05 domain model. Confirmed the only documented parameter `search` is covered without inventing typed null, numeric boundary, or length constraints. Preserved controlled-data requirements, SEC-05 input-domain coverage, and Step A unresolved decisions. Added explicit Human Gate B review options for exact-vs-partial matching, empty/whitespace partition granularity, security-oriented input placement, long-input representatives, and duplicate-query handling. No human option was selected by the AI. No runtime API execution, staging, or commit was performed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+### Human Review Addendum for AI-006 — 2026-08-20T14:23:00+07:00
+
+- Status: Accepted with explicit Gate B decisions
+- Accepted: Domain partition coverage, non-invention of unsupported boundaries/types, controlled-data requirements, and separation of characterization from contractual expectations.
+- Modified: Human selected 1B, 2B, 3B, 4B, 5B.
+- Removed: None.
+- Added: Partial-name search remains characterization; empty/whitespace/padded-whitespace stay separate; security-oriented values remain input-domain classes with detailed security analysis deferred to Step D; long keywords remain robustness representatives without contractual max-length assertions; duplicate search parameters remain robustness/characterization only.
+- Notes: Human Gate B is complete. Step B partition model is approved and ready for Step C — State/Sequence Analysis.
+
+## AI Audit Entry - AI-007
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T14:26:00+07:00 |
+| Stage | Phase 4 / API 1 / Step C — State/Sequence Analysis |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` |
+| User Prompt | Tiếp tục sử dụng $api-testing-human-loop cho Step C — State/Sequence Analysis |
+| Evidence/Input Basis | `HW06/.agents/skills/api-testing-human-loop/SKILL.md`; `HW06/.agents/skills/api-testing-human-loop/references/workflow-gates.md`; approved Step A requirements; approved Step B domain partitions; `HW06/plan.md` Step C |
+| Generated/Modified Files | `HW06/PoolA-FR-05-ProductSearch/analysis/state-transitions.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Applied `$api-testing-human-loop` Gate C. Determined that FR-05 has no explicit business state machine and did not fabricate lifecycle states. Modeled dataset conditions as preconditions, request independence/repeatability sequences, public-auth context, and concurrency only as a data-stability concern. Added explicit Human Gate C options for whether to model a formal state machine, repeatability expectations, cross-query sequences, authentication context, and concurrency treatment. No human option was selected by the AI. No runtime execution, staging, or commit was performed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+### Human Review Addendum for AI-007 — 2026-08-20T14:27:00+07:00
+
+- Status: Accepted with explicit Gate C decisions
+- Accepted: No explicit FR-05 business state machine, contextual dataset preconditions, read-only request sequences, and separation of sequence analysis from security/concurrency requirements.
+- Modified: Human selected 1B, 2B, 3A, 4B, 5B.
+- Removed: None.
+- Added: Keep contextual states/sequences instead of artificial lifecycle states; repeatability is non-mutation plus equivalent semantics under stable data; retain Search A → Search B and Search → listing independence checks; authentication remains contextual and moves to Step D for detailed security analysis; concurrent dataset changes remain an environment/data-stability concern only.
+- Notes: Human Gate C is complete. Step C is approved and ready for Step D — Security Analysis.
