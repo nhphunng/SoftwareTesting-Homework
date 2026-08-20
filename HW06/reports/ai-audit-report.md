@@ -114,3 +114,33 @@ Human Review:
 - Removed:
 - Added:
 - Notes:
+
+## AI Audit Entry - AI-005
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T13:37:00+07:00 |
+| Stage | Phase 4 / API 1 / Step A — Requirement Extraction |
+| API | FR-05 Product Search — `GET /api/products?search=keyword` |
+| User Prompt | bắt đầu **Phase 4 với API 1 — FR-05 Product Search**, trước tiên là **Step A — Requirement Extraction**. |
+| Evidence/Input Basis | `/Users/nguyenhoangphihung/Document/eshop-sut/README.md` FR-05 and SEC-04/SEC-05; `/Users/nguyenhoangphihung/Document/eshop-sut/api_specification.md` section 3.1; `/Users/nguyenhoangphihung/Document/eshop-sut/backend/server.js` product-search route; `HW06/reports/api-inventory.md`; approved Option B source model |
+| Generated/Modified Files | `HW06/PoolA-FR-05-ProductSearch/analysis/requirements.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Extracted source-supported FR-05 business requirements, API contract, applicable security requirements, request inputs, response expectations, state applicability, and unresolved items. Explicitly separated UI-only requirements (loading, h1, presentation/empty-state rendering) from API-testable behavior. Preserved unspecified status codes, response schemas, case sensitivity, trimming, length limits, pagination and duplicate-query semantics as `UNRESOLVED` rather than inventing expectations. Recorded the SQL interpolation in `backend/server.js` as an implementation observation and potential SEC-05 mismatch, not a confirmed defect. No runtime API execution and no commit were performed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
+
+### Human Review Addendum for AI-005 — 2026-08-20T14:12:00+07:00
+
+- Status: Accepted with explicit Step A decisions
+- Accepted: FR-05 requirement extraction, Option B source separation, API-vs-UI scoping, and preservation of unsupported expectations as unresolved.
+- Modified: Human selected 1C, 2C, 3C, 4C, 5C, 6C, 7C, 8B for the eight unresolved review items.
+- Removed: None.
+- Added: Case sensitivity, whitespace, search length, no-result payload/status, success status, and full schema remain `UNRESOLVED`; pagination/sort/filter is `NOT SPECIFIED / NOT IN SCOPE`; duplicate `search` parameters may be tested only as robustness/characterization behavior and cannot alone establish FR-05 non-compliance.
+- Notes: Human Gate A for API 1 Step A is complete. Proceed to Step B — Domain Partition Design using these constraints.
