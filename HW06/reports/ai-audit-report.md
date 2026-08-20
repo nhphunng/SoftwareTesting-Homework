@@ -93,3 +93,24 @@ Human Review:
 - Removed: None.
 - Added: `README.md` = business truth; `api_specification.md` = API interface contract; implementation/runtime = actual behavior. Later tests must distinguish Business Compliance Tests from API Contract Tests and use `CONFIRMED DEFECT` only after real execution plus human confirmation.
 - Notes: Gate A source-precedence decision is approved. Existing unresolved response/status/schema items remain unresolved unless supported by requirement/contract evidence.
+
+## AI Audit Entry - AI-004
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T13:35:00+07:00 |
+| Stage | Phase 3 — Select Three APIs |
+| API | FR-05 Product Search; FR-10 Cancel Order; FR-16 Import Products |
+| User Prompt | Tiếp tục với phase 3 |
+| Evidence/Input Basis | `HW06/plan.md`; `HW06/reports/api-inventory.md`; `HW06/source/api_specification.md`; `/Users/nguyenhoangphihung/Document/eshop-sut/README.md`; `/Users/nguyenhoangphihung/Document/eshop-sut/backend/server.js`; Human Gate A Option B decision |
+| Generated/Modified Files | `HW06/reports/api-selection.md`; `HW06/reports/ai-audit-report.md` |
+| AI Output | Verified the already-assigned API combination instead of performing a new selection. Confirmed one API from each required pool, verified each endpoint exists in both API specification and implementation, documented Requirement/API Contract/Conflict/Implementation Observation layers under Option B, and recorded why FR-05, FR-10, and FR-16 provide complementary testing dimensions. Did not fabricate proof that no group member has the same combination; that remains a human/group coordination assertion. No runtime execution and no commit were performed. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
