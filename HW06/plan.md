@@ -105,7 +105,7 @@ HW06/
 │   │   └── SKILL.md
 │   └── ai-audit/
 │       └── SKILL.md
-├── api-1/
+├── PoolA-FR-05-ProductSearch/
 │   ├── analysis/
 │   ├── generated/
 │   ├── audit/
@@ -113,9 +113,9 @@ HW06/
 │   ├── postman/
 │   ├── evidence/
 │   └── bugs/
-├── api-2/
+├── PoolB-FR-10-CancelOrder/
 │   └── ...
-├── api-3/
+├── PoolC-FR-16-ImportProducts/
 │   └── ...
 ├── postman/
 │   ├── collection/
@@ -588,7 +588,7 @@ Bắt đầu pipeline với **API 1 — Product Search**, sau đó lặp lại c
 Tạo:
 
 ```text
-api-1/analysis/requirements.md
+PoolA-FR-05-ProductSearch/analysis/requirements.md
 ```
 
 Extract:
@@ -652,7 +652,7 @@ DUPLICATE
 Tạo:
 
 ```text
-api-1/analysis/domain-partitions.md
+PoolA-FR-05-ProductSearch/analysis/domain-partitions.md
 ```
 
 Table:
@@ -683,7 +683,7 @@ Nếu API có state:
 Tạo:
 
 ```text
-api-1/analysis/state-transitions.md
+PoolA-FR-05-ProductSearch/analysis/state-transitions.md
 ```
 
 Liệt kê:
@@ -755,7 +755,7 @@ Các lớp security cần xem:
 Artifact:
 
 ```text
-api-1/analysis/security.md
+PoolA-FR-05-ProductSearch/analysis/security.md
 ```
 
 Table:
@@ -780,7 +780,7 @@ git commit -am "test(api1): map API security coverage"
 Tạo:
 
 ```text
-api-1/analysis/schema.md
+PoolA-FR-05-ProductSearch/analysis/schema.md
 ```
 
 Check:
@@ -831,7 +831,7 @@ Target:
 Artifact:
 
 ```text
-api-1/generated/ai-generated-tests.xlsx
+PoolA-FR-05-ProductSearch/generated/ai-generated-tests.xlsx
 ```
 
 hoặc CSV/Markdown trung gian rồi tổng hợp Excel.
@@ -855,7 +855,7 @@ Tạo matrix:
 ## Commit
 
 ```bash
-git add api-1/generated
+git add PoolA-FR-05-ProductSearch/generated
 git commit -m "test(api1): generate AI API test cases"
 ```
 
@@ -905,13 +905,13 @@ Ví dụ:
 Artifact:
 
 ```text
-api-1/audit/audit.xlsx
+PoolA-FR-05-ProductSearch/audit/audit.xlsx
 ```
 
 và:
 
 ```text
-api-1/audit/audit-summary.md
+PoolA-FR-05-ProductSearch/audit/audit-summary.md
 ```
 
 Summary:
@@ -945,7 +945,7 @@ Corrected Test
 ## Commit
 
 ```bash
-git add api-1/audit
+git add PoolA-FR-05-ProductSearch/audit
 git commit -m "test(api1): audit and correct AI generated tests"
 ```
 
@@ -998,13 +998,13 @@ Phân tích nguyên nhân theo một trong:
 Artifact:
 
 ```text
-api-1/human-added/human-tests.xlsx
+PoolA-FR-05-ProductSearch/human-added/human-tests.xlsx
 ```
 
 ## Commit
 
 ```bash
-git add api-1/human-added
+git add PoolA-FR-05-ProductSearch/human-added
 git commit -m "test(api1): add human discovered coverage cases"
 ```
 
@@ -1100,7 +1100,7 @@ Không dùng feature chỉ để tick checkbox nếu không hợp lý.
 ## Commit
 
 ```bash
-git add postman api-1/postman
+git add postman PoolA-FR-05-ProductSearch/postman
 git commit -m "test(api1): implement Postman API test suite"
 ```
 
@@ -1174,7 +1174,7 @@ Nếu testcase fail:
 ## Commit
 
 ```bash
-git add postman/newman api-1/evidence
+git add postman/newman PoolA-FR-05-ProductSearch/evidence
 git commit -m "test(api1): execute API suite with Newman"
 ```
 
@@ -1218,7 +1218,7 @@ Reproducibility
 Tạo:
 
 ```text
-api-1/bugs/BUG-001.md
+PoolA-FR-05-ProductSearch/bugs/BUG-001.md
 ```
 
 Đồng thời mở GitHub Issue.
@@ -1241,7 +1241,7 @@ AI missed: Yes
 ## Commit
 
 ```bash
-git add api-1/bugs
+git add PoolA-FR-05-ProductSearch/bugs
 git commit -m "bug(api1): document confirmed API defects"
 ```
 
