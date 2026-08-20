@@ -4,7 +4,7 @@ Date: 2026-08-20
 API: `PUT /api/orders/:id/cancel`  
 Primary requirement: FR-10 — Order State Machine  
 Gate A: **APPROVED**  
-Human Gate B status: **PENDING HUMAN REVIEW**
+Human Gate B status: **APPROVED**
 
 ## Gate A decision carried forward
 
