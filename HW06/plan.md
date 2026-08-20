@@ -1249,21 +1249,35 @@ Fix:
 - cleanup;
 - flaky tests.
 
-## 19.3 Run Newman
+## 19.3 Run Newman through the reusable Step K runner
 
-Example:
+Do not ask the AI agent to ingest the full Newman CLI/JSON/HTML output by default.
+Use the reusable runner so raw execution evidence is preserved on disk while a
+small failure-oriented summary is generated for AI reasoning.
 
 ```bash
-newman run collection.json \
-  -e environment.json \
-  -r cli,html
+./scripts/run-step-k.sh FR05
+./scripts/run-step-k.sh FR10
+./scripts/run-step-k.sh FR16
 ```
 
-Generate:
+Before an API is runtime-ready, validate file resolution without executing:
 
-```text
-postman/newman/api1-report.html
+```bash
+./scripts/run-step-k.sh FR10 --dry-run
 ```
+
+The runner:
+
+1. resolves the correct collection/environment/runtime-data files;
+2. executes Newman;
+3. stores the full CLI/JSON/HTML/JUnit artifacts in `postman/newman/`;
+4. invokes `scripts/extract-newman-summary.js`;
+5. produces compact `FRxx-execution-summary.json` and `.md` files;
+6. preserves Newman's real exit code so genuine failures remain visible to CI.
+
+Raw reports remain the evidence source of truth. The compact summary is the
+default AI input for Step K and Gate G.
 
 ## 19.4 Record real evidence
 
@@ -1274,6 +1288,22 @@ Store:
 - screenshots;
 - actual request/response;
 - X-Student-Id proof.
+
+Additionally store the compact AI-consumption artifact:
+
+```text
+postman/newman/FR05-execution-summary.json
+postman/newman/FR05-execution-summary.md
+```
+
+and analogously for FR10 and FR16.
+
+### Token-efficiency rule
+
+For normal Step K analysis, the AI should read only the compact execution
+summary. Do **not** load complete Newman JSON/HTML/CLI reports into context.
+Inspect a raw report only when a specific failed testcase cannot be diagnosed
+from the compact summary.
 
 ## 19.5 Never normalize real failures away
 
@@ -1286,6 +1316,20 @@ Nếu testcase fail:
    - test bug;
    - environment problem;
    - genuine SUT bug.
+
+Use this evidence flow:
+
+```text
+Newman raw evidence
+        ↓
+extract-newman-summary.js
+        ↓
+compact totals + failures only
+        ↓
+Human Gate G
+        ↓
+open raw evidence only for unresolved failed cases
+```
 
 ## Commit
 

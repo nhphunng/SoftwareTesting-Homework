@@ -602,3 +602,20 @@ Human Review:
 - P3: COMPLETE
 - P4 evidence verification: COMPLETE (62/62 official executions verified)
 - P4 screenshot artifact: BLOCKED by macOS Screen Recording permission; manual capture still required unless permission is granted
+
+## AI Audit Entry - AI-024
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T22:42:00+07:00 |
+| Stage | Cross-API Step K optimization |
+| User Prompt | Thực hiện khởi tạo và đưa nó vào workflow của step k |
+| Generated/Modified Files | `scripts/run-step-k.sh`; `scripts/extract-newman-summary.js`; `scripts/README.md`; `plan.md`; `postman/newman/FR05-execution-summary.json`; `postman/newman/FR05-execution-summary.md`; `reports/ai-audit-report.md` |
+| AI Output | Added a reusable Step K runner supporting FR05/FR10/FR16 and a compact Newman summary extractor. Updated Step K so raw CLI/JSON/HTML/JUnit evidence is preserved on disk while AI reads the compact failure-oriented summary first. Validated the extractor against the existing FR05 official report: 47 testcase IDs, 62 requests, 142 assertions, 138 passed, 4 failed, failed cases HUMAN-FR05-044/HUMAN-FR05-048, and X-Student-Id 62/62. The raw FR05 JSON is about 1.09 MB while the generated Markdown summary is about 1.8 KB. FR05 runner dry-run resolves correctly; FR10 dry-run currently fails fast because its collection/environment/runtime-data artifacts do not yet exist. No live Newman rerun was performed, avoiding unnecessary mutation of the already-reviewed FR05 evidence state. |
+
+Human Review:
+- Status: IMPLEMENTED AND VALIDATED
+- Reuse scope: FR05, FR10, FR16
+- Token-efficiency policy: compact summary first; raw report only for unresolved failed cases
+- Evidence integrity: raw reports retained; Newman non-zero exit status preserved

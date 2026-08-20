@@ -1,0 +1,70 @@
+{
+  "sourceReport": "postman/newman/FR05-official-report.json",
+  "generatedAt": "2026-08-20T15:41:28.317Z",
+  "testcaseIds": 47,
+  "requests": 62,
+  "assertions": 142,
+  "passedAssertions": 138,
+  "failedAssertions": 4,
+  "failedTestcaseIds": [
+    "HUMAN-FR05-044",
+    "HUMAN-FR05-048"
+  ],
+  "failedCases": [
+    {
+      "id": "HUMAN-FR05-044",
+      "itemName": "[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack",
+      "method": "GET",
+      "url": "http://localhost:3000/api/products?search=phone%00__NO_MATCH_23127194__",
+      "status": 500,
+      "failedAssertions": [
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | null-byte attack does not return 5xx",
+          "message": "expected 500 to be below 500"
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | no obvious internal-error disclosure",
+          "message": "expected '<h1>Database Error</h1><p>SQLITE_ERRO…' not to match /(?:SQLITE(?:_ERROR)?|SELECT\\s+.+FROM|(?:Error|Exception):\\s+.+\\n\\s+at\\s+)/i"
+        }
+      ],
+      "responsePreview": "<h1>Database Error</h1><p>SQLITE_ERROR: unrecognized token: \"'%phone\"</p>",
+      "requestHeaders": [
+        {
+          "key": "X-Student-Id",
+          "value": "23127194"
+        }
+      ]
+    },
+    {
+      "id": "HUMAN-FR05-048",
+      "itemName": "[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query",
+      "method": "POST",
+      "url": "http://localhost:3000/api/products?search=phone",
+      "status": 200,
+      "failedAssertions": [
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | unsupported unauthenticated POST is rejected with 4xx",
+          "message": "expected 200 to be within 400..499"
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | product ID set is unchanged after rejected POST",
+          "message": "expected [ '1', '2', '3', '4', '5', '6', '8' ] to deeply equal [ '1', '2', '3', '4', '5', '6' ]"
+        }
+      ],
+      "responsePreview": "{\"message\":\"Product created\",\"id\":8}",
+      "requestHeaders": [
+        {
+          "key": "X-Student-Id",
+          "value": "23127194"
+        }
+      ]
+    }
+  ],
+  "studentHeader": {
+    "expected": "23127194",
+    "executionsWithHeader": 62,
+    "executionsWithExpectedValue": 62,
+    "totalExecutions": 62,
+    "allExecutionsMatch": true
+  }
+}
