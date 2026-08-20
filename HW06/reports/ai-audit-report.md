@@ -619,3 +619,20 @@ Human Review:
 - Reuse scope: FR05, FR10, FR16
 - Token-efficiency policy: compact summary first; raw report only for unresolved failed cases
 - Evidence integrity: raw reports retained; Newman non-zero exit status preserved
+
+## AI Audit Entry - AI-025
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T22:55:00+07:00 |
+| Stage | API 2 / FR-10 — Human Gate A + Step B Domain Partition Design |
+| API | `PUT /api/orders/:id/cancel` |
+| User Decision | Accepted cross-user cancellation as a risk-based authorization expectation: User A must not cancel User B's order, without presenting it as direct FR-10 wording. |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/analysis/requirements.md`; `PoolB-FR-10-CancelOrder/analysis/domain-partitions.md`; `reports/ai-audit-report.md` |
+| AI Output | Marked Human Gate A approved and preserved the ownership/IDOR distinction as risk-based authorization. Designed Step B partitions for path `:id`, JWT/authentication, mandatory project header, undocumented request body/query shapes, content type, and state × ownership × auth combinations. No exact HTTP status codes or numeric ID boundaries were invented where the contract is silent. Semantic boundary `confirmed`→cancel allowed vs `shipping`→user cancel rejected is explicitly emphasized. |
+
+Human Review:
+- Gate A: APPROVED
+- Gate B: PENDING
+- Ownership/IDOR provenance: RISK-BASED AUTHORIZATION EXPECTATION, not direct FR-10 wording
