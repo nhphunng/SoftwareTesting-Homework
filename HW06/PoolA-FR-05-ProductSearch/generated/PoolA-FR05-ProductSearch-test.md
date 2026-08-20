@@ -1282,10 +1282,10 @@ The following five cases were authored by the reviewer. Their provenance remains
 | Root Cause | parser differential / unusual-input gap |
 | Human Audit Status | VALID |
 | Human Audit Reason | Reviewer-authored replacement case; fully executable as two sequential Postman/Newman requests. |
-| Execution Status | |
-| Actual Result | |
-| Evidence | |
-| Defect ID | |
+| Execution Status | FAILED — reproduced in smoke and official Newman execution; reviewed at Human Gate G |
+| Actual Result | Encoded null-byte search returned HTTP 500 with an SQLite parser error in HTML; subsequent normal search remained operational. Human Gate G confirmed the contract-backed defect as SEC-05 non-parameterized query usage rather than the 500 status itself. |
+| Evidence | `PoolA-FR-05-ProductSearch/evidence/FR05-official-failure-evidence.json`; `PoolA-FR-05-ProductSearch/evidence/FR05-human-gate-g-review.md` |
+| Defect ID | FR05-BUG-01 |
 
 ## HUMAN-FR05-046 — Search consistency after product rename
 
@@ -1364,7 +1364,7 @@ The following five cases were authored by the reviewer. Their provenance remains
 | Root Cause | unusual-sequence / method-confusion gap |
 | Human Audit Status | VALID |
 | Human Audit Reason | Reviewer-authored replacement case; executable as a deterministic three-request Postman/Newman sequence. |
-| Execution Status | |
-| Actual Result | |
-| Evidence | |
-| Defect ID | |
+| Execution Status | FAILED — reproduced in smoke and official Newman execution; reviewed at Human Gate G |
+| Actual Result | Unauthenticated malformed `POST /api/products?search=phone` returned HTTP 200, created product ID 8, and persisted all product fields as null. Gate G corrected the reporting basis: POST is documented; the confirmed violations are FR-12 authorization and FR-15 input validation. |
+| Evidence | `PoolA-FR-05-ProductSearch/evidence/FR05-official-failure-evidence.json`; `PoolA-FR-05-ProductSearch/evidence/FR05-human-gate-g-review.md` |
+| Defect ID | FR05-BUG-02; FR05-BUG-03 |

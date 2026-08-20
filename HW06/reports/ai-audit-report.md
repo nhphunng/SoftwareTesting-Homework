@@ -546,3 +546,22 @@ Human Review:
 - Not promoted as standalone confirmed defects: HTTP 500 itself for unusual search input; SQLite-error disclosure itself, because no exact generic error-status/disclosure contract was found in the supplied requirements.
 - Evidence state: product ID 8 intentionally retained until Step L documentation is complete.
 - Notes: Step L may now create formal bug records; no staging or commit was performed here.
+
+## AI Audit Entry - AI-021
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-20T21:46:00+07:00 |
+| Stage | API 1 / Step L — Genuine Bug Reporting |
+| API | FR-05 Product Search plus documented product mutation endpoint used by HUMAN-FR05-048 |
+| User Prompt | Chuyển sang Step L — Genuine Bug Reporting với 3 bug trên |
+| Evidence/Input Basis | Human Gate G approved defect bases; official Newman evidence; testcase source; SUT README and api specification |
+| Generated/Modified Files | `PoolA-FR-05-ProductSearch/bugs/FR05-BUG-01.md`; `FR05-BUG-02.md`; `FR05-BUG-03.md`; `FR05-bug-summary.md`; finalized testcase traceability in `generated/PoolA-FR05-ProductSearch-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Created three confirmed bug reports tied to SEC-05, FR-12, and FR-15 respectively. Severity assigned as High, Critical, High with rationale. Updated HUMAN-FR05-044 and HUMAN-FR05-048 execution/evidence/defect fields to point to the confirmed reports. Created a consolidated bug summary. Product ID 8 remains preserved for external screenshot/issue evidence. No GitHub Issue was fabricated or created because no authorized GitHub action was available/requested in this step. No cleanup, staging, or commit was performed. |
+
+Human Review:
+- Status: Step L local bug documentation complete
+- Confirmed bug records: FR05-BUG-01, FR05-BUG-02, FR05-BUG-03
+- External issue/screenshot evidence: PENDING
+- Cleanup: PENDING until external evidence is captured
