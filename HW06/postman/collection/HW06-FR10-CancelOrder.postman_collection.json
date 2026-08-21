@@ -1,0 +1,2873 @@
+{
+  "info": {
+    "_postman_id": "23127194-fr10-cancel-order-collection",
+    "name": "HW06 — FR-10 Cancel Order — 23127194",
+    "description": "FR-10 Step I implementation: 42 AI cases (including 6 corrected and human re-review approved) + 6 HUMAN-authored cases. Runtime IDs/tokens are intentionally unresolved until Step J. Exact HTTP codes/response schemas are not hard-coded where the contract is silent.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.request.headers.upsert({key:'X-Student-Id',value:'23127194'});",
+          "pm.variables.set('studentId','23127194');",
+          "pm.variables.set('fr10RequestStartedAt',Date.now());"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const n=pm.info.requestName||'FR10 request';",
+          "pm.test(n+' | collection X-Student-Id',function(){pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194');});",
+          "console.log('FR10 CHARACTERIZATION',JSON.stringify({request:n,status:pm.response.code,elapsedMs:pm.response.responseTime,contentType:pm.response.headers.get('Content-Type')||null}));"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "studentId",
+      "value": "23127194",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "AI — Functional",
+      "item": [
+        {
+          "name": "[AI] AI-FR10-001 — Own pending order — canonical cancel",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-001 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-001 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-001'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-001 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-001 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-002 — Own confirmed order — canonical cancel",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{confirmedOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{confirmedOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-002 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-002 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-002'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-002 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-002 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{confirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected",
+          "item": [
+            {
+              "name": "[AI] AI-FR10-003 — Branch A — confirmed cancel allowed",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{boundaryConfirmedOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{boundaryConfirmedOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "AI-FR10-003 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('AI-FR10-003 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-003'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                      "pm.test('AI-FR10-003 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('AI-FR10-003 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{boundaryConfirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[AI] AI-FR10-003 — Branch B — shipping cancel rejected",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{boundaryShippingOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{boundaryShippingOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "AI-FR10-003 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('AI-FR10-003 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-003'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                      "pm.test('AI-FR10-003 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('AI-FR10-003 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{boundaryShippingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('shipping'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-004 — Canonical request shape and mandatory student header",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-004 | Source=AI | Category=Functional. Corrected scope: representative canonical request; suite-wide header proof belongs to AI-FR10-042. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-004 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-004'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-004 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-004 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI — Domain",
+      "item": [
+        {
+          "name": "[AI] AI-FR10-005 — Non-existing plausible order ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{nonExistingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{nonExistingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-005 | Source=AI | Category=Functional. Robustness/characterization; no unrelated mutation may occur. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-005 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-005'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-005 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-006 — Order ID zero",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/0/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "0",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-006 | Source=AI | Category=Functional. Robustness/characterization; no unrelated mutation may occur. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-006 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-006'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-006 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-007 — Negative order ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/-1/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "-1",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-007 | Source=AI | Category=Functional. Robustness/characterization; no unrelated mutation may occur. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-007 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-007'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-007 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-008 — Non-numeric order ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/abc/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "abc",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-008 | Source=AI | Category=Functional. Robustness/characterization; no unrelated mutation may occur. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-008 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-008'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-008 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-009 — Decimal-like order ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/1.5/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "1.5",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-009 | Source=AI | Category=Functional. Robustness/characterization; no unrelated mutation may occur. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-009 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-009'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-009 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-010 — Very large numeric order ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/999999999999999999999/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "999999999999999999999",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-010 | Source=AI | Category=Functional. Robustness/characterization; no unrelated mutation may occur. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-010 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-010'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-010 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-011 — Missing path ID segment — Postman trace item",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders//cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-011 | Source=AI | Category=Functional. Approved correction requires raw-path evidence with curl --path-as-is; Postman/Newman may normalize double slashes. Do not treat this item alone as official oracle evidence. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-011 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-011'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-011 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-012 — Encoded quote/path-special ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/%27/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "%27",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-012 | Source=AI | Category=Functional. Corrected fixed probe %27. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-012 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-012'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-012 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI — Boundary",
+      "item": [
+        {
+          "name": "[AI] AI-FR10-013 — Empty JSON object body",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingBodyEmptyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingBodyEmptyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-013 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-013 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-013'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-013 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingBodyEmptyOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect([\"pending\",\"canceled\"]).to.include(st); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-014 — Malformed JSON body",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingMalformedBodyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingMalformedBodyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-014 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{invalid",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-014 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-014'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-014 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingMalformedBodyOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-015 — JSON null body",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingNullBodyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingNullBodyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-015 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "null",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-015 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-015'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-015 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingNullBodyOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect([\"pending\",\"canceled\"]).to.include(st); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-016 — Array body",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingArrayBodyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingArrayBodyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-016 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "[]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-016 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-016'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-016 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingArrayBodyOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect([\"pending\",\"canceled\"]).to.include(st); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-017 — Large unexpected JSON body",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingLargeBodyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingLargeBodyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-017 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"padding\":\"{{payload4096}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set('payload4096','A'.repeat(4096));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-017 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-017'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-017 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingLargeBodyOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect([\"pending\",\"canceled\"]).to.include(st); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-018 — Unknown benign query parameter",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{pendingBenignQueryOrderId}}/cancel?foo=bar",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{pendingBenignQueryOrderId}}",
+                "cancel"
+              ],
+              "query": [
+                {
+                  "key": "foo",
+                  "value": "bar"
+                }
+              ]
+            },
+            "description": "AI-FR10-018 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-018 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-018'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-018 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingBenignQueryOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect([\"pending\",\"canceled\"]).to.include(st); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI — State / Sequence",
+      "item": [
+        {
+          "name": "[AI] AI-FR10-019 — Pending cancel then repeated cancel",
+          "item": [
+            {
+              "name": "[AI] AI-FR10-019 — First cancel",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{repeatPendingOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{repeatPendingOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "AI-FR10-019 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('AI-FR10-019 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-019'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                      "pm.test('AI-FR10-019 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('AI-FR10-019 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{repeatPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[AI] AI-FR10-019 — Second cancel",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{repeatPendingOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{repeatPendingOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "AI-FR10-019 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('AI-FR10-019 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-019'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                      "pm.test('AI-FR10-019 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('AI-FR10-019 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{repeatPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-020 — Confirmed cancel then repeated cancel",
+          "item": [
+            {
+              "name": "[AI] AI-FR10-020 — First cancel",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{repeatConfirmedOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{repeatConfirmedOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "AI-FR10-020 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('AI-FR10-020 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-020'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                      "pm.test('AI-FR10-020 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('AI-FR10-020 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{repeatConfirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[AI] AI-FR10-020 — Second cancel",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{repeatConfirmedOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{repeatConfirmedOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "AI-FR10-020 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('AI-FR10-020 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-020'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                      "pm.test('AI-FR10-020 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('AI-FR10-020 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{repeatConfirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-021 — Shipping order cannot be user-canceled",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{shippingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{shippingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-021 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-021 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-021'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-021 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-021 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{shippingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('shipping'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-022 — Delivered final state cannot be canceled",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{deliveredOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{deliveredOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-022 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-022 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-022'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-022 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-022 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{deliveredOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('delivered'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-023 — Canceled final state cannot be canceled again",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{canceledOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{canceledOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-023 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-023 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-023'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-023 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-023 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{canceledOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-024 — Unauthenticated pending order remains unchanged",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{unauthPendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{unauthPendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-024 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-024 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-024'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-024 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-024 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{unauthPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tamperedJwt}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{tamperedConfirmedOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{tamperedConfirmedOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-025 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-025 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-025'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-025 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-025 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{tamperedConfirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('confirmed'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-026 — Body status override cannot force delivered",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{statusBodyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{statusBodyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-026 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"status\":\"delivered\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-026 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-026'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-026 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url:pm.variables.replaceIn('{{baseUrl}}/api/orders/{{statusBodyOrderId}}'),method:'GET',header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:'23127194'}]},(e,r)=>{if(!e){let j={};try{j=r.json()}catch(_e){} pm.test('AI-FR10-026 | never delivered',()=>pm.expect(stateOf(j)).to.not.eql('delivered'));}});",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-027 — Query status override cannot force delivered",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{statusQueryOrderId}}/cancel?status=delivered",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{statusQueryOrderId}}",
+                "cancel"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "delivered"
+                }
+              ]
+            },
+            "description": "AI-FR10-027 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-027 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-027'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-027 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url:pm.variables.replaceIn('{{baseUrl}}/api/orders/{{statusQueryOrderId}}'),method:'GET',header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:'23127194'}]},(e,r)=>{if(!e){let j={};try{j=r.json()}catch(_e){} pm.test('AI-FR10-027 | never delivered',()=>pm.expect(stateOf(j)).to.not.eql('delivered'));}});",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI — Security",
+      "item": [
+        {
+          "name": "[AI] AI-FR10-028 — Missing Authorization header",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{missingAuthOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{missingAuthOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-028 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-028 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-028'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-028 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-028 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{missingAuthOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-029 — Empty Authorization value",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{emptyAuthOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{emptyAuthOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-029 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-029 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-029'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-029 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-029 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{emptyAuthOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-030 — Bearer scheme without token",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{bearerOnlyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{bearerOnlyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-030 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-030 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-030'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-030 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-030 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{bearerOnlyOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-031 — Malformed JWT string",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer not-a-jwt",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{malformedJwtOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{malformedJwtOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-031 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-031 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-031'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-031 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-031 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{malformedJwtOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-032 — JWT-like token with invalid signature",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{tamperedJwt}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{invalidSigOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{invalidSigOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-032 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-032 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-032'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-032 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-032 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{invalidSigOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-033 — Wrong authentication scheme",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Basic {{basicAuthValue}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{basicAuthOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{basicAuthOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-033 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-033 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-033'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-033 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-033 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{basicAuthOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-034 — User A cannot cancel User B pending order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{userBPendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{userBPendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-034 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-034 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-034'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-034 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-034 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{userBPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-035 — User A cannot cancel User B confirmed order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{userBConfirmedOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{userBConfirmedOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-035 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-035 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-035'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-035 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-035 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{userBConfirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('confirmed'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-036 — Body user_id override cannot change authorization",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{userAOwnershipBodyOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{userAOwnershipBodyOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-036 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user_id\":\"{{userBId}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-036 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-036'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-036 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{userAOwnershipBodyOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect([\"pending\",\"canceled\"]).to.include(st); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-037 — Query/path order ID conflict",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{queryPathOwnOrderId}}/cancel?id={{userBPendingOrderId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{queryPathOwnOrderId}}",
+                "cancel"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{userBPendingOrderId}}"
+                }
+              ]
+            },
+            "description": "AI-FR10-037 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-037 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-037'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-037 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{userBPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{queryPathOwnOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect([\"pending\",\"canceled\"]).to.include(st); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-038 — Boolean-style injection probe in path ID",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/1%27%20OR%20%271%27%3D%271/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "1%27%20OR%20%271%27%3D%271",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-038 | Source=AI | Category=Functional. Corrected fixed encoded SQL-style probe; response alone is not a SEC-05 verdict. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-038 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-038'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-038 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI — Schema / Characterization",
+      "item": [
+        {
+          "name": "[AI] AI-FR10-039 — Successful cancel response-shape characterization",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{schemaSuccessOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{schemaSuccessOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-039 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-039 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-039'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-039 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-039 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                  "console.log('FR10 RESPONSE CHARACTERIZATION', JSON.stringify({id:'AI-FR10-039',status:pm.response.code,contentType:pm.response.headers.get('Content-Type')||null,bodyLength:pm.response.text().length}));",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{schemaSuccessOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-040 — Invalid shipping transition response characterization",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{schemaShippingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{schemaShippingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-040 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-040 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-040'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-040 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-040 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "console.log('FR10 RESPONSE CHARACTERIZATION', JSON.stringify({id:'AI-FR10-040',status:pm.response.code,contentType:pm.response.headers.get('Content-Type')||null,bodyLength:pm.response.text().length}));",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{schemaShippingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('shipping'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-041 — Authentication failure response characterization",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{schemaAuthOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{schemaAuthOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-041 | Source=AI | Category=Functional.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-041 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-041'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-041 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('AI-FR10-041 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "console.log('FR10 RESPONSE CHARACTERIZATION', JSON.stringify({id:'AI-FR10-041',status:pm.response.code,contentType:pm.response.headers.get('Content-Type')||null,bodyLength:pm.response.text().length}));",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{schemaAuthOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[AI] AI-FR10-042 — Official X-Student-Id evidence assertion",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{headerEvidenceOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{headerEvidenceOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "AI-FR10-042 | Source=AI | Category=Functional. Representative request. Suite-wide 100% header coverage is verified from official Newman JSON by Step K extractor. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('AI-FR10-042 | traceability', function(){ pm.expect(pm.info.requestName).to.include('AI-FR10-042'); pm.expect(pm.info.requestName).to.include('[AI]'); });",
+                  "pm.test('AI-FR10-042 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HUMAN — Additional Coverage",
+      "item": [
+        {
+          "name": "[HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{human043UserBPendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{human043UserBPendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "HUMAN-FR10-043 | Source=HUMAN | Category=Security / Ownership / Cross-user.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user_id\":\"{{userAId}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HUMAN-FR10-043 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-043'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                  "pm.test('HUMAN-FR10-043 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('HUMAN-FR10-043 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{human043UserBPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR10-044 — Existing foreign order versus nonexistent order enumeration",
+          "item": [
+            {
+              "name": "[HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{human044UserBPendingOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{human044UserBPendingOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "HUMAN-FR10-044 | Source=HUMAN | Category=Security / Enumeration.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('HUMAN-FR10-044 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-044'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                      "pm.test('HUMAN-FR10-044 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('HUMAN-FR10-044 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                      "pm.collectionVariables.set('human044ForeignStatus', String(pm.response.code)); pm.collectionVariables.set('human044ForeignBody', pm.response.text().replace(/\\d{4}-\\d{2}-\\d{2}T[^\"']+/g,'<timestamp>'));",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{human044UserBPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[HUMAN] HUMAN-FR10-044 — Request 2 — nonexistent order",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{nonExistingOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{nonExistingOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "HUMAN-FR10-044 | Source=HUMAN | Category=Security / Enumeration.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('HUMAN-FR10-044 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-044'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                      "pm.test('HUMAN-FR10-044 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "const current=pm.response.text().replace(/\\d{4}-\\d{2}-\\d{2}T[^\"']+/g,'<timestamp>'); console.log('HUMAN-FR10-044 ENUMERATION COMPARISON',JSON.stringify({foreignStatus:pm.collectionVariables.get('human044ForeignStatus'),nonexistentStatus:String(pm.response.code),foreignBody:pm.collectionVariables.get('human044ForeignBody'),nonexistentBody:current})); pm.test('HUMAN-FR10-044 | no sensitive foreign-order details asserted',function(){pm.expect(pm.collectionVariables.get('human044ForeignBody')||'').to.not.include(String(pm.environment.get('human044UserBPendingOrderId')||''));});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR10-045 — Unauthorized attempt followed by rightful-owner cancellation",
+          "item": [
+            {
+              "name": "[HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userAToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{human045UserBConfirmedOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{human045UserBConfirmedOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "HUMAN-FR10-045 | Source=HUMAN | Category=State history / BOLA.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('HUMAN-FR10-045 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-045'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                      "pm.test('HUMAN-FR10-045 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('HUMAN-FR10-045 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{human045UserBConfirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('confirmed'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "name": "[HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "X-Student-Id",
+                    "value": "{{studentId}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{userBToken}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders/{{human045UserBConfirmedOrderId}}/cancel",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders",
+                    "{{human045UserBConfirmedOrderId}}",
+                    "cancel"
+                  ]
+                },
+                "description": "HUMAN-FR10-045 | Source=HUMAN | Category=State history / BOLA.  Exact response schema/status remain unresolved unless semantic class is asserted."
+              },
+              "response": [],
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test('HUMAN-FR10-045 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-045'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                      "pm.test('HUMAN-FR10-045 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                      "pm.test('HUMAN-FR10-045 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
+                      "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                      "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                      "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{human045UserBConfirmedOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                      "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                      "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
+                      "});"
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{algNoneToken}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{human046PendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{human046PendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "HUMAN-FR10-046 | Source=HUMAN | Category=Security / Authentication.  Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "function b64url(obj){return btoa(JSON.stringify(obj)).replace(/=/g,'').replace(/\\+/g,'-').replace(/\\//g,'_');}",
+                  "const h=b64url({alg:'none',typ:'JWT'}); const p=b64url({sub:pm.environment.get('userAId'),exp:Math.floor(Date.now()/1000)+3600}); pm.variables.set('algNoneToken',h+'.'+p+'.');"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HUMAN-FR10-046 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-046'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                  "pm.test('HUMAN-FR10-046 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('HUMAN-FR10-046 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{human046PendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{human047UserBPendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{human047UserBPendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "HUMAN-FR10-047 | Source=HUMAN | Category=Security / Parser ambiguity / Cross-user.  Exact response schema/status remain unresolved unless semantic class is asserted.",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"user_id\":\"{{userBId}}\",\"user_id\":\"{{userAId}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HUMAN-FR10-047 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-047'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                  "pm.test('HUMAN-FR10-047 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "pm.test('HUMAN-FR10-047 | semantic rejection class', function(){ pm.expect(pm.response.code).to.be.at.least(400); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{human047UserBPendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userBToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "[HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Student-Id",
+                "value": "{{studentId}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{userAToken}}",
+                "type": "text"
+              },
+              {
+                "key": "X-HTTP-Method-Override",
+                "value": "PUT"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/orders/{{human048PendingOrderId}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "orders",
+                "{{human048PendingOrderId}}",
+                "cancel"
+              ]
+            },
+            "description": "HUMAN-FR10-048 | Source=HUMAN | Category=Security / Method confusion. Risk-based characterization; PUT is the documented contract method. Exact response schema/status remain unresolved unless semantic class is asserted."
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('HUMAN-FR10-048 | traceability', function(){ pm.expect(pm.info.requestName).to.include('HUMAN-FR10-048'); pm.expect(pm.info.requestName).to.include('[HUMAN]'); });",
+                  "pm.test('HUMAN-FR10-048 | required X-Student-Id header', function(){ pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194'); });",
+                  "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
+                  "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{human048PendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
+                  "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('pending'); }); }",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -740,3 +740,61 @@ Human Review:
 - Required minimum: >=5
 - Provenance: HUMAN
 - Step H: COMPLETE
+
+## AI Audit Entry - AI-032
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T00:10:00+07:00 |
+| Stage | API 2 / FR-10 — Step I Postman Implementation |
+| API | `PUT /api/orders/:id/cancel` |
+| User Prompt | Thực hiện Step I |
+| Generated/Modified Files | `postman/collection/HW06-FR10-CancelOrder.postman_collection.json`; `postman/environment/HW06-FR10-Local.postman_environment.json`; `postman/environment/HW06-FR10-Local.private.postman_environment.json`; `PoolB-FR-10-CancelOrder/postman/implementation.md`; `reports/ai-audit-report.md` |
+| AI Output | Implemented 48 FR10 testcase IDs in Postman (42 AI + 6 HUMAN) using 53 executable requests because ordered-sequence cases require multiple requests. Added collection-level `X-Student-Id: 23127194`, semantic success/error-class assertions where contract-backed, documented GET `/api/orders/:id` follow-up state oracles, characterization logging for unresolved response schemas, corrected deterministic probes/payloads, and environment skeletons with runtime tokens/IDs intentionally blank until Step J. Preserved AI-FR10-011 raw-path correction as requiring `curl --path-as-is` evidence because Postman/Newman may normalize double slashes. Validation: 48/48 testcase IDs present, 57 scripts syntax-valid with 0 syntax errors, and Step K dry-run resolves collection/environment but correctly blocks only on missing `postman/data/FR10-runtime-data.json`. |
+
+Human Review:
+- Step I: IMPLEMENTED
+- Unique testcase IDs: 48
+- Executable Postman requests: 53
+- Runtime data readiness: NOT READY — Step J required
+- Official Newman execution: NOT STARTED
+
+## AI Audit Entry - AI-033
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T00:12:00+07:00 |
+| Stage | API 2 / FR-10 — Step J Runtime Test Data and Preconditions |
+| API | `PUT /api/orders/:id/cancel` |
+| User Prompt | Thực step J — Prepare Runtime Test Data and Preconditions. |
+| Generated/Modified Files | `scripts/prepare-fr10-runtime.py`; `postman/data/FR10-runtime-data.json`; git-ignored `postman/environment/HW06-FR10-Local.private.postman_environment.json`; `PoolB-FR-10-CancelOrder/postman/runtime-fixture-manifest.json`; `PoolB-FR-10-CancelOrder/postman/runtime-preconditions.md`; `reports/ai-audit-report.md` |
+| AI Output | Verified the real EShop backend process on localhost:3000, created two dedicated timestamped regular users through register/login APIs, obtained the documented admin login, created 39 dedicated orders via POST /api/checkout, transitioned selected fixtures through the documented admin status endpoint, and verified the final ownership/state inventory. Runtime state counts: 27 pending, 7 confirmed, 3 shipping, 1 delivered, 1 canceled. User A owns 33 fixtures and User B owns 6. Updated the git-ignored private environment with real tokens/IDs, created non-secret FR10 runtime data and fixture manifest, added a reusable setup script using random fixture passwords for future runs, and documented reset/recreate strategy. Step K dry-run now resolves collection, private environment, runtime data, and Newman successfully. No official Newman run was performed. |
+
+Human Review:
+- Step J runtime readiness: READY
+- Dedicated orders: 39
+- State/ownership verification mismatches: 0
+- Private environment blank required variables: 0
+- Step K dry-run: PASS
+- Official execution: NOT STARTED
+
+## AI Audit Entry - AI-034
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T00:18:00+07:00 |
+| Stage | API 2 / FR-10 — Step I Postman Implementation |
+| API | `PUT /api/orders/:id/cancel` |
+| User Prompt | Thực hiện Step I. |
+| Generated/Modified Files | `postman/collection/HW06-FR10-CancelOrder.postman_collection.json`; `postman/environment/HW06-FR10-Local.postman_environment.json`; `postman/environment/HW06-FR10-Local.private.postman_environment.json`; `PoolB-FR-10-CancelOrder/postman/implementation.md`; `reports/ai-audit-report.md` |
+| AI Output | Implemented the 48 approved FR-10 testcase IDs in Postman: 42 AI + 6 HUMAN, represented by 53 executable requests because sequence cases require multiple requests. Added collection-level `X-Student-Id: 23127194`, environment variables, auth variants, state-oracle follow-up GET requests, corrected raw/body/security probes, response characterization logging, and HUMAN sequence/security coverage. JSON and 57 Postman scripts were syntax-validated with zero script syntax errors. `run-step-k.sh FR10 --dry-run` resolves successfully against the currently present runtime artifacts. No official Newman execution was performed as part of this Step I action. |
+
+Human Review:
+- Step I implementation: COMPLETE
+- Unique testcase IDs: 48 (42 AI + 6 HUMAN)
+- Executable Postman requests: 53
+- Postman script syntax errors: 0
+- Official Newman execution in this action: NOT STARTED
