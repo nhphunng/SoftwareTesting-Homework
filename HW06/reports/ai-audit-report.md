@@ -820,3 +820,24 @@ Human Review:
 - Potential product defect: User can cancel `shipping` order
 - Human Gate H: PENDING
 - Step L bug report / GitHub Issue: NOT STARTED
+
+## AI Audit Entry - AI-036
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with local coding connector |
+| Date and Time | 2026-08-21T08:59:55+07:00 |
+| Stage | API 2 / FR-10 — Step L confirmed-defect reporting after Human Gate H |
+| API | `PUT /api/orders/:id/cancel` |
+| User Decision | Explicitly approved Human Gate H: a User must not be able to cancel an order in `shipping`, while real Step K execution shows a successful cancellation and persisted `canceled` state. |
+| Generated/Modified Files | `PoolB-FR-10-CancelOrder/bugs/FR10-BUG-01.md`; `reports/ai-audit-report.md` |
+| External Record | GitHub Issue #27: https://github.com/nhphunng/SoftwareTesting-Homework/issues/27 |
+| AI Output | Applied `$api-testing-human-loop` at the confirmed-defect stage. Cross-checked FR-10 and the approved testcase definitions against the compact and raw real Newman evidence. Documented one High-severity defect traced to `AI-FR10-003`, `AI-FR10-021`, and `AI-FR10-040`: the cancel request returned HTTP 200 and three isolated shipping orders were observed as canceled afterward. Recorded reproducibility as 3/3 independent testcase scenarios in the final controlled run, cited only existing Step K/Newman artifacts, and created the real GitHub Issue. No screenshot was invented because no standalone FR-10 screenshot existed in the Step K evidence set. Test expectations were not changed. |
+
+Human Review:
+- Human Gate H: APPROVED by the user
+- Confirmed defect: `FR10-BUG-01`
+- Severity: High
+- Related testcases: `AI-FR10-003`, `AI-FR10-021`, `AI-FR10-040`
+- GitHub Issue: https://github.com/nhphunng/SoftwareTesting-Homework/issues/27
+- Step L: COMPLETE
