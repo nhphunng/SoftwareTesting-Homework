@@ -1,0 +1,433 @@
+Newman CI demo	Set up job	﻿2026-08-21T14:27:10.6737660Z Current runner version: '2.336.0'
+Newman CI demo	Set up job	2026-08-21T14:27:10.6758940Z ##[group]Runner Image Provisioner
+Newman CI demo	Set up job	2026-08-21T14:27:10.6759733Z Hosted Compute Agent
+Newman CI demo	Set up job	2026-08-21T14:27:10.6760215Z Version: 20260729.566
+Newman CI demo	Set up job	2026-08-21T14:27:10.6760785Z Commit: cf7153fe6e25b664e8693c24944bf2b00355d109
+Newman CI demo	Set up job	2026-08-21T14:27:10.6761374Z Build Date: 2026-07-29T19:17:02Z
+Newman CI demo	Set up job	2026-08-21T14:27:10.6761952Z Worker ID: {f357f702-4094-4d95-835b-6d4f1963494c}
+Newman CI demo	Set up job	2026-08-21T14:27:10.6762628Z Azure Region: westus
+Newman CI demo	Set up job	2026-08-21T14:27:10.6763107Z ##[endgroup]
+Newman CI demo	Set up job	2026-08-21T14:27:10.6764538Z ##[group]Operating System
+Newman CI demo	Set up job	2026-08-21T14:27:10.6765089Z Ubuntu
+Newman CI demo	Set up job	2026-08-21T14:27:10.6765547Z 24.04.4
+Newman CI demo	Set up job	2026-08-21T14:27:10.6766035Z LTS
+Newman CI demo	Set up job	2026-08-21T14:27:10.6766479Z ##[endgroup]
+Newman CI demo	Set up job	2026-08-21T14:27:10.6767090Z ##[group]Runner Image
+Newman CI demo	Set up job	2026-08-21T14:27:10.6767762Z Image: ubuntu-24.04
+Newman CI demo	Set up job	2026-08-21T14:27:10.6768283Z Version: 20260816.277.1
+Newman CI demo	Set up job	2026-08-21T14:27:10.6769193Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260816.277/images/ubuntu/Ubuntu2404-Readme.md
+Newman CI demo	Set up job	2026-08-21T14:27:10.6770642Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260816.277
+Newman CI demo	Set up job	2026-08-21T14:27:10.6771440Z ##[endgroup]
+Newman CI demo	Set up job	2026-08-21T14:27:10.6772472Z ##[group]GITHUB_TOKEN Permissions
+Newman CI demo	Set up job	2026-08-21T14:27:10.6774237Z Contents: read
+Newman CI demo	Set up job	2026-08-21T14:27:10.6774718Z Metadata: read
+Newman CI demo	Set up job	2026-08-21T14:27:10.6775253Z Packages: read
+Newman CI demo	Set up job	2026-08-21T14:27:10.6775743Z ##[endgroup]
+Newman CI demo	Set up job	2026-08-21T14:27:10.6777677Z Secret source: Actions
+Newman CI demo	Set up job	2026-08-21T14:27:10.6778585Z Prepare workflow directory
+Newman CI demo	Set up job	2026-08-21T14:27:10.7034444Z Prepare all required actions
+Newman CI demo	Set up job	2026-08-21T14:27:10.7072793Z Getting action download info
+Newman CI demo	Set up job	2026-08-21T14:27:11.0840954Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Newman CI demo	Set up job	2026-08-21T14:27:12.0964625Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+Newman CI demo	Set up job	2026-08-21T14:27:12.4272433Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Newman CI demo	Set up job	2026-08-21T14:27:12.8105348Z Complete job name: Newman CI demo
+Newman CI demo	Checkout homework repository	﻿2026-08-21T14:27:12.8683826Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8690529Z ##[group]Run actions/checkout@v4
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8690934Z with:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8691191Z   repository: nhphunng/SoftwareTesting-Homework
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8693438Z   token: ***
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8693655Z   ssh-strict: true
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8693874Z   ssh-user: git
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8694105Z   persist-credentials: true
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8694347Z   clean: true
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8694571Z   sparse-checkout-cone-mode: true
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8694844Z   fetch-depth: 1
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8695068Z   fetch-tags: false
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8695308Z   show-progress: true
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8695559Z   lfs: false
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8695767Z   submodules: false
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8696038Z   set-safe-directory: true
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8696310Z   allow-unsafe-pr-checkout: false
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.8696693Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.9515715Z Syncing repository: nhphunng/SoftwareTesting-Homework
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.9517005Z ##[group]Getting Git version info
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.9517638Z Working directory is '/home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework'
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:12.9518351Z [command]/usr/bin/git version
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.0814046Z git version 2.55.0
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.0863524Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.0876063Z Temporarily overriding HOME='/home/runner/work/_temp/3f145b4d-fd51-45cb-8970-f13d3d07ec79' before making global git config changes
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.0876959Z Adding repository directory to the temporary git global config as a safe directory
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.0881443Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1193030Z Deleting the contents of '/home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework'
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1196205Z ##[group]Initializing the repository
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1200480Z [command]/usr/bin/git init /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1761187Z hint: Using 'master' as the name for the initial branch. This default branch name
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1762211Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1762895Z hint: to use in all of your new repositories, which will suppress this warning,
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1763362Z hint: call:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1763565Z hint:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1763891Z hint: 	git config --global init.defaultBranch <name>
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1764214Z hint:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1764505Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1764956Z hint: 'development'. The just-created branch can be renamed via this command:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1765373Z hint:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1765589Z hint: 	git branch -m <name>
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1765842Z hint:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1766147Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1766744Z Initialized empty Git repository in /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework/.git/
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.1772819Z [command]/usr/bin/git remote add origin https://github.com/nhphunng/SoftwareTesting-Homework
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.2124053Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.2124742Z ##[group]Disabling automatic garbage collection
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.2127128Z [command]/usr/bin/git config --local gc.auto 0
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.2156055Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.2156663Z ##[group]Setting up auth
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.2161553Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.2190104Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.4775386Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.4808534Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.5011621Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.5046321Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.5258204Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.5294980Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.5295796Z ##[group]Fetching the repository
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:13.5304215Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b564ce2229ada6f4c14a13491eaafd37086b6068:refs/remotes/origin/hw06
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9630681Z From https://github.com/nhphunng/SoftwareTesting-Homework
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9631457Z  * [new ref]         b564ce2229ada6f4c14a13491eaafd37086b6068 -> origin/hw06
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9633812Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9634979Z ##[group]Determining the checkout info
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9636468Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9642361Z [command]/usr/bin/git sparse-checkout disable
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9829817Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9865278Z ##[group]Checking out the ref
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:14.9865906Z [command]/usr/bin/git checkout --progress --force -B hw06 refs/remotes/origin/hw06
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:15.0472776Z Switched to a new branch 'hw06'
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:15.0476225Z branch 'hw06' set up to track 'origin/hw06'.
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:15.0553014Z ##[endgroup]
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:15.0555115Z [command]/usr/bin/git log -1 --format=%H
+Newman CI demo	Checkout homework repository	2026-08-21T14:27:15.0567131Z b564ce2229ada6f4c14a13491eaafd37086b6068
+Newman CI demo	Checkout public EShop SUT	﻿2026-08-21T14:27:15.0782379Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0783759Z ##[group]Run actions/checkout@v4
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0783965Z with:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0784142Z   repository: ttbhanh/eshop-sut
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0784341Z   path: eshop-sut
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0786358Z   token: ***
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0786532Z   ssh-strict: true
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0786704Z   ssh-user: git
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0786881Z   persist-credentials: true
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0787084Z   clean: true
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0787405Z   sparse-checkout-cone-mode: true
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0787619Z   fetch-depth: 1
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0787788Z   fetch-tags: false
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0787965Z   show-progress: true
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0788154Z   lfs: false
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0788374Z   submodules: false
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0788582Z   set-safe-directory: true
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0788796Z   allow-unsafe-pr-checkout: false
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.0789008Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1444693Z Syncing repository: ttbhanh/eshop-sut
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1448137Z ##[group]Getting Git version info
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1449053Z Working directory is '/home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework/eshop-sut'
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1475585Z [command]/usr/bin/git version
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1508828Z git version 2.55.0
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1524057Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1534826Z Temporarily overriding HOME='/home/runner/work/_temp/c2e09ba8-03e0-442c-bc7b-d2ee36545138' before making global git config changes
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1535879Z Adding repository directory to the temporary git global config as a safe directory
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1538987Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework/eshop-sut
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1567568Z ##[group]Initializing the repository
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1571832Z [command]/usr/bin/git init /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework/eshop-sut
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1604135Z hint: Using 'master' as the name for the initial branch. This default branch name
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1604966Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1605630Z hint: to use in all of your new repositories, which will suppress this warning,
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1606136Z hint: call:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1606385Z hint:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1606748Z hint: 	git config --global init.defaultBranch <name>
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1609628Z hint:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1610244Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1611109Z hint: 'development'. The just-created branch can be renamed via this command:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1611746Z hint:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1612140Z hint: 	git branch -m <name>
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1612576Z hint:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1613103Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1614194Z Initialized empty Git repository in /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework/eshop-sut/.git/
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1615856Z [command]/usr/bin/git remote add origin https://github.com/ttbhanh/eshop-sut
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1678416Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1678978Z ##[group]Disabling automatic garbage collection
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1682014Z [command]/usr/bin/git config --local gc.auto 0
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1709486Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1709970Z ##[group]Setting up auth
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1715322Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1742076Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1959298Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.1990427Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.2214970Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.2241367Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.2437711Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.2469897Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.2472988Z ##[group]Determining the default branch
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.2473281Z Retrieving the default branch name
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.6563650Z Default branch 'main'
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.6564728Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.6565373Z ##[group]Fetching the repository
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:15.6579092Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +refs/heads/main:refs/remotes/origin/main
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3329856Z From https://github.com/ttbhanh/eshop-sut
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3330521Z  * [new branch]      main       -> origin/main
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3334219Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3334762Z ##[group]Determining the checkout info
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3335897Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3341341Z [command]/usr/bin/git sparse-checkout disable
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3379048Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3406711Z ##[group]Checking out the ref
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3410755Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3505865Z Switched to a new branch 'main'
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3508230Z branch 'main' set up to track 'origin/main'.
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3512353Z ##[endgroup]
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3546600Z [command]/usr/bin/git log -1 --format=%H
+Newman CI demo	Checkout public EShop SUT	2026-08-21T14:27:16.3572228Z 85af3ba875c88283615e22cb108f13e2fccaf0e9
+Newman CI demo	Setup Node.js	﻿2026-08-21T14:27:16.3732159Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3733125Z ##[group]Run actions/setup-node@v4
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3733334Z with:
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3733493Z   node-version: 20
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3733665Z   cache: npm
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3733894Z   cache-dependency-path: eshop-sut/backend/package-lock.json
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3734195Z   always-auth: false
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3734382Z   check-latest: false
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3736376Z   token: ***
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.3736541Z ##[endgroup]
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.4978330Z Attempting to download 20...
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.5060888Z (node:2090) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Newman CI demo	Setup Node.js	2026-08-21T14:27:16.5061794Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Newman CI demo	Setup Node.js	2026-08-21T14:27:17.2356463Z Acquiring 20.20.2 - x64 from https://github.com/actions/node-versions/releases/download/20.20.2-23521894959/node-20.20.2-linux-x64.tar.gz
+Newman CI demo	Setup Node.js	2026-08-21T14:27:17.6428478Z Extracting ...
+Newman CI demo	Setup Node.js	2026-08-21T14:27:17.6532259Z [command]/usr/bin/tar xz --strip 1 --warning=no-unknown-keyword --overwrite -C /home/runner/work/_temp/92f8b64b-0444-4453-8e6d-5e5f12f11aa9 -f /home/runner/work/_temp/07d491ee-611c-47ac-9ade-d79870024539
+Newman CI demo	Setup Node.js	2026-08-21T14:27:18.5159852Z Adding to the cache ...
+Newman CI demo	Setup Node.js	2026-08-21T14:27:20.4542197Z ##[group]Environment details
+Newman CI demo	Setup Node.js	2026-08-21T14:27:20.8069251Z node: v20.20.2
+Newman CI demo	Setup Node.js	2026-08-21T14:27:20.8069613Z npm: 10.8.2
+Newman CI demo	Setup Node.js	2026-08-21T14:27:20.8069851Z yarn: 1.22.22
+Newman CI demo	Setup Node.js	2026-08-21T14:27:20.8070419Z ##[endgroup]
+Newman CI demo	Setup Node.js	2026-08-21T14:27:20.8085274Z [command]/opt/hostedtoolcache/node/20.20.2/x64/bin/npm config get cache
+Newman CI demo	Setup Node.js	2026-08-21T14:27:20.8908198Z /home/runner/.npm
+Newman CI demo	Setup Node.js	2026-08-21T14:27:21.2099612Z Cache hit for: node-cache-Linux-x64-npm-b372d498e2a7dc99250c869b74f45671692480bcd4932acd594b4d31d77f4caa
+Newman CI demo	Setup Node.js	2026-08-21T14:27:21.2185624Z (node:2090) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Newman CI demo	Setup Node.js	2026-08-21T14:27:22.5172944Z Received 4508530 of 25480050 (17.7%), 4.3 MBs/sec
+Newman CI demo	Setup Node.js	2026-08-21T14:27:22.7300847Z Received 25480050 of 25480050 (100.0%), 20.0 MBs/sec
+Newman CI demo	Setup Node.js	2026-08-21T14:27:22.7301357Z Cache Size: ~24 MB (25480050 B)
+Newman CI demo	Setup Node.js	2026-08-21T14:27:22.7321575Z [command]/usr/bin/tar -xf /home/runner/work/_temp/740b3b03-ca50-423d-aed2-92f0f13fa9dd/cache.tzst -P -C /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework --use-compress-program unzstd
+Newman CI demo	Setup Node.js	2026-08-21T14:27:22.8917443Z Cache restored successfully
+Newman CI demo	Setup Node.js	2026-08-21T14:27:22.8933806Z Cache restored from key: node-cache-Linux-x64-npm-b372d498e2a7dc99250c869b74f45671692480bcd4932acd594b4d31d77f4caa
+Newman CI demo	Install SUT dependencies	﻿2026-08-21T14:27:22.9107344Z ##[group]Run npm ci
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:22.9107615Z [36;1mnpm ci[0m
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:22.9144471Z shell: /usr/bin/bash -e {0}
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:22.9144699Z ##[endgroup]
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.5833034Z npm warn deprecated prebuild-install@7.1.3: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8477414Z 
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8478314Z added 135 packages, and audited 136 packages in 877ms
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8478691Z 
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8478892Z 36 packages are looking for funding
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8479347Z   run `npm fund` for details
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8552399Z 
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8553055Z 4 vulnerabilities (1 low, 1 moderate, 1 high, 1 critical)
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8553619Z 
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8553945Z To address all issues, run:
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8554457Z   npm audit fix
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8554761Z 
+Newman CI demo	Install SUT dependencies	2026-08-21T14:27:23.8555043Z Run `npm audit` for details.
+Newman CI demo	Start SUT	﻿2026-08-21T14:27:23.8668731Z ##[group]Run nohup node server.js > "$GITHUB_WORKSPACE/HW06/cicd/sut-ci.log" 2>&1 &
+Newman CI demo	Start SUT	2026-08-21T14:27:23.8685906Z [36;1mnohup node server.js > "$GITHUB_WORKSPACE/HW06/cicd/sut-ci.log" 2>&1 &[0m
+Newman CI demo	Start SUT	2026-08-21T14:27:23.8686512Z [36;1mecho $! > "$GITHUB_WORKSPACE/HW06/cicd/sut-ci.pid"[0m
+Newman CI demo	Start SUT	2026-08-21T14:27:23.8720448Z shell: /usr/bin/bash -e {0}
+Newman CI demo	Start SUT	2026-08-21T14:27:23.8720668Z ##[endgroup]
+Newman CI demo	Wait for SUT	﻿2026-08-21T14:27:23.8793282Z ##[group]Run for i in {1..30}; do
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8793528Z [36;1mfor i in {1..30}; do[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8793868Z [36;1m  if curl --fail --silent http://127.0.0.1:3000/api/products >/dev/null; then[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8794226Z [36;1m    echo 'SUT_READY=true'[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8794437Z [36;1m    exit 0[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8794610Z [36;1m  fi[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8794779Z [36;1m  sleep 1[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8794954Z [36;1mdone[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8795132Z [36;1mcat HW06/cicd/sut-ci.log || true[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8795351Z [36;1mexit 1[0m
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8824792Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Newman CI demo	Wait for SUT	2026-08-21T14:27:23.8825075Z ##[endgroup]
+Newman CI demo	Wait for SUT	2026-08-21T14:27:24.9510636Z SUT_READY=true
+Newman CI demo	Install Newman	﻿2026-08-21T14:27:24.9536023Z ##[group]Run npm install --global newman newman-reporter-htmlextra
+Newman CI demo	Install Newman	2026-08-21T14:27:24.9536424Z [36;1mnpm install --global newman newman-reporter-htmlextra[0m
+Newman CI demo	Install Newman	2026-08-21T14:27:24.9569402Z shell: /usr/bin/bash -e {0}
+Newman CI demo	Install Newman	2026-08-21T14:27:24.9569632Z ##[endgroup]
+Newman CI demo	Install Newman	2026-08-21T14:27:26.4381211Z npm warn deprecated har-validator@5.1.5: this library is no longer supported
+Newman CI demo	Install Newman	2026-08-21T14:27:26.5306418Z npm warn deprecated uuid@3.4.0: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+Newman CI demo	Install Newman	2026-08-21T14:27:26.6790373Z npm warn deprecated uuid@8.3.2: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+Newman CI demo	Install Newman	2026-08-21T14:27:26.6889403Z npm warn deprecated uuid@9.0.1: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
+Newman CI demo	Install Newman	2026-08-21T14:27:27.2960257Z npm warn deprecated @faker-js/faker@5.5.3: Please update to a newer version.
+Newman CI demo	Install Newman	2026-08-21T14:27:27.3103446Z 
+Newman CI demo	Install Newman	2026-08-21T14:27:27.3104202Z added 205 packages in 2s
+Newman CI demo	Install Newman	2026-08-21T14:27:27.3104912Z 
+Newman CI demo	Install Newman	2026-08-21T14:27:27.3105396Z 25 packages are looking for funding
+Newman CI demo	Install Newman	2026-08-21T14:27:27.3106024Z   run `npm fund` for details
+Newman CI demo	Resolve mode	﻿2026-08-21T14:27:27.3298969Z ##[group]Run MODE="$(tr -d '[:space:]' < HW06/cicd/ci-mode.txt)"
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3299600Z [36;1mMODE="$(tr -d '[:space:]' < HW06/cicd/ci-mode.txt)"[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3300070Z [36;1mif [[ "$MODE" == "one-fail" ]]; then[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3300735Z [36;1m  echo 'env=HW06/cicd/postman/HW06-CI-OneFail.postman_environment.json' >> "$GITHUB_OUTPUT"[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3301406Z [36;1m  echo 'expect_exit=1' >> "$GITHUB_OUTPUT"[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3301830Z [36;1melif [[ "$MODE" == "pass" ]]; then[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3302450Z [36;1m  echo 'env=HW06/cicd/postman/HW06-CI-Pass.postman_environment.json' >> "$GITHUB_OUTPUT"[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3303087Z [36;1m  echo 'expect_exit=0' >> "$GITHUB_OUTPUT"[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3303460Z [36;1melse[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3303755Z [36;1m  echo "Unsupported CI mode: $MODE" >&2[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3304141Z [36;1m  exit 2[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3304394Z [36;1mfi[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3304679Z [36;1mecho "mode=$MODE" >> "$GITHUB_OUTPUT"[0m
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3348122Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Newman CI demo	Resolve mode	2026-08-21T14:27:27.3348574Z ##[endgroup]
+Newman CI demo	Run Newman demonstration	﻿2026-08-21T14:27:27.3482980Z ##[group]Run OUT="HW06/cicd/results/one-fail"
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3483281Z [36;1mOUT="HW06/cicd/results/one-fail"[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3483523Z [36;1mmkdir -p "$OUT"[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3483716Z [36;1mset +e[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3483986Z [36;1mnewman run HW06/cicd/postman/HW06-CI-Demo.postman_collection.json \[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3484400Z [36;1m  -e "HW06/cicd/postman/HW06-CI-OneFail.postman_environment.json" \[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3484764Z [36;1m  --reporters cli,json,htmlextra,junit \[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3485058Z [36;1m  --reporter-json-export "$OUT/report.json" \[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3485356Z [36;1m  --reporter-htmlextra-export "$OUT/report.html" \[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3485653Z [36;1m  --reporter-junit-export "$OUT/report.xml" \[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3485918Z [36;1m  --color off > "$OUT/newman-cli.txt" 2>&1[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3486172Z [36;1mEXIT_CODE=$?[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3486352Z [36;1mset -e[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3486573Z [36;1mecho "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3486867Z [36;1mcat "$OUT/newman-cli.txt"[0m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3517542Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:27.3517839Z ##[endgroup]
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2118226Z newman
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2118431Z 
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2118816Z HW06 CI/CD Demo — FR05 FR10 FR16
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2118984Z 
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2119092Z ❏ Setup
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2119404Z ↳ CI-SETUP-01 — Login default admin
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2119735Z   POST http://127.0.0.1:3000/api/login [200 OK, 640B, 24ms]
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2120191Z   ✓  CI-SETUP-01 — Login default admin | X-Student-Id exact
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2120521Z   ✓  CI-SETUP-01 | admin login succeeds
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2120677Z 
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2120802Z ❏ API CI Demonstrations
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2121376Z ↳ CI-FR05-001 — deterministic no-match product search
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2121817Z   GET http://127.0.0.1:3000/api/products?search=__HW06_CI_NO_MATCH_23127194__ [200 OK, 267B, 4ms]
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2122368Z   ✓  CI-FR05-001 — deterministic no-match product search | X-Student-Id exact
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2122710Z   ✓  CI-FR05-001 | HTTP 200
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2122937Z   ✓  CI-FR05-001 | JSON array
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2123249Z   ✓  CI-FR05-001 | no-match is empty
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2123521Z   1. CI-DEMO-ONLY | intentional single failure
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2123692Z 
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2123904Z ↳ CI-FR10-001 — nonexistent order cancellation is rejected
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2124313Z   PUT http://127.0.0.1:3000/api/orders/2147483647/cancel [404 Not Found, 301B, 6ms]
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2124811Z   ✓  CI-FR10-001 — nonexistent order cancellation is rejected | X-Student-Id exact
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2125206Z   ✓  CI-FR10-001 | nonexistent order rejected
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2125502Z   ✓  CI-FR10-001 | response has error
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2125649Z 
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2125806Z ↳ CI-FR16-001 — empty import is rejected
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2126158Z   POST http://127.0.0.1:3000/api/admin/import-products [400 Bad Request, 323B, 3ms]
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2126615Z   ✓  CI-FR16-001 — empty import is rejected | X-Student-Id exact
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2126939Z   ✓  CI-FR16-001 | empty import rejected
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2128944Z   ✓  CI-FR16-001 | response has error
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2129126Z 
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2129402Z ┌─────────────────────────┬─────────────────┬─────────────────┐
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2129807Z │                         │        executed │          failed │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2130249Z ├─────────────────────────┼─────────────────┼─────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2130655Z │              iterations │               1 │               0 │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2131309Z ├─────────────────────────┼─────────────────┼─────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2131907Z │                requests │               4 │               0 │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2132399Z ├─────────────────────────┼─────────────────┼─────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2132989Z │            test-scripts │               8 │               0 │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2133636Z ├─────────────────────────┼─────────────────┼─────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2134028Z │      prerequest-scripts │               4 │               0 │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2134426Z ├─────────────────────────┼─────────────────┼─────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2134792Z │              assertions │              13 │               1 │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2135174Z ├─────────────────────────┴─────────────────┴─────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2135556Z │ total run duration: 141ms                                   │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2135950Z ├─────────────────────────────────────────────────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2136340Z │ total data received: 447B (approx)                          │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2136757Z ├─────────────────────────────────────────────────────────────┤
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2137553Z │ average response time: 9ms [min: 3ms, max: 24ms, s.d.: 8ms] │
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2137979Z └─────────────────────────────────────────────────────────────┘
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2138167Z 
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2138576Z [31m  # [39m[31m failure        [39m[31m detail                                                                               [39m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2139208Z [90m    [39m[90m                [39m[90m                                                                                      [39m
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2139738Z  1.  AssertionError  CI-DEMO-ONLY | intentional single failure                                            
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2140280Z                      expected 'actual' to deeply equal 'intentionally-wrong-expected'                     
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2140769Z                      at assertion:3 in test-script                                                        
+Newman CI demo	Run Newman demonstration	2026-08-21T14:27:28.2141308Z                      inside "API CI Demonstrations / CI-FR05-001 — deterministic no-match product search" 
+Newman CI demo	Verify demonstration result	﻿2026-08-21T14:27:28.2165491Z ##[group]Run test "1" = "1"
+Newman CI demo	Verify demonstration result	2026-08-21T14:27:28.2165751Z [36;1mtest "1" = "1"[0m
+Newman CI demo	Verify demonstration result	2026-08-21T14:27:28.2166084Z [36;1mnode HW06/cicd/verify-ci-demo.mjs "HW06/cicd/results/one-fail/report.json" "one-fail"[0m
+Newman CI demo	Verify demonstration result	2026-08-21T14:27:28.2199080Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Newman CI demo	Verify demonstration result	2026-08-21T14:27:28.2199363Z ##[endgroup]
+Newman CI demo	Verify demonstration result	2026-08-21T14:27:28.2511102Z mode=one-fail requests=4 assertions=13 failed=1 sid=4/4
+Newman CI demo	Verify demonstration result	2026-08-21T14:27:28.2513863Z CI_DEMO_VERIFICATION=PASS
+Newman CI demo	Mark intentional one-fail demonstration	﻿2026-08-21T14:27:28.2571394Z ##[group]Run echo "Intentional CI demonstration: exactly one Newman testcase assertion was verified as failing."
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2572424Z [36;1mecho "Intentional CI demonstration: exactly one Newman testcase assertion was verified as failing."[0m
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2573222Z [36;1mecho "This red pipeline is NOT evidence of a new SUT defect."[0m
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2573691Z [36;1mexit 1[0m
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2613858Z shell: /usr/bin/bash -e {0}
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2614190Z ##[endgroup]
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2675403Z Intentional CI demonstration: exactly one Newman testcase assertion was verified as failing.
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2676220Z This red pipeline is NOT evidence of a new SUT defect.
+Newman CI demo	Mark intentional one-fail demonstration	2026-08-21T14:27:28.2687466Z ##[error]Process completed with exit code 1.
+Newman CI demo	Upload Newman reports	﻿2026-08-21T14:27:28.2753891Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2754874Z ##[group]Run actions/upload-artifact@v4
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2755100Z with:
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2755280Z   name: hw06-newman-one-fail-2
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2755535Z   path: HW06/cicd/results/one-fail/
+Newman CI demo	Upload Newman reports	HW06/cicd/sut-ci.log
+Newman CI demo	Upload Newman reports	
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2755818Z   if-no-files-found: warn
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2756034Z   retention-days: 30
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2756222Z   compression-level: 6
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2756402Z   overwrite: false
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2756590Z   include-hidden-files: false
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.2756797Z ##[endgroup]
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.4094854Z (node:2240) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.4096202Z (Use `node --trace-deprecation ...` to show where the warning was created)
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.4188633Z Multiple search paths detected. Calculating the least common ancestor of all paths
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.4190478Z The least common ancestor is /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework/HW06/cicd. This will be the root directory of the artifact
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.4191565Z With the provided path, there will be 5 files uploaded
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.4192261Z Artifact name is valid!
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.4192628Z Root directory input is valid!
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.8192647Z Beginning upload of artifact content to blob storage
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:28.8425276Z (node:2240) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:29.2144819Z Uploaded bytes 20299
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:29.2975082Z Finished uploading artifact content to blob storage!
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:29.2976131Z SHA256 digest of uploaded artifact zip is 77b1ed5827352082ebaa0ccd19300e435302c6a31b51af3027f2049a954dfe37
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:29.2976824Z Finalizing artifact upload
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:29.5578098Z Artifact hw06-newman-one-fail-2.zip successfully finalized. Artifact ID 9450197907
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:29.5579136Z Artifact hw06-newman-one-fail-2 has been successfully uploaded! Final size is 20299 bytes. Artifact ID is 9450197907
+Newman CI demo	Upload Newman reports	2026-08-21T14:27:29.5588252Z Artifact download URL: https://github.com/nhphunng/SoftwareTesting-Homework/actions/runs/32492204368/artifacts/9450197907
+Newman CI demo	Post Checkout public EShop SUT	﻿2026-08-21T14:27:29.5738095Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.5739092Z Post job cleanup.
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6403649Z [command]/usr/bin/git version
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6438617Z git version 2.55.0
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6468572Z Temporarily overriding HOME='/home/runner/work/_temp/f981e7a1-0f9a-4047-b2c6-aa5219f99be0' before making global git config changes
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6469843Z Adding repository directory to the temporary git global config as a safe directory
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6473180Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework/eshop-sut
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6507616Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6536166Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6745821Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6769697Z http.https://github.com/.extraheader
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6779072Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.6808413Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.7055086Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Newman CI demo	Post Checkout public EShop SUT	2026-08-21T14:27:29.7088169Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Newman CI demo	Post Checkout homework repository	﻿2026-08-21T14:27:29.7428807Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.7429791Z Post job cleanup.
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8163598Z [command]/usr/bin/git version
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8204121Z git version 2.55.0
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8241029Z Temporarily overriding HOME='/home/runner/work/_temp/0d6cc93c-efa2-42a7-91b9-9248afc224dd' before making global git config changes
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8242481Z Adding repository directory to the temporary git global config as a safe directory
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8244821Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/SoftwareTesting-Homework/SoftwareTesting-Homework
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8291971Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8340241Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8616500Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8645795Z http.https://github.com/.extraheader
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8656531Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8688292Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8912525Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Newman CI demo	Post Checkout homework repository	2026-08-21T14:27:29.8948854Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Newman CI demo	Complete job	﻿2026-08-21T14:27:29.9273507Z Cleaning up orphan processes
+Newman CI demo	Complete job	2026-08-21T14:27:29.9521195Z Terminate orphan process: pid (2169) (node)
+Newman CI demo	Complete job	2026-08-21T14:27:29.9529279Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

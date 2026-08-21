@@ -1212,3 +1212,28 @@ Human Review:
 - New SUT execution during P10: NONE
 - Next recommended phase: P11 — CI/CD integration
 
+## AI Audit Entry - AI-054
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector + GitHub Actions / GitHub CLI |
+| Date and Time | 2026-08-21T21:30:00+07:00 |
+| Stage | HW06 — P11 CI/CD Integration |
+| API | CI demonstration covering FR05 + FR10 + FR16 |
+| User Decision / Prompt | Tester requested P11 — integrate Newman into CI/CD and produce the required all-pass and exactly-one-fail pipeline samples. |
+| Evidence/Input Basis | Phase 6 requirements in `plan.md`; finalized Postman/Newman artifacts from P10; public EShop SUT repository; real GitHub Actions runs and downloaded artifacts/logs. |
+| Generated/Modified Files | `.github/workflows/hw06-api-tests.yml`; `cicd/postman/HW06-CI-Demo.postman_collection.json`; pass/one-fail environments; `cicd/verify-ci-demo.mjs`; `cicd/ci-mode.txt`; `cicd/CI-CD-Report.md`; `cicd/evidence/run-a/**`; `cicd/evidence/run-b/**`; `cicd/screenshots/run-a-all-pass.png`; `cicd/screenshots/run-b-one-fail.png`; `reports/ai-audit-report.md` |
+| AI Output | Implemented a GitHub Actions Newman pipeline on branch `hw06` using a controlled CI demonstration suite that is explicitly separate from official Step K defect evidence. Run A commit `06cd7d9` produced real GitHub Actions run `32492084678` with SUCCESS, 4 requests, 12 assertions, 0 failed, and exact `X-Student-Id: 23127194` on 4/4 requests. Run B commit `b564ce2` produced real run `32492204368`; the verifier confirmed exactly one failure (`CI-DEMO-ONLY`) among 13 assertions with SID 4/4, then the workflow intentionally marked the pipeline red and stated that the red run is not a new SUT defect. Commit `582811c` restored mode to pass and run `32492332236` completed SUCCESS. Real GitHub logs/Newman artifacts were downloaded and GitHub Actions run-page screenshots were captured. |
+
+Human Review:
+- Status: P11 COMPLETE — PENDING TESTER REVIEW
+- Run A all-pass: SUCCESS — https://github.com/nhphunng/SoftwareTesting-Homework/actions/runs/32492084678
+- Run A Newman: 12 assertions / 0 failed / SID 4/4
+- Run B intentional one-fail: FAILURE — https://github.com/nhphunng/SoftwareTesting-Homework/actions/runs/32492204368
+- Run B Newman: 13 assertions / exactly 1 failed / SID 4/4
+- Intentional failure label: `CI-DEMO-ONLY | intentional single failure`
+- Restore run: SUCCESS — https://github.com/nhphunng/SoftwareTesting-Homework/actions/runs/32492332236
+- Official Step K evidence modified: NO
+- New SUT bug claimed from Run B: NO
+- Next recommended phase: P12 — AI-driven API Test Generator
+
