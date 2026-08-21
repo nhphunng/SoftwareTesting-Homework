@@ -98,6 +98,13 @@ jobs:
           test "${{ steps.newman.outputs.exit_code }}" = "${{ steps.mode.outputs.expect_exit }}"
           node HW06/cicd/verify-ci-demo.mjs "HW06/cicd/results/${{ steps.mode.outputs.mode }}/report.json" "${{ steps.mode.outputs.mode }}"
 
+      - name: Mark intentional one-fail demonstration
+        if: steps.mode.outputs.mode == 'one-fail'
+        run: |
+          echo "Intentional CI demonstration: exactly one Newman testcase assertion was verified as failing."
+          echo "This red pipeline is NOT evidence of a new SUT defect."
+          exit 1
+
       - name: Upload Newman reports
         if: always()
         uses: actions/upload-artifact@v4
