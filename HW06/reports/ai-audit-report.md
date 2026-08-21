@@ -1143,3 +1143,23 @@ Human Review:
 - Confirmed defect: `FR16-BUG-03` — GitHub #30
 - Screenshot evidence: PENDING HUMAN CAPTURE FROM REAL NEWMAN/POSTMAN EVIDENCE VIEW
 
+## AI Audit Entry - AI-051
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T20:40:00+07:00 |
+| Stage | API 3 / FR-16 — Step L screenshot evidence capture |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Tester requested Newman evidence screenshots for the three confirmed FR16 defects. |
+| Evidence/Input Basis | Real `postman/newman/FR16-official-report.json`; confirmed Gate H defect mapping; representative testcases `AI-FR16-019`, `AI-FR16-024`, `AI-FR16-035` |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/evidence/screenshots/FR16-BUG-01.png`; `FR16-BUG-02.png`; `FR16-BUG-03.png`; matching `*-evidence.html` files; three FR16 bug Markdown reports; `reports/ai-audit-report.md` |
+| AI Output | Rendered three evidence views directly from the real official Newman JSON and captured them as PNG using local headless Chrome. Each image identifies the testcase, approved oracle, observed persistence result, failed Newman assertions, and `X-Student-Id: 23127194`. Authorization/JWT values are intentionally redacted. The views explicitly identify the raw Newman JSON as the source of truth and are not represented as native Postman UI screenshots. |
+
+Human Review:
+- Status: SCREENSHOT EVIDENCE CREATED FROM REAL NEWMAN RUN
+- FR16-BUG-01 representative evidence: `AI-FR16-019`
+- FR16-BUG-02 representative evidence: `AI-FR16-024`
+- FR16-BUG-03 representative evidence: `AI-FR16-035`
+- JWT exposure: REDACTED
+

@@ -50,6 +50,12 @@ The official Newman evidence shows the uniquely marked product persisted after t
 - `postman/newman/FR16-official-report.html`
 - `postman/newman/FR16-official-report.xml`
 
+## Screenshot evidence
+
+- PNG: `PoolC-FR-16-ImportProducts/evidence/screenshots/FR16-BUG-03.png`
+- Rendered evidence source: `PoolC-FR-16-ImportProducts/evidence/screenshots/FR16-BUG-03-evidence.html`
+- Source of truth: `postman/newman/FR16-official-report.json`
+
 ## Screenshot workflow
 
 Use the real evidence for `AI-FR16-035`: show the testcase ID, the non-admin scenario, follow-up persistence result, and `X-Student-Id: 23127194`. Authorization/JWT must be redacted. Do not expose the real token in a screenshot or Markdown artifact.

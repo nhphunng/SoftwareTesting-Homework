@@ -52,6 +52,12 @@ The official Newman evidence shows the marker persisted. For `AI-FR16-019`, the 
 
 Official run totals: 46 testcase IDs, 195 requests, 388 assertions, 46 failed assertions, and exact `X-Student-Id: 23127194` on 195/195 requests.
 
+## Screenshot evidence
+
+- PNG: `PoolC-FR-16-ImportProducts/evidence/screenshots/FR16-BUG-01.png`
+- Rendered evidence source: `PoolC-FR-16-ImportProducts/evidence/screenshots/FR16-BUG-01-evidence.html`
+- Source of truth: `postman/newman/FR16-official-report.json`
+
 ## Screenshot workflow
 
 Use the real Newman HTML/JSON evidence for `AI-FR16-019` or `AI-FR16-020`. The screenshot must visibly preserve the testcase ID, request/result context, persistence evidence, and `X-Student-Id: 23127194`; redact Authorization/JWT values. Do not recreate or fabricate a Postman response.

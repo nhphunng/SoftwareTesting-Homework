@@ -52,6 +52,12 @@ The controlled Newman run shows rows from invalid batches persisted. In `AI-FR16
 - `postman/newman/FR16-official-report.html`
 - `postman/newman/FR16-official-report.xml`
 
+## Screenshot evidence
+
+- PNG: `PoolC-FR-16-ImportProducts/evidence/screenshots/FR16-BUG-02.png`
+- Rendered evidence source: `PoolC-FR-16-ImportProducts/evidence/screenshots/FR16-BUG-02-evidence.html`
+- Source of truth: `postman/newman/FR16-official-report.json`
+
 ## Screenshot workflow
 
 Prefer `AI-FR16-024` for a concise screenshot: show the invalid-batch testcase plus the follow-up GET proving a companion marker persisted. `HUM-FR16-006` may be used as secondary evidence showing marker count accumulation. Preserve `X-Student-Id: 23127194` and redact JWT values.
