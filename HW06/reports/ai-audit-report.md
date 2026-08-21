@@ -1081,3 +1081,23 @@ Human Review:
 - Runtime-ready: 43 AI + 3 HUMAN testcase IDs
 - Blocked: 8 CSV AI cases + AI-FR16-046 + HUM-FR16-004 + HUM-FR16-005
 - Notes: Proceed to Step K only after reviewing this Step J preparation.
+
+## AI Audit Entry - AI-048
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T11:29:00+07:00 |
+| Stage | API 3 / FR-16 — Step K Official Newman Execution + Gate G preparation |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Tester approved Step J and requested Step K using `$api-testing-human-loop` and the Step K runner. |
+| Evidence/Input Basis | Approved Step J runtime setup; `scripts/run-step-k.sh`; real live Newman run; raw `FR16-official-*` evidence; compact execution summary; approved FR-16 contract/security/atomicity oracles |
+| Generated/Modified Files | `postman/newman/FR16-official-cli.txt`; `postman/newman/FR16-official-report.json`; `postman/newman/FR16-official-report.html`; `postman/newman/FR16-official-report.xml`; `postman/newman/FR16-execution-summary.json`; `postman/newman/FR16-execution-summary.md`; `scripts/extract-newman-summary.js`; `PoolC-FR-16-ImportProducts/evidence/step-k-execution.md`; `reports/ai-audit-report.md` |
+| AI Output | Performed the official FR16 Newman run. Final raw execution: 46 testcase IDs, 195 requests, 388 assertions, 342 passed assertions, 46 failed assertions, 17 testcase IDs with failures, and exact `X-Student-Id: 23127194` on 195/195 Newman-observed requests. Newman exit code was 1. A compact-summary reporting defect was discovered because the extractor recognized `HUMAN-FR..` but not FR16's `HUM-FR..`; the extractor was corrected and the summary was regenerated from the same raw Newman JSON without rerunning the SUT. Gate G preparation groups runtime failures into potential FR16 validation/atomic-rollback defects and a potential FR12/SEC-03 admin-role authorization defect. The 11 documented Step J blockers were not executed and are not treated as failures. No bug was confirmed or filed; Human Gate H remains pending. |
+
+Human Review:
+- Status: PENDING GATE G / GATE H REVIEW
+- Real execution evidence: COMPLETE
+- Potential defect cluster A: FR-16 invalid-row validation / atomic rollback
+- Potential defect cluster B: non-admin actor can import through admin endpoint
+- Notes: Do not create bug reports or GitHub Issues until the tester confirms the defect grouping and Gate H conclusions.

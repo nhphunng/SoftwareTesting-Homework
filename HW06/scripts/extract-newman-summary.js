@@ -19,7 +19,8 @@ const report = JSON.parse(fs.readFileSync(inputPath, 'utf8'));
 const run = report.run || {};
 const executions = Array.isArray(run.executions) ? run.executions : [];
 
-const testcasePattern = /\b((?:AI|HUMAN)-FR\d{2}-\d{3})\b/i;
+// Support both HUMAN-FRxx-yyy (older suites) and HUM-FRxx-yyy (FR16 Step H).
+const testcasePattern = /\b((?:AI|HUMAN|HUM)-FR\d{2}-\d{3})\b/i;
 const secretHeaderPattern = /^(authorization|proxy-authorization|cookie|set-cookie|x-api-key)$/i;
 const tokenPattern = /(bearer\s+[A-Za-z0-9._~+\/-]+=*|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+)/gi;
 

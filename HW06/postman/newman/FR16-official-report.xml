@@ -1,0 +1,1009 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="HW06 — FR-16 Import Products — 23127194" tests="56" time="0.077">
+  <testsuite name="AI — Functional (JSON API surface) / [AI] AI-FR16-001 — Canonical JSON import — one valid product" id="79d9059a-3748-4c67-bd4d-345595c4f00a" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="0" errors="0" time="0.002">
+    <testcase name="AI-FR16-001 | baseline marker A is absent" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+    <testcase name="[AI] AI-FR16-001 — Canonical JSON import — one valid product | collection X-Student-Id" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+    <testcase name="AI-FR16-001 | traceability and Source" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+    <testcase name="AI-FR16-001 | required X-Student-Id header" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+    <testcase name="AI-FR16-001 | response is available for semantic review" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+    <testcase name="AI-FR16-001 | exposed success counter does not contradict the persistence oracle" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+    <testcase name="AI-FR16-001 | business report is not empty" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+    <testcase name="AI-FR16-001 | persistence oracle A (exactly-one)" time="0.002" classname="AiFunctionalJsonApiSurfaceAiAiFr16001CanonicalJsonImportOneValidProduct"/>
+  </testsuite>
+  <testsuite name="AI — Functional (JSON API surface) / [AI] AI-FR16-002 — Canonical JSON import — multiple valid products" id="ea7fb5c2-781b-45bd-a61f-4470738d43e3" timestamp="2026-08-21T04:26:30.909Z" tests="12" failures="0" errors="0" time="0.003">
+    <testcase name="AI-FR16-002 | baseline marker A is absent" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | baseline marker B is absent" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | baseline marker C is absent" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="[AI] AI-FR16-002 — Canonical JSON import — multiple valid products | collection X-Student-Id" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | traceability and Source" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | required X-Student-Id header" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | response is available for semantic review" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | exposed success counter does not contradict the persistence oracle" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | business report is not empty" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | persistence oracle A (exactly-one)" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | persistence oracle B (exactly-one)" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+    <testcase name="AI-FR16-002 | persistence oracle C (exactly-one)" time="0.003" classname="AiFunctionalJsonApiSurfaceAiAiFr16002CanonicalJsonImportMultipleValidProducts"/>
+  </testsuite>
+  <testsuite name="AI — Functional (JSON API surface) / [AI] AI-FR16-005 — Official request carries required student header" id="5c1eeb84-dfd1-4fa2-be1c-ecc54ef13e30" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-005 | baseline marker A is absent" time="0.001" classname="AiFunctionalJsonApiSurfaceAiAiFr16005OfficialRequestCarriesRequiredStudentHeader"/>
+    <testcase name="[AI] AI-FR16-005 — Official request carries required student header | collection X-Student-Id" time="0.001" classname="AiFunctionalJsonApiSurfaceAiAiFr16005OfficialRequestCarriesRequiredStudentHeader"/>
+    <testcase name="AI-FR16-005 | traceability and Source" time="0.001" classname="AiFunctionalJsonApiSurfaceAiAiFr16005OfficialRequestCarriesRequiredStudentHeader"/>
+    <testcase name="AI-FR16-005 | required X-Student-Id header" time="0.001" classname="AiFunctionalJsonApiSurfaceAiAiFr16005OfficialRequestCarriesRequiredStudentHeader"/>
+    <testcase name="AI-FR16-005 | response is available for semantic review" time="0.001" classname="AiFunctionalJsonApiSurfaceAiAiFr16005OfficialRequestCarriesRequiredStudentHeader"/>
+    <testcase name="AI-FR16-005 | persistence oracle A (exactly-one)" time="0.001" classname="AiFunctionalJsonApiSurfaceAiAiFr16005OfficialRequestCarriesRequiredStudentHeader"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-006 — Missing top-level request body" id="8f943ea2-3fa6-4eac-bc2a-a536220ec02c" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-006 | baseline product snapshot is readable" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16006MissingTopLevelRequestBody"/>
+    <testcase name="[AI] AI-FR16-006 — Missing top-level request body | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16006MissingTopLevelRequestBody"/>
+    <testcase name="AI-FR16-006 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16006MissingTopLevelRequestBody"/>
+    <testcase name="AI-FR16-006 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16006MissingTopLevelRequestBody"/>
+    <testcase name="AI-FR16-006 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16006MissingTopLevelRequestBody"/>
+    <testcase name="AI-FR16-006 | persistence snapshot oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16006MissingTopLevelRequestBody"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-007 — Top-level JSON null" id="4c72c5bd-3086-409f-a90e-495512051073" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-007 | baseline product snapshot is readable" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16007TopLevelJsonNull"/>
+    <testcase name="[AI] AI-FR16-007 — Top-level JSON null | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16007TopLevelJsonNull"/>
+    <testcase name="AI-FR16-007 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16007TopLevelJsonNull"/>
+    <testcase name="AI-FR16-007 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16007TopLevelJsonNull"/>
+    <testcase name="AI-FR16-007 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16007TopLevelJsonNull"/>
+    <testcase name="AI-FR16-007 | persistence snapshot oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16007TopLevelJsonNull"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-008 — Top-level array instead of object" id="065f189d-972c-4623-b8ed-8a37e0531085" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-008 | baseline marker A is absent" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16008TopLevelArrayInsteadOfObject"/>
+    <testcase name="[AI] AI-FR16-008 — Top-level array instead of object | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16008TopLevelArrayInsteadOfObject"/>
+    <testcase name="AI-FR16-008 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16008TopLevelArrayInsteadOfObject"/>
+    <testcase name="AI-FR16-008 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16008TopLevelArrayInsteadOfObject"/>
+    <testcase name="AI-FR16-008 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16008TopLevelArrayInsteadOfObject"/>
+    <testcase name="AI-FR16-008 | persistence oracle A (absent)" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16008TopLevelArrayInsteadOfObject"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-009 — Missing products field" id="1926403d-9acf-4710-8516-3c387558f74b" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-009 | baseline product snapshot is readable" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16009MissingProductsField"/>
+    <testcase name="[AI] AI-FR16-009 — Missing products field | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16009MissingProductsField"/>
+    <testcase name="AI-FR16-009 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16009MissingProductsField"/>
+    <testcase name="AI-FR16-009 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16009MissingProductsField"/>
+    <testcase name="AI-FR16-009 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16009MissingProductsField"/>
+    <testcase name="AI-FR16-009 | persistence snapshot oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16009MissingProductsField"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-010 — Empty products array" id="46f4c98a-7537-4ca1-9d0d-c2477ee75c23" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-010 | baseline product snapshot is readable" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16010EmptyProductsArray"/>
+    <testcase name="[AI] AI-FR16-010 — Empty products array | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16010EmptyProductsArray"/>
+    <testcase name="AI-FR16-010 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16010EmptyProductsArray"/>
+    <testcase name="AI-FR16-010 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16010EmptyProductsArray"/>
+    <testcase name="AI-FR16-010 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16010EmptyProductsArray"/>
+    <testcase name="AI-FR16-010 | persistence snapshot oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16010EmptyProductsArray"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-011 — products null" id="15b9f5bc-ef64-4874-8bb0-b2513d0f5d3f" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-011 | baseline product snapshot is readable" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16011ProductsNull"/>
+    <testcase name="[AI] AI-FR16-011 — products null | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16011ProductsNull"/>
+    <testcase name="AI-FR16-011 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16011ProductsNull"/>
+    <testcase name="AI-FR16-011 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16011ProductsNull"/>
+    <testcase name="AI-FR16-011 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16011ProductsNull"/>
+    <testcase name="AI-FR16-011 | persistence snapshot oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16011ProductsNull"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-012 — products object instead of array" id="46644cbc-8309-400b-a091-0110c3626d00" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-012 | baseline product snapshot is readable" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16012ProductsObjectInsteadOfArray"/>
+    <testcase name="[AI] AI-FR16-012 — products object instead of array | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16012ProductsObjectInsteadOfArray"/>
+    <testcase name="AI-FR16-012 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16012ProductsObjectInsteadOfArray"/>
+    <testcase name="AI-FR16-012 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16012ProductsObjectInsteadOfArray"/>
+    <testcase name="AI-FR16-012 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16012ProductsObjectInsteadOfArray"/>
+    <testcase name="AI-FR16-012 | persistence snapshot oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16012ProductsObjectInsteadOfArray"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-013 — Empty product name in JSON row" id="2373e604-9eb3-405b-9680-b03c37d155b2" timestamp="2026-08-21T04:26:30.909Z" tests="10" failures="3" errors="0" time="0.002">
+    <testcase name="AI-FR16-013 | baseline marker A is absent" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow"/>
+    <testcase name="AI-FR16-013 | baseline marker B is absent" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow"/>
+    <testcase name="[AI] AI-FR16-013 — Empty product name in JSON row | collection X-Student-Id" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow"/>
+    <testcase name="AI-FR16-013 | traceability and Source" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow"/>
+    <testcase name="AI-FR16-013 | required X-Student-Id header" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow"/>
+    <testcase name="AI-FR16-013 | response is available for semantic review" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow"/>
+    <testcase name="AI-FR16-013 | exposed success counter does not contradict the persistence oracle" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow">
+      <failure type="AssertionFailure" message="expected 2 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Domain (JSON API surface) / [AI] AI-FR16-013 — Empty product name in JSON row.]]>
+        <![CDATA[Test description: AI-FR16-013 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 2 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 2 to deeply equal +0
+   at Object.eval sandbox-script.js:4:11).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-013 | business report is not empty" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow"/>
+    <testcase name="AI-FR16-013 | persistence oracle A (absent)" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Domain (JSON API surface) / [AI] AI-FR16-013 — Empty product name in JSON row.]]>
+        <![CDATA[Test description: AI-FR16-013 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:11).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-013 | persistence oracle B (absent)" time="0.002" classname="AiDomainJsonApiSurfaceAiAiFr16013EmptyProductNameInJsonRow">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Domain (JSON API surface) / [AI] AI-FR16-013 — Empty product name in JSON row.]]>
+        <![CDATA[Test description: AI-FR16-013 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:7:11).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-014 — Missing product name in JSON row" id="8ec5a1f3-f88b-4844-af51-a25100c110af" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="2" errors="0" time="0.001">
+    <testcase name="AI-FR16-014 | baseline marker A is absent" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow"/>
+    <testcase name="[AI] AI-FR16-014 — Missing product name in JSON row | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow"/>
+    <testcase name="AI-FR16-014 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow"/>
+    <testcase name="AI-FR16-014 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow"/>
+    <testcase name="AI-FR16-014 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow"/>
+    <testcase name="AI-FR16-014 | exposed success counter does not contradict the persistence oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Domain (JSON API surface) / [AI] AI-FR16-014 — Missing product name in JSON row.]]>
+        <![CDATA[Test description: AI-FR16-014 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:12).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-014 | business report is not empty" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow"/>
+    <testcase name="AI-FR16-014 | persistence oracle A (absent)" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16014MissingProductNameInJsonRow">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Domain (JSON API surface) / [AI] AI-FR16-014 — Missing product name in JSON row.]]>
+        <![CDATA[Test description: AI-FR16-014 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:12).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-015 — Null product name" id="608402a5-9335-48a9-a5cb-9592881b3e5e" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="2" errors="0" time="0.001">
+    <testcase name="AI-FR16-015 | baseline marker A is absent" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName"/>
+    <testcase name="[AI] AI-FR16-015 — Null product name | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName"/>
+    <testcase name="AI-FR16-015 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName"/>
+    <testcase name="AI-FR16-015 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName"/>
+    <testcase name="AI-FR16-015 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName"/>
+    <testcase name="AI-FR16-015 | exposed success counter does not contradict the persistence oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Domain (JSON API surface) / [AI] AI-FR16-015 — Null product name.]]>
+        <![CDATA[Test description: AI-FR16-015 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:13).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-015 | business report is not empty" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName"/>
+    <testcase name="AI-FR16-015 | persistence oracle A (absent)" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16015NullProductName">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Domain (JSON API surface) / [AI] AI-FR16-015 — Null product name.]]>
+        <![CDATA[Test description: AI-FR16-015 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:13).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-016 — Non-existing category ID — cross-requirement characterization" id="838ca19c-20b1-4173-83b7-25fdef207efe" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-016 | baseline marker A is absent" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16016NonExistingCategoryIdCrossRequirementCharacterization"/>
+    <testcase name="[AI] AI-FR16-016 — Non-existing category ID — cross-requirement characterization | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16016NonExistingCategoryIdCrossRequirementCharacterization"/>
+    <testcase name="AI-FR16-016 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16016NonExistingCategoryIdCrossRequirementCharacterization"/>
+    <testcase name="AI-FR16-016 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16016NonExistingCategoryIdCrossRequirementCharacterization"/>
+    <testcase name="AI-FR16-016 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16016NonExistingCategoryIdCrossRequirementCharacterization"/>
+    <testcase name="AI-FR16-016 | persistence oracle A (present-or-absent)" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16016NonExistingCategoryIdCrossRequirementCharacterization"/>
+  </testsuite>
+  <testsuite name="AI — Domain (JSON API surface) / [AI] AI-FR16-017 — Whitespace-only name — trimming semantics characterization" id="c06525be-6ea3-42dd-a22e-93a30b4bc742" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-017 | baseline product snapshot is readable" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16017WhitespaceOnlyNameTrimmingSemanticsCharacterization"/>
+    <testcase name="[AI] AI-FR16-017 — Whitespace-only name — trimming semantics characterization | collection X-Student-Id" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16017WhitespaceOnlyNameTrimmingSemanticsCharacterization"/>
+    <testcase name="AI-FR16-017 | traceability and Source" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16017WhitespaceOnlyNameTrimmingSemanticsCharacterization"/>
+    <testcase name="AI-FR16-017 | required X-Student-Id header" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16017WhitespaceOnlyNameTrimmingSemanticsCharacterization"/>
+    <testcase name="AI-FR16-017 | response is available for semantic review" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16017WhitespaceOnlyNameTrimmingSemanticsCharacterization"/>
+    <testcase name="AI-FR16-017 | persistence snapshot oracle" time="0.001" classname="AiDomainJsonApiSurfaceAiAiFr16017WhitespaceOnlyNameTrimmingSemanticsCharacterization"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR16-018 — Price = 1 — positive boundary valid" id="c543f065-ed1f-4164-8869-e7a721a4756a" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-018 | baseline marker A is absent" time="0.001" classname="AiBoundaryAiAiFr16018Price1PositiveBoundaryValid"/>
+    <testcase name="[AI] AI-FR16-018 — Price = 1 — positive boundary valid | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr16018Price1PositiveBoundaryValid"/>
+    <testcase name="AI-FR16-018 | traceability and Source" time="0.001" classname="AiBoundaryAiAiFr16018Price1PositiveBoundaryValid"/>
+    <testcase name="AI-FR16-018 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr16018Price1PositiveBoundaryValid"/>
+    <testcase name="AI-FR16-018 | response is available for semantic review" time="0.001" classname="AiBoundaryAiAiFr16018Price1PositiveBoundaryValid"/>
+    <testcase name="AI-FR16-018 | persistence oracle A (exactly-one)" time="0.001" classname="AiBoundaryAiAiFr16018Price1PositiveBoundaryValid"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback" id="1c88792e-83dc-42d3-a037-86d8d7b05735" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="2" errors="0" time="0.001">
+    <testcase name="AI-FR16-019 | baseline marker A is absent" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback"/>
+    <testcase name="[AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback"/>
+    <testcase name="AI-FR16-019 | traceability and Source" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback"/>
+    <testcase name="AI-FR16-019 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback"/>
+    <testcase name="AI-FR16-019 | response is available for semantic review" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback"/>
+    <testcase name="AI-FR16-019 | exposed success counter does not contradict the persistence oracle" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Boundary / [AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback.]]>
+        <![CDATA[Test description: AI-FR16-019 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:17).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-019 | business report is not empty" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback"/>
+    <testcase name="AI-FR16-019 | persistence oracle A (absent)" time="0.001" classname="AiBoundaryAiAiFr16019Price0BoundaryInvalidAndRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Boundary / [AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback.]]>
+        <![CDATA[Test description: AI-FR16-019 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:17).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR16-020 — Price = -1 — invalid negative boundary" id="cf846b96-7d07-4c48-81fc-08c797cb97ba" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="2" errors="0" time="0.001">
+    <testcase name="AI-FR16-020 | baseline marker A is absent" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary"/>
+    <testcase name="[AI] AI-FR16-020 — Price = -1 — invalid negative boundary | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary"/>
+    <testcase name="AI-FR16-020 | traceability and Source" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary"/>
+    <testcase name="AI-FR16-020 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary"/>
+    <testcase name="AI-FR16-020 | response is available for semantic review" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary"/>
+    <testcase name="AI-FR16-020 | exposed success counter does not contradict the persistence oracle" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Boundary / [AI] AI-FR16-020 — Price = -1 — invalid negative boundary.]]>
+        <![CDATA[Test description: AI-FR16-020 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:18).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-020 | business report is not empty" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary"/>
+    <testcase name="AI-FR16-020 | persistence oracle A (absent)" time="0.001" classname="AiBoundaryAiAiFr16020Price1InvalidNegativeBoundary">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Boundary / [AI] AI-FR16-020 — Price = -1 — invalid negative boundary.]]>
+        <![CDATA[Test description: AI-FR16-020 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:18).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR16-021 — Positive decimal price" id="c695998e-001c-4d37-80b9-f05160f50447" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-021 | baseline marker A is absent" time="0.001" classname="AiBoundaryAiAiFr16021PositiveDecimalPrice"/>
+    <testcase name="[AI] AI-FR16-021 — Positive decimal price | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr16021PositiveDecimalPrice"/>
+    <testcase name="AI-FR16-021 | traceability and Source" time="0.001" classname="AiBoundaryAiAiFr16021PositiveDecimalPrice"/>
+    <testcase name="AI-FR16-021 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr16021PositiveDecimalPrice"/>
+    <testcase name="AI-FR16-021 | response is available for semantic review" time="0.001" classname="AiBoundaryAiAiFr16021PositiveDecimalPrice"/>
+    <testcase name="AI-FR16-021 | persistence oracle A (exactly-one)" time="0.001" classname="AiBoundaryAiAiFr16021PositiveDecimalPrice"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR16-022 — Very large positive price — no invented maximum" id="5aaf8326-4e64-4402-80cf-6bda098c8c81" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-022 | baseline marker A is absent" time="0.001" classname="AiBoundaryAiAiFr16022VeryLargePositivePriceNoInventedMaximum"/>
+    <testcase name="[AI] AI-FR16-022 — Very large positive price — no invented maximum | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr16022VeryLargePositivePriceNoInventedMaximum"/>
+    <testcase name="AI-FR16-022 | traceability and Source" time="0.001" classname="AiBoundaryAiAiFr16022VeryLargePositivePriceNoInventedMaximum"/>
+    <testcase name="AI-FR16-022 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr16022VeryLargePositivePriceNoInventedMaximum"/>
+    <testcase name="AI-FR16-022 | response is available for semantic review" time="0.001" classname="AiBoundaryAiAiFr16022VeryLargePositivePriceNoInventedMaximum"/>
+    <testcase name="AI-FR16-022 | persistence oracle A (present-or-absent)" time="0.001" classname="AiBoundaryAiAiFr16022VeryLargePositivePriceNoInventedMaximum"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR16-023 — Long name >255 — FR-15 inheritance unresolved" id="24e20d48-5c23-4f3e-aef5-0ba5cf2b086b" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-023 | baseline long name absent" time="0.001" classname="AiBoundaryAiAiFr16023LongName255Fr15InheritanceUnresolved"/>
+    <testcase name="[AI] AI-FR16-023 — Long name >255 — FR-15 inheritance unresolved | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr16023LongName255Fr15InheritanceUnresolved"/>
+    <testcase name="AI-FR16-023 | traceability and Source" time="0.001" classname="AiBoundaryAiAiFr16023LongName255Fr15InheritanceUnresolved"/>
+    <testcase name="AI-FR16-023 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr16023LongName255Fr15InheritanceUnresolved"/>
+    <testcase name="AI-FR16-023 | response is available for semantic review" time="0.001" classname="AiBoundaryAiAiFr16023LongName255Fr15InheritanceUnresolved"/>
+    <testcase name="AI-FR16-023 | persistence oracle A (present-or-absent)" time="0.001" classname="AiBoundaryAiAiFr16023LongName255Fr15InheritanceUnresolved"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-024 — Invalid first row causes full rollback" id="425d94eb-c128-43c2-a6cc-126b15470b81" timestamp="2026-08-21T04:26:30.909Z" tests="10" failures="3" errors="0" time="0.002">
+    <testcase name="AI-FR16-024 | baseline marker A is absent" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback"/>
+    <testcase name="AI-FR16-024 | baseline marker B is absent" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback"/>
+    <testcase name="[AI] AI-FR16-024 — Invalid first row causes full rollback | collection X-Student-Id" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback"/>
+    <testcase name="AI-FR16-024 | traceability and Source" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback"/>
+    <testcase name="AI-FR16-024 | required X-Student-Id header" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback"/>
+    <testcase name="AI-FR16-024 | response is available for semantic review" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback"/>
+    <testcase name="AI-FR16-024 | exposed success counter does not contradict the persistence oracle" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 2 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-024 — Invalid first row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-024 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 2 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 2 to deeply equal +0
+   at Object.eval sandbox-script.js:4:22).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-024 | business report is not empty" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback"/>
+    <testcase name="AI-FR16-024 | persistence oracle A (absent)" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-024 — Invalid first row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-024 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:22).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-024 | persistence oracle B (absent)" time="0.002" classname="AiStateSequenceAiAiFr16024InvalidFirstRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-024 — Invalid first row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-024 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:7:22).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback" id="cd983e2a-9d36-4127-ae67-6e46a7958ee8" timestamp="2026-08-21T04:26:30.909Z" tests="12" failures="4" errors="0" time="0.002">
+    <testcase name="AI-FR16-025 | baseline marker A is absent" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="AI-FR16-025 | baseline marker B is absent" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="AI-FR16-025 | baseline marker C is absent" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="[AI] AI-FR16-025 — Invalid middle row causes full rollback | collection X-Student-Id" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="AI-FR16-025 | traceability and Source" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="AI-FR16-025 | required X-Student-Id header" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="AI-FR16-025 | response is available for semantic review" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="AI-FR16-025 | exposed success counter does not contradict the persistence oracle" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 3 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-025 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 3 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 3 to deeply equal +0
+   at Object.eval sandbox-script.js:4:23).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-025 | business report is not empty" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback"/>
+    <testcase name="AI-FR16-025 | persistence oracle A (absent)" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-025 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:23).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-025 | persistence oracle B (absent)" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-025 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:7:23).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-025 | persistence oracle C (absent)" time="0.002" classname="AiStateSequenceAiAiFr16025InvalidMiddleRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-025 | persistence oracle C (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:8:23).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback" id="16c7e4e9-bbc6-412a-ae1f-a066a325366c" timestamp="2026-08-21T04:26:30.909Z" tests="12" failures="4" errors="0" time="0.001">
+    <testcase name="AI-FR16-026 | baseline marker A is absent" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="AI-FR16-026 | baseline marker B is absent" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="AI-FR16-026 | baseline marker C is absent" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="[AI] AI-FR16-026 — Invalid final row causes full rollback | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="AI-FR16-026 | traceability and Source" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="AI-FR16-026 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="AI-FR16-026 | response is available for semantic review" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="AI-FR16-026 | exposed success counter does not contradict the persistence oracle" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 3 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-026 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 3 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 3 to deeply equal +0
+   at Object.eval sandbox-script.js:4:24).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-026 | business report is not empty" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback"/>
+    <testcase name="AI-FR16-026 | persistence oracle A (absent)" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-026 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:24).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-026 | persistence oracle B (absent)" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-026 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:7:24).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-026 | persistence oracle C (absent)" time="0.001" classname="AiStateSequenceAiAiFr16026InvalidFinalRowCausesFullRollback">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback.]]>
+        <![CDATA[Test description: AI-FR16-026 | persistence oracle C (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:8:24).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence" id="5b9b7136-86b4-45a6-9f08-0b116fc6829b" timestamp="2026-08-21T04:26:30.909Z" tests="10" failures="3" errors="0" time="0.002">
+    <testcase name="AI-FR16-027 | baseline marker A is absent" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence"/>
+    <testcase name="AI-FR16-027 | baseline marker B is absent" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence"/>
+    <testcase name="[AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence | collection X-Student-Id" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence"/>
+    <testcase name="AI-FR16-027 | traceability and Source" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence"/>
+    <testcase name="AI-FR16-027 | required X-Student-Id header" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence"/>
+    <testcase name="AI-FR16-027 | response is available for semantic review" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence"/>
+    <testcase name="AI-FR16-027 | exposed success counter does not contradict the persistence oracle" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence">
+      <failure type="AssertionFailure" message="expected 2 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence.]]>
+        <![CDATA[Test description: AI-FR16-027 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 2 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 2 to deeply equal +0
+   at Object.eval sandbox-script.js:4:25).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-027 | business report is not empty" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence"/>
+    <testcase name="AI-FR16-027 | persistence oracle A (absent)" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence.]]>
+        <![CDATA[Test description: AI-FR16-027 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:25).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-027 | persistence oracle B (absent)" time="0.002" classname="AiStateSequenceAiAiFr16027MultipleInvalidRowsStillYieldZeroPersistence">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence.]]>
+        <![CDATA[Test description: AI-FR16-027 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:7:25).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [1/2] — invalid batch A rolls back" id="11e9e0ae-fe57-4e88-a28a-9e77b044e5a4" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="2" errors="0" time="0.001">
+    <testcase name="AI-FR16-028 | baseline marker A is absent" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack"/>
+    <testcase name="AI-FR16-028 | baseline marker B is absent" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack"/>
+    <testcase name="[AI] AI-FR16-028 [1/2] — invalid batch A rolls back | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack"/>
+    <testcase name="AI-FR16-028 | traceability and Source" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack"/>
+    <testcase name="AI-FR16-028 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack"/>
+    <testcase name="AI-FR16-028 | response is available for semantic review" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack"/>
+    <testcase name="AI-FR16-028 | persistence oracle A (absent)" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [1/2] — invalid batch A rolls back.]]>
+        <![CDATA[Test description: AI-FR16-028 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:26).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-028 | persistence oracle B (absent)" time="0.001" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602812InvalidBatchARollsBack">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [1/2] — invalid batch A rolls back.]]>
+        <![CDATA[Test description: AI-FR16-028 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:5:26).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [2/2] — independent valid batch B succeeds" id="8ebae3db-54a1-4bec-a2ec-2e900b479533" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="2" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR16-028 [2/2] — independent valid batch B succeeds | collection X-Student-Id" time="0.002" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602822IndependentValidBatchBSucceeds"/>
+    <testcase name="AI-FR16-028 | traceability and Source" time="0.002" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602822IndependentValidBatchBSucceeds"/>
+    <testcase name="AI-FR16-028 | required X-Student-Id header" time="0.002" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602822IndependentValidBatchBSucceeds"/>
+    <testcase name="AI-FR16-028 | response is available for semantic review" time="0.002" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602822IndependentValidBatchBSucceeds"/>
+    <testcase name="AI-FR16-028 | persistence oracle A (absent)" time="0.002" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602822IndependentValidBatchBSucceeds">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [2/2] — independent valid batch B succeeds.]]>
+        <![CDATA[Test description: AI-FR16-028 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:27).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-028 | persistence oracle B (exactly-one)" time="0.002" classname="AiStateSequenceAiAiFr16028FailedBatchFollowedByIndependentValidBatchAiAiFr1602822IndependentValidBatchBSucceeds">
+      <failure type="AssertionFailure" message="expected 2 to deeply equal 1">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [2/2] — independent valid batch B succeeds.]]>
+        <![CDATA[Test description: AI-FR16-028 | persistence oracle B (exactly-one).]]>
+        <![CDATA[Error message: expected 2 to deeply equal 1.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 2 to deeply equal 1
+   at Object.eval sandbox-script.js:5:27).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-029 — Valid batch A followed by invalid batch B / [AI] AI-FR16-029 [1/2] — valid batch A persists" id="d240444e-0637-4715-ae34-17ef3c72b770" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="0" errors="0" time="0.002">
+    <testcase name="AI-FR16-029 | baseline marker A is absent" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+    <testcase name="AI-FR16-029 | baseline marker B is absent" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+    <testcase name="[AI] AI-FR16-029 [1/2] — valid batch A persists | collection X-Student-Id" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+    <testcase name="AI-FR16-029 | traceability and Source" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+    <testcase name="AI-FR16-029 | required X-Student-Id header" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+    <testcase name="AI-FR16-029 | response is available for semantic review" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+    <testcase name="AI-FR16-029 | persistence oracle A (exactly-one)" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+    <testcase name="AI-FR16-029 | persistence oracle B (absent)" time="0.002" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602912ValidBatchAPersists"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-029 — Valid batch A followed by invalid batch B / [AI] AI-FR16-029 [2/2] — invalid batch B rolls back without deleting A" id="dccd1c9e-d649-4482-8fcb-0fda168dbf41" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="1" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR16-029 [2/2] — invalid batch B rolls back without deleting A | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602922InvalidBatchBRollsBackWithoutDeletingA"/>
+    <testcase name="AI-FR16-029 | traceability and Source" time="0.001" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602922InvalidBatchBRollsBackWithoutDeletingA"/>
+    <testcase name="AI-FR16-029 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602922InvalidBatchBRollsBackWithoutDeletingA"/>
+    <testcase name="AI-FR16-029 | response is available for semantic review" time="0.001" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602922InvalidBatchBRollsBackWithoutDeletingA"/>
+    <testcase name="AI-FR16-029 | persistence oracle A (present)" time="0.001" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602922InvalidBatchBRollsBackWithoutDeletingA"/>
+    <testcase name="AI-FR16-029 | persistence oracle B (absent)" time="0.001" classname="AiStateSequenceAiAiFr16029ValidBatchAFollowedByInvalidBatchBAiAiFr1602922InvalidBatchBRollsBackWithoutDeletingA">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR16-029 — Valid batch A followed by invalid batch B / [AI] AI-FR16-029 [2/2] — invalid batch B rolls back without deleting A.]]>
+        <![CDATA[Test description: AI-FR16-029 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:5:29).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-030 — Repeat identical valid batch — duplicate/idempotency characterization / [AI] AI-FR16-030 [1/2] — first valid import" id="d70b26a3-b994-4873-9849-fff50d9a8324" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-030 | baseline marker A is absent" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603012FirstValidImport"/>
+    <testcase name="[AI] AI-FR16-030 [1/2] — first valid import | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603012FirstValidImport"/>
+    <testcase name="AI-FR16-030 | traceability and Source" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603012FirstValidImport"/>
+    <testcase name="AI-FR16-030 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603012FirstValidImport"/>
+    <testcase name="AI-FR16-030 | response is available for semantic review" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603012FirstValidImport"/>
+    <testcase name="AI-FR16-030 | persistence oracle A (present)" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603012FirstValidImport"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-030 — Repeat identical valid batch — duplicate/idempotency characterization / [AI] AI-FR16-030 [2/2] — repeat exact body" id="a52aa382-dcec-4042-9de9-cd8182812db2" timestamp="2026-08-21T04:26:30.909Z" tests="5" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR16-030 [2/2] — repeat exact body | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603022RepeatExactBody"/>
+    <testcase name="AI-FR16-030 | traceability and Source" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603022RepeatExactBody"/>
+    <testcase name="AI-FR16-030 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603022RepeatExactBody"/>
+    <testcase name="AI-FR16-030 | response is available for semantic review" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603022RepeatExactBody"/>
+    <testcase name="AI-FR16-030 | persistence oracle A (present)" time="0.001" classname="AiStateSequenceAiAiFr16030RepeatIdenticalValidBatchDuplicateIdempotencyCharacterizationAiAiFr1603022RepeatExactBody"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-031 — Malformed request followed by canonical valid request / [AI] AI-FR16-031 [1/2] — malformed JSON does not mutate" id="e03f86e0-2f98-4af7-9e89-5ec3cce2f4d1" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-031 | baseline marker A is absent" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+    <testcase name="AI-FR16-031 | baseline marker B is absent" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+    <testcase name="[AI] AI-FR16-031 [1/2] — malformed JSON does not mutate | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+    <testcase name="AI-FR16-031 | traceability and Source" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+    <testcase name="AI-FR16-031 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+    <testcase name="AI-FR16-031 | response is available for semantic review" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+    <testcase name="AI-FR16-031 | persistence oracle A (absent)" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+    <testcase name="AI-FR16-031 | persistence oracle B (absent)" time="0.001" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603112MalformedJsonDoesNotMutate"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR16-031 — Malformed request followed by canonical valid request / [AI] AI-FR16-031 [2/2] — canonical valid request still works" id="27dde11b-1bd8-421c-8132-27b9d682bf9a" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR16-031 [2/2] — canonical valid request still works | collection X-Student-Id" time="0.002" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603122CanonicalValidRequestStillWorks"/>
+    <testcase name="AI-FR16-031 | traceability and Source" time="0.002" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603122CanonicalValidRequestStillWorks"/>
+    <testcase name="AI-FR16-031 | required X-Student-Id header" time="0.002" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603122CanonicalValidRequestStillWorks"/>
+    <testcase name="AI-FR16-031 | response is available for semantic review" time="0.002" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603122CanonicalValidRequestStillWorks"/>
+    <testcase name="AI-FR16-031 | persistence oracle A (absent)" time="0.002" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603122CanonicalValidRequestStillWorks"/>
+    <testcase name="AI-FR16-031 | persistence oracle B (exactly-one)" time="0.002" classname="AiStateSequenceAiAiFr16031MalformedRequestFollowedByCanonicalValidRequestAiAiFr1603122CanonicalValidRequestStillWorks"/>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-032 — Missing JWT cannot import" id="8ae96698-84d0-4443-8f0e-7c7fe7077b70" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-032 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16032MissingJwtCannotImport"/>
+    <testcase name="[AI] AI-FR16-032 — Missing JWT cannot import | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16032MissingJwtCannotImport"/>
+    <testcase name="AI-FR16-032 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16032MissingJwtCannotImport"/>
+    <testcase name="AI-FR16-032 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16032MissingJwtCannotImport"/>
+    <testcase name="AI-FR16-032 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16032MissingJwtCannotImport"/>
+    <testcase name="AI-FR16-032 | persistence oracle A (absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16032MissingJwtCannotImport"/>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-033 — Malformed JWT cannot import" id="1e5c2020-fbac-4878-a36b-689ead90f9fd" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-033 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16033MalformedJwtCannotImport"/>
+    <testcase name="[AI] AI-FR16-033 — Malformed JWT cannot import | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16033MalformedJwtCannotImport"/>
+    <testcase name="AI-FR16-033 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16033MalformedJwtCannotImport"/>
+    <testcase name="AI-FR16-033 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16033MalformedJwtCannotImport"/>
+    <testcase name="AI-FR16-033 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16033MalformedJwtCannotImport"/>
+    <testcase name="AI-FR16-033 | persistence oracle A (absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16033MalformedJwtCannotImport"/>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-034 — Tampered JWT signature cannot import" id="dd8508c0-82fe-436c-9999-07d7f1dfa9d3" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-034 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16034TamperedJwtSignatureCannotImport"/>
+    <testcase name="[AI] AI-FR16-034 — Tampered JWT signature cannot import | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16034TamperedJwtSignatureCannotImport"/>
+    <testcase name="AI-FR16-034 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16034TamperedJwtSignatureCannotImport"/>
+    <testcase name="AI-FR16-034 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16034TamperedJwtSignatureCannotImport"/>
+    <testcase name="AI-FR16-034 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16034TamperedJwtSignatureCannotImport"/>
+    <testcase name="AI-FR16-034 | persistence oracle A (absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16034TamperedJwtSignatureCannotImport"/>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-035 — Valid non-admin JWT cannot import" id="52811ba5-1bdf-4dec-a438-1473befb3ddc" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="1" errors="0" time="0.001">
+    <testcase name="AI-FR16-035 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16035ValidNonAdminJwtCannotImport"/>
+    <testcase name="[AI] AI-FR16-035 — Valid non-admin JWT cannot import | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16035ValidNonAdminJwtCannotImport"/>
+    <testcase name="AI-FR16-035 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16035ValidNonAdminJwtCannotImport"/>
+    <testcase name="AI-FR16-035 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16035ValidNonAdminJwtCannotImport"/>
+    <testcase name="AI-FR16-035 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16035ValidNonAdminJwtCannotImport"/>
+    <testcase name="AI-FR16-035 | persistence oracle A (absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16035ValidNonAdminJwtCannotImport">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Security (JSON API surface) / [AI] AI-FR16-035 — Valid non-admin JWT cannot import.]]>
+        <![CDATA[Test description: AI-FR16-035 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:37).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-036 — Forged admin role in tampered token does not elevate privilege" id="b9ae3c00-24f3-40e5-942e-490c1a692472" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-036 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16036ForgedAdminRoleInTamperedTokenDoesNotElevatePrivilege"/>
+    <testcase name="[AI] AI-FR16-036 — Forged admin role in tampered token does not elevate privilege | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16036ForgedAdminRoleInTamperedTokenDoesNotElevatePrivilege"/>
+    <testcase name="AI-FR16-036 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16036ForgedAdminRoleInTamperedTokenDoesNotElevatePrivilege"/>
+    <testcase name="AI-FR16-036 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16036ForgedAdminRoleInTamperedTokenDoesNotElevatePrivilege"/>
+    <testcase name="AI-FR16-036 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16036ForgedAdminRoleInTamperedTokenDoesNotElevatePrivilege"/>
+    <testcase name="AI-FR16-036 | persistence oracle A (absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16036ForgedAdminRoleInTamperedTokenDoesNotElevatePrivilege"/>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-037 — Unexpected body role/admin fields do not elevate actor" id="2d35d7df-cb60-47c8-86e5-b8d3bb4bb6b7" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="1" errors="0" time="0.001">
+    <testcase name="AI-FR16-037 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16037UnexpectedBodyRoleAdminFieldsDoNotElevateActor"/>
+    <testcase name="[AI] AI-FR16-037 — Unexpected body role/admin fields do not elevate actor | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16037UnexpectedBodyRoleAdminFieldsDoNotElevateActor"/>
+    <testcase name="AI-FR16-037 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16037UnexpectedBodyRoleAdminFieldsDoNotElevateActor"/>
+    <testcase name="AI-FR16-037 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16037UnexpectedBodyRoleAdminFieldsDoNotElevateActor"/>
+    <testcase name="AI-FR16-037 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16037UnexpectedBodyRoleAdminFieldsDoNotElevateActor"/>
+    <testcase name="AI-FR16-037 | persistence oracle A (absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16037UnexpectedBodyRoleAdminFieldsDoNotElevateActor">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Security (JSON API surface) / [AI] AI-FR16-037 — Unexpected body role/admin fields do not elevate actor.]]>
+        <![CDATA[Test description: AI-FR16-037 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:39).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-038 — SQL-looking product name remains inert data" id="80f17425-0d7a-4155-83e4-7910dc538f4b" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-038 | baseline SQL marker absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16038SqlLookingProductNameRemainsInertData"/>
+    <testcase name="[AI] AI-FR16-038 — SQL-looking product name remains inert data | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16038SqlLookingProductNameRemainsInertData"/>
+    <testcase name="AI-FR16-038 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16038SqlLookingProductNameRemainsInertData"/>
+    <testcase name="AI-FR16-038 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16038SqlLookingProductNameRemainsInertData"/>
+    <testcase name="AI-FR16-038 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16038SqlLookingProductNameRemainsInertData"/>
+    <testcase name="AI-FR16-038 | persistence oracle A (present-or-absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16038SqlLookingProductNameRemainsInertData"/>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-039 — SQL-looking description remains inert data" id="99ccd0a9-fae8-4146-9960-e5aa08b77133" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-039 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16039SqlLookingDescriptionRemainsInertData"/>
+    <testcase name="[AI] AI-FR16-039 — SQL-looking description remains inert data | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16039SqlLookingDescriptionRemainsInertData"/>
+    <testcase name="AI-FR16-039 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16039SqlLookingDescriptionRemainsInertData"/>
+    <testcase name="AI-FR16-039 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16039SqlLookingDescriptionRemainsInertData"/>
+    <testcase name="AI-FR16-039 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16039SqlLookingDescriptionRemainsInertData"/>
+    <testcase name="AI-FR16-039 | persistence oracle A (present-or-absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16039SqlLookingDescriptionRemainsInertData"/>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-051 — Mixed JSON row types cannot partially persist" id="5131d251-9e2e-4cb2-abed-ca011e14c14c" timestamp="2026-08-21T04:26:30.909Z" tests="7" failures="1" errors="0" time="0.001">
+    <testcase name="AI-FR16-051 | baseline marker A is absent" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16051MixedJsonRowTypesCannotPartiallyPersist"/>
+    <testcase name="[AI] AI-FR16-051 — Mixed JSON row types cannot partially persist | collection X-Student-Id" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16051MixedJsonRowTypesCannotPartiallyPersist"/>
+    <testcase name="AI-FR16-051 | traceability and Source" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16051MixedJsonRowTypesCannotPartiallyPersist"/>
+    <testcase name="AI-FR16-051 | required X-Student-Id header" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16051MixedJsonRowTypesCannotPartiallyPersist"/>
+    <testcase name="AI-FR16-051 | response is available for semantic review" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16051MixedJsonRowTypesCannotPartiallyPersist"/>
+    <testcase name="AI-FR16-051 | business report is not empty" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16051MixedJsonRowTypesCannotPartiallyPersist"/>
+    <testcase name="AI-FR16-051 | persistence oracle A (absent)" time="0.001" classname="AiSecurityJsonApiSurfaceAiAiFr16051MixedJsonRowTypesCannotPartiallyPersist">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Security (JSON API surface) / [AI] AI-FR16-051 — Mixed JSON row types cannot partially persist.]]>
+        <![CDATA[Test description: AI-FR16-051 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:5:42).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Security (JSON API surface) / [AI] AI-FR16-052 — Duplicate JSON keys — parser precedence characterization" id="4b0163a3-2c87-4996-b0dc-14a4e16c1558" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="0" errors="0" time="0.002">
+    <testcase name="AI-FR16-052 | baseline marker A is absent" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+    <testcase name="AI-FR16-052 | baseline marker B is absent" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+    <testcase name="[AI] AI-FR16-052 — Duplicate JSON keys — parser precedence characterization | collection X-Student-Id" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+    <testcase name="AI-FR16-052 | traceability and Source" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+    <testcase name="AI-FR16-052 | required X-Student-Id header" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+    <testcase name="AI-FR16-052 | response is available for semantic review" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+    <testcase name="AI-FR16-052 | persistence oracle A (present-or-absent)" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+    <testcase name="AI-FR16-052 | persistence oracle B (present-or-absent)" time="0.002" classname="AiSecurityJsonApiSurfaceAiAiFr16052DuplicateJsonKeysParserPrecedenceCharacterization"/>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR16-042 — Record success runtime response shape without promoting it to contract" id="e4da4ee5-f827-4dd4-8c7c-b1ae1abc3ad4" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="AI-FR16-042 | baseline marker A is absent" time="0.001" classname="AiSchemaCharacterizationAiAiFr16042RecordSuccessRuntimeResponseShapeWithoutPromotingItToContract"/>
+    <testcase name="[AI] AI-FR16-042 — Record success runtime response shape without promoting it to contract | collection X-Student-Id" time="0.001" classname="AiSchemaCharacterizationAiAiFr16042RecordSuccessRuntimeResponseShapeWithoutPromotingItToContract"/>
+    <testcase name="AI-FR16-042 | traceability and Source" time="0.001" classname="AiSchemaCharacterizationAiAiFr16042RecordSuccessRuntimeResponseShapeWithoutPromotingItToContract"/>
+    <testcase name="AI-FR16-042 | required X-Student-Id header" time="0.001" classname="AiSchemaCharacterizationAiAiFr16042RecordSuccessRuntimeResponseShapeWithoutPromotingItToContract"/>
+    <testcase name="AI-FR16-042 | response is available for semantic review" time="0.001" classname="AiSchemaCharacterizationAiAiFr16042RecordSuccessRuntimeResponseShapeWithoutPromotingItToContract"/>
+    <testcase name="AI-FR16-042 | persistence oracle A (exactly-one)" time="0.001" classname="AiSchemaCharacterizationAiAiFr16042RecordSuccessRuntimeResponseShapeWithoutPromotingItToContract"/>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR16-043 — Record validation-failure runtime response shape" id="782b8427-427d-4af5-bac4-39d7841b242f" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="2" errors="0" time="0.001">
+    <testcase name="AI-FR16-043 | baseline marker A is absent" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape"/>
+    <testcase name="[AI] AI-FR16-043 — Record validation-failure runtime response shape | collection X-Student-Id" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-043 | traceability and Source" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-043 | required X-Student-Id header" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-043 | response is available for semantic review" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-043 | exposed success counter does not contradict the persistence oracle" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Schema / Characterization / [AI] AI-FR16-043 — Record validation-failure runtime response shape.]]>
+        <![CDATA[Test description: AI-FR16-043 | exposed success counter does not contradict the persistence oracle.]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:45).]]>
+      </failure>
+    </testcase>
+    <testcase name="AI-FR16-043 | business report is not empty" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-043 | persistence oracle A (absent)" time="0.001" classname="AiSchemaCharacterizationAiAiFr16043RecordValidationFailureRuntimeResponseShape">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Schema / Characterization / [AI] AI-FR16-043 — Record validation-failure runtime response shape.]]>
+        <![CDATA[Test description: AI-FR16-043 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:6:45).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR16-044 — Record authentication-failure runtime response shape" id="ebf49297-561b-404b-886a-ba033d30a26d" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.002">
+    <testcase name="AI-FR16-044 | baseline marker A is absent" time="0.002" classname="AiSchemaCharacterizationAiAiFr16044RecordAuthenticationFailureRuntimeResponseShape"/>
+    <testcase name="[AI] AI-FR16-044 — Record authentication-failure runtime response shape | collection X-Student-Id" time="0.002" classname="AiSchemaCharacterizationAiAiFr16044RecordAuthenticationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-044 | traceability and Source" time="0.002" classname="AiSchemaCharacterizationAiAiFr16044RecordAuthenticationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-044 | required X-Student-Id header" time="0.002" classname="AiSchemaCharacterizationAiAiFr16044RecordAuthenticationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-044 | response is available for semantic review" time="0.002" classname="AiSchemaCharacterizationAiAiFr16044RecordAuthenticationFailureRuntimeResponseShape"/>
+    <testcase name="AI-FR16-044 | persistence oracle A (absent)" time="0.002" classname="AiSchemaCharacterizationAiAiFr16044RecordAuthenticationFailureRuntimeResponseShape"/>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR16-045 — Record non-admin authorization response shape" id="a68d0dbe-c762-4afb-b57d-32bd0b2293a8" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="1" errors="0" time="0.001">
+    <testcase name="AI-FR16-045 | baseline marker A is absent" time="0.001" classname="AiSchemaCharacterizationAiAiFr16045RecordNonAdminAuthorizationResponseShape"/>
+    <testcase name="[AI] AI-FR16-045 — Record non-admin authorization response shape | collection X-Student-Id" time="0.001" classname="AiSchemaCharacterizationAiAiFr16045RecordNonAdminAuthorizationResponseShape"/>
+    <testcase name="AI-FR16-045 | traceability and Source" time="0.001" classname="AiSchemaCharacterizationAiAiFr16045RecordNonAdminAuthorizationResponseShape"/>
+    <testcase name="AI-FR16-045 | required X-Student-Id header" time="0.001" classname="AiSchemaCharacterizationAiAiFr16045RecordNonAdminAuthorizationResponseShape"/>
+    <testcase name="AI-FR16-045 | response is available for semantic review" time="0.001" classname="AiSchemaCharacterizationAiAiFr16045RecordNonAdminAuthorizationResponseShape"/>
+    <testcase name="AI-FR16-045 | persistence oracle A (absent)" time="0.001" classname="AiSchemaCharacterizationAiAiFr16045RecordNonAdminAuthorizationResponseShape">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: AI — Schema / Characterization / [AI] AI-FR16-045 — Record non-admin authorization response shape.]]>
+        <![CDATA[Test description: AI-FR16-045 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:47).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-001 — Concurrent duplicate import race" id="cd3b13cd-3685-4b8d-8125-513f9a5b5315" timestamp="2026-08-21T04:26:30.909Z" tests="7" failures="0" errors="0" time="0.001">
+    <testcase name="HUM-FR16-001 | baseline race marker is absent" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16001ConcurrentDuplicateImportRace"/>
+    <testcase name="[HUMAN] HUM-FR16-001 — Concurrent duplicate import race | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16001ConcurrentDuplicateImportRace"/>
+    <testcase name="HUM-FR16-001 | traceability and Source" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16001ConcurrentDuplicateImportRace"/>
+    <testcase name="HUM-FR16-001 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16001ConcurrentDuplicateImportRace"/>
+    <testcase name="HUM-FR16-001 | concurrent result contains complete rows only" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16001ConcurrentDuplicateImportRace"/>
+    <testcase name="HUM-FR16-001 | both parallel calls completed" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16001ConcurrentDuplicateImportRace"/>
+    <testcase name="HUM-FR16-001 | exposed counters agree with final persistence" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16001ConcurrentDuplicateImportRace"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-003 — Stale category reference after category deletion / [HUMAN] HUM-FR16-003 [1/3] — import while category exists" id="5bef7e3e-7949-46a9-b9e0-cf3a66357ce6" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="HUM-FR16-003 | baseline marker A is absent" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600313ImportWhileCategoryExists"/>
+    <testcase name="[HUMAN] HUM-FR16-003 [1/3] — import while category exists | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600313ImportWhileCategoryExists"/>
+    <testcase name="HUM-FR16-003 | traceability and Source" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600313ImportWhileCategoryExists"/>
+    <testcase name="HUM-FR16-003 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600313ImportWhileCategoryExists"/>
+    <testcase name="HUM-FR16-003 | response is available for semantic review" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600313ImportWhileCategoryExists"/>
+    <testcase name="HUM-FR16-003 | persistence oracle A (exactly-one)" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600313ImportWhileCategoryExists"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-003 — Stale category reference after category deletion / [HUMAN] HUM-FR16-003 [2/3] — delete disposable category" id="805df1b0-d5a6-4056-9679-e22f76610e85" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="0" errors="0" time="0.002">
+    <testcase name="[HUMAN] HUM-FR16-003 [2/3] — delete disposable category | collection X-Student-Id" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600323DeleteDisposableCategory"/>
+    <testcase name="HUM-FR16-003 | traceability and Source" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600323DeleteDisposableCategory"/>
+    <testcase name="HUM-FR16-003 | required X-Student-Id header" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600323DeleteDisposableCategory"/>
+    <testcase name="HUM-FR16-003 | response is available for semantic review" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600323DeleteDisposableCategory"/>
+    <testcase name="HUM-FR16-003 | persistence oracle A (present)" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600323DeleteDisposableCategory"/>
+    <testcase name="HUM-FR16-003 | category list is readable after delete attempt" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600323DeleteDisposableCategory"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-003 — Stale category reference after category deletion / [HUMAN] HUM-FR16-003 [3/3] — repeat exact import with stale category reference" id="7c0d98ef-1cf3-4d96-8dea-ead80dc85bbd" timestamp="2026-08-21T04:26:30.909Z" tests="5" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUM-FR16-003 [3/3] — repeat exact import with stale category reference | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600333RepeatExactImportWithStaleCategoryReference"/>
+    <testcase name="HUM-FR16-003 | traceability and Source" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600333RepeatExactImportWithStaleCategoryReference"/>
+    <testcase name="HUM-FR16-003 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600333RepeatExactImportWithStaleCategoryReference"/>
+    <testcase name="HUM-FR16-003 | response is available for semantic review" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600333RepeatExactImportWithStaleCategoryReference"/>
+    <testcase name="HUM-FR16-003 | stale-reference branching persistence oracle" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16003StaleCategoryReferenceAfterCategoryDeletionHumanHumFr1600333RepeatExactImportWithStaleCategoryReference"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1" id="d225981a-9e4a-4b2b-b3dd-1b67f577d7c2" timestamp="2026-08-21T04:26:30.909Z" tests="8" failures="2" errors="0" time="0.002">
+    <testcase name="HUM-FR16-006 | baseline marker A is absent" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1"/>
+    <testcase name="HUM-FR16-006 | baseline marker B is absent" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1"/>
+    <testcase name="[HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1 | collection X-Student-Id" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1"/>
+    <testcase name="HUM-FR16-006 | traceability and Source" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1"/>
+    <testcase name="HUM-FR16-006 | required X-Student-Id header" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1"/>
+    <testcase name="HUM-FR16-006 | response is available for semantic review" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1"/>
+    <testcase name="HUM-FR16-006 | persistence oracle A (absent)" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:4:52).]]>
+      </failure>
+    </testcase>
+    <testcase name="HUM-FR16-006 | persistence oracle B (absent)" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600615IdenticalInvalidBatchAttempt1">
+      <failure type="AssertionFailure" message="expected 1 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 1 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 1 to deeply equal +0
+   at Object.eval sandbox-script.js:5:52).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2" id="99fd463b-b082-4d12-94b1-dafd2951053d" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="2" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2 | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600625IdenticalInvalidBatchAttempt2"/>
+    <testcase name="HUM-FR16-006 | traceability and Source" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600625IdenticalInvalidBatchAttempt2"/>
+    <testcase name="HUM-FR16-006 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600625IdenticalInvalidBatchAttempt2"/>
+    <testcase name="HUM-FR16-006 | response is available for semantic review" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600625IdenticalInvalidBatchAttempt2"/>
+    <testcase name="HUM-FR16-006 | persistence oracle A (absent)" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600625IdenticalInvalidBatchAttempt2">
+      <failure type="AssertionFailure" message="expected 2 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 2 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 2 to deeply equal +0
+   at Object.eval sandbox-script.js:4:53).]]>
+      </failure>
+    </testcase>
+    <testcase name="HUM-FR16-006 | persistence oracle B (absent)" time="0.001" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600625IdenticalInvalidBatchAttempt2">
+      <failure type="AssertionFailure" message="expected 2 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 2 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 2 to deeply equal +0
+   at Object.eval sandbox-script.js:5:53).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3" id="262b61e3-99cf-474e-b407-09cb0e1e31ad" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="2" errors="0" time="0.002">
+    <testcase name="[HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3 | collection X-Student-Id" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600635IdenticalInvalidBatchAttempt3"/>
+    <testcase name="HUM-FR16-006 | traceability and Source" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600635IdenticalInvalidBatchAttempt3"/>
+    <testcase name="HUM-FR16-006 | required X-Student-Id header" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600635IdenticalInvalidBatchAttempt3"/>
+    <testcase name="HUM-FR16-006 | response is available for semantic review" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600635IdenticalInvalidBatchAttempt3"/>
+    <testcase name="HUM-FR16-006 | persistence oracle A (absent)" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600635IdenticalInvalidBatchAttempt3">
+      <failure type="AssertionFailure" message="expected 3 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 3 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 3 to deeply equal +0
+   at Object.eval sandbox-script.js:4:54).]]>
+      </failure>
+    </testcase>
+    <testcase name="HUM-FR16-006 | persistence oracle B (absent)" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600635IdenticalInvalidBatchAttempt3">
+      <failure type="AssertionFailure" message="expected 3 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 3 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 3 to deeply equal +0
+   at Object.eval sandbox-script.js:5:54).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4" id="f39d55e2-9426-46d2-b5dd-9d81c767f299" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="2" errors="0" time="0.002">
+    <testcase name="[HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4 | collection X-Student-Id" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600645IdenticalInvalidBatchAttempt4"/>
+    <testcase name="HUM-FR16-006 | traceability and Source" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600645IdenticalInvalidBatchAttempt4"/>
+    <testcase name="HUM-FR16-006 | required X-Student-Id header" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600645IdenticalInvalidBatchAttempt4"/>
+    <testcase name="HUM-FR16-006 | response is available for semantic review" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600645IdenticalInvalidBatchAttempt4"/>
+    <testcase name="HUM-FR16-006 | persistence oracle A (absent)" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600645IdenticalInvalidBatchAttempt4">
+      <failure type="AssertionFailure" message="expected 4 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 4 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 4 to deeply equal +0
+   at Object.eval sandbox-script.js:4:55).]]>
+      </failure>
+    </testcase>
+    <testcase name="HUM-FR16-006 | persistence oracle B (absent)" time="0.002" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600645IdenticalInvalidBatchAttempt4">
+      <failure type="AssertionFailure" message="expected 4 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 4 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 4 to deeply equal +0
+   at Object.eval sandbox-script.js:5:55).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5" id="aab4d4c1-ed7b-4cc6-8883-9a386d784d25" timestamp="2026-08-21T04:26:30.909Z" tests="6" failures="2" errors="0" time="0.003">
+    <testcase name="[HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5 | collection X-Student-Id" time="0.003" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600655IdenticalInvalidBatchAttempt5"/>
+    <testcase name="HUM-FR16-006 | traceability and Source" time="0.003" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600655IdenticalInvalidBatchAttempt5"/>
+    <testcase name="HUM-FR16-006 | required X-Student-Id header" time="0.003" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600655IdenticalInvalidBatchAttempt5"/>
+    <testcase name="HUM-FR16-006 | response is available for semantic review" time="0.003" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600655IdenticalInvalidBatchAttempt5"/>
+    <testcase name="HUM-FR16-006 | persistence oracle A (absent)" time="0.003" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600655IdenticalInvalidBatchAttempt5">
+      <failure type="AssertionFailure" message="expected 5 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle A (absent).]]>
+        <![CDATA[Error message: expected 5 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 5 to deeply equal +0
+   at Object.eval sandbox-script.js:4:56).]]>
+      </failure>
+    </testcase>
+    <testcase name="HUM-FR16-006 | persistence oracle B (absent)" time="0.003" classname="HumanAdditionalCoverageHumanHumFr16006RepeatedIdenticalInvalidBatchSubmissionsHumanHumFr1600655IdenticalInvalidBatchAttempt5">
+      <failure type="AssertionFailure" message="expected 5 to deeply equal +0">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr16-import-products-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-16 Import Products — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5.]]>
+        <![CDATA[Test description: HUM-FR16-006 | persistence oracle B (absent).]]>
+        <![CDATA[Error message: expected 5 to deeply equal +0.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 5 to deeply equal +0
+   at Object.eval sandbox-script.js:5:56).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>
