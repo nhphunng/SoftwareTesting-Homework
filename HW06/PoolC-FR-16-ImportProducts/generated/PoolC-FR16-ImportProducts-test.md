@@ -6,7 +6,10 @@
 API: POST /api/admin/import-products
 Source: AI
 AI-generated testcase count: 52
-Required minimum: >=35
+Human-added testcase count: 5
+Total testcase records: 57
+Required minimum AI-generated: >=35
+Required minimum human-added: >=5
 Schema/response checkpoint: APPROVED
 Human Audit Status: STEP G RE-REVIEW COMPLETE — 51 VALID / 1 INCOMPLETE / 0 INVALID
 Execution Status: NOT EXECUTED
@@ -32,7 +35,7 @@ Required per-request header for official requests: X-Student-Id: 23127194
 - Result after human re-review: **51 VALID / 1 INCOMPLETE / 0 INVALID**.
 - Human re-review approved corrected cases `AI-FR16-016`, `017`, `022`, `023`, `030`, and `040` as VALID. The only remaining `INCOMPLETE` case is `AI-FR16-046` (BLOCKED).
 - `AI-FR16-046` remains incomplete because no concrete, safe, reproducible DB-error trigger has been established yet; its corrected disposition is BLOCKED pending Step J.
-- No testcase is relabeled as human-authored; provenance remains `Source = AI`.
+- No AI testcase is relabeled as human-authored; AI provenance remains `Source = AI`. Step H cases are separately recorded with `Source = HUMAN`.
 
 ## Coverage summary
 
@@ -1467,3 +1470,146 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | Actual Result | |
 | Evidence | |
 | Defect ID | |
+
+# Step H — Human-added testcases
+
+Human reviewer proposed six cases to cover dimensions under-tested by the AI pool: concurrency, cross-user interaction, state-history dependency, token lifecycle, role-state consistency, and repeated-operation side effects. After review, five cases were retained for FR-16 with narrowed/branching oracles that avoid inventing undocumented policy. `HUM-FR16-002` was intentionally excluded from the FR-16 suite because its primary oracle belongs to Product CRUD / ownership authorization rather than the import operation itself.
+
+## HUM-FR16-001 — Concurrent duplicate import race
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | POST /api/admin/import-products |
+| Requirement Basis | FR-16 atomicity; concurrency/duplicate behavior undocumented — human gap-fill |
+| Category | Security / Race-Concurrency |
+| Preconditions | Valid admin JWT; one fully valid single-row batch with a fresh unique marker name absent from DB |
+| Input | Identical JSON body `{"products":[{"name":"RACE_23127194_<ts>","price":10,"category_id":<validId>}]}` sent twice concurrently or as near-concurrently as the test tool can produce |
+| Headers | `X-Student-Id: 23127194`; `Authorization: Bearer {{adminToken}}` |
+| Steps | Fire two byte-identical requests with no intentional delay; wait for both responses; query the marker afterward and compare final persistence with both responses. |
+| Expected Status | UNRESOLVED unless a later reviewed source establishes an exact code |
+| Expected Response | Duplicate/uniqueness policy is characterization only. Enforceable oracle: each successful request must correspond to a complete persisted row; each failed request must not produce a partial row; no corrupted/torn row may appear; response/report results must be consistent with final persistence. Final marker count may be 1 or 2 depending on undocumented duplicate policy. |
+| Expected Schema | S2 characterization of concurrent-write outcome plus persistence consistency |
+| Security Expectation | Concurrent execution must not bypass validation/atomicity or create corrupted partial data |
+| State Before | Marker absent |
+| State After | Transaction-consistent complete rows only; final count characterized as 1 or 2; never a torn/corrupted row or contradictory success report |
+| Postman/Newman Execution Notes | Use `pm.sendRequest()` from a Pre-request Script or an equivalent parallel mechanism so the second request is not serialized by Runner/Newman. Use a follow-up GET/query to count the unique marker and compare with both captured responses. |
+| Why AI Missed This | Cross-request concurrency requires reasoning about interleaved executions rather than isolated sequential testcases. |
+| Human Review Status | VALID — HUMAN AUTHORED |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUM-FR16-003 — Stale category reference after category deletion
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | POST /api/admin/import-products + category-management endpoint if available |
+| Requirement Basis | Category-lifecycle / referential-integrity characterization; FR-15 category-existence inheritance into FR-16 remains UNRESOLVED |
+| Category | State / Sequence |
+| Preconditions | Valid admin JWT; existing category `{{catId}}`; category-deletion endpoint is available and can be exercised safely |
+| Input | Request 1 imports a valid product with `category_id: {{catId}}`; Request 2 deletes `{{catId}}`; Request 3 reuses the exact Request-1 import body |
+| Headers | `X-Student-Id: 23127194`; `Authorization: Bearer {{adminToken}}` on official requests |
+| Steps | Import -> verify persistence -> delete category -> resend identical import -> inspect response, products, and category reference state. |
+| Expected Status | UNRESOLVED unless a later reviewed source establishes an exact code |
+| Expected Response | Acceptance/rejection of Request 3 is characterization because FR-16 category-existence policy is unresolved. If rejected, zero new marker rows may persist. If accepted, record the resulting category-reference behavior exactly. Request 3 must not corrupt the product created by Request 1 or unrelated data. Do not report an orphan-reference defect unless a reviewed referential-integrity rule/schema establishes that such a state is forbidden. |
+| Expected Schema | S2 characterization plus persistence/integrity invariant |
+| Security Expectation | Dependency changes across endpoints must not cause unrelated corruption or partial writes |
+| State Before | Category exists; Request-1 product persisted |
+| State After | Request-3 outcome explicitly characterized; no unrelated corruption; orphan-state defect verdict only if supported by a reviewed integrity rule |
+| Postman/Newman Execution Notes | Run three requests sequentially because order matters. Store `{{catId}}` and the original import body as collection variables; query persistence after Request 3. |
+| Why AI Missed This | Scenario depends on temporal state changes across import and category-management endpoints that were outside the single-endpoint generation context. |
+| Human Review Status | VALID — HUMAN AUTHORED CHARACTERIZATION |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUM-FR16-004 — Reuse of the same JWT after logout/revocation action
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | POST /api/admin/import-products + auth logout/revocation endpoint if available |
+| Requirement Basis | SEC-02 authentication; token-lifecycle behavior outside FR-16 remains characterization unless explicitly documented |
+| Category | Security / State-Sequence |
+| Preconditions | Valid admin JWT; confirm a logout/revocation endpoint and its documented semantics before execution |
+| Input | Request 1 uses `{{adminToken}}` for a valid import; Request 2 logs out/revokes using that same token; Request 3 reuses the exact same access-token string for another uniquely marked valid import |
+| Headers | `X-Student-Id: 23127194`; `Authorization: Bearer {{adminToken}}` where applicable |
+| Steps | Perform valid import -> invoke logout/revocation -> reuse the same access JWT -> inspect authorization outcome and new-marker persistence. |
+| Expected Status | UNRESOLVED unless a later reviewed auth source establishes an exact code |
+| Expected Response | Immediate rejection versus continued access-token validity until expiry is characterization unless the auth/logout contract explicitly requires immediate revocation. The observed behavior must be consistent with the documented token lifecycle. If Request 3 is rejected, zero new marker rows persist; if accepted under a valid documented stateless-token model, persistence must still be transactionally correct. |
+| Expected Schema | S1 authentication semantic where documented + S2 token-lifecycle characterization |
+| Security Expectation | Do not assume client-side logout equals immediate server-side access-token revocation without a source; authorization behavior must match the intended auth model |
+| State Before | First marker absent; valid token available |
+| State After | Request-3 behavior and persistence recorded consistently with the actual token-lifecycle design |
+| Postman/Newman Execution Notes | Use three sequential items and preserve the exact same token string in a collection variable. Do not silently fetch a fresh token before Request 3. |
+| Why AI Missed This | Token lifecycle is a cross-cutting auth concern not present in the FR-16 endpoint contract supplied during AI testcase generation. |
+| Human Review Status | VALID — HUMAN AUTHORED CHARACTERIZATION |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUM-FR16-005 — Stale non-admin token after mid-session role promotion
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | POST /api/admin/import-products + role-management endpoint if available |
+| Requirement Basis | SEC-03; authorization source-of-truth consistency across token issuance and later role changes — human gap-fill |
+| Category | Security / State-Sequence |
+| Preconditions | A non-admin account; a privileged endpoint that can promote the account; JWT `{{staleToken}}` issued before promotion; separate privileged token for the role-change operation |
+| Input | Capture non-admin JWT -> promote that account to admin through a separate privileged action -> reuse the original pre-promotion JWT for FR-16 import without re-login |
+| Headers | Role-change request uses `Authorization: Bearer {{superAdminToken}}`; import request uses `Authorization: Bearer {{staleToken}}`; official import carries `X-Student-Id: 23127194` |
+| Steps | Login as non-admin -> save token -> promote account -> do not refresh/re-login -> call FR-16 with original token -> inspect authorization outcome and persistence. |
+| Expected Status | UNRESOLVED unless a later reviewed source establishes an exact code |
+| Expected Response | Outcome must match the system's documented authorization source of truth. If role is embedded and trusted from JWT claims until reissue, the stale token remains non-admin and zero import rows persist. If the server deliberately re-validates current role from authoritative state on every request, the same token may gain admin authorization after promotion. Either architecture may be acceptable if intentional and consistent; request body data must never determine or elevate role. |
+| Expected Schema | S1 SEC-03 semantic + S2 characterization of token-claim versus live-role lookup behavior |
+| Security Expectation | No accidental or body-driven privilege escalation; behavior must be consistent with the intended authorization model |
+| State Before | Token issued while user is non-admin; import markers absent |
+| State After | Either zero persistence or full valid persistence according to the documented authorization model; no partial/unrelated mutation |
+| Postman/Newman Execution Notes | Use strict sequential execution. Store `{{staleToken}}` before promotion and explicitly reuse that unchanged token after promotion. Use a distinct privileged token for the role-management request. |
+| Why AI Missed This | Requires causal reasoning across authentication, role-management, and import requests separated in time. |
+| Human Review Status | VALID — HUMAN AUTHORED |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## HUM-FR16-006 — Repeated identical invalid-batch submissions
+
+| Field | Value |
+| --- | --- |
+| Source | HUMAN |
+| API | POST /api/admin/import-products |
+| Requirement Basis | FR-16 atomicity per request; repeated-operation side effects undocumented — human gap-fill |
+| Category | State / Sequence / Security |
+| Preconditions | Valid admin JWT; identical batch contains at least one valid unique marker row and one guaranteed FR-16-invalid row such as `price:0`; markers absent before first attempt |
+| Input | Send the exact same invalid batch 5 consecutive times |
+| Headers | `X-Student-Id: 23127194`; `Authorization: Bearer {{adminToken}}` |
+| Steps | Submit the identical invalid batch 5 times; after each attempt verify zero batch-marker persistence; compare responses across attempts and record any newly appearing throttling/lockout/audit indicators as characterization. |
+| Expected Status | UNRESOLVED unless a later reviewed source establishes an exact code |
+| Expected Response | Hard oracle: every attempt independently obeys FR-16 rollback, so zero rows from the invalid batch persist after each attempt and no stale state from an earlier failure causes partial persistence later. Rate limiting, lockout, audit growth, counters, or similar repeated-failure effects are characterization unless a reviewed policy explicitly defines them; their mere presence is not a defect. |
+| Expected Schema | S1 atomicity + S2 repeated-operation characterization |
+| Security Expectation | Repeated invalid input must not weaken transactional integrity; abuse-control behavior is judged only against documented policy |
+| State Before | All testcase markers absent |
+| State After | Zero batch-marker persistence after attempts 1 through 5; any non-product side effects recorded separately as characterization |
+| Postman/Newman Execution Notes | Use Runner/Newman iteration count 5 with the same body. Ensure every official request carries `X-Student-Id: 23127194`. Query the marker after each attempt; compare response/status/header changes between iteration 1 and iteration 5 without assuming 429/lockout is inherently a defect. |
+| Why AI Missed This | The AI pool modeled rollback requests as isolated one-shot cases and did not probe stateful effects that appear only after repeated identical failures. |
+| Human Review Status | VALID — HUMAN AUTHORED |
+| Execution Status | |
+| Actual Result | |
+| Evidence | |
+| Defect ID | |
+
+## Step H disposition note
+
+- Retained as FR-16 human-added cases: `HUM-FR16-001`, `HUM-FR16-003`, `HUM-FR16-004`, `HUM-FR16-005`, `HUM-FR16-006`.
+- Excluded from FR-16: `HUM-FR16-002` — cross-admin edit/delete primarily evaluates Product CRUD ownership/authorization and would introduce an undocumented creator-ownership policy into the FR-16 import suite.
+- Step H requirement is satisfied with **5 genuinely human-authored cases**.
+- These records remain `Source = HUMAN`; they are not retroactively attributed to AI.
+- No Step H case has been executed yet; runtime fields and evidence remain blank.
+

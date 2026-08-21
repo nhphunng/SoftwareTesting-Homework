@@ -1024,3 +1024,41 @@ Human Review:
 - Remaining incomplete: `AI-FR16-046` — BLOCKED pending safe deterministic DB-error trigger
 - Final distribution at this checkpoint: 51 VALID / 1 INCOMPLETE / 0 INVALID
 
+## AI Audit Entry - AI-046
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T10:47:00+07:00 |
+| Stage | API 3 / FR-16 — Step H Human-added testcase integration |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Integrate the tester's six proposed human-authored cases into the FR-16 testcase artifact after reviewing and correcting their scope/oracles. |
+| Evidence/Input Basis | Tester-authored six-case artifact; approved FR-16 analyses; completed Step G human audit/re-review; prior review finding that HUM-FR16-002 is out of FR-16 scope and the other five need narrowed or branching oracles |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/generated/PoolC-FR16-ImportProducts-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Added five genuinely human-authored Step H cases with `Source = HUMAN`: HUM-FR16-001 concurrent duplicate race, HUM-FR16-003 stale category reference characterization, HUM-FR16-004 post-logout same-JWT lifecycle characterization, HUM-FR16-005 stale pre-promotion token after role change, and HUM-FR16-006 repeated invalid-batch submissions. Narrowed their oracles to avoid inventing undocumented uniqueness, referential-integrity, token-revocation, or abuse-control policy. HUM-FR16-002 was intentionally excluded from FR-16 because its primary action/oracle belongs to Product CRUD ownership/authorization. Step H minimum >=5 human-added cases is satisfied. No runtime execution/evidence was created. |
+
+Human Review:
+- Status: SOURCE CASES AUTHORED BY TESTER; INTEGRATED WITH REVIEWED CORRECTIONS
+- Retained: `HUM-FR16-001`, `HUM-FR16-003`, `HUM-FR16-004`, `HUM-FR16-005`, `HUM-FR16-006`
+- Excluded from FR-16 scope: `HUM-FR16-002`
+- Step H count: 5 human-authored cases
+- Notes: Execution Status / Actual Result / Evidence / Defect ID remain blank pending real execution.
+
+## AI Audit Entry - AI-047
+
+| Field | Content |
+| --- | --- |
+| AI Tool | OpenAI Codex |
+| Date and Time | 2026-08-21T11:09:14+07:00 |
+| Stage | API 3 / FR-16 — Step I Postman implementation |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Implement all executable VALID FR-16 cases in Postman; retain `AI-FR16-046` as BLOCKED; preserve IDs/provenance and unresolved response behavior; use persistence oracles; implement five HUMAN records including real concurrency; block missing cross-endpoint dependencies; do not execute Newman or generate evidence. |
+| Evidence/Input Basis | Approved FR-16 requirements, domain, state, security, and schema analyses; 52 AI testcase records with Step G dispositions; five retained Step H HUMAN records; supplied API specification; existing FR-05/FR-10 Postman conventions |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/postman/build-collection.mjs`; `PoolC-FR-16-ImportProducts/postman/implementation.md`; `postman/collection/HW06-FR16-ImportProducts.postman_collection.json`; `postman/environment/HW06-FR16-Local.postman_environment.json`; `reports/ai-audit-report.md` |
+| AI Output | Implemented 43 executable AI testcase IDs and three executable HUMAN testcase IDs with 56 Postman request items, before/after product persistence oracles, blank credential/category runtime variables, branching characterization checks, sequential state cases, five repeated invalid submissions, and genuine parallel dispatch for `HUM-FR16-001`. Preserved all 57 testcase records in the collection, including eight VALID CSV cases technically blocked because no real CSV transport is documented, `AI-FR16-046` blocked without a fabricated DB trigger, and HUMAN cases `004`/`005` blocked because required logout/revocation and role-promotion APIs do not exist in the supplied contract. Applied `X-Student-Id: 23127194` to every executable primary/helper request. Performed static JSON/header/ID/script validation only; no Newman/SUT execution or evidence was produced. |
+
+Human Review:
+- Status: PENDING — Step I artifacts await tester review before Step J/runtime preparation.
+- Provenance preserved: 52 `AI-FR16-*` records and five retained `HUM-FR16-*` records.
+- Official execution: NOT STARTED.
+- Evidence fields: NOT POPULATED.
