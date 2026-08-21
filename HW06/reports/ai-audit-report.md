@@ -2,11 +2,90 @@
 
 > Declaration: I use AI tools for the following tasks.
 
+## P14 Compilation Status
+
+- Compiled on: `2026-08-21T22:27:00+07:00`
+- Historical corpus before this P14 compilation entry: **59 recorded interaction occurrences / 56 distinct historical IDs**.
+- Chronological ID range: `AI-001` through `AI-056`; no numeric ID in that range is missing.
+- P14 itself is appended as `AI-057` after the historical corpus is compiled.
+- Full historical entries are preserved below; P14 does **not** recreate prompts, outputs, human decisions, execution results, screenshots, or defects that were not already recorded.
+- PDF export is intentionally deferred because `plan.md` states `Export PDF later`.
+
+### Required-field normalization
+
+The historical entries were written incrementally while the assignment was being performed, so some labels differ while their semantics are equivalent. P14 uses the following mapping without rewriting the original interaction text:
+
+| Phase-8 required field | Historical audit representation |
+| --- | --- |
+| Tool | `AI Tool` |
+| Date | Date portion of `Date and Time` |
+| Time | Time/offset portion of `Date and Time` |
+| Prompt | `User Prompt`, `User Decision / Prompt`, `User Decision`, or `User Input` |
+| Output | `AI Output` |
+| Human Review | `Human Review`, `Human Review / Correction`, `Human Review / Finalization`, and/or a Human Review Addendum |
+| Correction | Recorded only where a human modification, testcase correction, re-review, parser fix, or other correction actually occurred; absence does not imply a fabricated correction |
+| Artifact | `Generated/Modified Files` plus any explicitly cited external record/evidence |
+
+Validation of the 59 pre-P14 historical occurrences found:
+
+- Tool present: **59/59**
+- Date and Time present: **59/59**
+- Prompt/decision/input present through the mapping above: **59/59**
+- AI Output present: **59/59**
+- Artifact field present: **59/59**
+- Human Review section/addendum present: **59/59**
+- Explicit correction signal recorded where applicable: **41/59**; the remaining entries are preserved without inventing a correction event.
+
+### Historical numbering anomalies preserved for traceability
+
+Two numbering mistakes occurred while the audit was being appended incrementally:
+
+- `AI-010` appears **three times**, all for successive FR-05 Step-F generation interactions at `14:40`, `15:00`, and `15:06` on 2026-08-20.
+- `AI-047` appears **twice**, for FR-16 Step I at `11:09:14` and Step J at `11:17` on 2026-08-21.
+
+These headings are intentionally **not renumbered retroactively** because other artifacts or human review notes may already refer to those IDs. Date/time + stage provide disambiguation. The next new entry uses the next unused ID, `AI-057`.
+
+### Coverage of the historical interaction corpus
+
+| Area | Recorded interaction occurrences |
+| --- | ---: |
+| Setup / shared workflow | 6 |
+| FR-05 pipeline | 20 |
+| FR-10 pipeline | 12 |
+| FR-16 pipeline | 16 |
+| P9–P13 consolidation / CI / generator / diagram | 5 |
+| **Total before P14** | **59** |
+
+### Human-AI collaboration evidence
+
+The report demonstrates the required pattern `AI Output → Human Evaluation → Correction → Final Artifact` using actual recorded interactions rather than reconstructed examples:
+
+| Evidence chain | AI Output | Human Evaluation | Correction / decision | Final artifact/result |
+| --- | --- | --- | --- | --- |
+| `AI-002` | Initial API-testing skill contained HW06-specific constraints | Human requested a reusable, project-neutral skill | Removed fixed FR/count/header/Postman assumptions and made project constraints runtime-configurable | `.agents/skills/api-testing-human-loop/` reusable skill |
+| `AI-005` → `AI-006` | FR-05 requirements/domain options preserved unsupported behavior as unresolved | Human explicitly chose Gate-A/Gate-B options | Search semantics, length, whitespace, duplicate-query behavior remained characterization/unresolved where required | Approved FR-05 requirement + domain models |
+| `AI-029` → `AI-030` | Six FR-10 AI cases remained `INCOMPLETE` after human audit | Human reviewed corrected versions | Added deterministic corrected tests, then human re-approved all six while preserving original audit provenance | 42/42 FR-10 AI cases implementation-ready |
+| `AI-043` → `AI-045` | FR-16 human audit recorded 45 VALID / 7 INCOMPLETE | Human required resolution of the seven incomplete cases | Corrections were proposed, reviewed, then explicitly human-approved | Corrected FR-16 generated suite ready for implementation |
+| `AI-054` | CI design needed both green and exactly-one-fail evidence despite real Step-K defects | Human assignment requirements required truthful separation | Built a dedicated CI-demo suite; intentional fail labelled `CI-DEMO-ONLY` and explicitly not a SUT defect | Real GitHub Actions pass/fail/restore evidence |
+| `AI-055` | Generator initially parsed the `100` prefix of `price: 10000` as HTTP 100 | Validation exposed the parser error | Status regex changed to require a recognized HTTP reason phrase; duplicate body-field model fixed | Regression-passing API test generator |
+| `AI-056` | AI supplied the earlier diagram blueprint/draft | Student manually reviewed/edited Mermaid | Student-reviewed Mermaid was promoted and re-rendered; SHA-256 matched the student's PNG | Final P13 `.mmd` + `.png` diagram artifacts |
+
+### Evidence-integrity rules applied during compilation
+
+- No runtime PASS/FAIL was created by P14.
+- No bug was newly claimed by P14.
+- No screenshot, Newman report, GitHub Actions result, or user decision was fabricated.
+- Official Step-K evidence remains the source of truth for API execution and confirmed defects.
+- The CI intentional-failure sample remains explicitly separate from SUT defect evidence.
+- Existing pending-review wording is retained when there is no later explicit human approval recorded in the audit itself.
+- Only the two session-log files that actually exist are indexed in `reports/ai-session-logs/README.md`; missing historical transcripts are not reconstructed.
+
 ## AI Tools Used
 
 | AI Tool | Tasks |
 | --- | --- |
-| ChatGPT | HW06 planning, skill design, API-testing assistance, and report support; extend this row as additional tasks are actually performed. |
+| ChatGPT | HW06 planning, skill design, requirement/domain/state/security/schema analysis support, testcase generation/correction support, Postman/Newman finalization, CI/CD integration, API-test-generator implementation, diagram review support, and report compilation. |
+| Liebe local coding connector | Local repository inspection/editing, command execution, validation, evidence collection, Git/GitHub operations, and artifact finalization under ChatGPT direction. |
 
 > New material AI interactions are appended chronologically using `$ai-audit-report`. Human review remains pending until explicitly completed by the tester.
 
@@ -1286,4 +1365,30 @@ Human Review / Finalization:
 - Runtime evidence fabricated/generated: NO.
 - Status: P13 COMPLETE.
 - Next planned step: P14 — Compile AI Audit Report.
+
+## AI Audit Entry - AI-057
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T22:30:00+07:00 |
+| Stage | HW06 — P14 Compile AI Audit Report |
+| API | Cross-assignment audit compilation for FR05 + FR10 + FR16 + P9–P13 |
+| User Decision / Prompt | Tester requested `P14 — Compile AI Audit Report`. |
+| Evidence/Input Basis | Existing chronological `reports/ai-audit-report.md`; existing `reports/ai-session-logs/AI-037.md`; existing `reports/ai-session-logs/FR10-step-c-summary.md`; Phase 8 requirements in `plan.md`; previously generated execution/CI/generator/diagram artifacts referenced by the historical audit. |
+| Generated/Modified Files | `reports/ai-audit-report.md`; `reports/ai-session-logs/README.md`; `scripts/validate-ai-audit.mjs` |
+| AI Output | Compiled the existing audit without reconstructing missing history. Added a P14 compilation summary, required-field normalization map, corpus coverage counts, evidence-integrity rules, Human-AI collaboration chains, and an anomaly register for duplicate historical IDs `AI-010` and `AI-047`. Indexed only the two session-log artifacts that actually exist and added a reusable validator. Historical entry text and numbering were preserved to avoid breaking traceability. PDF export remains intentionally deferred because the plan says to export it later. |
+
+Human Review / Correction:
+- Historical interaction occurrences before P14: 59.
+- Distinct historical IDs before P14: 56.
+- Historical numeric range `AI-001`..`AI-056`: no missing numeric ID.
+- Duplicate historical IDs preserved transparently: `AI-010` ×3 and `AI-047` ×2.
+- Required Tool/Date-Time/Prompt/Output/Artifact/Human Review presence was validated across the historical corpus before P14.
+- Missing transcripts reconstructed: NO.
+- Historical user decisions fabricated: NO.
+- Runtime evidence changed: NO.
+- Confirmed defect evidence changed: NO.
+- Status: P14 COMPILED — PENDING TESTER REVIEW.
+- Next planned step: P15 — Evidence-Based AI Critique.
 
