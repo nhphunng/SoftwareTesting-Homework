@@ -1062,3 +1062,22 @@ Human Review:
 - Provenance preserved: 52 `AI-FR16-*` records and five retained `HUM-FR16-*` records.
 - Official execution: NOT STARTED.
 - Evidence fields: NOT POPULATED.
+
+## AI Audit Entry - AI-047
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T11:17:00+07:00 |
+| Stage | API 3 / FR-16 — Step J Runtime Test Data / Preconditions |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Proceed to Step J — Prepare Runtime Test Data / Preconditions after Step I completion. |
+| Evidence/Input Basis | Step I collection/environment/implementation notes; live EShop backend; live category/user state; existing git-ignored HW06 runtime JWTs; backend route inventory; frontend-admin CSV implementation source |
+| Generated/Modified Files | `scripts/prepare-fr16-runtime.py`; `postman/environment/HW06-FR16-Local.private.postman_environment.json` (git-ignored); `postman/data/FR16-runtime-data.json`; `PoolC-FR-16-ImportProducts/postman/runtime-fixture-manifest.json`; `PoolC-FR-16-ImportProducts/postman/runtime-preconditions.md`; `reports/ai-audit-report.md` |
+| AI Output | Verified the live SUT endpoint; re-verified real admin/non-admin JWT roles; generated tampered/forged invalid JWT fixtures without exposing secrets; selected real category ID 1; verified absent category ID 2147483647; created a real disposable category for HUM-FR16-003; wrote a private git-ignored FR16 environment and non-secret runtime metadata. Source inspection confirmed the real CSV workflow exists in frontend-admin via browser FileReader/client-side parsing followed by JSON POST, but no callable CSV upload/multipart API exists, so the 8 CSV cases remain blocked for faithful Newman execution. Backend route inventory also confirms no logout/revocation route and no role-promotion route, leaving HUM-FR16-004/005 blocked; AI-FR16-046 remains blocked for lack of a safe deterministic DB-error trigger. 46 testcase IDs are runtime-ready. No official Newman run or testcase verdict/evidence was produced. |
+
+Human Review:
+- Status: PENDING STEP J REVIEW
+- Runtime-ready: 43 AI + 3 HUMAN testcase IDs
+- Blocked: 8 CSV AI cases + AI-FR16-046 + HUM-FR16-004 + HUM-FR16-005
+- Notes: Proceed to Step K only after reviewing this Step J preparation.
