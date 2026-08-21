@@ -898,6 +898,27 @@ Human Review:
 | AI Output | Recorded Gate B as approved and modeled FR-16 using persistence states/sequences rather than inventing a named lifecycle state machine. Defined baseline, fully persisted, rolled-back, forbidden partial-persistence, unauthorized-unchanged, and repeat-import characterization states. Added valid single/multi-row transitions; invalid first/middle/last-row rollback sequences; auth/role state-preservation sequences; CSV-to-JSON bridge reasoning; repeated import characterization; failed→valid recovery; valid batch A→invalid batch B transactional isolation; parser/body failure persistence rules; optional concurrency characterization; and a before/after runtime verification strategy. Partial persistence is explicitly forbidden by direct FR-16 atomicity. Duplicate/idempotency/concurrency/status/schema details remain unresolved. Gate C remains pending human review. No runtime execution or evidence was fabricated. |
 
 Human Review:
+- Status: APPROVED
+- Accepted: Gate C approved; persistence-state model, forbidden partial persistence, before/after persistence oracle, authorization-preserving transitions, and characterization-only duplicate/concurrency treatment retained.
+- Modified:
+- Removed:
+- Added:
+- Notes: Proceed to Step D — Security Analysis.
+
+## AI Audit Entry - AI-040
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T09:51:00+07:00 |
+| Stage | API 3 / FR-16 — Gate C approval + Step D Security Analysis |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Approve Gate C; perform Step D — Security Analysis for FR16, focusing on SEC-02, SEC-03, import authorization, injection/persistence risks, and CSV/import-specific attack surface. |
+| Evidence/Input Basis | Approved FR-16 Step A requirements; approved Step B domain partitions; approved Step C persistence/state model; `plan.md` Step D; `$api-testing-human-loop` Gate D guidance; current `backend/server.js` inspected as implementation observation only |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/analysis/state-transitions.md`; `PoolC-FR-16-ImportProducts/analysis/security.md`; `reports/ai-audit-report.md` |
+| AI Output | Recorded Gate C as approved and created FR-16 Security Analysis. Mapped SEC-01..SEC-07 by actual applicability: SEC-02 and SEC-03 directly apply, SEC-05 applies to the persistence path, SEC-04 is only partially verifiable at API scope, and SEC-01/06/07 are not applicable. Added authentication/tampered-token coverage, direct non-admin role-escalation tests, role-claim tampering, persistence/atomicity security cases, SQL-oriented inert payloads with no-unintended-mutation oracle, CSV formula-injection and parser/header/column-smuggling risks, JSON duplicate-key/type-confusion/unexpected-field characterization, information-disclosure characterization, resource-abuse characterization, replay/duplicate-policy boundaries, transport-conflict security reasoning, and before/after persistence security oracles. Generic IDOR/ownership was explicitly excluded because no user-owned path resource exists. Static source observations were kept separate from defect confirmation. Gate D remains pending human review. No runtime execution or evidence was fabricated. |
+
+Human Review:
 - Status: Pending human review
 - Accepted:
 - Modified:

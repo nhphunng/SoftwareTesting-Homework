@@ -5,7 +5,7 @@ API: `POST /api/admin/import-products`
 Primary requirement: FR-16 — Import Products from CSV  
 Gate A: **APPROVED**  
 Gate B: **APPROVED**  
-Human Gate C status: **PENDING HUMAN REVIEW**
+Human Gate C status: **APPROVED**
 
 ## 1. Scope and modeling choice
 
@@ -479,3 +479,7 @@ Please review before Step D:
 10. Preserve the CSV-vs-JSON bridge distinction: both surfaces must ultimately respect persistence integrity, but transport/parser behavior remains separately classified.
 
 Do not proceed to Step D until Human Gate C is approved.
+
+Human Gate C status: **APPROVED**
+
+Gate C decision: the reviewer approved the persistence-state model, including forbidden partial persistence, before/after persistence verification, authorization-preserving transitions, transactional isolation between independent batches, and characterization-only treatment for duplicate/idempotency/concurrency behavior.
