@@ -1392,3 +1392,29 @@ Human Review / Correction:
 - Status: P14 COMPILED — PENDING TESTER REVIEW.
 - Next planned step: P15 — Evidence-Based AI Critique.
 
+## AI Audit Entry - AI-058
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T22:33:00+07:00 |
+| Stage | HW06 — P15 Evidence-Based AI Critique |
+| API | Cross-assignment critique covering FR05 + FR10 + FR16 |
+| User Decision / Prompt | Tester requested `P15 — Write Evidence-Based AI Critique (200–300 words)`. |
+| Evidence/Input Basis | Phase 9 requirements in `plan.md`; FR05 audit summary and human-added testcase reasons; FR10 audit/human-added cases and confirmed shipping-state defect; FR16 human audit, blocked case, human-added cases, and confirmed price/rollback/role-authorization defects; P14 audit compilation. |
+| Generated/Modified Files | `reports/AI-Critique.md`; `reports/ai-audit-report.md` |
+| AI Output | Wrote a 250-word critique grounded in actual HW06 evidence. It distinguishes AI incompleteness from invalidity, cites the 10 FR05 / 6 FR10 / 7 FR16 initially INCOMPLETE cases, identifies cross-endpoint/compositional reasoning as a major blind spot, cites HUMAN-FR05-044 and HUMAN-FR05-048 as human-added cases that exposed three FR05 defects, acknowledges additional human coverage dimensions, and explicitly notes that AI did detect the FR10 shipping-state defect and the major FR16 validation/rollback/authorization defects once deterministic runtime fixtures were available. |
+
+Human Review / Correction:
+- Required length: 200–300 words.
+- Actual critique length: 250 words, excluding the Markdown heading.
+- Generic praise-only critique: NO.
+- Actual INVALID evidence: no AI-generated testcase ultimately remained INVALID; critique states this explicitly instead of inventing an INVALID example.
+- INCOMPLETE evidence included: YES — FR05=10, FR10=6, FR16=7 before correction/re-review.
+- Human-added evidence included: YES.
+- Bugs AI missed included: YES — FR05 defects triggered by HUMAN-FR05-044 and HUMAN-FR05-048.
+- Bugs AI did catch acknowledged: YES — FR10 shipping-state cancellation and FR16 price/rollback/role-authorization defects.
+- Prompt limitation discussed: YES — predominantly single-endpoint, partition-driven generation reduced temporal/parser-layer/cross-feature exploration.
+- Status: P15 COMPLETE — PENDING TESTER REVIEW.
+- Next planned step: P16 — Main Report + README.
+
