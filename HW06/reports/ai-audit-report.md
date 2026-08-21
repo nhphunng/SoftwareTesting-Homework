@@ -1101,3 +1101,45 @@ Human Review:
 - Potential defect cluster A: FR-16 invalid-row validation / atomic rollback
 - Potential defect cluster B: non-admin actor can import through admin endpoint
 - Notes: Do not create bug reports or GitHub Issues until the tester confirms the defect grouping and Gate H conclusions.
+
+## AI Audit Entry - AI-049
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T11:43:00+07:00 |
+| Stage | API 3 / FR-16 — Human Gate G approval and defect-candidate grouping |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Tester approved the Step K execution evidence, approved the `HUM-FR` extractor fix, accepted all 11 blocked cases as NOT EXECUTED, selected Option B, and confirmed three potential product defects as Gate H candidates. |
+| Evidence/Input Basis | Raw FR16 Newman evidence; corrected compact summary; approved FR-16/FR-12 requirements; Step K Gate G classification |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/evidence/step-k-execution.md`; `reports/ai-audit-report.md` |
+| AI Output | Recorded Gate G as human-approved. Preserved three distinct defect candidates for Human Gate H: (1) FR16 accepts non-positive prices, (2) FR16 violates atomic all-or-nothing rollback, and (3) non-admin users can import through the admin endpoint. The reporting-tool issue is accepted as fixed. The 11 blocked testcase IDs remain NOT EXECUTED and are neither PASS nor FAIL. No bug report or GitHub Issue has been created yet. |
+
+Human Review:
+- Status: GATE G APPROVED
+- Candidate 1: FR16 accepts non-positive prices
+- Candidate 2: FR16 violates atomic all-or-nothing rollback
+- Candidate 3: non-admin user can import through `/api/admin/import-products`
+- Blocked cases: 11 accepted as NOT EXECUTED
+- Next gate: Human Gate H — confirm or reject each candidate as a genuine defect
+
+## AI Audit Entry - AI-050
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T11:55:00+07:00 |
+| Stage | API 3 / FR-16 — Human Gate H approval + Step L confirmed defect reporting |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Tester approved all three Gate H defect conclusions and requested Step L bug reporting. |
+| Evidence/Input Basis | Human-approved Gate G Option B grouping; approved FR-16/FR-12 requirements; real FR16 Newman evidence; Step K persistence results; corrected compact summary |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/bugs/FR16-BUG-01.md`; `FR16-BUG-02.md`; `FR16-BUG-03.md`; `reports/ai-audit-report.md`; GitHub Issues #28, #29, #30 |
+| AI Output | Confirmed and documented three genuine defects after Human Gate H approval: (1) non-positive prices are accepted/persisted, (2) invalid import batches violate atomic all-or-nothing rollback, and (3) a valid non-admin JWT can import through the admin endpoint. Created three Markdown bug reports and GitHub Issues #28/#29/#30. Screenshot workflow was documented but no screenshot was fabricated or claimed to exist. |
+
+Human Review:
+- Status: GATE H APPROVED / STEP L BUG REPORTING COMPLETE
+- Confirmed defect: `FR16-BUG-01` — GitHub #28
+- Confirmed defect: `FR16-BUG-02` — GitHub #29
+- Confirmed defect: `FR16-BUG-03` — GitHub #30
+- Screenshot evidence: PENDING HUMAN CAPTURE FROM REAL NEWMAN/POSTMAN EVIDENCE VIEW
+

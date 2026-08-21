@@ -132,8 +132,11 @@ Runtime setup evidence:
 
 - Step J: APPROVED by tester
 - Step K real execution: COMPLETE
-- Gate G execution classification: PREPARED
-- Potential SUT defect cluster A: invalid-row validation / atomic rollback violation
-- Potential SUT defect cluster B: missing admin-role authorization on import
+- Gate G execution evidence: **APPROVED by tester**
+- Reporting-tool defect: **APPROVED AS FIXED** — `HUM-FR` support added and summary regenerated from the same raw Newman evidence
+- Potential Product Defect 1: **CONFIRM AS CANDIDATE** — FR16 accepts non-positive prices
+- Potential Product Defect 2: **CONFIRM AS CANDIDATE** — FR16 violates atomic all-or-nothing rollback
+- Potential Product Defect 3: **CONFIRM AS CANDIDATE** — non-admin user can import through `/api/admin/import-products`
+- 11 Step J blockers: **ACCEPTED AS NOT EXECUTED** — neither PASS nor FAIL
 - Human Gate H defect confirmation: PENDING
 - Bug report / GitHub Issue: NOT YET CREATED
