@@ -8,7 +8,7 @@ Source: AI
 AI-generated testcase count: 52
 Required minimum: >=35
 Schema/response checkpoint: APPROVED
-Human Audit Status: NOT STARTED — Step G required
+Human Audit Status: STEP G RE-REVIEW COMPLETE — 51 VALID / 1 INCOMPLETE / 0 INVALID
 Execution Status: NOT EXECUTED
 Required per-request header for official requests: X-Student-Id: 23127194
 ```
@@ -16,7 +16,7 @@ Required per-request header for official requests: X-Student-Id: 23127194
 ## Provenance and review rules
 
 - Every testcase in this artifact has `Source = AI`.
-- `Human Audit Status`, `Human Audit Reason`, and `Corrected Test` are intentionally left pending/blank until **Step G human review**.
+- `Human Audit Status` and `Human Audit Reason` below reflect the tester's Step G review plus the later human re-review of corrected cases. Six previously INCOMPLETE cases were approved as VALID; `AI-FR16-046` remains INCOMPLETE/BLOCKED.
 - `Execution Status`, `Actual Result`, `Evidence`, and `Defect ID` remain blank until real implementation/execution/review stages.
 - `UNRESOLVED` is deliberate for undocumented exact HTTP statuses, response field names, error schemas, and parser details.
 - FR-16 business truth and the documented API transport remain separate: CSV business-contract cases must use the real CSV workflow if runtime-accessible; direct JSON cases exercise the documented `products[]` API surface.
@@ -24,7 +24,15 @@ Required per-request header for official requests: X-Student-Id: 23127194
 - For security cases, persistence/state evidence is stronger than response status alone.
 - Current implementation fields such as `message`, `inserted`, `errors`, and `error` are characterization targets only, not invented contract schema.
 - CSV formula injection, duplicate JSON key behavior, large values, duplicate/idempotency behavior, and some parser details remain risk-based/characterization unless an approved source states otherwise.
-- Do not execute these testcases yet as official evidence. Step G human audit must occur before implementation/runtime execution stages according to the workflow.
+- Step G human re-review is complete for the six corrected cases. `AI-FR16-046` remains BLOCKED and must not be executed unless Step J establishes a safe deterministic DB-error trigger.
+
+## Step G human audit note
+
+- The tester reviewed all 52 AI-generated cases for testability, concrete/checkable oracles, executable preconditions/inputs, and consistency with FR-16 atomicity/security expectations.
+- Result after human re-review: **51 VALID / 1 INCOMPLETE / 0 INVALID**.
+- Human re-review approved corrected cases `AI-FR16-016`, `017`, `022`, `023`, `030`, and `040` as VALID. The only remaining `INCOMPLETE` case is `AI-FR16-046` (BLOCKED).
+- `AI-FR16-046` remains incomplete because no concrete, safe, reproducible DB-error trigger has been established yet; its corrected disposition is BLOCKED pending Step J.
+- No testcase is relabeled as human-authored; provenance remains `Source = AI`.
 
 ## Coverage summary
 
@@ -68,8 +76,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Clear precondition and a deterministic persistence oracle (marker absent then present); requirement basis matches the canonical FR-16 import path. Executable as written. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -95,8 +103,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Same reasoning as AI-FR16-001 extended to a 3-row batch; oracle (all 3 persist, counts match) is unambiguous. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -122,8 +130,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Correctly routes through the real CSV workflow per the provenance rule separating business contract from JSON transport; the "if runtime-accessible" condition is explicit and does not block other cases. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -149,8 +157,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Standard RFC4180 quoted-comma case with a checkable oracle (comma stays inside the field, row is not split). |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -176,8 +184,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Correctly scoped as an evidence/process check rather than a SUT behavior assertion, and explicitly marked N/A for SUT expectations so it can't be mis-scored as a functional defect. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -203,8 +211,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Missing-body negative case has a sound oracle (zero unintended persistence) even though exact status/body are left as characterization by design. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -230,8 +238,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Same reasoning as AI-FR16-006 for a JSON `null` top-level payload. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -257,8 +265,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Array-instead-of-object case is well scoped; the persistence oracle is unambiguous. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -284,8 +292,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Missing `products` key case; zero-persistence oracle is clear and testable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -311,8 +319,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Empty-array case still carries a meaningful oracle (no row is ever created), which is enough to catch a broken empty-batch handler even though accept-vs-reject is intentionally left open. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -338,8 +346,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | `products:null` type-mismatch case; oracle is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -365,8 +373,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | `products` as object type-mismatch case; oracle is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -392,8 +400,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Empty-name atomicity case; FR-16's non-empty-name rule and the rollback oracle are both clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -419,8 +427,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Missing-name case; same reasoning as AI-FR16-013. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -446,8 +454,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Null-name case; same reasoning as AI-FR16-013/014. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -473,9 +481,10 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | VALID — HUMAN RE-REVIEW APPROVED |
+| Human Audit Reason | Original INCOMPLETE finding resolved by the approved Corrected Test. Human re-review approved the correction; case is now testable with the stated branching persistence/integrity oracle while unresolved policy remains characterization-only. |
+| Corrected Test | Use a concrete absent category ID (for example `2147483647`) with a unique product marker, non-empty name, and positive price. Send the canonical JSON request as admin. Branching oracle: if the SUT rejects the row, assert zero marker persistence and no unrelated product/category mutation; if the SUT accepts it, assert exactly one marker row persists and unrelated products/categories remain unchanged. Record acceptance/rejection and response shape as characterization; do not claim FR-15 category-existence compliance from this case. |
+| AI Re-review | HUMAN APPROVED — correction accepted by tester on 2026-08-21. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -500,9 +509,10 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | VALID — HUMAN RE-REVIEW APPROVED |
+| Human Audit Reason | Original INCOMPLETE finding resolved by the approved Corrected Test. Human re-review approved the correction; case is now testable with the stated branching persistence/integrity oracle while unresolved policy remains characterization-only. |
+| Corrected Test | Send one canonical JSON row with a unique marker and `name:"   "` (three spaces), positive price, and otherwise valid fields. Branching oracle: if rejected, zero marker rows persist; if accepted, exactly one marker row may persist and unrelated data remains unchanged. Record whether the stored name is preserved/trimmed as characterization. Pass/fail is based on persistence consistency and no unrelated mutation, not on an invented trimming rule. |
+| AI Re-review | HUMAN APPROVED — correction accepted by tester on 2026-08-21. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -527,8 +537,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | price=1 positive-boundary case; the persistence oracle is unambiguous. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -554,8 +564,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | price=0 boundary-invalid case with a clear atomicity oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -581,8 +591,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | price=-1 negative-boundary case; same reasoning as AI-FR16-019. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -608,8 +618,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Decimal-price case; a reasonable, appropriately hedged inference from FR-16's "positive number" wording, with a clear persistence oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -635,9 +645,10 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | VALID — HUMAN RE-REVIEW APPROVED |
+| Human Audit Reason | Original INCOMPLETE finding resolved by the approved Corrected Test. Human re-review approved the correction; case is now testable with the stated branching persistence/integrity oracle while unresolved policy remains characterization-only. |
+| Corrected Test | Use the concrete positive value `1000000000000` (1e12) with a unique marker and otherwise valid row. Send as admin. The request must not crash the service or corrupt unrelated data. If accepted, exactly one marker row persists and the business report must be consistent with that persistence; if rejected, zero marker rows persist and the failure must not partially write the batch. Exact acceptance/rejection remains characterization because no maximum price is documented. |
+| AI Re-review | HUMAN APPROVED — correction accepted by tester on 2026-08-21. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -662,9 +673,10 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | VALID — HUMAN RE-REVIEW APPROVED |
+| Human Audit Reason | Original INCOMPLETE finding resolved by the approved Corrected Test. Human re-review approved the correction; case is now testable with the stated branching persistence/integrity oracle while unresolved policy remains characterization-only. |
+| Corrected Test | Use an exact 256-character ASCII name (for example `N` repeated 256 times), positive price, and a unique companion marker field/value. Send as admin. Because FR-15 inheritance is unresolved, do not require acceptance or rejection. Branching oracle: if accepted, exactly one intended row persists and unrelated data remains unchanged; if rejected, zero marker rows persist. Record the observed length handling as characterization and do not report a FR-16 defect solely from accept/reject. |
+| AI Re-review | HUMAN APPROVED — correction accepted by tester on 2026-08-21. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -689,8 +701,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | P3 — baseline unchanged; zero batch markers present |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Invalid-first-row atomicity case; the rollback oracle is clear and directly testable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -716,8 +728,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | P3 — baseline unchanged |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Invalid-middle-row atomicity case; same reasoning as AI-FR16-024. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -743,8 +755,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | P3 — baseline unchanged |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Invalid-last-row atomicity case; same reasoning as AI-FR16-024/025. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -770,8 +782,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Multiple-invalid-rows case; the zero-persistence oracle is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -797,8 +809,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Failed-batch-then-valid-batch sequencing case; oracle (A=0 rows, B=all rows) is clear and independently checkable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -824,8 +836,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Valid-then-invalid sequencing case; oracle (A remains committed, B=0 rows) is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -851,9 +863,10 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | VALID — HUMAN RE-REVIEW APPROVED |
+| Human Audit Reason | Original INCOMPLETE finding resolved by the approved Corrected Test. Human re-review approved the correction; case is now testable with the stated branching persistence/integrity oracle while unresolved policy remains characterization-only. |
+| Corrected Test | Import a valid uniquely marked batch once and record the resulting marker-row count. Send the exact same batch a second time. Duplicate policy remains unspecified, so accept/reject/deduplicate/duplicate-insert are all characterization outcomes. Enforceable oracle: the second request must not alter unrelated products, must not corrupt the original rows, and any response/report must be consistent with the final persisted marker-row count. |
+| AI Re-review | HUMAN APPROVED — correction accepted by tester on 2026-08-21. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -878,8 +891,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Malformed-then-valid recovery case; oracle (first request = 0 rows, second = full persistence) is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -905,8 +918,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | P5 — unauthorized unchanged |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Missing-JWT case; the zero-persistence security oracle is unambiguous. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -932,8 +945,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Malformed-JWT case; same reasoning as AI-FR16-032. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -959,8 +972,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Tampered-signature case; same reasoning as AI-FR16-032/033, assuming the test environment can safely produce an invalid-signature token. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -986,8 +999,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | P5 — unauthorized unchanged |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Valid-non-admin-JWT case; zero-persistence oracle is clear (SEC-03). |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1013,8 +1026,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Forged-admin-claim-in-tampered-token case; the zero-persistence oracle directly tests signature verification, which is well-defined and testable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1040,8 +1053,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Mass-assignment/extra-fields case; storage of the extra fields themselves is left as characterization, but the core invariant (body cannot override token authorization, no unrelated mutation) is concretely testable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1067,8 +1080,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | SQL-looking name case; the invariant (no structural DB mutation, unrelated data unaffected) is a clear, testable persistence-integrity oracle. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1094,8 +1107,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | SQL-looking description case; same reasoning as AI-FR16-038. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1121,9 +1134,10 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | VALID — HUMAN RE-REVIEW APPROVED |
+| Human Audit Reason | Original INCOMPLETE finding resolved by the approved Corrected Test. Human re-review approved the correction; case is now testable with the stated branching persistence/integrity oracle while unresolved policy remains characterization-only. |
+| Corrected Test | Through the real CSV workflow, import a valid CSV row whose unique product name is exactly `=2+2` and whose remaining fields are valid. The import layer must treat the cell as literal text rather than execute or transform it. If accepted, verify the persisted product name remains the literal `=2+2` and unrelated data is unchanged; if rejected, verify zero marker persistence. Do not claim spreadsheet-formula exploitation without downstream export/open evidence. |
+| AI Re-review | HUMAN APPROVED — correction accepted by tester on 2026-08-21. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1148,8 +1162,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Malformed-CSV/parser-confusion case; the zero-unintended-persistence oracle is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1175,8 +1189,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Schema-characterization case for the success path; the persistence requirement is a real assertion and the shape recording is explicitly non-normative, so the case is internally coherent. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1202,8 +1216,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Schema-characterization case for the validation-failure path; the atomicity/rollback assertion is enforceable and the shape recording is non-normative. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1229,8 +1243,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Schema-characterization case for the auth-failure path; the zero-persistence + rejection assertion is enforceable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1256,8 +1270,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Schema-characterization case for the non-admin path; the zero-persistence + rejection assertion is enforceable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1283,9 +1297,10 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
-| Corrected Test | |
+| Human Audit Status | INCOMPLETE |
+| Human Audit Reason | Precondition is highly conditional ("only if Step J can safely and deterministically" reproduce a DB error) with no concrete trigger defined; as written this may simply never execute. Needs either a concrete reproducible input or an explicit BLOCKED/SKIP disposition rather than being carried as an ordinary pending case. |
+| Corrected Test | Reclassify this testcase as `BLOCKED — no safe deterministic DB-error trigger identified yet`. Do not execute it in the official suite unless Step J establishes a concrete, reproducible, non-destructive input that causes a DB-level insert error. If such a trigger is later established, the testcase must specify the exact input, baseline, zero-partial-persistence oracle, and response-disclosure checks before human re-review. |
+| AI Re-review | NOT READY FOR VALID — the correction gives a safe disposition, but this remains non-executable until Step J finds a reproducible DB-error trigger. |
 | Execution Status | |
 | Actual Result | |
 | Evidence | |
@@ -1310,8 +1325,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Wrong-extension case; the zero-unintended-persistence oracle is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1337,8 +1352,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Reordered-header case; the exact-header-contract violation oracle is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1364,8 +1379,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Extra-header-column case; both the contract-violation oracle and the "no privilege smuggling" invariant are testable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1391,8 +1406,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | RFC4180 doubled-quote case; the parser-correctness oracle is clear. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1418,8 +1433,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Mixed-type JSON rows case; the zero/partial-persistence oracle is clear and directly exercises type-confusion handling. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |
@@ -1445,8 +1460,8 @@ Required per-request header for official requests: X-Student-Id: 23127194
 | State Before | Baseline: unique testcase markers absent |
 | State After | As stated by expected response / persistence oracle |
 | AI Rationale | Generated from the approved FR-16 Requirement + Domain + State + Security + Schema analyses; preserves contract uncertainty and the persistence-first oracle. |
-| Human Audit Status | |
-| Human Audit Reason | |
+| Human Audit Status | VALID |
+| Human Audit Reason | Duplicate-JSON-keys case; exact key precedence is left as characterization, but the enforceable invariant (no unauthorized mutation, atomicity preserved) is concretely testable. |
 | Corrected Test | |
 | Execution Status | |
 | Actual Result | |

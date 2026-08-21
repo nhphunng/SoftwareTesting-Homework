@@ -961,9 +961,66 @@ Human Review:
 | AI Output | Recorded the Schema/Response checkpoint as approved and generated 52 AI-origin FR-16 testcase records (requirement >=35). Coverage includes 6 Functional, 15 Domain, 6 Boundary, 8 State/Sequence, 12 Security, and 5 Schema cases. The suite covers canonical JSON imports, CSV business workflow, exact headers/RFC4180 cases, request-shape partitions, name/price boundaries, first/middle/last-row rollback, failure-recovery sequences, SEC-02 authentication, SEC-03 role escalation, token tampering, SEC-05 inert SQL probes, CSV parser/formula risks, duplicate JSON keys/type confusion, and S1/S2 response characterization. Every official-request testcase carries the assignment header requirement. Exact undocumented HTTP statuses and response schemas remain UNRESOLVED. Human audit fields are not filled by AI; execution/evidence/actual-result/defect fields remain blank. No runtime execution or evidence was fabricated. |
 
 Human Review:
-- Status: Pending human review
-- Accepted:
-- Modified:
+- Status: COMPLETE
+- Accepted: Tester completed Step G human audit for all 52 AI-generated FR-16 cases: 45 VALID, 7 INCOMPLETE, 0 INVALID.
+- Modified: Human Audit Status and Human Audit Reason were populated in `PoolC-FR-16-ImportProducts/generated/PoolC-FR16-ImportProducts-test.md` from the tester-provided reviewed artifact.
 - Removed:
-- Added:
-- Notes: Step G must classify every AI-generated testcase as VALID / INVALID / INCOMPLETE before implementation proceeds.
+- Added: INCOMPLETE cases are `AI-FR16-016`, `AI-FR16-017`, `AI-FR16-022`, `AI-FR16-023`, `AI-FR16-030`, `AI-FR16-040`, and `AI-FR16-046`.
+- Notes: Corrected Test remains pending for the 7 INCOMPLETE cases. Do not relabel them as VALID until the tester reviews and approves explicit corrections/policy dispositions.
+
+## AI Audit Entry - AI-043
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T10:21:00+07:00 |
+| Stage | API 3 / FR-16 — Step G Human Audit synchronization |
+| API | `POST /api/admin/import-products` |
+| User Input | Tester supplied a reviewed `PoolC-FR16-ImportProducts-test.md` containing per-case Human Audit Status and Human Audit Reason. |
+| Evidence/Input Basis | Tester-provided reviewed artifact with 52 AI cases; existing generated FR-16 testcase artifact; `$api-testing-human-loop` provenance rules |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/generated/PoolC-FR16-ImportProducts-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Synchronized the tester's human audit into the project artifact without changing testcase provenance. Final human-audit distribution is 45 VALID / 7 INCOMPLETE / 0 INVALID. Preserved the tester's reasons verbatim for every testcase. The seven INCOMPLETE cases are 016, 017, 022, 023, 030, 040, and 046. Corrected Test fields remain blank; no AI-generated correction is represented as human-approved. Execution/Actual Result/Evidence/Defect fields remain untouched. |
+
+Human Review:
+- Status: COMPLETE — source is the tester-provided reviewed artifact
+- Accepted: 45 VALID / 7 INCOMPLETE / 0 INVALID
+- Notes: Next action should resolve the 7 INCOMPLETE cases before treating the complete 52-case suite as implementation-ready.
+
+## AI Audit Entry - AI-044
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T10:29:00+07:00 |
+| Stage | API 3 / FR-16 — Step G INCOMPLETE-case correction proposal + AI re-review |
+| API | `POST /api/admin/import-products` |
+| User Prompt | Resolve the 7 INCOMPLETE cases by proposing `Corrected Test` for each, then re-review whether they can become VALID. |
+| Evidence/Input Basis | Tester-provided Human Audit Status/Reason for all 52 AI cases; approved FR-16 Requirement/Domain/State/Security/Schema analyses; provenance rules from `$api-testing-human-loop` |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/generated/PoolC-FR16-ImportProducts-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Added AI-proposed `Corrected Test` and explicit `AI Re-review` rows to exactly the seven human-INCOMPLETE cases while preserving their original Human Audit Status/Reason. Cases 016, 017, 022, 023, 030, and 040 are assessed READY FOR HUMAN RE-REVIEW because the corrections add concrete inputs and/or branching persistence-integrity oracles without inventing unresolved acceptance policies. Case 046 remains NOT READY FOR VALID and is safely reclassified as BLOCKED until Step J identifies a concrete, reproducible, non-destructive DB-error trigger. No Human Audit Status was changed by AI. No execution evidence was produced. |
+
+Human Review:
+- Status: PARTIALLY APPROVED — 6 corrections approved; 1 remains blocked
+- Approved by tester: `AI-FR16-016`, `017`, `022`, `023`, `030`, `040`
+- Still blocked: `AI-FR16-046`
+- Notes: Tester approved the six proposed corrections; their Human Audit Status is now VALID — HUMAN RE-REVIEW APPROVED. `AI-FR16-046` remains INCOMPLETE/BLOCKED.
+
+## AI Audit Entry - AI-045
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T10:41:00+07:00 |
+| Stage | API 3 / FR-16 — Human re-review approval of corrected Step G cases |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Tester explicitly approved the six proposed corrections for `AI-FR16-016`, `017`, `022`, `023`, `030`, and `040`. |
+| Evidence/Input Basis | Tester approval in chat; AI-044 correction proposals; existing human-reviewed FR-16 testcase artifact |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/generated/PoolC-FR16-ImportProducts-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Updated the six tester-approved corrected cases from INCOMPLETE to `VALID — HUMAN RE-REVIEW APPROVED`, preserved their AI provenance, retained the accepted Corrected Test, and recorded human approval. Suite human-audit distribution is now 51 VALID / 1 INCOMPLETE / 0 INVALID. `AI-FR16-046` remains INCOMPLETE/BLOCKED because no safe deterministic DB-error trigger exists yet. No runtime execution/evidence was created. |
+
+Human Review:
+- Status: APPROVED
+- Accepted: `AI-FR16-016`, `AI-FR16-017`, `AI-FR16-022`, `AI-FR16-023`, `AI-FR16-030`, `AI-FR16-040` corrected tests
+- Remaining incomplete: `AI-FR16-046` — BLOCKED pending safe deterministic DB-error trigger
+- Final distribution at this checkpoint: 51 VALID / 1 INCOMPLETE / 0 INVALID
+
