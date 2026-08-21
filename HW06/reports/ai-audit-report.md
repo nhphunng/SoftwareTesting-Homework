@@ -1163,3 +1163,52 @@ Human Review:
 - FR16-BUG-03 representative evidence: `AI-FR16-035`
 - JWT exposure: REDACTED
 
+## AI Audit Entry - AI-052
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with artifact_tool spreadsheet generator + Liebe local coding connector |
+| Date and Time | 2026-08-21T21:08:00+07:00 |
+| Stage | HW06 — P9 Consolidate Excel Test Suite |
+| API | Consolidated FR05 + FR10 + FR16 |
+| User Decision / Prompt | Tester requested P9 — consolidate the completed API testcase suites into a single Excel workbook. |
+| Evidence/Input Basis | Authoritative testcase Markdown for FR05/FR10/FR16; FR10 human-authored testcase file; real Newman execution summaries for all three APIs; Human Gate H confirmed bug reports. |
+| Generated/Modified Files | Generated `HW06-API-Test-Cases.xlsx` as the P9 consolidated workbook artifact; updated `reports/ai-audit-report.md`. |
+| AI Output | Consolidated 152 testcase records across all three selected APIs while preserving provenance and execution semantics: 136 AI-generated and 16 HUMAN-authored; 119 PASS, 22 FAIL, 11 FR16 cases explicitly `NOT EXECUTED — BLOCKED`; seven confirmed defect records mapped to supporting testcase IDs. Workbook contains `Summary`, `All Test Cases`, `FR05`, `FR10`, `FR16`, `Defects`, and `Sources` sheets, including execution-status conditional formatting, authoritative Markdown source paths, evidence references, and a summary chart. Formula/error validation completed with no spreadsheet formula errors. The Excel workbook is an export/index artifact; the Markdown testcase files remain the source of truth for full testcase definitions. |
+
+Human Review:
+- Status: P9 EXCEL CONSOLIDATION GENERATED — PENDING TESTER REVIEW
+- Total testcase records: 152
+- AI-generated: 136
+- HUMAN-authored: 16
+- PASS: 119
+- FAIL: 22
+- NOT EXECUTED — BLOCKED: 11
+- Confirmed defects: 7
+- Source-of-truth rule: detailed testcase definitions remain in their authoritative Markdown artifacts
+
+## AI Audit Entry - AI-053
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T21:11:00+07:00 |
+| Stage | HW06 — P10 Finalize Postman/Newman |
+| API | Consolidated FR05 + FR10 + FR16 |
+| User Decision / Prompt | Tester requested P10 — finalize the Postman/Newman artifacts after P9 consolidation. |
+| Evidence/Input Basis | Three Postman collections; three public environments; git-ignored private runtime environments; three runtime-data files; real Step K Newman CLI/JSON/HTML/JUnit reports and compact summaries; shared `run-step-k.sh` runner. |
+| Generated/Modified Files | `postman/README.md`; `reports/postman-newman-finalization.md`; `scripts/validate-postman-newman.mjs`; `reports/ai-audit-report.md` |
+| AI Output | Finalized the Postman/Newman package without rerunning the SUT. Verified all required collection/environment/data/Newman evidence files for FR05, FR10, and FR16; confirmed public collections/environments contain no JWT-like literals; confirmed private runtime environments are git-ignored; confirmed each collection has a collection-level pre-request script enforcing exact `X-Student-Id: 23127194`; and confirmed the real Newman evidence records the exact student header on 353/353 observed requests. Preserved truthful official outcomes: 805 assertions total, 749 passed, 56 failed. FR16's 11 blocked testcase records remain `NOT EXECUTED — BLOCKED`, neither PASS nor FAIL. Added a reusable static/evidence validation script and documented Postman/Newman features and runner usage. |
+
+Human Review:
+- Status: P10 FINALIZED — PENDING TESTER REVIEW
+- Collections: 3/3 present
+- Public environments: 3/3 present, no JWT literals found
+- Private runtime environments: 3/3 git-ignored
+- Runtime data files: 3/3 present
+- Newman HTML/JSON/CLI/JUnit evidence: 3/3 feature sets present
+- Student header evidence: 353/353 exact match
+- Validation: `P10_VALIDATION=PASS`
+- New SUT execution during P10: NONE
+- Next recommended phase: P11 — CI/CD integration
+
