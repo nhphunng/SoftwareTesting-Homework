@@ -1,0 +1,5 @@
+
+# HW06 CI runtime outputs (downloaded/generated evidence is curated under cicd/screenshots/report)
+HW06/cicd/results/
+HW06/cicd/sut-ci.log
+HW06/cicd/sut-ci.pid

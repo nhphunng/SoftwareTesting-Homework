@@ -1,0 +1,110 @@
+name: HW06 API Tests
+
+on:
+  push:
+    branches: [hw06]
+    paths:
+      - '.github/workflows/hw06-api-tests.yml'
+      - 'HW06/cicd/**'
+  workflow_dispatch:
+
+jobs:
+  newman:
+    name: Newman CI demo
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout homework repository
+        uses: actions/checkout@v4
+
+      - name: Checkout public EShop SUT
+        uses: actions/checkout@v4
+        with:
+          repository: ttbhanh/eshop-sut
+          path: eshop-sut
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: eshop-sut/backend/package-lock.json
+
+      - name: Install SUT dependencies
+        working-directory: eshop-sut/backend
+        run: npm ci
+
+      - name: Start SUT
+        working-directory: eshop-sut/backend
+        run: |
+          nohup node server.js > "$GITHUB_WORKSPACE/HW06/cicd/sut-ci.log" 2>&1 &
+          echo $! > "$GITHUB_WORKSPACE/HW06/cicd/sut-ci.pid"
+
+      - name: Wait for SUT
+        shell: bash
+        run: |
+          for i in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3000/api/products >/dev/null; then
+              echo 'SUT_READY=true'
+              exit 0
+            fi
+            sleep 1
+          done
+          cat HW06/cicd/sut-ci.log || true
+          exit 1
+
+      - name: Install Newman
+        run: npm install --global newman newman-reporter-htmlextra
+
+      - name: Resolve mode
+        id: mode
+        shell: bash
+        run: |
+          MODE="$(tr -d '[:space:]' < HW06/cicd/ci-mode.txt)"
+          if [[ "$MODE" == "one-fail" ]]; then
+            echo 'env=HW06/cicd/postman/HW06-CI-OneFail.postman_environment.json' >> "$GITHUB_OUTPUT"
+            echo 'expect_exit=1' >> "$GITHUB_OUTPUT"
+          elif [[ "$MODE" == "pass" ]]; then
+            echo 'env=HW06/cicd/postman/HW06-CI-Pass.postman_environment.json' >> "$GITHUB_OUTPUT"
+            echo 'expect_exit=0' >> "$GITHUB_OUTPUT"
+          else
+            echo "Unsupported CI mode: $MODE" >&2
+            exit 2
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+
+      - name: Run Newman demonstration
+        id: newman
+        shell: bash
+        run: |
+          OUT="HW06/cicd/results/${{ steps.mode.outputs.mode }}"
+          mkdir -p "$OUT"
+          set +e
+          newman run HW06/cicd/postman/HW06-CI-Demo.postman_collection.json \
+            -e "${{ steps.mode.outputs.env }}" \
+            --reporters cli,json,htmlextra,junit \
+            --reporter-json-export "$OUT/report.json" \
+            --reporter-htmlextra-export "$OUT/report.html" \
+            --reporter-junit-export "$OUT/report.xml" \
+            --color off > "$OUT/newman-cli.txt" 2>&1
+          EXIT_CODE=$?
+          set -e
+          echo "exit_code=$EXIT_CODE" >> "$GITHUB_OUTPUT"
+          cat "$OUT/newman-cli.txt"
+
+      - name: Verify demonstration result
+        shell: bash
+        run: |
+          test "${{ steps.newman.outputs.exit_code }}" = "${{ steps.mode.outputs.expect_exit }}"
+          node HW06/cicd/verify-ci-demo.mjs "HW06/cicd/results/${{ steps.mode.outputs.mode }}/report.json" "${{ steps.mode.outputs.mode }}"
+
+      - name: Upload Newman reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hw06-newman-${{ steps.mode.outputs.mode }}-${{ github.run_number }}
+          path: |
+            HW06/cicd/results/${{ steps.mode.outputs.mode }}/
+            HW06/cicd/sut-ci.log
+          if-no-files-found: warn
+          retention-days: 30

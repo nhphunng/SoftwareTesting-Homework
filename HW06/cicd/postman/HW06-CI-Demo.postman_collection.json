@@ -1,0 +1,152 @@
+{
+  "info": {
+    "name": "HW06 CI/CD Demo — FR05 FR10 FR16",
+    "description": "Controlled CI demonstration suite, separate from official Step K evidence. Mode one-fail intentionally introduces exactly one CI-DEMO-ONLY assertion failure.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.request.headers.upsert({key:'X-Student-Id', value:'23127194'});"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "pm.test((pm.info.requestName || 'CI request') + ' | X-Student-Id exact', function () {",
+          "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194');",
+          "});"
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "name": "Setup",
+      "item": [
+        {
+          "name": "CI-SETUP-01 — Login default admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"admin@eshop.com\",\"password\":\"Admin123!\"}"
+            },
+            "url": "{{baseUrl}}/api/login"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-SETUP-01 | admin login succeeds', function(){ pm.expect(pm.response.code).to.eql(200); });",
+                  "const j=pm.response.json(); pm.expect(j).to.have.property('token'); pm.environment.set('adminToken', j.token);"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "API CI Demonstrations",
+      "item": [
+        {
+          "name": "CI-FR05-001 — deterministic no-match product search",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/api/products?search=__HW06_CI_NO_MATCH_23127194__"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-FR05-001 | HTTP 200', function(){ pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('CI-FR05-001 | JSON array', function(){ pm.expect(pm.response.json()).to.be.an('array'); });",
+                  "pm.test('CI-FR05-001 | no-match is empty', function(){ pm.expect(pm.response.json()).to.have.length(0); });",
+                  "if (String(pm.environment.get('ciIntentionalFail')) === 'true') {",
+                  "  pm.test('CI-DEMO-ONLY | intentional single failure', function(){ pm.expect('actual').to.eql('intentionally-wrong-expected'); });",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "CI-FR10-001 — nonexistent order cancellation is rejected",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "url": "{{baseUrl}}/api/orders/2147483647/cancel"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-FR10-001 | nonexistent order rejected', function(){ pm.expect(pm.response.code).to.eql(404); });",
+                  "pm.test('CI-FR10-001 | response has error', function(){ pm.expect(pm.response.json()).to.have.property('error'); });"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "CI-FR16-001 — empty import is rejected",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"products\":[]}"
+            },
+            "url": "{{baseUrl}}/api/admin/import-products"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-FR16-001 | empty import rejected', function(){ pm.expect(pm.response.code).to.eql(400); });",
+                  "pm.test('CI-FR16-001 | response has error', function(){ pm.expect(pm.response.json()).to.have.property('error'); });"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
