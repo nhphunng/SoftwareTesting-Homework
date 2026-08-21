@@ -6,7 +6,9 @@ Primary requirement: FR-16 — Product Import from CSV
 Gate A: **APPROVED**  
 Gate B: **APPROVED**  
 Gate C: **APPROVED**  
-Human Gate D status: **PENDING HUMAN REVIEW**
+Human Gate D status: **APPROVED**
+
+Gate D decision: the reviewer approved direct SEC-02/SEC-03 coverage, SEC-05 persistence-path probes, partial SEC-04 treatment, CSV/import-specific risk characterization, and the rule that implementation observations remain separate from confirmed defects until real execution and Gate G/H review.
 
 ## 1. Security scope
 

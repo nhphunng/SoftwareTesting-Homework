@@ -919,9 +919,51 @@ Human Review:
 | AI Output | Recorded Gate C as approved and created FR-16 Security Analysis. Mapped SEC-01..SEC-07 by actual applicability: SEC-02 and SEC-03 directly apply, SEC-05 applies to the persistence path, SEC-04 is only partially verifiable at API scope, and SEC-01/06/07 are not applicable. Added authentication/tampered-token coverage, direct non-admin role-escalation tests, role-claim tampering, persistence/atomicity security cases, SQL-oriented inert payloads with no-unintended-mutation oracle, CSV formula-injection and parser/header/column-smuggling risks, JSON duplicate-key/type-confusion/unexpected-field characterization, information-disclosure characterization, resource-abuse characterization, replay/duplicate-policy boundaries, transport-conflict security reasoning, and before/after persistence security oracles. Generic IDOR/ownership was explicitly excluded because no user-owned path resource exists. Static source observations were kept separate from defect confirmation. Gate D remains pending human review. No runtime execution or evidence was fabricated. |
 
 Human Review:
+- Status: APPROVED
+- Accepted: Gate D approved; direct SEC-02/SEC-03 coverage, SEC-05 persistence-path probes, partial SEC-04 treatment, CSV/import risk characterization, and separation of implementation observations from confirmed defects retained.
+- Modified:
+- Removed:
+- Added:
+- Notes: Proceed to Step E — Schema / Response Analysis.
+
+## AI Audit Entry - AI-041
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T09:55:00+07:00 |
+| Stage | API 3 / FR-16 — Gate D approval + Step E Schema / Response Analysis |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Approve Gate D; perform Step E — Schema / Response Analysis, explicitly separating the FR-16 business report (`success count / error count / reasons`) from actual/documented endpoint response behavior without inventing exact schema/status codes. |
+| Evidence/Input Basis | Approved FR-16 Step A-D artifacts; `source/api_specification.md` §6/§6.3; `plan.md` Step E; `$api-testing-human-loop` schema/response checkpoint guidance; current `backend/server.js` response shape inspected as implementation observation only |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/analysis/security.md`; `PoolC-FR-16-ImportProducts/analysis/schema.md`; `reports/ai-audit-report.md` |
+| AI Output | Recorded Gate D as approved and created FR-16 Schema / Response Analysis. Preserved three layers: FR-16 semantic business-report obligations, API specification request contract with no defined response schema/status, and current implementation response characterization. Treated `success count`, `error count`, and failure reasons as semantic requirements without inventing JSON property names. Kept exact success/validation/auth/authorization/parser statuses, response field names/types/nesting, row-number formatting, Content-Type, and error-count interpretation unresolved. Current implementation fields `message`, `inserted`, `errors`, and `error` remain S2 runtime/implementation characterization only. Added response-counter vs persistence consistency rules, invalid-batch rollback semantics, CSV-vs-JSON response responsibility separation, auth/role response policy, information-disclosure characterization, a three-layer S1/S2/S3 schema strategy, and 16 candidate schema/response tests. Schema/response checkpoint remains pending human review. No runtime execution or evidence was fabricated. |
+
+Human Review:
+- Status: APPROVED
+- Accepted: Schema/Response checkpoint approved; three-layer S1/S2/S3 response model, semantic report obligations, persistence-first atomicity oracle, and unresolved exact status/schema boundaries retained.
+- Modified:
+- Removed:
+- Added:
+- Notes: Proceed to Step F — AI Testcase Generation.
+
+## AI Audit Entry - AI-042
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T10:09:00+07:00 |
+| Stage | API 3 / FR-16 — Step F AI Testcase Generation |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Step F — AI Testcase Generation: create >=35 AI-generated testcases for FR16 based on the approved Requirement + Domain + State + Security + Schema analyses. |
+| Evidence/Input Basis | Approved `analysis/requirements.md`; approved `analysis/domain-partitions.md`; approved `analysis/state-transitions.md`; approved `analysis/security.md`; approved `analysis/schema.md`; `$api-testing-human-loop` testcase/evidence contract |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/analysis/schema.md`; `PoolC-FR-16-ImportProducts/generated/PoolC-FR16-ImportProducts-test.md`; `reports/ai-audit-report.md` |
+| AI Output | Recorded the Schema/Response checkpoint as approved and generated 52 AI-origin FR-16 testcase records (requirement >=35). Coverage includes 6 Functional, 15 Domain, 6 Boundary, 8 State/Sequence, 12 Security, and 5 Schema cases. The suite covers canonical JSON imports, CSV business workflow, exact headers/RFC4180 cases, request-shape partitions, name/price boundaries, first/middle/last-row rollback, failure-recovery sequences, SEC-02 authentication, SEC-03 role escalation, token tampering, SEC-05 inert SQL probes, CSV parser/formula risks, duplicate JSON keys/type confusion, and S1/S2 response characterization. Every official-request testcase carries the assignment header requirement. Exact undocumented HTTP statuses and response schemas remain UNRESOLVED. Human audit fields are not filled by AI; execution/evidence/actual-result/defect fields remain blank. No runtime execution or evidence was fabricated. |
+
+Human Review:
 - Status: Pending human review
 - Accepted:
 - Modified:
 - Removed:
 - Added:
-- Notes:
+- Notes: Step G must classify every AI-generated testcase as VALID / INVALID / INCOMPLETE before implementation proceeds.
