@@ -841,3 +841,66 @@ Human Review:
 - Related testcases: `AI-FR10-003`, `AI-FR10-021`, `AI-FR10-040`
 - GitHub Issue: https://github.com/nhphunng/SoftwareTesting-Homework/issues/27
 - Step L: COMPLETE
+
+## AI Audit Entry - AI-037
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T09:29:00+07:00 |
+| Stage | API 3 / FR-16 — Step A Requirement Extraction |
+| API | `POST /api/admin/import-products` |
+| User Prompt | @Liebe Dùng $api-testing-human-loop bắt đầu FR16 — Step A: Requirement Extraction cho POST /api/admin/import-products, theo đúng workflow trong plan.md. |
+| Evidence/Input Basis | `source/api_specification.md`; `/Users/nguyenhoangphihung/Document/eshop-sut/README.md` FR-12/FR-15/FR-16 and SEC-01..SEC-07; `plan.md`; `.agents/skills/api-testing-human-loop/SKILL.md`; `.agents/skills/api-testing-human-loop/references/workflow-gates.md`; `reports/api-inventory.md`; `reports/api-selection.md`; `/Users/nguyenhoangphihung/Document/eshop-sut/backend/server.js` as implementation observation only |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/analysis/requirements.md`; `reports/ai-session-logs/AI-037.md`; `reports/ai-audit-report.md` |
+| AI Output | Extracted FR-16 Step A and stopped at Human Gate A. Preserved the material contract conflict: FR-16 requires CSV file upload with `.csv`, exact header, RFC4180 parsing, row validation, atomic rollback, and clear result reporting, while `api_specification.md` documents JSON `{products:[...]}` for the same endpoint. Kept exact HTTP status codes/response schema and FR-15 inheritance unresolved. Mapped SEC-02 and SEC-03 as directly applicable. Recorded current server behavior only as implementation observations and runtime targets, not confirmed defects. No runtime execution or evidence was fabricated. Full output preserved in `reports/ai-session-logs/AI-037.md`. |
+
+Human Review:
+- Status: APPROVED
+- Accepted: Gate A approved; dual-surface model retained for FR-16 CSV business contract and JSON `products[]` API contract.
+- Modified:
+- Removed:
+- Added:
+- Notes: Proceed to Step B — Domain Partition Design for both input surfaces.
+
+## AI Audit Entry - AI-038
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T09:38:00+07:00 |
+| Stage | API 3 / FR-16 — Gate A approval + Step B Domain Partition Design |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | approve Gate A, bước tiếp theo đúng workflow sẽ là Step B — Domain Partition Design cho cả hai input surface: CSV business contract và JSON products[] API contract. |
+| Evidence/Input Basis | Approved `PoolC-FR-16-ImportProducts/analysis/requirements.md`; `plan.md` Step B; `.agents/skills/api-testing-human-loop/references/workflow-gates.md`; FR-16/FR-12/SEC requirements already extracted at Step A |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/analysis/requirements.md`; `PoolC-FR-16-ImportProducts/analysis/domain-partitions.md`; `reports/ai-audit-report.md` |
+| AI Output | Recorded Human Gate A as approved and created the FR-16 dual-surface domain model. CSV coverage includes file presence/extension, exact header variants, RFC4180 quoted-comma and parser cases, per-row name/price partitions, unclear description/image/category fields, batch composition, and first/middle/last invalid-row rollback partitions. JSON coverage includes top-level `products[]` shape, row type/shape, field-level name/price/description/image/category partitions, malformed/additional inputs, and batch atomicity. Auth partitions explicitly cover SEC-02 and the direct SEC-03 role boundary between admin and valid non-admin JWTs. No undocumented file-size, row-count, name-length, category-range, response-status, or parser limits were promoted to mandatory requirements. Gate B remains pending human review. No runtime execution or evidence was created. |
+
+Human Review:
+- Status: APPROVED
+- Accepted: Gate B approved; dual-surface partition model, rollback row-position partitions, and direct non-admin role boundary retained.
+- Modified:
+- Removed:
+- Added:
+- Notes: Proceed to Step C — State Transition / Persistence Analysis.
+
+## AI Audit Entry - AI-039
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T09:45:00+07:00 |
+| Stage | API 3 / FR-16 — Gate B approval + Step C State Transition / Persistence Analysis |
+| API | `POST /api/admin/import-products` |
+| User Decision / Prompt | Tôi approve Gate B, bước tiếp theo đúng workflow thực hiện StepC - State Trasition / Persistence Analysis |
+| Evidence/Input Basis | Approved `PoolC-FR-16-ImportProducts/analysis/requirements.md`; approved `PoolC-FR-16-ImportProducts/analysis/domain-partitions.md`; `plan.md` Step C; `.agents/skills/api-testing-human-loop/references/workflow-gates.md` |
+| Generated/Modified Files | `PoolC-FR-16-ImportProducts/analysis/domain-partitions.md`; `PoolC-FR-16-ImportProducts/analysis/state-transitions.md`; `reports/ai-audit-report.md` |
+| AI Output | Recorded Gate B as approved and modeled FR-16 using persistence states/sequences rather than inventing a named lifecycle state machine. Defined baseline, fully persisted, rolled-back, forbidden partial-persistence, unauthorized-unchanged, and repeat-import characterization states. Added valid single/multi-row transitions; invalid first/middle/last-row rollback sequences; auth/role state-preservation sequences; CSV-to-JSON bridge reasoning; repeated import characterization; failed→valid recovery; valid batch A→invalid batch B transactional isolation; parser/body failure persistence rules; optional concurrency characterization; and a before/after runtime verification strategy. Partial persistence is explicitly forbidden by direct FR-16 atomicity. Duplicate/idempotency/concurrency/status/schema details remain unresolved. Gate C remains pending human review. No runtime execution or evidence was fabricated. |
+
+Human Review:
+- Status: Pending human review
+- Accepted:
+- Modified:
+- Removed:
+- Added:
+- Notes:
