@@ -1,0 +1,871 @@
+newman
+
+HW06 — FR-10 Cancel Order — 23127194
+
+❏ AI — Functional
+↳ [AI] AI-FR10-001 — Own pending order — canonical cancel
+  PUT http://localhost:3000/api/orders/40/cancel [200 OK, 308B, 19ms]
+  ✓  [AI] AI-FR10-001 — Own pending order — canonical cancel | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-001
+  │  — Own pending order — canonical cancel","status":200,
+  │ "elapsedMs":19,"contentType":"application/json; charse
+  │ t=utf-8"}'
+  └
+  ✓  AI-FR10-001 | traceability
+  ✓  AI-FR10-001 | required X-Student-Id header
+  ✓  AI-FR10-001 | semantic success class
+  GET http://localhost:3000/api/orders/40 [200 OK, 427B, 2ms]
+  ✓  [AI] AI-FR10-001 — Own pending order — canonical cancel | follow-up GET succeeds
+  ✓  [AI] AI-FR10-001 — Own pending order — canonical cancel | post-state oracle
+
+↳ [AI] AI-FR10-002 — Own confirmed order — canonical cancel
+  PUT http://localhost:3000/api/orders/42/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-002 — Own confirmed order — canonical cancel | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-002
+  │  — Own confirmed order — canonical cancel","status":20
+  │ 0,"elapsedMs":2,"contentType":"application/json; chars
+  │ et=utf-8"}'
+  └
+  ✓  AI-FR10-002 | traceability
+  ✓  AI-FR10-002 | required X-Student-Id header
+  ✓  AI-FR10-002 | semantic success class
+  GET http://localhost:3000/api/orders/42 [200 OK, 429B, 2ms]
+  ✓  [AI] AI-FR10-002 — Own confirmed order — canonical cancel | follow-up GET succeeds
+  ✓  [AI] AI-FR10-002 — Own confirmed order — canonical cancel | post-state oracle
+
+❏ AI — Functional / [AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected
+↳ [AI] AI-FR10-003 — Branch A — confirmed cancel allowed
+  PUT http://localhost:3000/api/orders/46/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-003 — Branch A — confirmed cancel allowed | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-003
+  │  — Branch A — confirmed cancel allowed","status":200,"
+  │ elapsedMs":2,"contentType":"application/json; charset=
+  │ utf-8"}'
+  └
+  ✓  AI-FR10-003 | traceability
+  ✓  AI-FR10-003 | required X-Student-Id header
+  ✓  AI-FR10-003 | semantic success class
+  GET http://localhost:3000/api/orders/46 [200 OK, 437B, 1ms]
+  ✓  [AI] AI-FR10-003 — Branch A — confirmed cancel allowed | follow-up GET succeeds
+  ✓  [AI] AI-FR10-003 — Branch A — confirmed cancel allowed | post-state oracle
+
+↳ [AI] AI-FR10-003 — Branch B — shipping cancel rejected
+  PUT http://localhost:3000/api/orders/47/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-003 — Branch B — shipping cancel rejected | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-003
+  │  — Branch B — shipping cancel rejected","status":200,"
+  │ elapsedMs":2,"contentType":"application/json; charset=
+  │ utf-8"}'
+  └
+  ✓  AI-FR10-003 | traceability
+  ✓  AI-FR10-003 | required X-Student-Id header
+  1. AI-FR10-003 | semantic rejection class
+  GET http://localhost:3000/api/orders/47 [200 OK, 436B, 1ms]
+  ✓  [AI] AI-FR10-003 — Branch B — shipping cancel rejected | follow-up GET succeeds
+  2. [AI] AI-FR10-003 — Branch B — shipping cancel rejected | post-state oracle
+
+❏ AI — Functional
+↳ [AI] AI-FR10-004 — Canonical request shape and mandatory student header
+  PUT http://localhost:3000/api/orders/41/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-004 — Canonical request shape and mandatory student header | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-004
+  │  — Canonical request shape and mandatory student heade
+  │ r","status":200,"elapsedMs":2,"contentType":"applicati
+  │ on/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-004 | traceability
+  ✓  AI-FR10-004 | required X-Student-Id header
+  ✓  AI-FR10-004 | semantic success class
+  GET http://localhost:3000/api/orders/41 [200 OK, 436B, 1ms]
+  ✓  [AI] AI-FR10-004 — Canonical request shape and mandatory student header | follow-up GET succeeds
+  ✓  [AI] AI-FR10-004 — Canonical request shape and mandatory student header | post-state oracle
+
+❏ AI — Domain
+↳ [AI] AI-FR10-005 — Non-existing plausible order ID
+  PUT http://localhost:3000/api/orders/10079/cancel [404 Not Found, 301B, 1ms]
+  ✓  [AI] AI-FR10-005 — Non-existing plausible order ID | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-005
+  │  — Non-existing plausible order ID","status":404,"elap
+  │ sedMs":1,"contentType":"application/json; charset=utf-
+  │ 8"}'
+  └
+  ✓  AI-FR10-005 | traceability
+  ✓  AI-FR10-005 | required X-Student-Id header
+
+↳ [AI] AI-FR10-006 — Order ID zero
+  PUT http://localhost:3000/api/orders/0/cancel [404 Not Found, 301B, 2ms]
+  ✓  [AI] AI-FR10-006 — Order ID zero | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-006
+  │  — Order ID zero","status":404,"elapsedMs":2,"contentT
+  │ ype":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-006 | traceability
+  ✓  AI-FR10-006 | required X-Student-Id header
+
+↳ [AI] AI-FR10-007 — Negative order ID
+  PUT http://localhost:3000/api/orders/-1/cancel [404 Not Found, 301B, 2ms]
+  ✓  [AI] AI-FR10-007 — Negative order ID | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-007
+  │  — Negative order ID","status":404,"elapsedMs":2,"cont
+  │ entType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-007 | traceability
+  ✓  AI-FR10-007 | required X-Student-Id header
+
+↳ [AI] AI-FR10-008 — Non-numeric order ID
+  PUT http://localhost:3000/api/orders/abc/cancel [404 Not Found, 301B, 1ms]
+  ✓  [AI] AI-FR10-008 — Non-numeric order ID | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-008
+  │  — Non-numeric order ID","status":404,"elapsedMs":1,"c
+  │ ontentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-008 | traceability
+  ✓  AI-FR10-008 | required X-Student-Id header
+
+↳ [AI] AI-FR10-009 — Decimal-like order ID
+  PUT http://localhost:3000/api/orders/1.5/cancel [404 Not Found, 301B, 1ms]
+  ✓  [AI] AI-FR10-009 — Decimal-like order ID | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-009
+  │  — Decimal-like order ID","status":404,"elapsedMs":1,"
+  │ contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-009 | traceability
+  ✓  AI-FR10-009 | required X-Student-Id header
+
+↳ [AI] AI-FR10-010 — Very large numeric order ID
+  PUT http://localhost:3000/api/orders/999999999999999999999/cancel [404 Not Found, 301B, 1ms]
+  ✓  [AI] AI-FR10-010 — Very large numeric order ID | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-010
+  │  — Very large numeric order ID","status":404,"elapsedM
+  │ s":1,"contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-010 | traceability
+  ✓  AI-FR10-010 | required X-Student-Id header
+
+↳ [AI] AI-FR10-011 — Missing path ID segment — Postman trace item
+  PUT http://localhost:3000/api/orders//cancel [404 Not Found, 461B, 1ms]
+  ✓  [AI] AI-FR10-011 — Missing path ID segment — Postman trace item | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-011
+  │  — Missing path ID segment — Postman trace item","stat
+  │ us":404,"elapsedMs":1,"contentType":"text/html; charse
+  │ t=utf-8"}'
+  └
+  ✓  AI-FR10-011 | traceability
+  ✓  AI-FR10-011 | required X-Student-Id header
+
+↳ [AI] AI-FR10-012 — Encoded quote/path-special ID
+  PUT http://localhost:3000/api/orders/%27/cancel [404 Not Found, 301B, 2ms]
+  ✓  [AI] AI-FR10-012 — Encoded quote/path-special ID | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-012
+  │  — Encoded quote/path-special ID","status":404,"elapse
+  │ dMs":2,"contentType":"application/json; charset=utf-8"
+  │ }'
+  └
+  ✓  AI-FR10-012 | traceability
+  ✓  AI-FR10-012 | required X-Student-Id header
+
+❏ AI — Boundary
+↳ [AI] AI-FR10-013 — Empty JSON object body
+  PUT http://localhost:3000/api/orders/48/cancel [200 OK, 308B, 3ms]
+  ✓  [AI] AI-FR10-013 — Empty JSON object body | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-013
+  │  — Empty JSON object body","status":200,"elapsedMs":3,
+  │ "contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-013 | traceability
+  ✓  AI-FR10-013 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/48 [200 OK, 436B, 2ms]
+  ✓  [AI] AI-FR10-013 — Empty JSON object body | follow-up GET succeeds
+  ✓  [AI] AI-FR10-013 — Empty JSON object body | post-state oracle
+
+↳ [AI] AI-FR10-014 — Malformed JSON body
+  PUT http://localhost:3000/api/orders/49/cancel [400 Bad Request, 1.51kB, 1ms]
+  ✓  [AI] AI-FR10-014 — Malformed JSON body | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-014
+  │  — Malformed JSON body","status":400,"elapsedMs":1,"co
+  │ ntentType":"text/html; charset=utf-8"}'
+  └
+  ✓  AI-FR10-014 | traceability
+  ✓  AI-FR10-014 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/49 [200 OK, 439B, 1ms]
+  ✓  [AI] AI-FR10-014 — Malformed JSON body | follow-up GET succeeds
+  ✓  [AI] AI-FR10-014 — Malformed JSON body | post-state oracle
+
+↳ [AI] AI-FR10-015 — JSON null body
+  PUT http://localhost:3000/api/orders/50/cancel [400 Bad Request, 1.55kB, 1ms]
+  ✓  [AI] AI-FR10-015 — JSON null body | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-015
+  │  — JSON null body","status":400,"elapsedMs":1,"content
+  │ Type":"text/html; charset=utf-8"}'
+  └
+  ✓  AI-FR10-015 | traceability
+  ✓  AI-FR10-015 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/50 [200 OK, 434B, 1ms]
+  ✓  [AI] AI-FR10-015 — JSON null body | follow-up GET succeeds
+  ✓  [AI] AI-FR10-015 — JSON null body | post-state oracle
+
+↳ [AI] AI-FR10-016 — Array body
+  PUT http://localhost:3000/api/orders/51/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-016 — Array body | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-016
+  │  — Array body","status":200,"elapsedMs":2,"contentType
+  │ ":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-016 | traceability
+  ✓  AI-FR10-016 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/51 [200 OK, 436B, 1ms]
+  ✓  [AI] AI-FR10-016 — Array body | follow-up GET succeeds
+  ✓  [AI] AI-FR10-016 — Array body | post-state oracle
+
+↳ [AI] AI-FR10-017 — Large unexpected JSON body
+  PUT http://localhost:3000/api/orders/52/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-017 — Large unexpected JSON body | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-017
+  │  — Large unexpected JSON body","status":200,"elapsedMs
+  │ ":2,"contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-017 | traceability
+  ✓  AI-FR10-017 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/52 [200 OK, 436B, 1ms]
+  ✓  [AI] AI-FR10-017 — Large unexpected JSON body | follow-up GET succeeds
+  ✓  [AI] AI-FR10-017 — Large unexpected JSON body | post-state oracle
+
+↳ [AI] AI-FR10-018 — Unknown benign query parameter
+  PUT http://localhost:3000/api/orders/53/cancel?foo=bar [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-018 — Unknown benign query parameter | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-018
+  │  — Unknown benign query parameter","status":200,"elaps
+  │ edMs":2,"contentType":"application/json; charset=utf-8
+  │ "}'
+  └
+  ✓  AI-FR10-018 | traceability
+  ✓  AI-FR10-018 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/53 [200 OK, 438B, 1ms]
+  ✓  [AI] AI-FR10-018 — Unknown benign query parameter | follow-up GET succeeds
+  ✓  [AI] AI-FR10-018 — Unknown benign query parameter | post-state oracle
+
+❏ AI — State / Sequence / [AI] AI-FR10-019 — Pending cancel then repeated cancel
+↳ [AI] AI-FR10-019 — First cancel
+  PUT http://localhost:3000/api/orders/54/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-019 — First cancel | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-019
+  │  — First cancel","status":200,"elapsedMs":2,"contentTy
+  │ pe":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-019 | traceability
+  ✓  AI-FR10-019 | required X-Student-Id header
+  ✓  AI-FR10-019 | semantic success class
+  GET http://localhost:3000/api/orders/54 [200 OK, 433B, 1ms]
+  ✓  [AI] AI-FR10-019 — First cancel | follow-up GET succeeds
+  ✓  [AI] AI-FR10-019 — First cancel | post-state oracle
+
+↳ [AI] AI-FR10-019 — Second cancel
+  PUT http://localhost:3000/api/orders/54/cancel [400 Bad Request, 313B, 1ms]
+  ✓  [AI] AI-FR10-019 — Second cancel | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-019
+  │  — Second cancel","status":400,"elapsedMs":1,"contentT
+  │ ype":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-019 | traceability
+  ✓  AI-FR10-019 | required X-Student-Id header
+  ✓  AI-FR10-019 | semantic rejection class
+  GET http://localhost:3000/api/orders/54 [200 OK, 433B, 1ms]
+  ✓  [AI] AI-FR10-019 — Second cancel | follow-up GET succeeds
+  ✓  [AI] AI-FR10-019 — Second cancel | post-state oracle
+
+❏ AI — State / Sequence / [AI] AI-FR10-020 — Confirmed cancel then repeated cancel
+↳ [AI] AI-FR10-020 — First cancel
+  PUT http://localhost:3000/api/orders/55/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-020 — First cancel | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-020
+  │  — First cancel","status":200,"elapsedMs":2,"contentTy
+  │ pe":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-020 | traceability
+  ✓  AI-FR10-020 | required X-Student-Id header
+  ✓  AI-FR10-020 | semantic success class
+  GET http://localhost:3000/api/orders/55 [200 OK, 435B, 1ms]
+  ✓  [AI] AI-FR10-020 — First cancel | follow-up GET succeeds
+  ✓  [AI] AI-FR10-020 — First cancel | post-state oracle
+
+↳ [AI] AI-FR10-020 — Second cancel
+  PUT http://localhost:3000/api/orders/55/cancel [400 Bad Request, 313B, 1ms]
+  ✓  [AI] AI-FR10-020 — Second cancel | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-020
+  │  — Second cancel","status":400,"elapsedMs":1,"contentT
+  │ ype":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-020 | traceability
+  ✓  AI-FR10-020 | required X-Student-Id header
+  ✓  AI-FR10-020 | semantic rejection class
+  GET http://localhost:3000/api/orders/55 [200 OK, 435B, 1ms]
+  ✓  [AI] AI-FR10-020 — Second cancel | follow-up GET succeeds
+  ✓  [AI] AI-FR10-020 — Second cancel | post-state oracle
+
+❏ AI — State / Sequence
+↳ [AI] AI-FR10-021 — Shipping order cannot be user-canceled
+  PUT http://localhost:3000/api/orders/43/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-021 — Shipping order cannot be user-canceled | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-021
+  │  — Shipping order cannot be user-canceled","status":20
+  │ 0,"elapsedMs":2,"contentType":"application/json; chars
+  │ et=utf-8"}'
+  └
+  ✓  AI-FR10-021 | traceability
+  ✓  AI-FR10-021 | required X-Student-Id header
+  3. AI-FR10-021 | semantic rejection class
+  GET http://localhost:3000/api/orders/43 [200 OK, 428B, 1ms]
+  ✓  [AI] AI-FR10-021 — Shipping order cannot be user-canceled | follow-up GET succeeds
+  4. [AI] AI-FR10-021 — Shipping order cannot be user-canceled | post-state oracle
+
+↳ [AI] AI-FR10-022 — Delivered final state cannot be canceled
+  PUT http://localhost:3000/api/orders/44/cancel [400 Bad Request, 313B, 1ms]
+  ✓  [AI] AI-FR10-022 — Delivered final state cannot be canceled | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-022
+  │  — Delivered final state cannot be canceled","status":
+  │ 400,"elapsedMs":1,"contentType":"application/json; cha
+  │ rset=utf-8"}'
+  └
+  ✓  AI-FR10-022 | traceability
+  ✓  AI-FR10-022 | required X-Student-Id header
+  ✓  AI-FR10-022 | semantic rejection class
+  GET http://localhost:3000/api/orders/44 [200 OK, 430B, 1ms]
+  ✓  [AI] AI-FR10-022 — Delivered final state cannot be canceled | follow-up GET succeeds
+  ✓  [AI] AI-FR10-022 — Delivered final state cannot be canceled | post-state oracle
+
+↳ [AI] AI-FR10-023 — Canceled final state cannot be canceled again
+  PUT http://localhost:3000/api/orders/45/cancel [400 Bad Request, 313B, 1ms]
+  ✓  [AI] AI-FR10-023 — Canceled final state cannot be canceled again | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-023
+  │  — Canceled final state cannot be canceled again","sta
+  │ tus":400,"elapsedMs":1,"contentType":"application/json
+  │ ; charset=utf-8"}'
+  └
+  ✓  AI-FR10-023 | traceability
+  ✓  AI-FR10-023 | required X-Student-Id header
+  ✓  AI-FR10-023 | semantic rejection class
+  GET http://localhost:3000/api/orders/45 [200 OK, 428B, 1ms]
+  ✓  [AI] AI-FR10-023 — Canceled final state cannot be canceled again | follow-up GET succeeds
+  ✓  [AI] AI-FR10-023 — Canceled final state cannot be canceled again | post-state oracle
+
+↳ [AI] AI-FR10-024 — Unauthenticated pending order remains unchanged
+  PUT http://localhost:3000/api/orders/56/cancel [401 Unauthorized, 301B, 1ms]
+  ✓  [AI] AI-FR10-024 — Unauthenticated pending order remains unchanged | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-024
+  │  — Unauthenticated pending order remains unchanged","s
+  │ tatus":401,"elapsedMs":1,"contentType":"application/js
+  │ on; charset=utf-8"}'
+  └
+  ✓  AI-FR10-024 | traceability
+  ✓  AI-FR10-024 | required X-Student-Id header
+  ✓  AI-FR10-024 | semantic rejection class
+  GET http://localhost:3000/api/orders/56 [200 OK, 432B, 2ms]
+  ✓  [AI] AI-FR10-024 — Unauthenticated pending order remains unchanged | follow-up GET succeeds
+  ✓  [AI] AI-FR10-024 — Unauthenticated pending order remains unchanged | post-state oracle
+
+↳ [AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged
+  PUT http://localhost:3000/api/orders/57/cancel [403 Forbidden, 295B, 1ms]
+  ✓  [AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-025
+  │  — Tampered-auth confirmed order remains unchanged","s
+  │ tatus":403,"elapsedMs":1,"contentType":"application/js
+  │ on; charset=utf-8"}'
+  └
+  ✓  AI-FR10-025 | traceability
+  ✓  AI-FR10-025 | required X-Student-Id header
+  ✓  AI-FR10-025 | semantic rejection class
+  GET http://localhost:3000/api/orders/57 [200 OK, 438B, 1ms]
+  ✓  [AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged | follow-up GET succeeds
+  ✓  [AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged | post-state oracle
+
+↳ [AI] AI-FR10-026 — Body status override cannot force delivered
+  PUT http://localhost:3000/api/orders/58/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-026 — Body status override cannot force delivered | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-026
+  │  — Body status override cannot force delivered","statu
+  │ s":200,"elapsedMs":2,"contentType":"application/json; 
+  │ charset=utf-8"}'
+  └
+  ✓  AI-FR10-026 | traceability
+  ✓  AI-FR10-026 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/58 [200 OK, 430B, 1ms]
+  ✓  AI-FR10-026 | never delivered
+
+↳ [AI] AI-FR10-027 — Query status override cannot force delivered
+  PUT http://localhost:3000/api/orders/59/cancel?status=delivered [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-027 — Query status override cannot force delivered | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-027
+  │  — Query status override cannot force delivered","stat
+  │ us":200,"elapsedMs":2,"contentType":"application/json;
+  │  charset=utf-8"}'
+  └
+  ✓  AI-FR10-027 | traceability
+  ✓  AI-FR10-027 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/59 [200 OK, 431B, 0µs]
+  ✓  AI-FR10-027 | never delivered
+
+❏ AI — Security
+↳ [AI] AI-FR10-028 — Missing Authorization header
+  PUT http://localhost:3000/api/orders/60/cancel [401 Unauthorized, 301B, 1ms]
+  ✓  [AI] AI-FR10-028 — Missing Authorization header | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-028
+  │  — Missing Authorization header","status":401,"elapsed
+  │ Ms":1,"contentType":"application/json; charset=utf-8"}
+  │ '
+  └
+  ✓  AI-FR10-028 | traceability
+  ✓  AI-FR10-028 | required X-Student-Id header
+  ✓  AI-FR10-028 | semantic rejection class
+  GET http://localhost:3000/api/orders/60 [200 OK, 430B, 1ms]
+  ✓  [AI] AI-FR10-028 — Missing Authorization header | follow-up GET succeeds
+  ✓  [AI] AI-FR10-028 — Missing Authorization header | post-state oracle
+
+↳ [AI] AI-FR10-029 — Empty Authorization value
+  PUT http://localhost:3000/api/orders/61/cancel [403 Forbidden, 295B, 1ms]
+  ✓  [AI] AI-FR10-029 — Empty Authorization value | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-029
+  │  — Empty Authorization value","status":403,"elapsedMs"
+  │ :1,"contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-029 | traceability
+  ✓  AI-FR10-029 | required X-Student-Id header
+  ✓  AI-FR10-029 | semantic rejection class
+  GET http://localhost:3000/api/orders/61 [200 OK, 428B, 1ms]
+  ✓  [AI] AI-FR10-029 — Empty Authorization value | follow-up GET succeeds
+  ✓  [AI] AI-FR10-029 — Empty Authorization value | post-state oracle
+
+↳ [AI] AI-FR10-030 — Bearer scheme without token
+  PUT http://localhost:3000/api/orders/62/cancel [401 Unauthorized, 301B, 0µs]
+  ✓  [AI] AI-FR10-030 — Bearer scheme without token | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-030
+  │  — Bearer scheme without token","status":401,"elapsedM
+  │ s":0,"contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-030 | traceability
+  ✓  AI-FR10-030 | required X-Student-Id header
+  ✓  AI-FR10-030 | semantic rejection class
+  GET http://localhost:3000/api/orders/62 [200 OK, 429B, 1ms]
+  ✓  [AI] AI-FR10-030 — Bearer scheme without token | follow-up GET succeeds
+  ✓  [AI] AI-FR10-030 — Bearer scheme without token | post-state oracle
+
+↳ [AI] AI-FR10-031 — Malformed JWT string
+  PUT http://localhost:3000/api/orders/63/cancel [403 Forbidden, 295B, 0µs]
+  ✓  [AI] AI-FR10-031 — Malformed JWT string | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-031
+  │  — Malformed JWT string","status":403,"elapsedMs":0,"c
+  │ ontentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-031 | traceability
+  ✓  AI-FR10-031 | required X-Student-Id header
+  ✓  AI-FR10-031 | semantic rejection class
+  GET http://localhost:3000/api/orders/63 [200 OK, 431B, 1ms]
+  ✓  [AI] AI-FR10-031 — Malformed JWT string | follow-up GET succeeds
+  ✓  [AI] AI-FR10-031 — Malformed JWT string | post-state oracle
+
+↳ [AI] AI-FR10-032 — JWT-like token with invalid signature
+  PUT http://localhost:3000/api/orders/64/cancel [403 Forbidden, 295B, 1ms]
+  ✓  [AI] AI-FR10-032 — JWT-like token with invalid signature | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-032
+  │  — JWT-like token with invalid signature","status":403
+  │ ,"elapsedMs":1,"contentType":"application/json; charse
+  │ t=utf-8"}'
+  └
+  ✓  AI-FR10-032 | traceability
+  ✓  AI-FR10-032 | required X-Student-Id header
+  ✓  AI-FR10-032 | semantic rejection class
+  GET http://localhost:3000/api/orders/64 [200 OK, 429B, 2ms]
+  ✓  [AI] AI-FR10-032 — JWT-like token with invalid signature | follow-up GET succeeds
+  ✓  [AI] AI-FR10-032 — JWT-like token with invalid signature | post-state oracle
+
+↳ [AI] AI-FR10-033 — Wrong authentication scheme
+  PUT http://localhost:3000/api/orders/65/cancel [403 Forbidden, 295B, 1ms]
+  ✓  [AI] AI-FR10-033 — Wrong authentication scheme | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-033
+  │  — Wrong authentication scheme","status":403,"elapsedM
+  │ s":1,"contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-033 | traceability
+  ✓  AI-FR10-033 | required X-Student-Id header
+  ✓  AI-FR10-033 | semantic rejection class
+  GET http://localhost:3000/api/orders/65 [200 OK, 428B, 1ms]
+  ✓  [AI] AI-FR10-033 — Wrong authentication scheme | follow-up GET succeeds
+  ✓  [AI] AI-FR10-033 — Wrong authentication scheme | post-state oracle
+
+↳ [AI] AI-FR10-034 — User A cannot cancel User B pending order
+  PUT http://localhost:3000/api/orders/66/cancel [404 Not Found, 301B, 1ms]
+  ✓  [AI] AI-FR10-034 — User A cannot cancel User B pending order | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-034
+  │  — User A cannot cancel User B pending order","status"
+  │ :404,"elapsedMs":1,"contentType":"application/json; ch
+  │ arset=utf-8"}'
+  └
+  ✓  AI-FR10-034 | traceability
+  ✓  AI-FR10-034 | required X-Student-Id header
+  ✓  AI-FR10-034 | semantic rejection class
+  GET http://localhost:3000/api/orders/66 [200 OK, 431B, 1ms]
+  ✓  [AI] AI-FR10-034 — User A cannot cancel User B pending order | follow-up GET succeeds
+  ✓  [AI] AI-FR10-034 — User A cannot cancel User B pending order | post-state oracle
+
+↳ [AI] AI-FR10-035 — User A cannot cancel User B confirmed order
+  PUT http://localhost:3000/api/orders/67/cancel [404 Not Found, 301B, 1ms]
+  ✓  [AI] AI-FR10-035 — User A cannot cancel User B confirmed order | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-035
+  │  — User A cannot cancel User B confirmed order","statu
+  │ s":404,"elapsedMs":1,"contentType":"application/json; 
+  │ charset=utf-8"}'
+  └
+  ✓  AI-FR10-035 | traceability
+  ✓  AI-FR10-035 | required X-Student-Id header
+  ✓  AI-FR10-035 | semantic rejection class
+  GET http://localhost:3000/api/orders/67 [200 OK, 435B, 1ms]
+  ✓  [AI] AI-FR10-035 — User A cannot cancel User B confirmed order | follow-up GET succeeds
+  ✓  [AI] AI-FR10-035 — User A cannot cancel User B confirmed order | post-state oracle
+
+↳ [AI] AI-FR10-036 — Body user_id override cannot change authorization
+  PUT http://localhost:3000/api/orders/68/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-036 — Body user_id override cannot change authorization | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-036
+  │  — Body user_id override cannot change authorization",
+  │ "status":200,"elapsedMs":2,"contentType":"application/
+  │ json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-036 | traceability
+  ✓  AI-FR10-036 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/68 [200 OK, 438B, 2ms]
+  ✓  [AI] AI-FR10-036 — Body user_id override cannot change authorization | follow-up GET succeeds
+  ✓  [AI] AI-FR10-036 — Body user_id override cannot change authorization | post-state oracle
+
+↳ [AI] AI-FR10-037 — Query/path order ID conflict
+  PUT http://localhost:3000/api/orders/69/cancel?id=66 [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-037 — Query/path order ID conflict | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-037
+  │  — Query/path order ID conflict","status":200,"elapsed
+  │ Ms":2,"contentType":"application/json; charset=utf-8"}
+  │ '
+  └
+  ✓  AI-FR10-037 | traceability
+  ✓  AI-FR10-037 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/66   GET http://localhost:3000/api/orders/69 [200 OK, 431B, 1ms]
+  ✓  [AI] AI-FR10-037 — Query/path order ID conflict | follow-up GET succeeds
+  ✓  [AI] AI-FR10-037 — Query/path order ID conflict | post-state oracle
+[200 OK, 432B, 3ms]
+  ✓  [AI] AI-FR10-037 — Query/path order ID conflict | follow-up GET succeeds
+  ✓  [AI] AI-FR10-037 — Query/path order ID conflict | post-state oracle
+
+↳ [AI] AI-FR10-038 — Boolean-style injection probe in path ID
+  PUT http://localhost:3000/api/orders/1%27%20OR%20%271%27%3D%271/cancel [404 Not Found, 301B, 1ms]
+  ✓  [AI] AI-FR10-038 — Boolean-style injection probe in path ID | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-038
+  │  — Boolean-style injection probe in path ID","status":
+  │ 404,"elapsedMs":1,"contentType":"application/json; cha
+  │ rset=utf-8"}'
+  └
+  ✓  AI-FR10-038 | traceability
+  ✓  AI-FR10-038 | required X-Student-Id header
+
+❏ AI — Schema / Characterization
+↳ [AI] AI-FR10-039 — Successful cancel response-shape characterization
+  PUT http://localhost:3000/api/orders/70/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-039 — Successful cancel response-shape characterization | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-039
+  │  — Successful cancel response-shape characterization",
+  │ "status":200,"elapsedMs":2,"contentType":"application/
+  │ json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-039 | traceability
+  ✓  AI-FR10-039 | required X-Student-Id header
+  ✓  AI-FR10-039 | semantic success class
+  ┌
+  │ 'FR10 RESPONSE CHARACTERIZATION', '{"id":"AI-FR10-039"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":41}'
+  └
+  GET http://localhost:3000/api/orders/70 [200 OK, 433B, 1ms]
+  ✓  [AI] AI-FR10-039 — Successful cancel response-shape characterization | follow-up GET succeeds
+  ✓  [AI] AI-FR10-039 — Successful cancel response-shape characterization | post-state oracle
+
+↳ [AI] AI-FR10-040 — Invalid shipping transition response characterization
+  PUT http://localhost:3000/api/orders/71/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-040 — Invalid shipping transition response characterization | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-040
+  │  — Invalid shipping transition response characterizati
+  │ on","status":200,"elapsedMs":2,"contentType":"applicat
+  │ ion/json; charset=utf-8"}'
+  └
+  ✓  AI-FR10-040 | traceability
+  ✓  AI-FR10-040 | required X-Student-Id header
+  5. AI-FR10-040 | semantic rejection class
+  ┌
+  │ 'FR10 RESPONSE CHARACTERIZATION', '{"id":"AI-FR10-040"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":41}'
+  └
+  GET http://localhost:3000/api/orders/71 [200 OK, 434B, 1ms]
+  ✓  [AI] AI-FR10-040 — Invalid shipping transition response characterization | follow-up GET succeeds
+  6. [AI] AI-FR10-040 — Invalid shipping transition response characterization | post-state oracle
+
+↳ [AI] AI-FR10-041 — Authentication failure response characterization
+  PUT http://localhost:3000/api/orders/72/cancel [401 Unauthorized, 301B, 1ms]
+  ✓  [AI] AI-FR10-041 — Authentication failure response characterization | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-041
+  │  — Authentication failure response characterization","
+  │ status":401,"elapsedMs":1,"contentType":"application/j
+  │ son; charset=utf-8"}'
+  └
+  ✓  AI-FR10-041 | traceability
+  ✓  AI-FR10-041 | required X-Student-Id header
+  ✓  AI-FR10-041 | semantic rejection class
+  ┌
+  │ 'FR10 RESPONSE CHARACTERIZATION', '{"id":"AI-FR10-041"
+  │ ,"status":401,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":24}'
+  └
+  GET http://localhost:3000/api/orders/72 [200 OK, 429B, 1ms]
+  ✓  [AI] AI-FR10-041 — Authentication failure response characterization | follow-up GET succeeds
+  ✓  [AI] AI-FR10-041 — Authentication failure response characterization | post-state oracle
+
+↳ [AI] AI-FR10-042 — Official X-Student-Id evidence assertion
+  PUT http://localhost:3000/api/orders/73/cancel [200 OK, 308B, 2ms]
+  ✓  [AI] AI-FR10-042 — Official X-Student-Id evidence assertion | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[AI] AI-FR10-042
+  │  — Official X-Student-Id evidence assertion","status":
+  │ 200,"elapsedMs":2,"contentType":"application/json; cha
+  │ rset=utf-8"}'
+  └
+  ✓  AI-FR10-042 | traceability
+  ✓  AI-FR10-042 | required X-Student-Id header
+
+❏ HUMAN — Additional Coverage
+↳ [HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner
+  PUT http://localhost:3000/api/orders/74/cancel [404 Not Found, 301B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-043 — Cross-user cancellation with forged body owne
+  │ r","status":404,"elapsedMs":1,"contentType":"applicati
+  │ on/json; charset=utf-8"}'
+  └
+  ✓  HUMAN-FR10-043 | traceability
+  ✓  HUMAN-FR10-043 | required X-Student-Id header
+  ✓  HUMAN-FR10-043 | semantic rejection class
+  GET http://localhost:3000/api/orders/74 [200 OK, 439B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner | follow-up GET succeeds
+  ✓  [HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner | post-state oracle
+
+❏ HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-044 — Existing foreign order versus nonexistent order enumeration
+↳ [HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order
+  PUT http://localhost:3000/api/orders/75/cancel [404 Not Found, 301B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-044 — Request 1 — foreign existing order","status":
+  │ 404,"elapsedMs":1,"contentType":"application/json; cha
+  │ rset=utf-8"}'
+  └
+  ✓  HUMAN-FR10-044 | traceability
+  ✓  HUMAN-FR10-044 | required X-Student-Id header
+  ✓  HUMAN-FR10-044 | semantic rejection class
+  GET http://localhost:3000/api/orders/75 [200 OK, 439B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order | follow-up GET succeeds
+  ✓  [HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order | post-state oracle
+
+↳ [HUMAN] HUMAN-FR10-044 — Request 2 — nonexistent order
+  PUT http://localhost:3000/api/orders/10079/cancel [404 Not Found, 301B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-044 — Request 2 — nonexistent order | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-044 — Request 2 — nonexistent order","status":404,"
+  │ elapsedMs":1,"contentType":"application/json; charset=
+  │ utf-8"}'
+  └
+  ✓  HUMAN-FR10-044 | traceability
+  ✓  HUMAN-FR10-044 | required X-Student-Id header
+  ┌
+  │ 'HUMAN-FR10-044 ENUMERATION COMPARISON', '{"foreignSta
+  │ tus":"404","nonexistentStatus":"404","foreignBody":"{\
+  │ \"error\\":\\"Order not found\\"}","nonexistentBody":"
+  │ {\\"error\\":\\"Order not found\\"}"}'
+  └
+  ✓  HUMAN-FR10-044 | no sensitive foreign-order details asserted
+
+❏ HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-045 — Unauthorized attempt followed by rightful-owner cancellation
+↳ [HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt
+  PUT http://localhost:3000/api/orders/76/cancel [404 Not Found, 301B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-045 — Step 1 — unauthorized User A attempt","status
+  │ ":404,"elapsedMs":1,"contentType":"application/json; c
+  │ harset=utf-8"}'
+  └
+  ✓  HUMAN-FR10-045 | traceability
+  ✓  HUMAN-FR10-045 | required X-Student-Id header
+  ✓  HUMAN-FR10-045 | semantic rejection class
+  GET http://localhost:3000/api/orders/76 [200 OK, 443B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt | follow-up GET succeeds
+  ✓  [HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt | post-state oracle
+
+↳ [HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation
+  PUT http://localhost:3000/api/orders/76/cancel [200 OK, 308B, 2ms]
+  ✓  [HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-045 — Step 2 — rightful User B cancellation","statu
+  │ s":200,"elapsedMs":2,"contentType":"application/json; 
+  │ charset=utf-8"}'
+  └
+  ✓  HUMAN-FR10-045 | traceability
+  ✓  HUMAN-FR10-045 | required X-Student-Id header
+  ✓  HUMAN-FR10-045 | semantic success class
+  GET http://localhost:3000/api/orders/76 [200 OK, 442B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation | follow-up GET succeeds
+  ✓  [HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation | post-state oracle
+
+❏ HUMAN — Additional Coverage
+↳ [HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm
+  ┌
+  │ `Using "btoa" is deprecated. Use "require('btoa')" ins
+  │ tead.`
+  └
+  PUT http://localhost:3000/api/orders/77/cancel [403 Forbidden, 295B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-046 — Unsigned JWT using the none algorithm","statu
+  │ s":403,"elapsedMs":1,"contentType":"application/json; 
+  │ charset=utf-8"}'
+  └
+  ✓  HUMAN-FR10-046 | traceability
+  ✓  HUMAN-FR10-046 | required X-Student-Id header
+  ✓  HUMAN-FR10-046 | semantic rejection class
+  GET http://localhost:3000/api/orders/77 [200 OK, 434B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm | follow-up GET succeeds
+  ✓  [HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm | post-state oracle
+
+↳ [HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership
+  PUT http://localhost:3000/api/orders/78/cancel [404 Not Found, 301B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-047 — Duplicate JSON keys must not bypass ownership
+  │ ","status":404,"elapsedMs":1,"contentType":"applicatio
+  │ n/json; charset=utf-8"}'
+  └
+  ✓  HUMAN-FR10-047 | traceability
+  ✓  HUMAN-FR10-047 | required X-Student-Id header
+  ✓  HUMAN-FR10-047 | semantic rejection class
+  GET http://localhost:3000/api/orders/78 [200 OK, 439B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership | follow-up GET succeeds
+  ✓  [HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership | post-state oracle
+
+↳ [HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation
+  POST http://localhost:3000/api/orders/79/cancel [404 Not Found, 464B, 1ms]
+  ✓  [HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation | collection X-Student-Id
+  ┌
+  │ 'FR10 CHARACTERIZATION', '{"request":"[HUMAN] HUMAN-FR
+  │ 10-048 — HTTP method-override header must not create u
+  │ nintended cancellation","status":404,"elapsedMs":1,"co
+  │ ntentType":"text/html; charset=utf-8"}'
+  └
+  ✓  HUMAN-FR10-048 | traceability
+  ✓  HUMAN-FR10-048 | required X-Student-Id header
+  GET http://localhost:3000/api/orders/79 [200 OK, 434B, 0µs]
+  ✓  [HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation | follow-up GET succeeds
+  ✓  [HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation | post-state oracle
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │              96 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │             106 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │              55 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │             275 │               6 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 1068ms                                  │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 11.48kB (approx)                       │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 1ms [min: 1ms, max: 19ms, s.d.: 1ms] │
+└─────────────────────────────────────────────────────────────┘
+
+[31m  # [39m[31m failure        [39m[31m detail                                                                                                                                                            [39m
+[90m    [39m[90m                [39m[90m                                                                                                                                                                   [39m
+ 1.  AssertionError  AI-FR10-003 | semantic rejection class                                                                                                                            
+                     expected 200 to be at least 400                                                                                                                                   
+                     at assertion:2 in test-script                                                                                                                                     
+                     inside "AI — Functional / [AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected / [AI] AI-FR10-003 — Branch B — shipping cancel rejected" 
+[90m    [39m[90m                [39m[90m                                                                                                                                                                   [39m
+ 2.  AssertionError  [AI] AI-FR10-003 — Branch B — shipping cancel rejected | post-state oracle                                                                                        
+                     expected 'canceled' to deeply equal 'shipping'                                                                                                                    
+                     at assertion:4 in test-script                                                                                                                                     
+                     inside "AI — Functional / [AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected / [AI] AI-FR10-003 — Branch B — shipping cancel rejected" 
+[90m    [39m[90m                [39m[90m                                                                                                                                                                   [39m
+ 3.  AssertionError  AI-FR10-021 | semantic rejection class                                                                                                                            
+                     expected 200 to be at least 400                                                                                                                                   
+                     at assertion:2 in test-script                                                                                                                                     
+                     inside "AI — State / Sequence / [AI] AI-FR10-021 — Shipping order cannot be user-canceled"                                                                        
+[90m    [39m[90m                [39m[90m                                                                                                                                                                   [39m
+ 4.  AssertionError  [AI] AI-FR10-021 — Shipping order cannot be user-canceled | post-state oracle                                                                                     
+                     expected 'canceled' to deeply equal 'shipping'                                                                                                                    
+                     at assertion:4 in test-script                                                                                                                                     
+                     inside "AI — State / Sequence / [AI] AI-FR10-021 — Shipping order cannot be user-canceled"                                                                        
+[90m    [39m[90m                [39m[90m                                                                                                                                                                   [39m
+ 5.  AssertionError  AI-FR10-040 | semantic rejection class                                                                                                                            
+                     expected 200 to be at least 400                                                                                                                                   
+                     at assertion:2 in test-script                                                                                                                                     
+                     inside "AI — Schema / Characterization / [AI] AI-FR10-040 — Invalid shipping transition response characterization"                                                
+[90m    [39m[90m                [39m[90m                                                                                                                                                                   [39m
+ 6.  AssertionError  [AI] AI-FR10-040 — Invalid shipping transition response characterization | post-state oracle                                                                      
+                     expected 'canceled' to deeply equal 'shipping'                                                                                                                    
+                     at assertion:4 in test-script                                                                                                                                     
+                     inside "AI — Schema / Characterization / [AI] AI-FR10-040 — Invalid shipping transition response characterization"                                                

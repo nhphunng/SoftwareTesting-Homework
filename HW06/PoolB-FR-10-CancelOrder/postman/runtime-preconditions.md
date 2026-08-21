@@ -38,7 +38,7 @@ No token/password is stored in the tracked runtime manifest or this document.
 
 ## Fixture creation method
 
-All 39 dedicated order fixtures were created through documented API paths:
+All 40 dedicated order fixtures are created through documented API paths:
 
 ```text
 POST /api/register
@@ -63,12 +63,12 @@ The script creates a fresh timestamped fixture set, generates random passwords f
 ## Prepared state inventory
 
 ```text
-PENDING:   27 dedicated orders
+PENDING:   28 dedicated orders
 CONFIRMED:  7 dedicated orders
 SHIPPING:   3 dedicated orders
 DELIVERED:  1 dedicated order
 CANCELED:   1 dedicated order
-TOTAL:     39 dedicated orders
+TOTAL:     40 dedicated orders
 ```
 
 Each mutation-sensitive testcase/group has a dedicated order variable so an earlier cancellation does not destroy a later testcase's precondition.
@@ -76,7 +76,7 @@ Each mutation-sensitive testcase/group has a dedicated order variable so an earl
 Ownership distribution in the current fixture set:
 
 ```text
-User A: 33 orders
+User A: 34 orders
 User B:  6 orders
 ```
 
@@ -93,16 +93,16 @@ PoolB-FR-10-CancelOrder/postman/runtime-fixture-manifest.json
 Verification performed after setup:
 
 ```text
-manifest orders:       39
+manifest orders:       40
 database mismatches:    0
-private env variables: 49
+private env variables: 50
 blank private env vars:  0
 ```
 
 State distribution verified against the live SQLite database:
 
 ```text
-pending:   27
+pending:   28
 confirmed:  7
 shipping:   3
 delivered:  1

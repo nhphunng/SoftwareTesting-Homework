@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="HW06 — FR-10 Cancel Order — 23127194" tests="53" time="0.063">
+  <testsuite name="AI — Functional / [AI] AI-FR10-001 — Own pending order — canonical cancel" id="461e6cfb-f437-4aac-8c9c-8871e043f169" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-001 — Own pending order — canonical cancel | collection X-Student-Id" time="0.002" classname="AiFunctionalAiAiFr10001OwnPendingOrderCanonicalCancel"/>
+    <testcase name="AI-FR10-001 | traceability" time="0.002" classname="AiFunctionalAiAiFr10001OwnPendingOrderCanonicalCancel"/>
+    <testcase name="AI-FR10-001 | required X-Student-Id header" time="0.002" classname="AiFunctionalAiAiFr10001OwnPendingOrderCanonicalCancel"/>
+    <testcase name="AI-FR10-001 | semantic success class" time="0.002" classname="AiFunctionalAiAiFr10001OwnPendingOrderCanonicalCancel"/>
+    <testcase name="[AI] AI-FR10-001 — Own pending order — canonical cancel | follow-up GET succeeds" time="0.002" classname="AiFunctionalAiAiFr10001OwnPendingOrderCanonicalCancel"/>
+    <testcase name="[AI] AI-FR10-001 — Own pending order — canonical cancel | post-state oracle" time="0.002" classname="AiFunctionalAiAiFr10001OwnPendingOrderCanonicalCancel"/>
+  </testsuite>
+  <testsuite name="AI — Functional / [AI] AI-FR10-002 — Own confirmed order — canonical cancel" id="d5df795c-7937-4f75-8ce9-d07ce55bb655" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-002 — Own confirmed order — canonical cancel | collection X-Student-Id" time="0.002" classname="AiFunctionalAiAiFr10002OwnConfirmedOrderCanonicalCancel"/>
+    <testcase name="AI-FR10-002 | traceability" time="0.002" classname="AiFunctionalAiAiFr10002OwnConfirmedOrderCanonicalCancel"/>
+    <testcase name="AI-FR10-002 | required X-Student-Id header" time="0.002" classname="AiFunctionalAiAiFr10002OwnConfirmedOrderCanonicalCancel"/>
+    <testcase name="AI-FR10-002 | semantic success class" time="0.002" classname="AiFunctionalAiAiFr10002OwnConfirmedOrderCanonicalCancel"/>
+    <testcase name="[AI] AI-FR10-002 — Own confirmed order — canonical cancel | follow-up GET succeeds" time="0.002" classname="AiFunctionalAiAiFr10002OwnConfirmedOrderCanonicalCancel"/>
+    <testcase name="[AI] AI-FR10-002 — Own confirmed order — canonical cancel | post-state oracle" time="0.002" classname="AiFunctionalAiAiFr10002OwnConfirmedOrderCanonicalCancel"/>
+  </testsuite>
+  <testsuite name="AI — Functional / [AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected / [AI] AI-FR10-003 — Branch A — confirmed cancel allowed" id="af66897c-6b09-4c15-9d60-62e8ba51eea6" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-003 — Branch A — confirmed cancel allowed | collection X-Student-Id" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchAConfirmedCancelAllowed"/>
+    <testcase name="AI-FR10-003 | traceability" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchAConfirmedCancelAllowed"/>
+    <testcase name="AI-FR10-003 | required X-Student-Id header" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchAConfirmedCancelAllowed"/>
+    <testcase name="AI-FR10-003 | semantic success class" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchAConfirmedCancelAllowed"/>
+    <testcase name="[AI] AI-FR10-003 — Branch A — confirmed cancel allowed | follow-up GET succeeds" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchAConfirmedCancelAllowed"/>
+    <testcase name="[AI] AI-FR10-003 — Branch A — confirmed cancel allowed | post-state oracle" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchAConfirmedCancelAllowed"/>
+  </testsuite>
+  <testsuite name="AI — Functional / [AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected / [AI] AI-FR10-003 — Branch B — shipping cancel rejected" id="3a964264-1213-4c35-9a74-fcf215492fc8" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="2" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-003 — Branch B — shipping cancel rejected | collection X-Student-Id" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchBShippingCancelRejected"/>
+    <testcase name="AI-FR10-003 | traceability" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchBShippingCancelRejected"/>
+    <testcase name="AI-FR10-003 | required X-Student-Id header" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchBShippingCancelRejected"/>
+    <testcase name="AI-FR10-003 | semantic rejection class" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchBShippingCancelRejected">
+      <failure type="AssertionFailure" message="expected 200 to be at least 400">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr10-cancel-order-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-10 Cancel Order — 23127194.]]>
+        <![CDATA[Request name: AI — Functional / [AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected / [AI] AI-FR10-003 — Branch B — shipping cancel rejected.]]>
+        <![CDATA[Test description: AI-FR10-003 | semantic rejection class.]]>
+        <![CDATA[Error message: expected 200 to be at least 400.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 200 to be at least 400
+   at Object.eval sandbox-script.js:3:4).]]>
+      </failure>
+    </testcase>
+    <testcase name="[AI] AI-FR10-003 — Branch B — shipping cancel rejected | follow-up GET succeeds" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchBShippingCancelRejected"/>
+    <testcase name="[AI] AI-FR10-003 — Branch B — shipping cancel rejected | post-state oracle" time="0.001" classname="AiFunctionalAiAiFr10003SemanticBoundaryConfirmedAllowedVsShippingRejectedAiAiFr10003BranchBShippingCancelRejected">
+      <failure type="AssertionFailure" message="expected 'canceled' to deeply equal 'shipping'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr10-cancel-order-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-10 Cancel Order — 23127194.]]>
+        <![CDATA[Request name: AI — Functional / [AI] AI-FR10-003 — Semantic boundary — confirmed allowed vs shipping rejected / [AI] AI-FR10-003 — Branch B — shipping cancel rejected.]]>
+        <![CDATA[Test description: [AI] AI-FR10-003 — Branch B — shipping cancel rejected | post-state oracle.]]>
+        <![CDATA[Error message: expected 'canceled' to deeply equal 'shipping'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 'canceled' to deeply equal 'shipping'
+   at Object.eval sandbox-script.js:5:4).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Functional / [AI] AI-FR10-004 — Canonical request shape and mandatory student header" id="e16ae2d5-cbf9-470c-9e0c-71150fb822b3" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-004 — Canonical request shape and mandatory student header | collection X-Student-Id" time="0.001" classname="AiFunctionalAiAiFr10004CanonicalRequestShapeAndMandatoryStudentHeader"/>
+    <testcase name="AI-FR10-004 | traceability" time="0.001" classname="AiFunctionalAiAiFr10004CanonicalRequestShapeAndMandatoryStudentHeader"/>
+    <testcase name="AI-FR10-004 | required X-Student-Id header" time="0.001" classname="AiFunctionalAiAiFr10004CanonicalRequestShapeAndMandatoryStudentHeader"/>
+    <testcase name="AI-FR10-004 | semantic success class" time="0.001" classname="AiFunctionalAiAiFr10004CanonicalRequestShapeAndMandatoryStudentHeader"/>
+    <testcase name="[AI] AI-FR10-004 — Canonical request shape and mandatory student header | follow-up GET succeeds" time="0.001" classname="AiFunctionalAiAiFr10004CanonicalRequestShapeAndMandatoryStudentHeader"/>
+    <testcase name="[AI] AI-FR10-004 — Canonical request shape and mandatory student header | post-state oracle" time="0.001" classname="AiFunctionalAiAiFr10004CanonicalRequestShapeAndMandatoryStudentHeader"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-005 — Non-existing plausible order ID" id="707d1c4c-54a7-49c4-b0ea-9d92ae643cb3" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-005 — Non-existing plausible order ID | collection X-Student-Id" time="0.001" classname="AiDomainAiAiFr10005NonExistingPlausibleOrderId"/>
+    <testcase name="AI-FR10-005 | traceability" time="0.001" classname="AiDomainAiAiFr10005NonExistingPlausibleOrderId"/>
+    <testcase name="AI-FR10-005 | required X-Student-Id header" time="0.001" classname="AiDomainAiAiFr10005NonExistingPlausibleOrderId"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-006 — Order ID zero" id="fd841c02-2568-48b2-9142-3f4dbeea2c70" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-006 — Order ID zero | collection X-Student-Id" time="0.002" classname="AiDomainAiAiFr10006OrderIdZero"/>
+    <testcase name="AI-FR10-006 | traceability" time="0.002" classname="AiDomainAiAiFr10006OrderIdZero"/>
+    <testcase name="AI-FR10-006 | required X-Student-Id header" time="0.002" classname="AiDomainAiAiFr10006OrderIdZero"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-007 — Negative order ID" id="f41d9599-f551-4a47-b88a-945e6d94343e" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-007 — Negative order ID | collection X-Student-Id" time="0.002" classname="AiDomainAiAiFr10007NegativeOrderId"/>
+    <testcase name="AI-FR10-007 | traceability" time="0.002" classname="AiDomainAiAiFr10007NegativeOrderId"/>
+    <testcase name="AI-FR10-007 | required X-Student-Id header" time="0.002" classname="AiDomainAiAiFr10007NegativeOrderId"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-008 — Non-numeric order ID" id="6074507c-ab04-40d3-9791-3d83fd657eeb" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-008 — Non-numeric order ID | collection X-Student-Id" time="0.001" classname="AiDomainAiAiFr10008NonNumericOrderId"/>
+    <testcase name="AI-FR10-008 | traceability" time="0.001" classname="AiDomainAiAiFr10008NonNumericOrderId"/>
+    <testcase name="AI-FR10-008 | required X-Student-Id header" time="0.001" classname="AiDomainAiAiFr10008NonNumericOrderId"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-009 — Decimal-like order ID" id="5446f1d3-5ada-4c29-8740-bce9ea0256ff" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-009 — Decimal-like order ID | collection X-Student-Id" time="0.001" classname="AiDomainAiAiFr10009DecimalLikeOrderId"/>
+    <testcase name="AI-FR10-009 | traceability" time="0.001" classname="AiDomainAiAiFr10009DecimalLikeOrderId"/>
+    <testcase name="AI-FR10-009 | required X-Student-Id header" time="0.001" classname="AiDomainAiAiFr10009DecimalLikeOrderId"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-010 — Very large numeric order ID" id="148694fa-91c5-4b17-82b9-202b307c0570" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-010 — Very large numeric order ID | collection X-Student-Id" time="0.001" classname="AiDomainAiAiFr10010VeryLargeNumericOrderId"/>
+    <testcase name="AI-FR10-010 | traceability" time="0.001" classname="AiDomainAiAiFr10010VeryLargeNumericOrderId"/>
+    <testcase name="AI-FR10-010 | required X-Student-Id header" time="0.001" classname="AiDomainAiAiFr10010VeryLargeNumericOrderId"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-011 — Missing path ID segment — Postman trace item" id="d995fc13-9c4a-40c3-8837-2e0e4d402327" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-011 — Missing path ID segment — Postman trace item | collection X-Student-Id" time="0.001" classname="AiDomainAiAiFr10011MissingPathIdSegmentPostmanTraceItem"/>
+    <testcase name="AI-FR10-011 | traceability" time="0.001" classname="AiDomainAiAiFr10011MissingPathIdSegmentPostmanTraceItem"/>
+    <testcase name="AI-FR10-011 | required X-Student-Id header" time="0.001" classname="AiDomainAiAiFr10011MissingPathIdSegmentPostmanTraceItem"/>
+  </testsuite>
+  <testsuite name="AI — Domain / [AI] AI-FR10-012 — Encoded quote/path-special ID" id="7c2e650f-fb48-436d-ad36-8101ac24c15f" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-012 — Encoded quote/path-special ID | collection X-Student-Id" time="0.002" classname="AiDomainAiAiFr10012EncodedQuotePathSpecialId"/>
+    <testcase name="AI-FR10-012 | traceability" time="0.002" classname="AiDomainAiAiFr10012EncodedQuotePathSpecialId"/>
+    <testcase name="AI-FR10-012 | required X-Student-Id header" time="0.002" classname="AiDomainAiAiFr10012EncodedQuotePathSpecialId"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR10-013 — Empty JSON object body" id="b3a26fd8-147c-4f74-ba85-153d80e9e6b2" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-013 — Empty JSON object body | collection X-Student-Id" time="0.002" classname="AiBoundaryAiAiFr10013EmptyJsonObjectBody"/>
+    <testcase name="AI-FR10-013 | traceability" time="0.002" classname="AiBoundaryAiAiFr10013EmptyJsonObjectBody"/>
+    <testcase name="AI-FR10-013 | required X-Student-Id header" time="0.002" classname="AiBoundaryAiAiFr10013EmptyJsonObjectBody"/>
+    <testcase name="[AI] AI-FR10-013 — Empty JSON object body | follow-up GET succeeds" time="0.002" classname="AiBoundaryAiAiFr10013EmptyJsonObjectBody"/>
+    <testcase name="[AI] AI-FR10-013 — Empty JSON object body | post-state oracle" time="0.002" classname="AiBoundaryAiAiFr10013EmptyJsonObjectBody"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR10-014 — Malformed JSON body" id="920496e4-4601-4a8a-905b-bdb7b0d39144" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-014 — Malformed JSON body | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr10014MalformedJsonBody"/>
+    <testcase name="AI-FR10-014 | traceability" time="0.001" classname="AiBoundaryAiAiFr10014MalformedJsonBody"/>
+    <testcase name="AI-FR10-014 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr10014MalformedJsonBody"/>
+    <testcase name="[AI] AI-FR10-014 — Malformed JSON body | follow-up GET succeeds" time="0.001" classname="AiBoundaryAiAiFr10014MalformedJsonBody"/>
+    <testcase name="[AI] AI-FR10-014 — Malformed JSON body | post-state oracle" time="0.001" classname="AiBoundaryAiAiFr10014MalformedJsonBody"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR10-015 — JSON null body" id="7066b618-e26c-4823-8b02-42b452bd66bf" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-015 — JSON null body | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr10015JsonNullBody"/>
+    <testcase name="AI-FR10-015 | traceability" time="0.001" classname="AiBoundaryAiAiFr10015JsonNullBody"/>
+    <testcase name="AI-FR10-015 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr10015JsonNullBody"/>
+    <testcase name="[AI] AI-FR10-015 — JSON null body | follow-up GET succeeds" time="0.001" classname="AiBoundaryAiAiFr10015JsonNullBody"/>
+    <testcase name="[AI] AI-FR10-015 — JSON null body | post-state oracle" time="0.001" classname="AiBoundaryAiAiFr10015JsonNullBody"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR10-016 — Array body" id="e4dbf1e3-1f42-4229-935f-c1b8c54d0e5b" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-016 — Array body | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr10016ArrayBody"/>
+    <testcase name="AI-FR10-016 | traceability" time="0.001" classname="AiBoundaryAiAiFr10016ArrayBody"/>
+    <testcase name="AI-FR10-016 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr10016ArrayBody"/>
+    <testcase name="[AI] AI-FR10-016 — Array body | follow-up GET succeeds" time="0.001" classname="AiBoundaryAiAiFr10016ArrayBody"/>
+    <testcase name="[AI] AI-FR10-016 — Array body | post-state oracle" time="0.001" classname="AiBoundaryAiAiFr10016ArrayBody"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR10-017 — Large unexpected JSON body" id="2fb9a3b1-224c-4c22-8366-90eaec38d12e" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-017 — Large unexpected JSON body | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr10017LargeUnexpectedJsonBody"/>
+    <testcase name="AI-FR10-017 | traceability" time="0.001" classname="AiBoundaryAiAiFr10017LargeUnexpectedJsonBody"/>
+    <testcase name="AI-FR10-017 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr10017LargeUnexpectedJsonBody"/>
+    <testcase name="[AI] AI-FR10-017 — Large unexpected JSON body | follow-up GET succeeds" time="0.001" classname="AiBoundaryAiAiFr10017LargeUnexpectedJsonBody"/>
+    <testcase name="[AI] AI-FR10-017 — Large unexpected JSON body | post-state oracle" time="0.001" classname="AiBoundaryAiAiFr10017LargeUnexpectedJsonBody"/>
+  </testsuite>
+  <testsuite name="AI — Boundary / [AI] AI-FR10-018 — Unknown benign query parameter" id="8d754b2a-ebfe-4ba5-b659-b00b7185dbfa" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-018 — Unknown benign query parameter | collection X-Student-Id" time="0.001" classname="AiBoundaryAiAiFr10018UnknownBenignQueryParameter"/>
+    <testcase name="AI-FR10-018 | traceability" time="0.001" classname="AiBoundaryAiAiFr10018UnknownBenignQueryParameter"/>
+    <testcase name="AI-FR10-018 | required X-Student-Id header" time="0.001" classname="AiBoundaryAiAiFr10018UnknownBenignQueryParameter"/>
+    <testcase name="[AI] AI-FR10-018 — Unknown benign query parameter | follow-up GET succeeds" time="0.001" classname="AiBoundaryAiAiFr10018UnknownBenignQueryParameter"/>
+    <testcase name="[AI] AI-FR10-018 — Unknown benign query parameter | post-state oracle" time="0.001" classname="AiBoundaryAiAiFr10018UnknownBenignQueryParameter"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-019 — Pending cancel then repeated cancel / [AI] AI-FR10-019 — First cancel" id="9457527b-997b-4226-ab4c-aea99f23fe3f" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-019 — First cancel | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019FirstCancel"/>
+    <testcase name="AI-FR10-019 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019FirstCancel"/>
+    <testcase name="AI-FR10-019 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019FirstCancel"/>
+    <testcase name="AI-FR10-019 | semantic success class" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019FirstCancel"/>
+    <testcase name="[AI] AI-FR10-019 — First cancel | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019FirstCancel"/>
+    <testcase name="[AI] AI-FR10-019 — First cancel | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019FirstCancel"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-019 — Pending cancel then repeated cancel / [AI] AI-FR10-019 — Second cancel" id="6b3e94bb-d282-4c59-8a47-0bc14e3c5b62" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-019 — Second cancel | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019SecondCancel"/>
+    <testcase name="AI-FR10-019 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019SecondCancel"/>
+    <testcase name="AI-FR10-019 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019SecondCancel"/>
+    <testcase name="AI-FR10-019 | semantic rejection class" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019SecondCancel"/>
+    <testcase name="[AI] AI-FR10-019 — Second cancel | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019SecondCancel"/>
+    <testcase name="[AI] AI-FR10-019 — Second cancel | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10019PendingCancelThenRepeatedCancelAiAiFr10019SecondCancel"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-020 — Confirmed cancel then repeated cancel / [AI] AI-FR10-020 — First cancel" id="bd344dac-5a89-4363-bafb-5e18139e36f5" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-020 — First cancel | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020FirstCancel"/>
+    <testcase name="AI-FR10-020 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020FirstCancel"/>
+    <testcase name="AI-FR10-020 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020FirstCancel"/>
+    <testcase name="AI-FR10-020 | semantic success class" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020FirstCancel"/>
+    <testcase name="[AI] AI-FR10-020 — First cancel | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020FirstCancel"/>
+    <testcase name="[AI] AI-FR10-020 — First cancel | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020FirstCancel"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-020 — Confirmed cancel then repeated cancel / [AI] AI-FR10-020 — Second cancel" id="930e7497-d789-4e60-bfc4-f7796c82100d" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-020 — Second cancel | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020SecondCancel"/>
+    <testcase name="AI-FR10-020 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020SecondCancel"/>
+    <testcase name="AI-FR10-020 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020SecondCancel"/>
+    <testcase name="AI-FR10-020 | semantic rejection class" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020SecondCancel"/>
+    <testcase name="[AI] AI-FR10-020 — Second cancel | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020SecondCancel"/>
+    <testcase name="[AI] AI-FR10-020 — Second cancel | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10020ConfirmedCancelThenRepeatedCancelAiAiFr10020SecondCancel"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-021 — Shipping order cannot be user-canceled" id="115bdb3a-00ef-48b0-9002-83354b4c2d7b" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="2" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-021 — Shipping order cannot be user-canceled | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10021ShippingOrderCannotBeUserCanceled"/>
+    <testcase name="AI-FR10-021 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10021ShippingOrderCannotBeUserCanceled"/>
+    <testcase name="AI-FR10-021 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10021ShippingOrderCannotBeUserCanceled"/>
+    <testcase name="AI-FR10-021 | semantic rejection class" time="0.001" classname="AiStateSequenceAiAiFr10021ShippingOrderCannotBeUserCanceled">
+      <failure type="AssertionFailure" message="expected 200 to be at least 400">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr10-cancel-order-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-10 Cancel Order — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR10-021 — Shipping order cannot be user-canceled.]]>
+        <![CDATA[Test description: AI-FR10-021 | semantic rejection class.]]>
+        <![CDATA[Error message: expected 200 to be at least 400.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 200 to be at least 400
+   at Object.eval sandbox-script.js:3:24).]]>
+      </failure>
+    </testcase>
+    <testcase name="[AI] AI-FR10-021 — Shipping order cannot be user-canceled | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10021ShippingOrderCannotBeUserCanceled"/>
+    <testcase name="[AI] AI-FR10-021 — Shipping order cannot be user-canceled | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10021ShippingOrderCannotBeUserCanceled">
+      <failure type="AssertionFailure" message="expected 'canceled' to deeply equal 'shipping'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr10-cancel-order-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-10 Cancel Order — 23127194.]]>
+        <![CDATA[Request name: AI — State / Sequence / [AI] AI-FR10-021 — Shipping order cannot be user-canceled.]]>
+        <![CDATA[Test description: [AI] AI-FR10-021 — Shipping order cannot be user-canceled | post-state oracle.]]>
+        <![CDATA[Error message: expected 'canceled' to deeply equal 'shipping'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 'canceled' to deeply equal 'shipping'
+   at Object.eval sandbox-script.js:5:24).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-022 — Delivered final state cannot be canceled" id="e4943257-b1f5-4dcb-b9a3-c34525f1e6ef" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-022 — Delivered final state cannot be canceled | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10022DeliveredFinalStateCannotBeCanceled"/>
+    <testcase name="AI-FR10-022 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10022DeliveredFinalStateCannotBeCanceled"/>
+    <testcase name="AI-FR10-022 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10022DeliveredFinalStateCannotBeCanceled"/>
+    <testcase name="AI-FR10-022 | semantic rejection class" time="0.001" classname="AiStateSequenceAiAiFr10022DeliveredFinalStateCannotBeCanceled"/>
+    <testcase name="[AI] AI-FR10-022 — Delivered final state cannot be canceled | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10022DeliveredFinalStateCannotBeCanceled"/>
+    <testcase name="[AI] AI-FR10-022 — Delivered final state cannot be canceled | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10022DeliveredFinalStateCannotBeCanceled"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-023 — Canceled final state cannot be canceled again" id="f3542f1c-8809-4e96-b7cf-8e4f170356aa" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-023 — Canceled final state cannot be canceled again | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10023CanceledFinalStateCannotBeCanceledAgain"/>
+    <testcase name="AI-FR10-023 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10023CanceledFinalStateCannotBeCanceledAgain"/>
+    <testcase name="AI-FR10-023 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10023CanceledFinalStateCannotBeCanceledAgain"/>
+    <testcase name="AI-FR10-023 | semantic rejection class" time="0.001" classname="AiStateSequenceAiAiFr10023CanceledFinalStateCannotBeCanceledAgain"/>
+    <testcase name="[AI] AI-FR10-023 — Canceled final state cannot be canceled again | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10023CanceledFinalStateCannotBeCanceledAgain"/>
+    <testcase name="[AI] AI-FR10-023 — Canceled final state cannot be canceled again | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10023CanceledFinalStateCannotBeCanceledAgain"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-024 — Unauthenticated pending order remains unchanged" id="922bc4d7-7dfa-4bd7-8afa-b1e51e1c88cf" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-024 — Unauthenticated pending order remains unchanged | collection X-Student-Id" time="0.002" classname="AiStateSequenceAiAiFr10024UnauthenticatedPendingOrderRemainsUnchanged"/>
+    <testcase name="AI-FR10-024 | traceability" time="0.002" classname="AiStateSequenceAiAiFr10024UnauthenticatedPendingOrderRemainsUnchanged"/>
+    <testcase name="AI-FR10-024 | required X-Student-Id header" time="0.002" classname="AiStateSequenceAiAiFr10024UnauthenticatedPendingOrderRemainsUnchanged"/>
+    <testcase name="AI-FR10-024 | semantic rejection class" time="0.002" classname="AiStateSequenceAiAiFr10024UnauthenticatedPendingOrderRemainsUnchanged"/>
+    <testcase name="[AI] AI-FR10-024 — Unauthenticated pending order remains unchanged | follow-up GET succeeds" time="0.002" classname="AiStateSequenceAiAiFr10024UnauthenticatedPendingOrderRemainsUnchanged"/>
+    <testcase name="[AI] AI-FR10-024 — Unauthenticated pending order remains unchanged | post-state oracle" time="0.002" classname="AiStateSequenceAiAiFr10024UnauthenticatedPendingOrderRemainsUnchanged"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged" id="16f339e1-31e1-461f-991d-f901435cb14d" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10025TamperedAuthConfirmedOrderRemainsUnchanged"/>
+    <testcase name="AI-FR10-025 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10025TamperedAuthConfirmedOrderRemainsUnchanged"/>
+    <testcase name="AI-FR10-025 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10025TamperedAuthConfirmedOrderRemainsUnchanged"/>
+    <testcase name="AI-FR10-025 | semantic rejection class" time="0.001" classname="AiStateSequenceAiAiFr10025TamperedAuthConfirmedOrderRemainsUnchanged"/>
+    <testcase name="[AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged | follow-up GET succeeds" time="0.001" classname="AiStateSequenceAiAiFr10025TamperedAuthConfirmedOrderRemainsUnchanged"/>
+    <testcase name="[AI] AI-FR10-025 — Tampered-auth confirmed order remains unchanged | post-state oracle" time="0.001" classname="AiStateSequenceAiAiFr10025TamperedAuthConfirmedOrderRemainsUnchanged"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-026 — Body status override cannot force delivered" id="8fb3b7a2-4e34-48c0-b413-c2ec3cb3e435" timestamp="2026-08-21T01:44:50.184Z" tests="4" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-026 — Body status override cannot force delivered | collection X-Student-Id" time="0.001" classname="AiStateSequenceAiAiFr10026BodyStatusOverrideCannotForceDelivered"/>
+    <testcase name="AI-FR10-026 | traceability" time="0.001" classname="AiStateSequenceAiAiFr10026BodyStatusOverrideCannotForceDelivered"/>
+    <testcase name="AI-FR10-026 | required X-Student-Id header" time="0.001" classname="AiStateSequenceAiAiFr10026BodyStatusOverrideCannotForceDelivered"/>
+    <testcase name="AI-FR10-026 | never delivered" time="0.001" classname="AiStateSequenceAiAiFr10026BodyStatusOverrideCannotForceDelivered"/>
+  </testsuite>
+  <testsuite name="AI — State / Sequence / [AI] AI-FR10-027 — Query status override cannot force delivered" id="c5dee00c-b6dd-4fc3-88ad-0a765790192f" timestamp="2026-08-21T01:44:50.184Z" tests="4" failures="0" errors="0" time="0.000">
+    <testcase name="[AI] AI-FR10-027 — Query status override cannot force delivered | collection X-Student-Id" time="0.000" classname="AiStateSequenceAiAiFr10027QueryStatusOverrideCannotForceDelivered"/>
+    <testcase name="AI-FR10-027 | traceability" time="0.000" classname="AiStateSequenceAiAiFr10027QueryStatusOverrideCannotForceDelivered"/>
+    <testcase name="AI-FR10-027 | required X-Student-Id header" time="0.000" classname="AiStateSequenceAiAiFr10027QueryStatusOverrideCannotForceDelivered"/>
+    <testcase name="AI-FR10-027 | never delivered" time="0.000" classname="AiStateSequenceAiAiFr10027QueryStatusOverrideCannotForceDelivered"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-028 — Missing Authorization header" id="956568c9-5a29-473b-9291-d67d3af31f7e" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-028 — Missing Authorization header | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10028MissingAuthorizationHeader"/>
+    <testcase name="AI-FR10-028 | traceability" time="0.001" classname="AiSecurityAiAiFr10028MissingAuthorizationHeader"/>
+    <testcase name="AI-FR10-028 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10028MissingAuthorizationHeader"/>
+    <testcase name="AI-FR10-028 | semantic rejection class" time="0.001" classname="AiSecurityAiAiFr10028MissingAuthorizationHeader"/>
+    <testcase name="[AI] AI-FR10-028 — Missing Authorization header | follow-up GET succeeds" time="0.001" classname="AiSecurityAiAiFr10028MissingAuthorizationHeader"/>
+    <testcase name="[AI] AI-FR10-028 — Missing Authorization header | post-state oracle" time="0.001" classname="AiSecurityAiAiFr10028MissingAuthorizationHeader"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-029 — Empty Authorization value" id="207aaaf0-e47b-4274-b827-7b18ba71b91c" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-029 — Empty Authorization value | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10029EmptyAuthorizationValue"/>
+    <testcase name="AI-FR10-029 | traceability" time="0.001" classname="AiSecurityAiAiFr10029EmptyAuthorizationValue"/>
+    <testcase name="AI-FR10-029 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10029EmptyAuthorizationValue"/>
+    <testcase name="AI-FR10-029 | semantic rejection class" time="0.001" classname="AiSecurityAiAiFr10029EmptyAuthorizationValue"/>
+    <testcase name="[AI] AI-FR10-029 — Empty Authorization value | follow-up GET succeeds" time="0.001" classname="AiSecurityAiAiFr10029EmptyAuthorizationValue"/>
+    <testcase name="[AI] AI-FR10-029 — Empty Authorization value | post-state oracle" time="0.001" classname="AiSecurityAiAiFr10029EmptyAuthorizationValue"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-030 — Bearer scheme without token" id="01271b8d-ad6d-4833-bf27-6eb89c8b7199" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-030 — Bearer scheme without token | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10030BearerSchemeWithoutToken"/>
+    <testcase name="AI-FR10-030 | traceability" time="0.001" classname="AiSecurityAiAiFr10030BearerSchemeWithoutToken"/>
+    <testcase name="AI-FR10-030 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10030BearerSchemeWithoutToken"/>
+    <testcase name="AI-FR10-030 | semantic rejection class" time="0.001" classname="AiSecurityAiAiFr10030BearerSchemeWithoutToken"/>
+    <testcase name="[AI] AI-FR10-030 — Bearer scheme without token | follow-up GET succeeds" time="0.001" classname="AiSecurityAiAiFr10030BearerSchemeWithoutToken"/>
+    <testcase name="[AI] AI-FR10-030 — Bearer scheme without token | post-state oracle" time="0.001" classname="AiSecurityAiAiFr10030BearerSchemeWithoutToken"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-031 — Malformed JWT string" id="86b2c4f5-3c2b-431c-9b89-15da1a9c1101" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-031 — Malformed JWT string | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10031MalformedJwtString"/>
+    <testcase name="AI-FR10-031 | traceability" time="0.001" classname="AiSecurityAiAiFr10031MalformedJwtString"/>
+    <testcase name="AI-FR10-031 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10031MalformedJwtString"/>
+    <testcase name="AI-FR10-031 | semantic rejection class" time="0.001" classname="AiSecurityAiAiFr10031MalformedJwtString"/>
+    <testcase name="[AI] AI-FR10-031 — Malformed JWT string | follow-up GET succeeds" time="0.001" classname="AiSecurityAiAiFr10031MalformedJwtString"/>
+    <testcase name="[AI] AI-FR10-031 — Malformed JWT string | post-state oracle" time="0.001" classname="AiSecurityAiAiFr10031MalformedJwtString"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-032 — JWT-like token with invalid signature" id="5a547d31-f894-4095-8f0d-653983624ac2" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-032 — JWT-like token with invalid signature | collection X-Student-Id" time="0.002" classname="AiSecurityAiAiFr10032JwtLikeTokenWithInvalidSignature"/>
+    <testcase name="AI-FR10-032 | traceability" time="0.002" classname="AiSecurityAiAiFr10032JwtLikeTokenWithInvalidSignature"/>
+    <testcase name="AI-FR10-032 | required X-Student-Id header" time="0.002" classname="AiSecurityAiAiFr10032JwtLikeTokenWithInvalidSignature"/>
+    <testcase name="AI-FR10-032 | semantic rejection class" time="0.002" classname="AiSecurityAiAiFr10032JwtLikeTokenWithInvalidSignature"/>
+    <testcase name="[AI] AI-FR10-032 — JWT-like token with invalid signature | follow-up GET succeeds" time="0.002" classname="AiSecurityAiAiFr10032JwtLikeTokenWithInvalidSignature"/>
+    <testcase name="[AI] AI-FR10-032 — JWT-like token with invalid signature | post-state oracle" time="0.002" classname="AiSecurityAiAiFr10032JwtLikeTokenWithInvalidSignature"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-033 — Wrong authentication scheme" id="f4dfc30e-f5ad-463b-b73b-253913c10ad0" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-033 — Wrong authentication scheme | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10033WrongAuthenticationScheme"/>
+    <testcase name="AI-FR10-033 | traceability" time="0.001" classname="AiSecurityAiAiFr10033WrongAuthenticationScheme"/>
+    <testcase name="AI-FR10-033 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10033WrongAuthenticationScheme"/>
+    <testcase name="AI-FR10-033 | semantic rejection class" time="0.001" classname="AiSecurityAiAiFr10033WrongAuthenticationScheme"/>
+    <testcase name="[AI] AI-FR10-033 — Wrong authentication scheme | follow-up GET succeeds" time="0.001" classname="AiSecurityAiAiFr10033WrongAuthenticationScheme"/>
+    <testcase name="[AI] AI-FR10-033 — Wrong authentication scheme | post-state oracle" time="0.001" classname="AiSecurityAiAiFr10033WrongAuthenticationScheme"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-034 — User A cannot cancel User B pending order" id="695eea7a-2078-4a7d-ac7e-0d0c6b734d21" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-034 — User A cannot cancel User B pending order | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10034UserACannotCancelUserBPendingOrder"/>
+    <testcase name="AI-FR10-034 | traceability" time="0.001" classname="AiSecurityAiAiFr10034UserACannotCancelUserBPendingOrder"/>
+    <testcase name="AI-FR10-034 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10034UserACannotCancelUserBPendingOrder"/>
+    <testcase name="AI-FR10-034 | semantic rejection class" time="0.001" classname="AiSecurityAiAiFr10034UserACannotCancelUserBPendingOrder"/>
+    <testcase name="[AI] AI-FR10-034 — User A cannot cancel User B pending order | follow-up GET succeeds" time="0.001" classname="AiSecurityAiAiFr10034UserACannotCancelUserBPendingOrder"/>
+    <testcase name="[AI] AI-FR10-034 — User A cannot cancel User B pending order | post-state oracle" time="0.001" classname="AiSecurityAiAiFr10034UserACannotCancelUserBPendingOrder"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-035 — User A cannot cancel User B confirmed order" id="e1d1d97a-3a89-44c2-9335-2fe074ecf89c" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-035 — User A cannot cancel User B confirmed order | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10035UserACannotCancelUserBConfirmedOrder"/>
+    <testcase name="AI-FR10-035 | traceability" time="0.001" classname="AiSecurityAiAiFr10035UserACannotCancelUserBConfirmedOrder"/>
+    <testcase name="AI-FR10-035 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10035UserACannotCancelUserBConfirmedOrder"/>
+    <testcase name="AI-FR10-035 | semantic rejection class" time="0.001" classname="AiSecurityAiAiFr10035UserACannotCancelUserBConfirmedOrder"/>
+    <testcase name="[AI] AI-FR10-035 — User A cannot cancel User B confirmed order | follow-up GET succeeds" time="0.001" classname="AiSecurityAiAiFr10035UserACannotCancelUserBConfirmedOrder"/>
+    <testcase name="[AI] AI-FR10-035 — User A cannot cancel User B confirmed order | post-state oracle" time="0.001" classname="AiSecurityAiAiFr10035UserACannotCancelUserBConfirmedOrder"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-036 — Body user_id override cannot change authorization" id="66d87ca6-f798-459f-83df-791c2d097b03" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-036 — Body user_id override cannot change authorization | collection X-Student-Id" time="0.002" classname="AiSecurityAiAiFr10036BodyUserIdOverrideCannotChangeAuthorization"/>
+    <testcase name="AI-FR10-036 | traceability" time="0.002" classname="AiSecurityAiAiFr10036BodyUserIdOverrideCannotChangeAuthorization"/>
+    <testcase name="AI-FR10-036 | required X-Student-Id header" time="0.002" classname="AiSecurityAiAiFr10036BodyUserIdOverrideCannotChangeAuthorization"/>
+    <testcase name="[AI] AI-FR10-036 — Body user_id override cannot change authorization | follow-up GET succeeds" time="0.002" classname="AiSecurityAiAiFr10036BodyUserIdOverrideCannotChangeAuthorization"/>
+    <testcase name="[AI] AI-FR10-036 — Body user_id override cannot change authorization | post-state oracle" time="0.002" classname="AiSecurityAiAiFr10036BodyUserIdOverrideCannotChangeAuthorization"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-037 — Query/path order ID conflict" id="5b8834f7-9fc7-4550-b49a-8ae956cbd3af" timestamp="2026-08-21T01:44:50.184Z" tests="7" failures="0" errors="0" time="0.003">
+    <testcase name="[AI] AI-FR10-037 — Query/path order ID conflict | collection X-Student-Id" time="0.003" classname="AiSecurityAiAiFr10037QueryPathOrderIdConflict"/>
+    <testcase name="AI-FR10-037 | traceability" time="0.003" classname="AiSecurityAiAiFr10037QueryPathOrderIdConflict"/>
+    <testcase name="AI-FR10-037 | required X-Student-Id header" time="0.003" classname="AiSecurityAiAiFr10037QueryPathOrderIdConflict"/>
+    <testcase name="[AI] AI-FR10-037 — Query/path order ID conflict | follow-up GET succeeds" time="0.003" classname="AiSecurityAiAiFr10037QueryPathOrderIdConflict"/>
+    <testcase name="[AI] AI-FR10-037 — Query/path order ID conflict | post-state oracle" time="0.003" classname="AiSecurityAiAiFr10037QueryPathOrderIdConflict"/>
+  </testsuite>
+  <testsuite name="AI — Security / [AI] AI-FR10-038 — Boolean-style injection probe in path ID" id="0a0bf3bd-a3ac-4567-9f3b-32a218891d6d" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-038 — Boolean-style injection probe in path ID | collection X-Student-Id" time="0.001" classname="AiSecurityAiAiFr10038BooleanStyleInjectionProbeInPathId"/>
+    <testcase name="AI-FR10-038 | traceability" time="0.001" classname="AiSecurityAiAiFr10038BooleanStyleInjectionProbeInPathId"/>
+    <testcase name="AI-FR10-038 | required X-Student-Id header" time="0.001" classname="AiSecurityAiAiFr10038BooleanStyleInjectionProbeInPathId"/>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR10-039 — Successful cancel response-shape characterization" id="d522795b-d98f-486d-a7d5-3ca8a48caf26" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-039 — Successful cancel response-shape characterization | collection X-Student-Id" time="0.001" classname="AiSchemaCharacterizationAiAiFr10039SuccessfulCancelResponseShapeCharacterization"/>
+    <testcase name="AI-FR10-039 | traceability" time="0.001" classname="AiSchemaCharacterizationAiAiFr10039SuccessfulCancelResponseShapeCharacterization"/>
+    <testcase name="AI-FR10-039 | required X-Student-Id header" time="0.001" classname="AiSchemaCharacterizationAiAiFr10039SuccessfulCancelResponseShapeCharacterization"/>
+    <testcase name="AI-FR10-039 | semantic success class" time="0.001" classname="AiSchemaCharacterizationAiAiFr10039SuccessfulCancelResponseShapeCharacterization"/>
+    <testcase name="[AI] AI-FR10-039 — Successful cancel response-shape characterization | follow-up GET succeeds" time="0.001" classname="AiSchemaCharacterizationAiAiFr10039SuccessfulCancelResponseShapeCharacterization"/>
+    <testcase name="[AI] AI-FR10-039 — Successful cancel response-shape characterization | post-state oracle" time="0.001" classname="AiSchemaCharacterizationAiAiFr10039SuccessfulCancelResponseShapeCharacterization"/>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR10-040 — Invalid shipping transition response characterization" id="3bca95df-e976-4e2d-92c5-4371e316eaa7" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="2" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-040 — Invalid shipping transition response characterization | collection X-Student-Id" time="0.001" classname="AiSchemaCharacterizationAiAiFr10040InvalidShippingTransitionResponseCharacterization"/>
+    <testcase name="AI-FR10-040 | traceability" time="0.001" classname="AiSchemaCharacterizationAiAiFr10040InvalidShippingTransitionResponseCharacterization"/>
+    <testcase name="AI-FR10-040 | required X-Student-Id header" time="0.001" classname="AiSchemaCharacterizationAiAiFr10040InvalidShippingTransitionResponseCharacterization"/>
+    <testcase name="AI-FR10-040 | semantic rejection class" time="0.001" classname="AiSchemaCharacterizationAiAiFr10040InvalidShippingTransitionResponseCharacterization">
+      <failure type="AssertionFailure" message="expected 200 to be at least 400">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr10-cancel-order-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-10 Cancel Order — 23127194.]]>
+        <![CDATA[Request name: AI — Schema / Characterization / [AI] AI-FR10-040 — Invalid shipping transition response characterization.]]>
+        <![CDATA[Test description: AI-FR10-040 | semantic rejection class.]]>
+        <![CDATA[Error message: expected 200 to be at least 400.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 200 to be at least 400
+   at Object.eval sandbox-script.js:3:43).]]>
+      </failure>
+    </testcase>
+    <testcase name="[AI] AI-FR10-040 — Invalid shipping transition response characterization | follow-up GET succeeds" time="0.001" classname="AiSchemaCharacterizationAiAiFr10040InvalidShippingTransitionResponseCharacterization"/>
+    <testcase name="[AI] AI-FR10-040 — Invalid shipping transition response characterization | post-state oracle" time="0.001" classname="AiSchemaCharacterizationAiAiFr10040InvalidShippingTransitionResponseCharacterization">
+      <failure type="AssertionFailure" message="expected 'canceled' to deeply equal 'shipping'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr10-cancel-order-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-10 Cancel Order — 23127194.]]>
+        <![CDATA[Request name: AI — Schema / Characterization / [AI] AI-FR10-040 — Invalid shipping transition response characterization.]]>
+        <![CDATA[Test description: [AI] AI-FR10-040 — Invalid shipping transition response characterization | post-state oracle.]]>
+        <![CDATA[Error message: expected 'canceled' to deeply equal 'shipping'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 'canceled' to deeply equal 'shipping'
+   at Object.eval sandbox-script.js:5:43).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR10-041 — Authentication failure response characterization" id="487e3ef9-08c1-4efe-a608-d7de33b818f3" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR10-041 — Authentication failure response characterization | collection X-Student-Id" time="0.001" classname="AiSchemaCharacterizationAiAiFr10041AuthenticationFailureResponseCharacterization"/>
+    <testcase name="AI-FR10-041 | traceability" time="0.001" classname="AiSchemaCharacterizationAiAiFr10041AuthenticationFailureResponseCharacterization"/>
+    <testcase name="AI-FR10-041 | required X-Student-Id header" time="0.001" classname="AiSchemaCharacterizationAiAiFr10041AuthenticationFailureResponseCharacterization"/>
+    <testcase name="AI-FR10-041 | semantic rejection class" time="0.001" classname="AiSchemaCharacterizationAiAiFr10041AuthenticationFailureResponseCharacterization"/>
+    <testcase name="[AI] AI-FR10-041 — Authentication failure response characterization | follow-up GET succeeds" time="0.001" classname="AiSchemaCharacterizationAiAiFr10041AuthenticationFailureResponseCharacterization"/>
+    <testcase name="[AI] AI-FR10-041 — Authentication failure response characterization | post-state oracle" time="0.001" classname="AiSchemaCharacterizationAiAiFr10041AuthenticationFailureResponseCharacterization"/>
+  </testsuite>
+  <testsuite name="AI — Schema / Characterization / [AI] AI-FR10-042 — Official X-Student-Id evidence assertion" id="5b6f30d7-4ecf-4549-aa60-2c5f5817ddf5" timestamp="2026-08-21T01:44:50.184Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR10-042 — Official X-Student-Id evidence assertion | collection X-Student-Id" time="0.002" classname="AiSchemaCharacterizationAiAiFr10042OfficialXStudentIdEvidenceAssertion"/>
+    <testcase name="AI-FR10-042 | traceability" time="0.002" classname="AiSchemaCharacterizationAiAiFr10042OfficialXStudentIdEvidenceAssertion"/>
+    <testcase name="AI-FR10-042 | required X-Student-Id header" time="0.002" classname="AiSchemaCharacterizationAiAiFr10042OfficialXStudentIdEvidenceAssertion"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner" id="05d22733-22f4-45f9-8746-b23e1b122c02" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10043CrossUserCancellationWithForgedBodyOwner"/>
+    <testcase name="HUMAN-FR10-043 | traceability" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10043CrossUserCancellationWithForgedBodyOwner"/>
+    <testcase name="HUMAN-FR10-043 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10043CrossUserCancellationWithForgedBodyOwner"/>
+    <testcase name="HUMAN-FR10-043 | semantic rejection class" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10043CrossUserCancellationWithForgedBodyOwner"/>
+    <testcase name="[HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner | follow-up GET succeeds" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10043CrossUserCancellationWithForgedBodyOwner"/>
+    <testcase name="[HUMAN] HUMAN-FR10-043 — Cross-user cancellation with forged body owner | post-state oracle" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10043CrossUserCancellationWithForgedBodyOwner"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-044 — Existing foreign order versus nonexistent order enumeration / [HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order" id="49f211f5-6f41-42d4-989f-7591c219565b" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request1ForeignExistingOrder"/>
+    <testcase name="HUMAN-FR10-044 | traceability" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request1ForeignExistingOrder"/>
+    <testcase name="HUMAN-FR10-044 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request1ForeignExistingOrder"/>
+    <testcase name="HUMAN-FR10-044 | semantic rejection class" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request1ForeignExistingOrder"/>
+    <testcase name="[HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order | follow-up GET succeeds" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request1ForeignExistingOrder"/>
+    <testcase name="[HUMAN] HUMAN-FR10-044 — Request 1 — foreign existing order | post-state oracle" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request1ForeignExistingOrder"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-044 — Existing foreign order versus nonexistent order enumeration / [HUMAN] HUMAN-FR10-044 — Request 2 — nonexistent order" id="2ef8dd50-20c7-48dd-8c7d-bac32d0ae68a" timestamp="2026-08-21T01:44:50.184Z" tests="4" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR10-044 — Request 2 — nonexistent order | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request2NonexistentOrder"/>
+    <testcase name="HUMAN-FR10-044 | traceability" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request2NonexistentOrder"/>
+    <testcase name="HUMAN-FR10-044 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request2NonexistentOrder"/>
+    <testcase name="HUMAN-FR10-044 | no sensitive foreign-order details asserted" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10044ExistingForeignOrderVersusNonexistentOrderEnumerationHumanHumanFr10044Request2NonexistentOrder"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-045 — Unauthorized attempt followed by rightful-owner cancellation / [HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt" id="14170226-83b6-4e2f-928c-6997159d407b" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step1UnauthorizedUserAAttempt"/>
+    <testcase name="HUMAN-FR10-045 | traceability" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step1UnauthorizedUserAAttempt"/>
+    <testcase name="HUMAN-FR10-045 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step1UnauthorizedUserAAttempt"/>
+    <testcase name="HUMAN-FR10-045 | semantic rejection class" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step1UnauthorizedUserAAttempt"/>
+    <testcase name="[HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt | follow-up GET succeeds" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step1UnauthorizedUserAAttempt"/>
+    <testcase name="[HUMAN] HUMAN-FR10-045 — Step 1 — unauthorized User A attempt | post-state oracle" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step1UnauthorizedUserAAttempt"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-045 — Unauthorized attempt followed by rightful-owner cancellation / [HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation" id="951d970e-db70-420a-a48c-950ecf123d91" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step2RightfulUserBCancellation"/>
+    <testcase name="HUMAN-FR10-045 | traceability" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step2RightfulUserBCancellation"/>
+    <testcase name="HUMAN-FR10-045 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step2RightfulUserBCancellation"/>
+    <testcase name="HUMAN-FR10-045 | semantic success class" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step2RightfulUserBCancellation"/>
+    <testcase name="[HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation | follow-up GET succeeds" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step2RightfulUserBCancellation"/>
+    <testcase name="[HUMAN] HUMAN-FR10-045 — Step 2 — rightful User B cancellation | post-state oracle" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10045UnauthorizedAttemptFollowedByRightfulOwnerCancellationHumanHumanFr10045Step2RightfulUserBCancellation"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm" id="8b1a8e08-3108-4747-a8c2-545b2a843ad2" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10046UnsignedJwtUsingTheNoneAlgorithm"/>
+    <testcase name="HUMAN-FR10-046 | traceability" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10046UnsignedJwtUsingTheNoneAlgorithm"/>
+    <testcase name="HUMAN-FR10-046 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10046UnsignedJwtUsingTheNoneAlgorithm"/>
+    <testcase name="HUMAN-FR10-046 | semantic rejection class" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10046UnsignedJwtUsingTheNoneAlgorithm"/>
+    <testcase name="[HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm | follow-up GET succeeds" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10046UnsignedJwtUsingTheNoneAlgorithm"/>
+    <testcase name="[HUMAN] HUMAN-FR10-046 — Unsigned JWT using the none algorithm | post-state oracle" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10046UnsignedJwtUsingTheNoneAlgorithm"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership" id="71816420-7262-4fef-b746-dfb4140a1659" timestamp="2026-08-21T01:44:50.184Z" tests="6" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership | collection X-Student-Id" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10047DuplicateJsonKeysMustNotBypassOwnership"/>
+    <testcase name="HUMAN-FR10-047 | traceability" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10047DuplicateJsonKeysMustNotBypassOwnership"/>
+    <testcase name="HUMAN-FR10-047 | required X-Student-Id header" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10047DuplicateJsonKeysMustNotBypassOwnership"/>
+    <testcase name="HUMAN-FR10-047 | semantic rejection class" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10047DuplicateJsonKeysMustNotBypassOwnership"/>
+    <testcase name="[HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership | follow-up GET succeeds" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10047DuplicateJsonKeysMustNotBypassOwnership"/>
+    <testcase name="[HUMAN] HUMAN-FR10-047 — Duplicate JSON keys must not bypass ownership | post-state oracle" time="0.001" classname="HumanAdditionalCoverageHumanHumanFr10047DuplicateJsonKeysMustNotBypassOwnership"/>
+  </testsuite>
+  <testsuite name="HUMAN — Additional Coverage / [HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation" id="c51199f2-78c9-4d1f-879d-a5c78d995db8" timestamp="2026-08-21T01:44:50.184Z" tests="5" failures="0" errors="0" time="0.000">
+    <testcase name="[HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation | collection X-Student-Id" time="0.000" classname="HumanAdditionalCoverageHumanHumanFr10048HttpMethodOverrideHeaderMustNotCreateUnintendedCancellation"/>
+    <testcase name="HUMAN-FR10-048 | traceability" time="0.000" classname="HumanAdditionalCoverageHumanHumanFr10048HttpMethodOverrideHeaderMustNotCreateUnintendedCancellation"/>
+    <testcase name="HUMAN-FR10-048 | required X-Student-Id header" time="0.000" classname="HumanAdditionalCoverageHumanHumanFr10048HttpMethodOverrideHeaderMustNotCreateUnintendedCancellation"/>
+    <testcase name="[HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation | follow-up GET succeeds" time="0.000" classname="HumanAdditionalCoverageHumanHumanFr10048HttpMethodOverrideHeaderMustNotCreateUnintendedCancellation"/>
+    <testcase name="[HUMAN] HUMAN-FR10-048 — HTTP method-override header must not create unintended cancellation | post-state oracle" time="0.000" classname="HumanAdditionalCoverageHumanHumanFr10048HttpMethodOverrideHeaderMustNotCreateUnintendedCancellation"/>
+  </testsuite>
+</testsuites>

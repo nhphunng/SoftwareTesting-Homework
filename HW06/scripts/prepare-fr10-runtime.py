@@ -100,6 +100,7 @@ def main():
 
     fixture_spec = {
         "pendingOrderId": ("A", "pending"),
+        "canonicalRequestOrderId": ("A", "pending"),
         "confirmedOrderId": ("A", "confirmed"),
         "shippingOrderId": ("A", "shipping"),
         "deliveredOrderId": ("A", "delivered"),

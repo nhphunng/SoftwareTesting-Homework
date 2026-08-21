@@ -798,3 +798,25 @@ Human Review:
 - Executable Postman requests: 53
 - Postman script syntax errors: 0
 - Official Newman execution in this action: NOT STARTED
+
+## AI Audit Entry - AI-035
+
+| Field | Content |
+| --- | --- |
+| AI Tool | ChatGPT with Liebe local coding connector |
+| Date and Time | 2026-08-21T08:44:00+07:00 |
+| Stage | API 2 / FR-10 — Step K Real Newman Execution + Gate G Classification |
+| API | `PUT /api/orders/:id/cancel` |
+| User Prompt | @Liebe Dùng $api-testing-human-loop để thực hiện step K, nhớ sử dụng các script run-step-k.sh,... cho FR10 |
+| Generated/Modified Files | `postman/newman/FR10-official-cli.txt`; `postman/newman/FR10-official-report.json`; `postman/newman/FR10-official-report.html`; `postman/newman/FR10-official-report.xml`; `postman/newman/FR10-execution-summary.json`; `postman/newman/FR10-execution-summary.md`; `PoolB-FR-10-CancelOrder/evidence/step-k-execution.md`; `scripts/prepare-fr10-runtime.py`; `postman/environment/HW06-FR10-Local.postman_environment.json`; git-ignored private FR10 environment; `postman/data/FR10-runtime-data.json`; `PoolB-FR-10-CancelOrder/postman/runtime-fixture-manifest.json`; `PoolB-FR-10-CancelOrder/postman/runtime-preconditions.md`; FR10 Postman collection; `reports/ai-audit-report.md` |
+| AI Output | Applied `$api-testing-human-loop` Step K using the reusable runner. Dry-run resolved all inputs. The first real run produced 90 failed assertions because the existing order IDs were stale after an SUT reset; this was classified as runtime/setup failure, not a product bug. Recreated isolated runtime fixtures and reran, reducing failures to four testcase IDs. Gate G analysis identified `AI-FR10-004` as a test implementation defect caused by sharing a mutation fixture with `AI-FR10-001`; added a dedicated canonical-request fixture, recreated the runtime dataset, and reran. Final current Newman evidence: 48 testcase IDs, 96 requests, 275 assertions, 269 passed, 6 failed, exact `X-Student-Id` coverage 96/96. Remaining failed IDs are `AI-FR10-003`, `AI-FR10-021`, and `AI-FR10-040`; all reproducibly show a User canceling a `shipping` order successfully and the order becoming `canceled`, contrary to FR-10. Static server inspection correlates with this behavior, but it remains a potential SUT defect until Human Gate H confirmation. |
+
+Human Review:
+- Step K real execution: COMPLETE
+- Gate G classification: PREPARED FOR HUMAN REVIEW
+- Runtime/setup failure from stale fixtures: RESOLVED
+- Postman implementation defect `AI-FR10-004`: RESOLVED AND RERUN PASS
+- Remaining failed testcase IDs: 3
+- Potential product defect: User can cancel `shipping` order
+- Human Gate H: PENDING
+- Step L bug report / GitHub Issue: NOT STARTED

@@ -271,14 +271,14 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/api/orders/{{pendingOrderId}}/cancel",
+              "raw": "{{baseUrl}}/api/orders/{{canonicalRequestOrderId}}/cancel",
               "host": [
                 "{{baseUrl}}"
               ],
               "path": [
                 "api",
                 "orders",
-                "{{pendingOrderId}}",
+                "{{canonicalRequestOrderId}}",
                 "cancel"
               ]
             },
@@ -296,7 +296,7 @@
                   "pm.test('AI-FR10-004 | semantic success class', function(){ pm.expect(pm.response.code).to.be.within(200,299); });",
                   "function stateOf(j){ return j && (j.status || (j.order && j.order.status) || (j.data && j.data.status)); }",
                   "function ownerOf(j){ return j && (j.user_id || j.userId || (j.order && (j.order.user_id || j.order.userId)) || (j.data && (j.data.user_id || j.data.userId))); }",
-                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{pendingOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
+                  "pm.sendRequest({url: pm.variables.replaceIn('{{baseUrl}}/api/orders/{{canonicalRequestOrderId}}'), method:'GET', header:[{key:'Authorization',value:'Bearer '+pm.environment.get('userAToken')},{key:'X-Student-Id',value:pm.variables.get('studentId')||'23127194'}]}, function(err,res){",
                   "  pm.test(pm.info.requestName+' | follow-up GET succeeds', function(){ pm.expect(err).to.equal(null); pm.expect(res.code).to.be.within(200,299); });",
                   "  if(!err){ let j={}; try{j=res.json();}catch(e){} const st=stateOf(j); pm.test(pm.info.requestName+' | post-state oracle', function(){ pm.expect(st).to.eql('canceled'); }); }",
                   "});"

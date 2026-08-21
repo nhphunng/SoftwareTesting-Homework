@@ -1,0 +1,119 @@
+{
+  "sourceReport": "postman/newman/FR10-official-report.json",
+  "generatedAt": "2026-08-21T01:44:51.411Z",
+  "testcaseIds": 48,
+  "requests": 96,
+  "assertions": 275,
+  "passedAssertions": 269,
+  "failedAssertions": 6,
+  "failedTestcaseIds": [
+    "AI-FR10-003",
+    "AI-FR10-021",
+    "AI-FR10-040"
+  ],
+  "failedCases": [
+    {
+      "id": "AI-FR10-003",
+      "itemName": "[AI] AI-FR10-003 — Branch B — shipping cancel rejected",
+      "method": "GET",
+      "url": "http://localhost:3000/api/orders/47",
+      "status": 200,
+      "failedAssertions": [
+        {
+          "assertion": "AI-FR10-003 | semantic rejection class",
+          "message": "expected 200 to be at least 400"
+        },
+        {
+          "assertion": "[AI] AI-FR10-003 — Branch B — shipping cancel rejected | post-state oracle",
+          "message": "expected 'canceled' to deeply equal 'shipping'"
+        },
+        {
+          "assertion": "AI-FR10-003 | semantic rejection class",
+          "message": "expected 200 to be at least 400"
+        },
+        {
+          "assertion": "[AI] AI-FR10-003 — Branch B — shipping cancel rejected | post-state oracle",
+          "message": "expected 'canceled' to deeply equal 'shipping'"
+        }
+      ],
+      "responsePreview": "{\"id\":47,\"user_id\":5,\"total_amount\":100000,\"status\":\"canceled\",\"shipping_address\":\"HW06 FR10 boundaryShippingOrderId 20260821084449\",\"created_at\":\"2026-08-21 01:44:49\"}",
+      "requestHeaders": [
+        {
+          "key": "X-Student-Id",
+          "value": "23127194"
+        }
+      ]
+    },
+    {
+      "id": "AI-FR10-021",
+      "itemName": "[AI] AI-FR10-021 — Shipping order cannot be user-canceled",
+      "method": "GET",
+      "url": "http://localhost:3000/api/orders/43",
+      "status": 200,
+      "failedAssertions": [
+        {
+          "assertion": "AI-FR10-021 | semantic rejection class",
+          "message": "expected 200 to be at least 400"
+        },
+        {
+          "assertion": "[AI] AI-FR10-021 — Shipping order cannot be user-canceled | post-state oracle",
+          "message": "expected 'canceled' to deeply equal 'shipping'"
+        },
+        {
+          "assertion": "AI-FR10-021 | semantic rejection class",
+          "message": "expected 200 to be at least 400"
+        },
+        {
+          "assertion": "[AI] AI-FR10-021 — Shipping order cannot be user-canceled | post-state oracle",
+          "message": "expected 'canceled' to deeply equal 'shipping'"
+        }
+      ],
+      "responsePreview": "{\"id\":43,\"user_id\":5,\"total_amount\":100000,\"status\":\"canceled\",\"shipping_address\":\"HW06 FR10 shippingOrderId 20260821084449\",\"created_at\":\"2026-08-21 01:44:49\"}",
+      "requestHeaders": [
+        {
+          "key": "X-Student-Id",
+          "value": "23127194"
+        }
+      ]
+    },
+    {
+      "id": "AI-FR10-040",
+      "itemName": "[AI] AI-FR10-040 — Invalid shipping transition response characterization",
+      "method": "GET",
+      "url": "http://localhost:3000/api/orders/71",
+      "status": 200,
+      "failedAssertions": [
+        {
+          "assertion": "AI-FR10-040 | semantic rejection class",
+          "message": "expected 200 to be at least 400"
+        },
+        {
+          "assertion": "[AI] AI-FR10-040 — Invalid shipping transition response characterization | post-state oracle",
+          "message": "expected 'canceled' to deeply equal 'shipping'"
+        },
+        {
+          "assertion": "AI-FR10-040 | semantic rejection class",
+          "message": "expected 200 to be at least 400"
+        },
+        {
+          "assertion": "[AI] AI-FR10-040 — Invalid shipping transition response characterization | post-state oracle",
+          "message": "expected 'canceled' to deeply equal 'shipping'"
+        }
+      ],
+      "responsePreview": "{\"id\":71,\"user_id\":5,\"total_amount\":100000,\"status\":\"canceled\",\"shipping_address\":\"HW06 FR10 schemaShippingOrderId 20260821084449\",\"created_at\":\"2026-08-21 01:44:49\"}",
+      "requestHeaders": [
+        {
+          "key": "X-Student-Id",
+          "value": "23127194"
+        }
+      ]
+    }
+  ],
+  "studentHeader": {
+    "expected": "23127194",
+    "executionsWithHeader": 96,
+    "executionsWithExpectedValue": 96,
+    "totalExecutions": 96,
+    "allExecutionsMatch": true
+  }
+}
