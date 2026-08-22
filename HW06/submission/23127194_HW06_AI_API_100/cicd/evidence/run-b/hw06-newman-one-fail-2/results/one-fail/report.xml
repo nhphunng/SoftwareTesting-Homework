@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="HW06 CI/CD Demo — FR05 FR10 FR16" tests="4" time="0.037">
+  <testsuite name="Setup / CI-SETUP-01 — Login default admin" id="02830c45-2074-4d91-ab4c-1113d9e8cbc2" timestamp="2026-08-21T14:27:27.935Z" tests="2" failures="0" errors="0" time="0.024">
+    <testcase name="CI-SETUP-01 — Login default admin | X-Student-Id exact" time="0.024" classname="SetupCiSetup01LoginDefaultAdmin"/>
+    <testcase name="CI-SETUP-01 | admin login succeeds" time="0.024" classname="SetupCiSetup01LoginDefaultAdmin"/>
+  </testsuite>
+  <testsuite name="API CI Demonstrations / CI-FR05-001 — deterministic no-match product search" id="35e94401-8764-471b-9dbe-4b2c8f50c853" timestamp="2026-08-21T14:27:27.935Z" tests="5" failures="1" errors="0" time="0.004">
+    <testcase name="CI-FR05-001 — deterministic no-match product search | X-Student-Id exact" time="0.004" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+    <testcase name="CI-FR05-001 | HTTP 200" time="0.004" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+    <testcase name="CI-FR05-001 | JSON array" time="0.004" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+    <testcase name="CI-FR05-001 | no-match is empty" time="0.004" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+    <testcase name="CI-DEMO-ONLY | intentional single failure" time="0.004" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch">
+      <failure type="AssertionFailure" message="expected 'actual' to deeply equal 'intentionally-wrong-expected'">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: ab62319e-a471-450f-8bed-e0215fc72cee.]]>
+        <![CDATA[Collection name: HW06 CI/CD Demo — FR05 FR10 FR16.]]>
+        <![CDATA[Request name: API CI Demonstrations / CI-FR05-001 — deterministic no-match product search.]]>
+        <![CDATA[Test description: CI-DEMO-ONLY | intentional single failure.]]>
+        <![CDATA[Error message: expected 'actual' to deeply equal 'intentionally-wrong-expected'.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 'actual' to deeply equal 'intentionally-wrong-expected'
+   at Object.eval sandbox-script.js:4:2).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="API CI Demonstrations / CI-FR10-001 — nonexistent order cancellation is rejected" id="bff56203-3fa4-46d9-906b-49bb5de79ef8" timestamp="2026-08-21T14:27:27.935Z" tests="3" failures="0" errors="0" time="0.006">
+    <testcase name="CI-FR10-001 — nonexistent order cancellation is rejected | X-Student-Id exact" time="0.006" classname="ApiCiDemonstrationsCiFr10001NonexistentOrderCancellationIsRejected"/>
+    <testcase name="CI-FR10-001 | nonexistent order rejected" time="0.006" classname="ApiCiDemonstrationsCiFr10001NonexistentOrderCancellationIsRejected"/>
+    <testcase name="CI-FR10-001 | response has error" time="0.006" classname="ApiCiDemonstrationsCiFr10001NonexistentOrderCancellationIsRejected"/>
+  </testsuite>
+  <testsuite name="API CI Demonstrations / CI-FR16-001 — empty import is rejected" id="b3bc8a29-f1da-4df7-a468-a3181f99e6c2" timestamp="2026-08-21T14:27:27.935Z" tests="3" failures="0" errors="0" time="0.003">
+    <testcase name="CI-FR16-001 — empty import is rejected | X-Student-Id exact" time="0.003" classname="ApiCiDemonstrationsCiFr16001EmptyImportIsRejected"/>
+    <testcase name="CI-FR16-001 | empty import rejected" time="0.003" classname="ApiCiDemonstrationsCiFr16001EmptyImportIsRejected"/>
+    <testcase name="CI-FR16-001 | response has error" time="0.003" classname="ApiCiDemonstrationsCiFr16001EmptyImportIsRejected"/>
+  </testsuite>
+</testsuites>

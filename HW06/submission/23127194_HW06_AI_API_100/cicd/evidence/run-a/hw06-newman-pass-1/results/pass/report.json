@@ -1,0 +1,1535 @@
+{
+  "collection": {
+    "item": [
+      {
+        "id": "77b951a9-42bb-43f8-bd59-3f62c42eda6c",
+        "name": "Setup",
+        "item": [
+          {
+            "id": "d73fc0a8-f470-4bcb-8b48-698ae7400bca",
+            "name": "CI-SETUP-01 — Login default admin",
+            "request": {
+              "url": {
+                "path": [
+                  "api",
+                  "login"
+                ],
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\"email\":\"admin@eshop.com\",\"password\":\"Admin123!\"}"
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "dd533a14-e1fb-44e5-943b-da7152d0cfee",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('CI-SETUP-01 | admin login succeeds', function(){ pm.expect(pm.response.code).to.eql(200); });",
+                    "const j=pm.response.json(); pm.expect(j).to.have.property('token'); pm.environment.set('adminToken', j.token);"
+                  ],
+                  "_lastExecutionId": "cc003a99-9216-4369-8570-36300b1159ee"
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      },
+      {
+        "id": "6f066c03-faa6-4afb-92cd-8ce3ea525d85",
+        "name": "API CI Demonstrations",
+        "item": [
+          {
+            "id": "0d3cc260-7685-4134-b49b-548ed4fd4abd",
+            "name": "CI-FR05-001 — deterministic no-match product search",
+            "request": {
+              "url": {
+                "path": [
+                  "api",
+                  "products"
+                ],
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "query": [
+                  {
+                    "key": "search",
+                    "value": "__HW06_CI_NO_MATCH_23127194__"
+                  }
+                ],
+                "variable": []
+              },
+              "method": "GET"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "23d1ef34-d656-4091-86d6-57079c2e1d3d",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('CI-FR05-001 | HTTP 200', function(){ pm.expect(pm.response.code).to.eql(200); });",
+                    "pm.test('CI-FR05-001 | JSON array', function(){ pm.expect(pm.response.json()).to.be.an('array'); });",
+                    "pm.test('CI-FR05-001 | no-match is empty', function(){ pm.expect(pm.response.json()).to.have.length(0); });",
+                    "if (String(pm.environment.get('ciIntentionalFail')) === 'true') {",
+                    "  pm.test('CI-DEMO-ONLY | intentional single failure', function(){ pm.expect('actual').to.eql('intentionally-wrong-expected'); });",
+                    "}"
+                  ],
+                  "_lastExecutionId": "1b99beb3-d3d5-45ae-8aa8-5b1230ccb2b6"
+                }
+              }
+            ]
+          },
+          {
+            "id": "27c04428-5dae-42c5-8db3-4ded40f27369",
+            "name": "CI-FR10-001 — nonexistent order cancellation is rejected",
+            "request": {
+              "url": {
+                "path": [
+                  "api",
+                  "orders",
+                  "2147483647",
+                  "cancel"
+                ],
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{adminToken}}"
+                }
+              ],
+              "method": "PUT"
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "1fdfcf2c-fee0-4495-97b0-e3653ef0b4dc",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('CI-FR10-001 | nonexistent order rejected', function(){ pm.expect(pm.response.code).to.eql(404); });",
+                    "pm.test('CI-FR10-001 | response has error', function(){ pm.expect(pm.response.json()).to.have.property('error'); });"
+                  ],
+                  "_lastExecutionId": "33867d4b-3c35-406a-a93d-ffb8e0214280"
+                }
+              }
+            ]
+          },
+          {
+            "id": "06200ba3-48d4-4809-84a4-9905cc0c50ef",
+            "name": "CI-FR16-001 — empty import is rejected",
+            "request": {
+              "url": {
+                "path": [
+                  "api",
+                  "admin",
+                  "import-products"
+                ],
+                "host": [
+                  "{{baseUrl}}"
+                ],
+                "query": [],
+                "variable": []
+              },
+              "header": [
+                {
+                  "key": "Authorization",
+                  "value": "Bearer {{adminToken}}"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "method": "POST",
+              "body": {
+                "mode": "raw",
+                "raw": "{\"products\":[]}"
+              }
+            },
+            "response": [],
+            "event": [
+              {
+                "listen": "test",
+                "script": {
+                  "id": "41f3c031-8d05-4c90-9da8-b731c3e4cf43",
+                  "type": "text/javascript",
+                  "exec": [
+                    "pm.test('CI-FR16-001 | empty import rejected', function(){ pm.expect(pm.response.code).to.eql(400); });",
+                    "pm.test('CI-FR16-001 | response has error', function(){ pm.expect(pm.response.json()).to.have.property('error'); });"
+                  ],
+                  "_lastExecutionId": "1af2c531-1237-4343-812e-44e058d7a080"
+                }
+              }
+            ]
+          }
+        ],
+        "event": []
+      }
+    ],
+    "event": [
+      {
+        "listen": "prerequest",
+        "script": {
+          "id": "f7b4cd5c-cdad-46a7-968b-c92f32ea6c01",
+          "type": "text/javascript",
+          "exec": [
+            "pm.request.headers.upsert({key:'X-Student-Id', value:'23127194'});"
+          ],
+          "_lastExecutionId": "d4415088-8945-4215-a37e-ac69175718a4"
+        }
+      },
+      {
+        "listen": "test",
+        "script": {
+          "id": "cc5a59db-2802-4603-84c7-c3ed85a3bfea",
+          "type": "text/javascript",
+          "exec": [
+            "pm.test((pm.info.requestName || 'CI request') + ' | X-Student-Id exact', function () {",
+            "  pm.expect(pm.request.headers.get('X-Student-Id')).to.eql('23127194');",
+            "});"
+          ],
+          "_lastExecutionId": "8d93f05a-27f4-4cbe-8028-84bf21b6edf9"
+        }
+      }
+    ],
+    "variable": [],
+    "info": {
+      "_postman_id": "81799ab5-5847-49ed-aa8e-035169695ebe",
+      "name": "HW06 CI/CD Demo — FR05 FR10 FR16",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+      "description": {
+        "content": "Controlled CI demonstration suite, separate from official Step K evidence. Mode one-fail intentionally introduces exactly one CI-DEMO-ONLY assertion failure.",
+        "type": "text/plain"
+      }
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment"
+    },
+    "id": "21d16770-ae01-44a8-87dc-f2abfd13f4d6",
+    "name": "HW06 CI Pass",
+    "values": [
+      {
+        "type": "any",
+        "value": "http://127.0.0.1:3000",
+        "key": "baseUrl"
+      },
+      {
+        "type": "any",
+        "value": "23127194",
+        "key": "studentId"
+      },
+      {
+        "type": "any",
+        "value": "false",
+        "key": "ciIntentionalFail"
+      },
+      {
+        "type": "any",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg3MzIyMzcwfQ.y19Jdnrnr4n1VIPILtq4ekrixUGoAYk_k7z5JCqV_Qk",
+        "key": "adminToken"
+      }
+    ]
+  },
+  "globals": {
+    "id": "3bd4dfc4-8170-45b8-ae34-2e9707c1de3c",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 12,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 8,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 4,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 12.75,
+      "responseMin": 4,
+      "responseMax": 36,
+      "responseSd": 13.442005058770063,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1787322370291,
+      "completed": 1787322370466
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 4,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "eddc4b7e-6a09-4a85-bea8-f1899dd21b39",
+          "httpRequestId": "628fa75a-4a74-4557-8a90-8c8a78326ac5"
+        },
+        "item": {
+          "id": "d73fc0a8-f470-4bcb-8b48-698ae7400bca",
+          "name": "CI-SETUP-01 — Login default admin",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"admin@eshop.com\",\"password\":\"Admin123!\"}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "dd533a14-e1fb-44e5-943b-da7152d0cfee",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-SETUP-01 | admin login succeeds', function(){ pm.expect(pm.response.code).to.eql(200); });",
+                  "const j=pm.response.json(); pm.expect(j).to.have.property('token'); pm.environment.set('adminToken', j.token);"
+                ],
+                "_lastExecutionId": "cc003a99-9216-4369-8570-36300b1159ee"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "login"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127194"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "547c9aed-987f-4517-aebe-a55a151198fa",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "50",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"email\":\"admin@eshop.com\",\"password\":\"Admin123!\"}"
+          }
+        },
+        "response": {
+          "id": "4f96aea2-5b4f-4758-b6b4-a1764ff1d812",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "371"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"173-k+Bb72NIxCeBfK+7ZZEMeI09DHw\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 21 Aug 2026 14:26:10 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              109,
+              101,
+              115,
+              115,
+              97,
+              103,
+              101,
+              34,
+              58,
+              34,
+              76,
+              111,
+              103,
+              105,
+              110,
+              32,
+              115,
+              117,
+              99,
+              99,
+              101,
+              115,
+              115,
+              102,
+              117,
+              108,
+              34,
+              44,
+              34,
+              116,
+              111,
+              107,
+              101,
+              110,
+              34,
+              58,
+              34,
+              101,
+              121,
+              74,
+              104,
+              98,
+              71,
+              99,
+              105,
+              79,
+              105,
+              74,
+              73,
+              85,
+              122,
+              73,
+              49,
+              78,
+              105,
+              73,
+              115,
+              73,
+              110,
+              82,
+              53,
+              99,
+              67,
+              73,
+              54,
+              73,
+              107,
+              112,
+              88,
+              86,
+              67,
+              74,
+              57,
+              46,
+              101,
+              121,
+              74,
+              112,
+              90,
+              67,
+              73,
+              54,
+              77,
+              83,
+              119,
+              105,
+              99,
+              109,
+              57,
+              115,
+              90,
+              83,
+              73,
+              54,
+              73,
+              109,
+              70,
+              107,
+              98,
+              87,
+              108,
+              117,
+              73,
+              105,
+              119,
+              105,
+              97,
+              87,
+              70,
+              48,
+              73,
+              106,
+              111,
+              120,
+              78,
+              122,
+              103,
+              51,
+              77,
+              122,
+              73,
+              121,
+              77,
+              122,
+              99,
+              119,
+              102,
+              81,
+              46,
+              121,
+              49,
+              57,
+              74,
+              100,
+              110,
+              114,
+              110,
+              114,
+              52,
+              110,
+              49,
+              86,
+              73,
+              80,
+              73,
+              76,
+              116,
+              113,
+              52,
+              101,
+              107,
+              114,
+              105,
+              120,
+              85,
+              71,
+              111,
+              65,
+              89,
+              107,
+              95,
+              107,
+              55,
+              122,
+              53,
+              74,
+              67,
+              113,
+              86,
+              95,
+              81,
+              107,
+              34,
+              44,
+              34,
+              117,
+              115,
+              101,
+              114,
+              34,
+              58,
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              49,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              65,
+              100,
+              109,
+              105,
+              110,
+              32,
+              85,
+              115,
+              101,
+              114,
+              34,
+              44,
+              34,
+              101,
+              109,
+              97,
+              105,
+              108,
+              34,
+              58,
+              34,
+              97,
+              100,
+              109,
+              105,
+              110,
+              64,
+              101,
+              115,
+              104,
+              111,
+              112,
+              46,
+              99,
+              111,
+              109,
+              34,
+              44,
+              34,
+              112,
+              97,
+              115,
+              115,
+              119,
+              111,
+              114,
+              100,
+              34,
+              58,
+              34,
+              65,
+              100,
+              109,
+              105,
+              110,
+              49,
+              50,
+              51,
+              33,
+              34,
+              44,
+              34,
+              114,
+              111,
+              108,
+              101,
+              34,
+              58,
+              34,
+              97,
+              100,
+              109,
+              105,
+              110,
+              34,
+              44,
+              34,
+              108,
+              111,
+              103,
+              105,
+              110,
+              95,
+              97,
+              116,
+              116,
+              101,
+              109,
+              112,
+              116,
+              115,
+              34,
+              58,
+              48,
+              44,
+              34,
+              108,
+              111,
+              99,
+              107,
+              101,
+              100,
+              95,
+              117,
+              110,
+              116,
+              105,
+              108,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              114,
+              101,
+              115,
+              101,
+              116,
+              95,
+              116,
+              111,
+              107,
+              101,
+              110,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              115,
+              104,
+              105,
+              112,
+              112,
+              105,
+              110,
+              103,
+              95,
+              97,
+              100,
+              100,
+              114,
+              101,
+              115,
+              115,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              44,
+              34,
+              112,
+              104,
+              111,
+              110,
+              101,
+              34,
+              58,
+              110,
+              117,
+              108,
+              108,
+              125,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 36,
+          "responseSize": 371
+        },
+        "id": "d73fc0a8-f470-4bcb-8b48-698ae7400bca",
+        "assertions": [
+          {
+            "assertion": "CI-SETUP-01 — Login default admin | X-Student-Id exact",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-SETUP-01 | admin login succeeds",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "a26d766e-fc33-4007-a943-e9ed79171377",
+          "length": 4,
+          "cycles": 1,
+          "position": 1,
+          "iteration": 0,
+          "httpRequestId": "89ef75fd-05ed-47a5-b30d-a07c021bd35f"
+        },
+        "item": {
+          "id": "0d3cc260-7685-4134-b49b-548ed4fd4abd",
+          "name": "CI-FR05-001 — deterministic no-match product search",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "__HW06_CI_NO_MATCH_23127194__"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "23d1ef34-d656-4091-86d6-57079c2e1d3d",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-FR05-001 | HTTP 200', function(){ pm.expect(pm.response.code).to.eql(200); });",
+                  "pm.test('CI-FR05-001 | JSON array', function(){ pm.expect(pm.response.json()).to.be.an('array'); });",
+                  "pm.test('CI-FR05-001 | no-match is empty', function(){ pm.expect(pm.response.json()).to.have.length(0); });",
+                  "if (String(pm.environment.get('ciIntentionalFail')) === 'true') {",
+                  "  pm.test('CI-DEMO-ONLY | intentional single failure', function(){ pm.expect('actual').to.eql('intentionally-wrong-expected'); });",
+                  "}"
+                ],
+                "_lastExecutionId": "1b99beb3-d3d5-45ae-8aa8-5b1230ccb2b6"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "products"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [
+              {
+                "key": "search",
+                "value": "__HW06_CI_NO_MATCH_23127194__"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "X-Student-Id",
+              "value": "23127194"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "0091ec1d-3e9d-40bf-9551-803ead98cea9",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "0685388b-5038-4731-8a9f-9b7ec8483d97",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "2"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 21 Aug 2026 14:26:10 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              91,
+              93
+            ]
+          },
+          "cookie": [],
+          "responseTime": 5,
+          "responseSize": 2
+        },
+        "id": "0d3cc260-7685-4134-b49b-548ed4fd4abd",
+        "assertions": [
+          {
+            "assertion": "CI-FR05-001 — deterministic no-match product search | X-Student-Id exact",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-FR05-001 | HTTP 200",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-FR05-001 | JSON array",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-FR05-001 | no-match is empty",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "b6071598-b2b7-4754-89fd-1702c365c063",
+          "length": 4,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "2c7eb2c9-5db9-4de6-a639-39f27b8bd2f9"
+        },
+        "item": {
+          "id": "27c04428-5dae-42c5-8db3-4ded40f27369",
+          "name": "CI-FR10-001 — nonexistent order cancellation is rejected",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "orders",
+                "2147483647",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              }
+            ],
+            "method": "PUT"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "1fdfcf2c-fee0-4495-97b0-e3653ef0b4dc",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-FR10-001 | nonexistent order rejected', function(){ pm.expect(pm.response.code).to.eql(404); });",
+                  "pm.test('CI-FR10-001 | response has error', function(){ pm.expect(pm.response.json()).to.have.property('error'); });"
+                ],
+                "_lastExecutionId": "33867d4b-3c35-406a-a93d-ffb8e0214280"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "orders",
+              "2147483647",
+              "cancel"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg3MzIyMzcwfQ.y19Jdnrnr4n1VIPILtq4ekrixUGoAYk_k7z5JCqV_Qk"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127194"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "ca478476-124a-4d16-98d4-ec53dc0f1caa",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "0",
+              "system": true
+            }
+          ],
+          "method": "PUT"
+        },
+        "response": {
+          "id": "0af0c566-d56b-471d-94c0-6b2b3454bed8",
+          "status": "Not Found",
+          "code": 404,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "27"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"1b-G7RX01EQFHhrsSpXHe3p7uxrQrs\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 21 Aug 2026 14:26:10 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              79,
+              114,
+              100,
+              101,
+              114,
+              32,
+              110,
+              111,
+              116,
+              32,
+              102,
+              111,
+              117,
+              110,
+              100,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 6,
+          "responseSize": 27
+        },
+        "id": "27c04428-5dae-42c5-8db3-4ded40f27369",
+        "assertions": [
+          {
+            "assertion": "CI-FR10-001 — nonexistent order cancellation is rejected | X-Student-Id exact",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-FR10-001 | nonexistent order rejected",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-FR10-001 | response has error",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "98187e26-2628-44be-b1f0-33c71fde4a8a",
+          "length": 4,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "3102659e-ac98-42de-a843-97f34698f026"
+        },
+        "item": {
+          "id": "06200ba3-48d4-4809-84a4-9905cc0c50ef",
+          "name": "CI-FR16-001 — empty import is rejected",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "admin",
+                "import-products"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"products\":[]}"
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "41f3c031-8d05-4c90-9da8-b731c3e4cf43",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('CI-FR16-001 | empty import rejected', function(){ pm.expect(pm.response.code).to.eql(400); });",
+                  "pm.test('CI-FR16-001 | response has error', function(){ pm.expect(pm.response.json()).to.have.property('error'); });"
+                ],
+                "_lastExecutionId": "1af2c531-1237-4343-812e-44e058d7a080"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "3000",
+            "path": [
+              "api",
+              "admin",
+              "import-products"
+            ],
+            "host": [
+              "127",
+              "0",
+              "0",
+              "1"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6ImFkbWluIiwiaWF0IjoxNzg3MzIyMzcwfQ.y19Jdnrnr4n1VIPILtq4ekrixUGoAYk_k7z5JCqV_Qk"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "X-Student-Id",
+              "value": "23127194"
+            },
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.39.1",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "efbccd03-76d4-42a8-8c89-5f2ac1c0207a",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "127.0.0.1:3000",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            },
+            {
+              "key": "Content-Length",
+              "value": "15",
+              "system": true
+            }
+          ],
+          "method": "POST",
+          "body": {
+            "mode": "raw",
+            "raw": "{\"products\":[]}"
+          }
+        },
+        "response": {
+          "id": "b4a15545-2c5d-4c7a-94da-1526bbf73f99",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "X-Powered-By",
+              "value": "Express"
+            },
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            },
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Content-Length",
+              "value": "47"
+            },
+            {
+              "key": "ETag",
+              "value": "W/\"2f-ZfOKxfjwu/0WpDjqlrIyoEXZXl8\""
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 21 Aug 2026 14:26:10 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=5"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              101,
+              114,
+              114,
+              111,
+              114,
+              34,
+              58,
+              34,
+              75,
+              104,
+              195,
+              180,
+              110,
+              103,
+              32,
+              99,
+              195,
+              179,
+              32,
+              100,
+              225,
+              187,
+              175,
+              32,
+              108,
+              105,
+              225,
+              187,
+              135,
+              117,
+              32,
+              196,
+              145,
+              225,
+              187,
+              131,
+              32,
+              105,
+              109,
+              112,
+              111,
+              114,
+              116,
+              34,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 4,
+          "responseSize": 47
+        },
+        "id": "06200ba3-48d4-4809-84a4-9905cc0c50ef",
+        "assertions": [
+          {
+            "assertion": "CI-FR16-001 — empty import is rejected | X-Student-Id exact",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-FR16-001 | empty import rejected",
+            "skipped": false
+          },
+          {
+            "assertion": "CI-FR16-001 | response has error",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 447
+    },
+    "failures": [],
+    "error": null
+  }
+}

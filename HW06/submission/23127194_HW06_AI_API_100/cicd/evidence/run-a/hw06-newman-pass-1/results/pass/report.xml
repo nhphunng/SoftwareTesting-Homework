@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="HW06 CI/CD Demo — FR05 FR10 FR16" tests="4" time="0.051">
+  <testsuite name="Setup / CI-SETUP-01 — Login default admin" id="d73fc0a8-f470-4bcb-8b48-698ae7400bca" timestamp="2026-08-21T14:26:10.291Z" tests="2" failures="0" errors="0" time="0.036">
+    <testcase name="CI-SETUP-01 — Login default admin | X-Student-Id exact" time="0.036" classname="SetupCiSetup01LoginDefaultAdmin"/>
+    <testcase name="CI-SETUP-01 | admin login succeeds" time="0.036" classname="SetupCiSetup01LoginDefaultAdmin"/>
+  </testsuite>
+  <testsuite name="API CI Demonstrations / CI-FR05-001 — deterministic no-match product search" id="0d3cc260-7685-4134-b49b-548ed4fd4abd" timestamp="2026-08-21T14:26:10.291Z" tests="4" failures="0" errors="0" time="0.005">
+    <testcase name="CI-FR05-001 — deterministic no-match product search | X-Student-Id exact" time="0.005" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+    <testcase name="CI-FR05-001 | HTTP 200" time="0.005" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+    <testcase name="CI-FR05-001 | JSON array" time="0.005" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+    <testcase name="CI-FR05-001 | no-match is empty" time="0.005" classname="ApiCiDemonstrationsCiFr05001DeterministicNoMatchProductSearch"/>
+  </testsuite>
+  <testsuite name="API CI Demonstrations / CI-FR10-001 — nonexistent order cancellation is rejected" id="27c04428-5dae-42c5-8db3-4ded40f27369" timestamp="2026-08-21T14:26:10.291Z" tests="3" failures="0" errors="0" time="0.006">
+    <testcase name="CI-FR10-001 — nonexistent order cancellation is rejected | X-Student-Id exact" time="0.006" classname="ApiCiDemonstrationsCiFr10001NonexistentOrderCancellationIsRejected"/>
+    <testcase name="CI-FR10-001 | nonexistent order rejected" time="0.006" classname="ApiCiDemonstrationsCiFr10001NonexistentOrderCancellationIsRejected"/>
+    <testcase name="CI-FR10-001 | response has error" time="0.006" classname="ApiCiDemonstrationsCiFr10001NonexistentOrderCancellationIsRejected"/>
+  </testsuite>
+  <testsuite name="API CI Demonstrations / CI-FR16-001 — empty import is rejected" id="06200ba3-48d4-4809-84a4-9905cc0c50ef" timestamp="2026-08-21T14:26:10.291Z" tests="3" failures="0" errors="0" time="0.004">
+    <testcase name="CI-FR16-001 — empty import is rejected | X-Student-Id exact" time="0.004" classname="ApiCiDemonstrationsCiFr16001EmptyImportIsRejected"/>
+    <testcase name="CI-FR16-001 | empty import rejected" time="0.004" classname="ApiCiDemonstrationsCiFr16001EmptyImportIsRejected"/>
+    <testcase name="CI-FR16-001 | response has error" time="0.004" classname="ApiCiDemonstrationsCiFr16001EmptyImportIsRejected"/>
+  </testsuite>
+</testsuites>
