@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="HW06 — FR-05 Product Search — 23127194" tests="62" time="0.114">
+  <testsuite name="B1 &amp; B7 — Functional / Business / [AI] AI-FR05-001 — Listing with search omitted" id="fd12b225-a360-48cd-b0b0-e3012027768d" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.017">
+    <testcase name="[AI] AI-FR05-001 — Listing with search omitted | required X-Student-Id header" time="0.017" classname="B1AmpB7FunctionalBusinessAiAiFr05001ListingWithSearchOmitted"/>
+    <testcase name="[AI] AI-FR05-001 | testcase traceability" time="0.017" classname="B1AmpB7FunctionalBusinessAiAiFr05001ListingWithSearchOmitted"/>
+  </testsuite>
+  <testsuite name="B1 &amp; B7 — Functional / Business / [AI] AI-FR05-002 — Controlled matching keyword" id="64bb9cf8-c6b7-4d1d-bde0-b627825a5f3c" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-002 — Controlled matching keyword | required X-Student-Id header" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05002ControlledMatchingKeyword"/>
+    <testcase name="[AI] AI-FR05-002 | testcase traceability" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05002ControlledMatchingKeyword"/>
+    <testcase name="[AI] AI-FR05-002 — Controlled matching keyword | configured matching product is discoverable" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05002ControlledMatchingKeyword"/>
+  </testsuite>
+  <testsuite name="B1 &amp; B7 — Functional / Business / [AI] AI-FR05-003 — Controlled no-match keyword" id="73f4761c-7519-45bd-81fa-653dddf5576e" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-003 — Controlled no-match keyword | required X-Student-Id header" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05003ControlledNoMatchKeyword"/>
+    <testcase name="[AI] AI-FR05-003 | testcase traceability" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05003ControlledNoMatchKeyword"/>
+    <testcase name="[AI] AI-FR05-003 — Controlled no-match keyword | no fabricated or non-name-only match" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05003ControlledNoMatchKeyword"/>
+  </testsuite>
+  <testsuite name="B1 &amp; B7 — Functional / Business / [AI] AI-FR05-004 — Exact existing product name" id="a2c5db1c-86e3-495a-a7c0-7dbe594bc531" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-004 — Exact existing product name | required X-Student-Id header" time="0.001" classname="B1AmpB7FunctionalBusinessAiAiFr05004ExactExistingProductName"/>
+    <testcase name="[AI] AI-FR05-004 | testcase traceability" time="0.001" classname="B1AmpB7FunctionalBusinessAiAiFr05004ExactExistingProductName"/>
+    <testcase name="[AI] AI-FR05-004 — Exact existing product name | configured matching product is discoverable" time="0.001" classname="B1AmpB7FunctionalBusinessAiAiFr05004ExactExistingProductName"/>
+  </testsuite>
+  <testsuite name="B1 &amp; B7 — Functional / Business / [AI] AI-FR05-005 — Keyword present only outside product name" id="297d0e78-2d59-45cf-8860-6f658a9e26c1" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-005 — Keyword present only outside product name | required X-Student-Id header" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05005KeywordPresentOnlyOutsideProductName"/>
+    <testcase name="[AI] AI-FR05-005 | testcase traceability" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05005KeywordPresentOnlyOutsideProductName"/>
+    <testcase name="[AI] AI-FR05-005 — Keyword present only outside product name | no fabricated or non-name-only match" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05005KeywordPresentOnlyOutsideProductName"/>
+  </testsuite>
+  <testsuite name="B1 &amp; B7 — Functional / Business / [AI] AI-FR05-006 — Public request without Authorization header" id="08433f28-6832-4e8f-a5ba-fa471358a9c9" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-006 — Public request without Authorization header | required X-Student-Id header" time="0.001" classname="B1AmpB7FunctionalBusinessAiAiFr05006PublicRequestWithoutAuthorizationHeader"/>
+    <testcase name="[AI] AI-FR05-006 | testcase traceability" time="0.001" classname="B1AmpB7FunctionalBusinessAiAiFr05006PublicRequestWithoutAuthorizationHeader"/>
+  </testsuite>
+  <testsuite name="B1 &amp; B7 — Functional / Business / [AI] AI-FR05-041 — Whole result-set name-search consistency" id="a5ac660f-67f1-46fb-8b59-2fb34b2cbc51" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-041 — Whole result-set name-search consistency | required X-Student-Id header" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05041WholeResultSetNameSearchConsistency"/>
+    <testcase name="[AI] AI-FR05-041 | testcase traceability" time="0.002" classname="B1AmpB7FunctionalBusinessAiAiFr05041WholeResultSetNameSearchConsistency"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-007 — Empty search characterization" id="6e3d7fdf-fb89-4fd5-8003-21354b0e0d74" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-007 — Empty search characterization | required X-Student-Id header" time="0.002" classname="B2DomainCharacterizationAiAiFr05007EmptySearchCharacterization"/>
+    <testcase name="[AI] AI-FR05-007 | testcase traceability" time="0.002" classname="B2DomainCharacterizationAiAiFr05007EmptySearchCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-008 — Whitespace-only search characterization" id="5f1e55b7-a0ef-4357-8df5-12d60b4cfd6c" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-008 — Whitespace-only search characterization | required X-Student-Id header" time="0.001" classname="B2DomainCharacterizationAiAiFr05008WhitespaceOnlySearchCharacterization"/>
+    <testcase name="[AI] AI-FR05-008 | testcase traceability" time="0.001" classname="B2DomainCharacterizationAiAiFr05008WhitespaceOnlySearchCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-009 — Padded keyword characterization" id="27286eac-07da-48a8-bdc7-6e2af6ead8bb" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-009 — Padded keyword characterization | required X-Student-Id header" time="0.001" classname="B2DomainCharacterizationAiAiFr05009PaddedKeywordCharacterization"/>
+    <testcase name="[AI] AI-FR05-009 | testcase traceability" time="0.001" classname="B2DomainCharacterizationAiAiFr05009PaddedKeywordCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-010 — Partial-name search characterization" id="16305a91-2afc-476c-8fff-9b910f16bcae" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-010 — Partial-name search characterization | required X-Student-Id header" time="0.002" classname="B2DomainCharacterizationAiAiFr05010PartialNameSearchCharacterization"/>
+    <testcase name="[AI] AI-FR05-010 | testcase traceability" time="0.002" classname="B2DomainCharacterizationAiAiFr05010PartialNameSearchCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-011 — Vietnamese/Unicode search characterization" id="adbf007e-8d6d-4502-938e-63f0e78a15e8" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-011 — Vietnamese/Unicode search characterization | required X-Student-Id header" time="0.001" classname="B2DomainCharacterizationAiAiFr05011VietnameseUnicodeSearchCharacterization"/>
+    <testcase name="[AI] AI-FR05-011 | testcase traceability" time="0.001" classname="B2DomainCharacterizationAiAiFr05011VietnameseUnicodeSearchCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-012 — Fixed punctuation and symbols characterization (corrected)" id="650e3bbc-9f3f-4cbc-91ff-d65324c89f6d" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-012 — Fixed punctuation and symbols characterization (corrected) | required X-Student-Id header" time="0.001" classname="B2DomainCharacterizationAiAiFr05012FixedPunctuationAndSymbolsCharacterizationCorrected"/>
+    <testcase name="[AI] AI-FR05-012 | testcase traceability" time="0.001" classname="B2DomainCharacterizationAiAiFr05012FixedPunctuationAndSymbolsCharacterizationCorrected"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-013 — Script-like API input characterization (corrected)" id="70663067-9f4e-4043-90cf-56b97d5778b4" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-013 — Script-like API input characterization (corrected) | required X-Student-Id header" time="0.002" classname="B2DomainCharacterizationAiAiFr05013ScriptLikeApiInputCharacterizationCorrected"/>
+    <testcase name="[AI] AI-FR05-013 | testcase traceability" time="0.002" classname="B2DomainCharacterizationAiAiFr05013ScriptLikeApiInputCharacterizationCorrected"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-014 — URL-encoded literal plus sign characterization" id="91857990-3e73-4796-b004-29c78573e3d0" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-014 — URL-encoded literal plus sign characterization | required X-Student-Id header" time="0.001" classname="B2DomainCharacterizationAiAiFr05014UrlEncodedLiteralPlusSignCharacterization"/>
+    <testcase name="[AI] AI-FR05-014 | testcase traceability" time="0.001" classname="B2DomainCharacterizationAiAiFr05014UrlEncodedLiteralPlusSignCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-015 — Lower-case variation characterization" id="6176ff5c-1bfe-4372-9f9c-56a32d70c3bf" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-015 — Lower-case variation characterization | required X-Student-Id header" time="0.002" classname="B2DomainCharacterizationAiAiFr05015LowerCaseVariationCharacterization"/>
+    <testcase name="[AI] AI-FR05-015 | testcase traceability" time="0.002" classname="B2DomainCharacterizationAiAiFr05015LowerCaseVariationCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-016 — Upper/mixed-case variation characterization" id="8771f3ec-d2ad-4f43-8666-d66d1dac7668" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.004">
+    <testcase name="[AI] AI-FR05-016 — Upper/mixed-case variation characterization | required X-Student-Id header" time="0.004" classname="B2DomainCharacterizationAiAiFr05016UpperMixedCaseVariationCharacterization"/>
+    <testcase name="[AI] AI-FR05-016 | testcase traceability" time="0.004" classname="B2DomainCharacterizationAiAiFr05016UpperMixedCaseVariationCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-017 — Numeric-looking text characterization" id="3529927a-a714-4313-85c6-558da5c2eb60" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-017 — Numeric-looking text characterization | required X-Student-Id header" time="0.002" classname="B2DomainCharacterizationAiAiFr05017NumericLookingTextCharacterization"/>
+    <testcase name="[AI] AI-FR05-017 | testcase traceability" time="0.002" classname="B2DomainCharacterizationAiAiFr05017NumericLookingTextCharacterization"/>
+  </testsuite>
+  <testsuite name="B2 — Domain / Characterization / [AI] AI-FR05-018 — Literal null text characterization" id="179cce4e-a3be-4afe-86a4-3e812cc054dd" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-018 — Literal null text characterization | required X-Student-Id header" time="0.001" classname="B2DomainCharacterizationAiAiFr05018LiteralNullTextCharacterization"/>
+    <testcase name="[AI] AI-FR05-018 | testcase traceability" time="0.001" classname="B2DomainCharacterizationAiAiFr05018LiteralNullTextCharacterization"/>
+  </testsuite>
+  <testsuite name="B3 — Boundary / Negative / [AI] AI-FR05-019 — One-character keyword characterization" id="786ed078-945b-46d0-876a-72de4ce4927e" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-019 — One-character keyword characterization | required X-Student-Id header" time="0.001" classname="B3BoundaryNegativeAiAiFr05019OneCharacterKeywordCharacterization"/>
+    <testcase name="[AI] AI-FR05-019 | testcase traceability" time="0.001" classname="B3BoundaryNegativeAiAiFr05019OneCharacterKeywordCharacterization"/>
+  </testsuite>
+  <testsuite name="B3 — Boundary / Negative / [AI] AI-FR05-020 — Exactly 2,000 ASCII A characters (corrected)" id="c91fcbf1-650e-41ee-afda-84124b04309d" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-020 — Exactly 2,000 ASCII A characters (corrected) | required X-Student-Id header" time="0.001" classname="B3BoundaryNegativeAiAiFr05020Exactly2000AsciiACharactersCorrected"/>
+    <testcase name="[AI] AI-FR05-020 | testcase traceability" time="0.001" classname="B3BoundaryNegativeAiAiFr05020Exactly2000AsciiACharactersCorrected"/>
+  </testsuite>
+  <testsuite name="B3 — Boundary / Negative / [AI] AI-FR05-021 — Duplicate search parameters characterization" id="9aa6660a-a3f5-454f-82fb-813bfec66688" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-021 — Duplicate search parameters characterization | required X-Student-Id header" time="0.001" classname="B3BoundaryNegativeAiAiFr05021DuplicateSearchParametersCharacterization"/>
+    <testcase name="[AI] AI-FR05-021 | testcase traceability" time="0.001" classname="B3BoundaryNegativeAiAiFr05021DuplicateSearchParametersCharacterization"/>
+  </testsuite>
+  <testsuite name="B3 — Boundary / Negative / [AI] AI-FR05-022 — URL-encoded literal percent characterization" id="af4abefc-a1a2-41c7-8628-a31458975443" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-022 — URL-encoded literal percent characterization | required X-Student-Id header" time="0.002" classname="B3BoundaryNegativeAiAiFr05022UrlEncodedLiteralPercentCharacterization"/>
+    <testcase name="[AI] AI-FR05-022 | testcase traceability" time="0.002" classname="B3BoundaryNegativeAiAiFr05022UrlEncodedLiteralPercentCharacterization"/>
+  </testsuite>
+  <testsuite name="B3 — Boundary / Negative / [AI] AI-FR05-023 — URL-encoded literal ampersand characterization" id="6ee1da16-5375-4c6b-9108-53d987c26768" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-023 — URL-encoded literal ampersand characterization | required X-Student-Id header" time="0.001" classname="B3BoundaryNegativeAiAiFr05023UrlEncodedLiteralAmpersandCharacterization"/>
+    <testcase name="[AI] AI-FR05-023 | testcase traceability" time="0.001" classname="B3BoundaryNegativeAiAiFr05023UrlEncodedLiteralAmpersandCharacterization"/>
+  </testsuite>
+  <testsuite name="B3 — Boundary / Negative / [AI] AI-FR05-024 — URL-encoded literal equals sign characterization" id="e31f2e61-2e5e-48d8-a60e-94ddc360da10" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-024 — URL-encoded literal equals sign characterization | required X-Student-Id header" time="0.002" classname="B3BoundaryNegativeAiAiFr05024UrlEncodedLiteralEqualsSignCharacterization"/>
+    <testcase name="[AI] AI-FR05-024 | testcase traceability" time="0.002" classname="B3BoundaryNegativeAiAiFr05024UrlEncodedLiteralEqualsSignCharacterization"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-025 — Repeat listing; read-only semantics / [AI] AI-FR05-025 — Step 1 of 2 — first listing" id="92d86747-a1df-4e6d-a08e-8a2430c11cc9" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-025 — Step 1 of 2 — first listing | required X-Student-Id header" time="0.001" classname="B4StateSequenceAiAiFr05025RepeatListingReadOnlySemanticsAiAiFr05025Step1Of2FirstListing"/>
+    <testcase name="[AI] AI-FR05-025 | testcase traceability" time="0.001" classname="B4StateSequenceAiAiFr05025RepeatListingReadOnlySemanticsAiAiFr05025Step1Of2FirstListing"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-025 — Repeat listing; read-only semantics / [AI] AI-FR05-025 — Step 2 of 2 — repeated listing" id="733351ce-6eef-478a-b8a6-3da78859f749" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-025 — Step 2 of 2 — repeated listing | required X-Student-Id header" time="0.001" classname="B4StateSequenceAiAiFr05025RepeatListingReadOnlySemanticsAiAiFr05025Step2Of2RepeatedListing"/>
+    <testcase name="[AI] AI-FR05-025 | testcase traceability" time="0.001" classname="B4StateSequenceAiAiFr05025RepeatListingReadOnlySemanticsAiAiFr05025Step2Of2RepeatedListing"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-026 — Repeat controlled search / [AI] AI-FR05-026 — Step 1 of 2 — first controlled search" id="6998b2cd-d552-4c1d-999a-216c3ad7e468" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-026 — Step 1 of 2 — first controlled search | required X-Student-Id header" time="0.001" classname="B4StateSequenceAiAiFr05026RepeatControlledSearchAiAiFr05026Step1Of2FirstControlledSearch"/>
+    <testcase name="[AI] AI-FR05-026 | testcase traceability" time="0.001" classname="B4StateSequenceAiAiFr05026RepeatControlledSearchAiAiFr05026Step1Of2FirstControlledSearch"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-026 — Repeat controlled search / [AI] AI-FR05-026 — Step 2 of 2 — repeated controlled search" id="4f139f78-e3e3-445f-99d6-fc029b34626a" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-026 — Step 2 of 2 — repeated controlled search | required X-Student-Id header" time="0.001" classname="B4StateSequenceAiAiFr05026RepeatControlledSearchAiAiFr05026Step2Of2RepeatedControlledSearch"/>
+    <testcase name="[AI] AI-FR05-026 | testcase traceability" time="0.001" classname="B4StateSequenceAiAiFr05026RepeatControlledSearchAiAiFr05026Step2Of2RepeatedControlledSearch"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-027 — Search A then Search B independence / [AI] AI-FR05-027 — Step 1 of 2 — search keyword A" id="6901109c-d0a0-4b30-9e4a-3555224921eb" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-027 — Step 1 of 2 — search keyword A | required X-Student-Id header" time="0.001" classname="B4StateSequenceAiAiFr05027SearchAThenSearchBIndependenceAiAiFr05027Step1Of2SearchKeywordA"/>
+    <testcase name="[AI] AI-FR05-027 | testcase traceability" time="0.001" classname="B4StateSequenceAiAiFr05027SearchAThenSearchBIndependenceAiAiFr05027Step1Of2SearchKeywordA"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-027 — Search A then Search B independence / [AI] AI-FR05-027 — Step 2 of 2 — search keyword B" id="d90dc713-8cd8-4072-b307-cfbead096218" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-027 — Step 2 of 2 — search keyword B | required X-Student-Id header" time="0.002" classname="B4StateSequenceAiAiFr05027SearchAThenSearchBIndependenceAiAiFr05027Step2Of2SearchKeywordB"/>
+    <testcase name="[AI] AI-FR05-027 | testcase traceability" time="0.002" classname="B4StateSequenceAiAiFr05027SearchAThenSearchBIndependenceAiAiFr05027Step2Of2SearchKeywordB"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-028 — Filtered search then unfiltered listing / [AI] AI-FR05-028 — Step 1 of 2 — filtered search" id="2eb3d377-8682-4aa5-8db0-7a2a97ff9358" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-028 — Step 1 of 2 — filtered search | required X-Student-Id header" time="0.002" classname="B4StateSequenceAiAiFr05028FilteredSearchThenUnfilteredListingAiAiFr05028Step1Of2FilteredSearch"/>
+    <testcase name="[AI] AI-FR05-028 | testcase traceability" time="0.002" classname="B4StateSequenceAiAiFr05028FilteredSearchThenUnfilteredListingAiAiFr05028Step1Of2FilteredSearch"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-028 — Filtered search then unfiltered listing / [AI] AI-FR05-028 — Step 2 of 2 — unfiltered listing" id="875467de-f8e1-462e-a1dd-26731ffb3742" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-028 — Step 2 of 2 — unfiltered listing | required X-Student-Id header" time="0.001" classname="B4StateSequenceAiAiFr05028FilteredSearchThenUnfilteredListingAiAiFr05028Step2Of2UnfilteredListing"/>
+    <testcase name="[AI] AI-FR05-028 | testcase traceability" time="0.001" classname="B4StateSequenceAiAiFr05028FilteredSearchThenUnfilteredListingAiAiFr05028Step2Of2UnfilteredListing"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-029 — Unmatched quote then normal search (corrected) / [AI] AI-FR05-029 — Step 1 of 2 — reuse AI-FR05-030 unmatched quote" id="d7d25510-018a-47b1-b8e6-1ee230a8cf11" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-029 — Step 1 of 2 — reuse AI-FR05-030 unmatched quote | required X-Student-Id header" time="0.002" classname="B4StateSequenceAiAiFr05029UnmatchedQuoteThenNormalSearchCorrectedAiAiFr05029Step1Of2ReuseAiFr05030UnmatchedQuote"/>
+    <testcase name="[AI] AI-FR05-029 | testcase traceability" time="0.002" classname="B4StateSequenceAiAiFr05029UnmatchedQuoteThenNormalSearchCorrectedAiAiFr05029Step1Of2ReuseAiFr05030UnmatchedQuote"/>
+  </testsuite>
+  <testsuite name="B4 — State / Sequence / [AI] AI-FR05-029 — Unmatched quote then normal search (corrected) / [AI] AI-FR05-029 — Step 2 of 2 — reuse AI-FR05-002 normal search" id="32831466-f2a2-40a3-a3f1-b09e2ae5cc4b" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-029 — Step 2 of 2 — reuse AI-FR05-002 normal search | required X-Student-Id header" time="0.001" classname="B4StateSequenceAiAiFr05029UnmatchedQuoteThenNormalSearchCorrectedAiAiFr05029Step2Of2ReuseAiFr05002NormalSearch"/>
+    <testcase name="[AI] AI-FR05-029 | testcase traceability" time="0.001" classname="B4StateSequenceAiAiFr05029UnmatchedQuoteThenNormalSearchCorrectedAiAiFr05029Step2Of2ReuseAiFr05002NormalSearch"/>
+    <testcase name="[AI] AI-FR05-029 — Step 2 of 2 — reuse AI-FR05-002 normal search | configured matching product is discoverable" time="0.001" classname="B4StateSequenceAiAiFr05029UnmatchedQuoteThenNormalSearchCorrectedAiAiFr05029Step2Of2ReuseAiFr05002NormalSearch"/>
+  </testsuite>
+  <testsuite name="B5 — Security / [AI] AI-FR05-030 — Unmatched quote SQL-injection probe" id="10545962-35e2-4f58-8113-98c57581d60f" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-030 — Unmatched quote SQL-injection probe | required X-Student-Id header" time="0.001" classname="B5SecurityAiAiFr05030UnmatchedQuoteSqlInjectionProbe"/>
+    <testcase name="[AI] AI-FR05-030 | testcase traceability" time="0.001" classname="B5SecurityAiAiFr05030UnmatchedQuoteSqlInjectionProbe"/>
+  </testsuite>
+  <testsuite name="B5 — Security / [AI] AI-FR05-031 — Boolean/operator SQL-injection probe (corrected)" id="4a92d7ec-2a2d-4ecc-96b1-65cd8d3ce5d2" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-031 — Boolean/operator SQL-injection probe (corrected) | required X-Student-Id header" time="0.001" classname="B5SecurityAiAiFr05031BooleanOperatorSqlInjectionProbeCorrected"/>
+    <testcase name="[AI] AI-FR05-031 | testcase traceability" time="0.001" classname="B5SecurityAiAiFr05031BooleanOperatorSqlInjectionProbeCorrected"/>
+  </testsuite>
+  <testsuite name="B5 — Security / [AI] AI-FR05-032 — SQL comment probe (corrected)" id="360e89b2-bb35-4aef-8457-765696553646" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-032 — SQL comment probe (corrected) | required X-Student-Id header" time="0.001" classname="B5SecurityAiAiFr05032SqlCommentProbeCorrected"/>
+    <testcase name="[AI] AI-FR05-032 | testcase traceability" time="0.001" classname="B5SecurityAiAiFr05032SqlCommentProbeCorrected"/>
+  </testsuite>
+  <testsuite name="B5 — Security / [AI] AI-FR05-033 — UNION query-structure probe (corrected)" id="72c88f7f-9392-487a-81b4-68f44285e526" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-033 — UNION query-structure probe (corrected) | required X-Student-Id header" time="0.001" classname="B5SecurityAiAiFr05033UnionQueryStructureProbeCorrected"/>
+    <testcase name="[AI] AI-FR05-033 | testcase traceability" time="0.001" classname="B5SecurityAiAiFr05033UnionQueryStructureProbeCorrected"/>
+  </testsuite>
+  <testsuite name="B5 — Security / [AI] AI-FR05-034 — Encoded wildcard/quote/boolean/comment probe (corrected)" id="0912a337-203f-4832-91c0-1f6f3c30777f" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-034 — Encoded wildcard/quote/boolean/comment probe (corrected) | required X-Student-Id header" time="0.001" classname="B5SecurityAiAiFr05034EncodedWildcardQuoteBooleanCommentProbeCorrected"/>
+    <testcase name="[AI] AI-FR05-034 | testcase traceability" time="0.001" classname="B5SecurityAiAiFr05034EncodedWildcardQuoteBooleanCommentProbeCorrected"/>
+  </testsuite>
+  <testsuite name="B5 — Security / [AI] AI-FR05-035 — Conditional internal-information disclosure probe (corrected)" id="8efe6019-796f-4379-9b52-3cdeaeaf92ee" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-035 — Conditional internal-information disclosure probe (corrected) | required X-Student-Id header" time="0.002" classname="B5SecurityAiAiFr05035ConditionalInternalInformationDisclosureProbeCorrected"/>
+    <testcase name="[AI] AI-FR05-035 | testcase traceability" time="0.002" classname="B5SecurityAiAiFr05035ConditionalInternalInformationDisclosureProbeCorrected"/>
+  </testsuite>
+  <testsuite name="B5 — Security / [AI] AI-FR05-036 — Invalid token on public endpoint characterization" id="cdd38240-9959-46f9-a9dc-bd3481693cec" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-036 — Invalid token on public endpoint characterization | required X-Student-Id header" time="0.001" classname="B5SecurityAiAiFr05036InvalidTokenOnPublicEndpointCharacterization"/>
+    <testcase name="[AI] AI-FR05-036 | testcase traceability" time="0.001" classname="B5SecurityAiAiFr05036InvalidTokenOnPublicEndpointCharacterization"/>
+  </testsuite>
+  <testsuite name="B6 — Schema Characterization / [AI] AI-FR05-037 — Top-level response shape characterization" id="a2dab295-6d6a-4d14-bdf8-c8551ff1245b" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-037 — Top-level response shape characterization | required X-Student-Id header" time="0.001" classname="B6SchemaCharacterizationAiAiFr05037TopLevelResponseShapeCharacterization"/>
+    <testcase name="[AI] AI-FR05-037 | testcase traceability" time="0.001" classname="B6SchemaCharacterizationAiAiFr05037TopLevelResponseShapeCharacterization"/>
+  </testsuite>
+  <testsuite name="B6 — Schema Characterization / [AI] AI-FR05-038 — Product item keys/types characterization" id="68357eaa-d055-4c7e-b696-e597f7aab4ce" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-038 — Product item keys/types characterization | required X-Student-Id header" time="0.002" classname="B6SchemaCharacterizationAiAiFr05038ProductItemKeysTypesCharacterization"/>
+    <testcase name="[AI] AI-FR05-038 | testcase traceability" time="0.002" classname="B6SchemaCharacterizationAiAiFr05038ProductItemKeysTypesCharacterization"/>
+  </testsuite>
+  <testsuite name="B6 — Schema Characterization / [AI] AI-FR05-039 — No-match payload shape characterization" id="c8387b20-a6eb-4574-887e-216b0f18f7d6" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-039 — No-match payload shape characterization | required X-Student-Id header" time="0.001" classname="B6SchemaCharacterizationAiAiFr05039NoMatchPayloadShapeCharacterization"/>
+    <testcase name="[AI] AI-FR05-039 | testcase traceability" time="0.001" classname="B6SchemaCharacterizationAiAiFr05039NoMatchPayloadShapeCharacterization"/>
+    <testcase name="[AI] AI-FR05-039 — No-match payload shape characterization | no fabricated or non-name-only match" time="0.001" classname="B6SchemaCharacterizationAiAiFr05039NoMatchPayloadShapeCharacterization"/>
+  </testsuite>
+  <testsuite name="B6 — Schema Characterization / [AI] AI-FR05-040 — Conditional error response shape characterization (corrected)" id="3cfa91ba-62e4-49b0-83bf-2c0b428dc904" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-040 — Conditional error response shape characterization (corrected) | required X-Student-Id header" time="0.002" classname="B6SchemaCharacterizationAiAiFr05040ConditionalErrorResponseShapeCharacterizationCorrected"/>
+    <testcase name="[AI] AI-FR05-040 | testcase traceability" time="0.002" classname="B6SchemaCharacterizationAiAiFr05040ConditionalErrorResponseShapeCharacterizationCorrected"/>
+  </testsuite>
+  <testsuite name="B7 — Cross-check / [AI] AI-FR05-042 — Omitted versus empty search characterization / [AI] AI-FR05-042 — Step 1 of 2 — search omitted" id="7602aa2f-202e-46b0-81ad-bd3407ecca35" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[AI] AI-FR05-042 — Step 1 of 2 — search omitted | required X-Student-Id header" time="0.001" classname="B7CrossCheckAiAiFr05042OmittedVersusEmptySearchCharacterizationAiAiFr05042Step1Of2SearchOmitted"/>
+    <testcase name="[AI] AI-FR05-042 | testcase traceability" time="0.001" classname="B7CrossCheckAiAiFr05042OmittedVersusEmptySearchCharacterizationAiAiFr05042Step1Of2SearchOmitted"/>
+  </testsuite>
+  <testsuite name="B7 — Cross-check / [AI] AI-FR05-042 — Omitted versus empty search characterization / [AI] AI-FR05-042 — Step 2 of 2 — explicit empty search" id="91556aab-78ab-41c7-a428-8cfa7a90152e" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[AI] AI-FR05-042 — Step 2 of 2 — explicit empty search | required X-Student-Id header" time="0.002" classname="B7CrossCheckAiAiFr05042OmittedVersusEmptySearchCharacterizationAiAiFr05042Step2Of2ExplicitEmptySearch"/>
+    <testcase name="[AI] AI-FR05-042 | testcase traceability" time="0.002" classname="B7CrossCheckAiAiFr05042OmittedVersusEmptySearchCharacterizationAiAiFr05042Step2Of2ExplicitEmptySearch"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-043 — Structured query parameter injection / [HUMAN] HUMAN-FR05-043 — Step 1 of 2 — fixed no-match baseline" id="8dd57aa5-1e5a-4447-b5ee-146404a69beb" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[HUMAN] HUMAN-FR05-043 — Step 1 of 2 — fixed no-match baseline | required X-Student-Id header" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05043StructuredQueryParameterInjectionHumanHumanFr05043Step1Of2FixedNoMatchBaseline"/>
+    <testcase name="[HUMAN] HUMAN-FR05-043 | testcase traceability" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05043StructuredQueryParameterInjectionHumanHumanFr05043Step1Of2FixedNoMatchBaseline"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-043 — Structured query parameter injection / [HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack" id="c61a2184-7906-4641-9e70-89f7db5cadf2" timestamp="2026-08-20T14:16:10.338Z" tests="4" failures="0" errors="0" time="0.008">
+    <testcase name="[HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack | required X-Student-Id header" time="0.008" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05043StructuredQueryParameterInjectionHumanHumanFr05043Step2Of2BracketNotationNeAttack"/>
+    <testcase name="[HUMAN] HUMAN-FR05-043 | testcase traceability" time="0.008" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05043StructuredQueryParameterInjectionHumanHumanFr05043Step2Of2BracketNotationNeAttack"/>
+    <testcase name="[HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack | structured-parameter attack does not return 5xx" time="0.008" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05043StructuredQueryParameterInjectionHumanHumanFr05043Step2Of2BracketNotationNeAttack"/>
+    <testcase name="[HUMAN] HUMAN-FR05-043 — Step 2 of 2 — bracket-notation $ne attack | attack product IDs are not broader than baseline" time="0.008" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05043StructuredQueryParameterInjectionHumanHumanFr05043Step2Of2BracketNotationNeAttack"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-044 — Encoded null-byte inside search value / [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack" id="e4d41cbf-97bb-4808-a74d-4b8150b59375" timestamp="2026-08-20T14:16:10.338Z" tests="4" failures="2" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | required X-Student-Id header" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05044EncodedNullByteInsideSearchValueHumanHumanFr05044Step1Of2EncodedNullByteAttack"/>
+    <testcase name="[HUMAN] HUMAN-FR05-044 | testcase traceability" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05044EncodedNullByteInsideSearchValueHumanHumanFr05044Step1Of2EncodedNullByteAttack"/>
+    <testcase name="[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | null-byte attack does not return 5xx" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05044EncodedNullByteInsideSearchValueHumanHumanFr05044Step1Of2EncodedNullByteAttack">
+      <failure type="AssertionFailure" message="expected 500 to be below 500">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr05-product-search-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-05 Product Search — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-044 — Encoded null-byte inside search value / [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack.]]>
+        <![CDATA[Test description: [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | null-byte attack does not return 5xx.]]>
+        <![CDATA[Error message: expected 500 to be below 500.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 500 to be below 500
+   at Object.eval sandbox-script.js:2:51).]]>
+      </failure>
+    </testcase>
+    <testcase name="[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | no obvious internal-error disclosure" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05044EncodedNullByteInsideSearchValueHumanHumanFr05044Step1Of2EncodedNullByteAttack">
+      <failure type="AssertionFailure" message="expected '&lt;h1>Database Error&lt;/h1>&lt;p>SQLITE_ERRO…' not to match /(?:SQLITE(?:_ERROR)?|SELECT\s+.+FROM|(?:Error|Exception):\s+.+\n\s+at\s+)/i">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr05-product-search-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-05 Product Search — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-044 — Encoded null-byte inside search value / [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack.]]>
+        <![CDATA[Test description: [HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | no obvious internal-error disclosure.]]>
+        <![CDATA[Error message: expected '<h1>Database Error</h1><p>SQLITE_ERRO…' not to match /(?:SQLITE(?:_ERROR)?|SELECT\s+.+FROM|(?:Error|Exception):\s+.+\n\s+at\s+)/i.]]>
+        <![CDATA[Stacktrace: AssertionError: expected '<h1>Database Error</h1><p>SQLITE_ERRO…' not to match /(?:SQLITE(?:_ERROR)?|SELECT\s+.+FROM|(?:Error|Exception):\s+.+\n\s+at\s+)/i
+   at Object.eval sandbox-script.js:3:51).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-044 — Encoded null-byte inside search value / [HUMAN] HUMAN-FR05-044 — Step 2 of 2 — normal phone search after attack" id="bbd7b8f9-d045-4853-9c95-fac89f256ae3" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR05-044 — Step 2 of 2 — normal phone search after attack | required X-Student-Id header" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05044EncodedNullByteInsideSearchValueHumanHumanFr05044Step2Of2NormalPhoneSearchAfterAttack"/>
+    <testcase name="[HUMAN] HUMAN-FR05-044 | testcase traceability" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05044EncodedNullByteInsideSearchValueHumanHumanFr05044Step2Of2NormalPhoneSearchAfterAttack"/>
+    <testcase name="[HUMAN] HUMAN-FR05-044 — Step 2 of 2 — normal phone search after attack | subsequent normal search remains operational" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05044EncodedNullByteInsideSearchValueHumanHumanFr05044Step2Of2NormalPhoneSearchAfterAttack"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-046 — Search consistency after product rename — opt-in destructive sequence / [HUMAN] HUMAN-FR05-046 — Step 1 of 4 — confirm OldName search" id="48df25f0-de02-4b47-bc9e-8e154ef0a060" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.002">
+    <testcase name="[HUMAN] HUMAN-FR05-046 — Step 1 of 4 — confirm OldName search | required X-Student-Id header" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step1Of4ConfirmOldNameSearch"/>
+    <testcase name="[HUMAN] HUMAN-FR05-046 | testcase traceability" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step1Of4ConfirmOldNameSearch"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-046 — Search consistency after product rename — opt-in destructive sequence / [HUMAN] HUMAN-FR05-046 — Step 2 of 4 — update OldName to NewName" id="8e7ca848-022b-4e5a-abda-0761e082f689" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="[HUMAN] HUMAN-FR05-046 — Step 2 of 4 — update OldName to NewName | required X-Student-Id header" time="0.003" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step2Of4UpdateOldNameToNewName"/>
+    <testcase name="[HUMAN] HUMAN-FR05-046 | testcase traceability" time="0.003" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step2Of4UpdateOldNameToNewName"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-046 — Search consistency after product rename — opt-in destructive sequence / [HUMAN] HUMAN-FR05-046 — Step 3 of 4 — search OldName after update" id="39820542-409b-4c84-ab5c-c3cbf03d95c3" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR05-046 — Step 3 of 4 — search OldName after update | required X-Student-Id header" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step3Of4SearchOldNameAfterUpdate"/>
+    <testcase name="[HUMAN] HUMAN-FR05-046 | testcase traceability" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step3Of4SearchOldNameAfterUpdate"/>
+    <testcase name="[HUMAN] HUMAN-FR05-046 — Step 3 of 4 — search OldName after update | no fabricated or non-name-only match" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step3Of4SearchOldNameAfterUpdate"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-046 — Search consistency after product rename — opt-in destructive sequence / [HUMAN] HUMAN-FR05-046 — Step 4 of 4 — search NewName after update" id="bcc8064a-ef16-477a-bbb6-3b71ad6556c1" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR05-046 — Step 4 of 4 — search NewName after update | required X-Student-Id header" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step4Of4SearchNewNameAfterUpdate"/>
+    <testcase name="[HUMAN] HUMAN-FR05-046 | testcase traceability" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step4Of4SearchNewNameAfterUpdate"/>
+    <testcase name="[HUMAN] HUMAN-FR05-046 — Step 4 of 4 — search NewName after update | configured matching product is discoverable" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05046SearchConsistencyAfterProductRenameOptInDestructiveSequenceHumanHumanFr05046Step4Of4SearchNewNameAfterUpdate"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-047 — Deleted product must not remain searchable — opt-in destructive sequence / [HUMAN] HUMAN-FR05-047 — Step 1 of 3 — search unique product before deletion" id="b563401c-74d7-43bc-94e4-551a79198092" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR05-047 — Step 1 of 3 — search unique product before deletion | required X-Student-Id header" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05047DeletedProductMustNotRemainSearchableOptInDestructiveSequenceHumanHumanFr05047Step1Of3SearchUniqueProductBeforeDeletion"/>
+    <testcase name="[HUMAN] HUMAN-FR05-047 | testcase traceability" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05047DeletedProductMustNotRemainSearchableOptInDestructiveSequenceHumanHumanFr05047Step1Of3SearchUniqueProductBeforeDeletion"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-047 — Deleted product must not remain searchable — opt-in destructive sequence / [HUMAN] HUMAN-FR05-047 — Step 2 of 3 — delete resolved product" id="0c05ba6d-0379-4253-8c9f-ac4eb91f7db1" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.003">
+    <testcase name="[HUMAN] HUMAN-FR05-047 — Step 2 of 3 — delete resolved product | required X-Student-Id header" time="0.003" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05047DeletedProductMustNotRemainSearchableOptInDestructiveSequenceHumanHumanFr05047Step2Of3DeleteResolvedProduct"/>
+    <testcase name="[HUMAN] HUMAN-FR05-047 | testcase traceability" time="0.003" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05047DeletedProductMustNotRemainSearchableOptInDestructiveSequenceHumanHumanFr05047Step2Of3DeleteResolvedProduct"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-047 — Deleted product must not remain searchable — opt-in destructive sequence / [HUMAN] HUMAN-FR05-047 — Step 3 of 3 — search same unique name after deletion" id="07696f0d-c9a2-45fd-8fc8-dc1af7479009" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="0" errors="0" time="0.002">
+    <testcase name="[HUMAN] HUMAN-FR05-047 — Step 3 of 3 — search same unique name after deletion | required X-Student-Id header" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05047DeletedProductMustNotRemainSearchableOptInDestructiveSequenceHumanHumanFr05047Step3Of3SearchSameUniqueNameAfterDeletion"/>
+    <testcase name="[HUMAN] HUMAN-FR05-047 | testcase traceability" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05047DeletedProductMustNotRemainSearchableOptInDestructiveSequenceHumanHumanFr05047Step3Of3SearchSameUniqueNameAfterDeletion"/>
+    <testcase name="[HUMAN] HUMAN-FR05-047 — Step 3 of 3 — search same unique name after deletion | no fabricated or non-name-only match" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05047DeletedProductMustNotRemainSearchableOptInDestructiveSequenceHumanHumanFr05047Step3Of3SearchSameUniqueNameAfterDeletion"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products / [HUMAN] HUMAN-FR05-048 — Step 1 of 3 — save product IDs before POST" id="e1cad1ad-a3eb-4ac3-8461-8a31bc5bc086" timestamp="2026-08-20T14:16:10.338Z" tests="2" failures="0" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR05-048 — Step 1 of 3 — save product IDs before POST | required X-Student-Id header" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step1Of3SaveProductIDsBeforePost"/>
+    <testcase name="[HUMAN] HUMAN-FR05-048 | testcase traceability" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step1Of3SaveProductIDsBeforePost"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products / [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query" id="431d60d0-b258-4143-b9c1-cf6c6c418842" timestamp="2026-08-20T14:16:10.338Z" tests="5" failures="1" errors="0" time="0.002">
+    <testcase name="[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | required X-Student-Id header" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step2Of3UnauthenticatedMalformedPostWithSearchQuery"/>
+    <testcase name="[HUMAN] HUMAN-FR05-048 | testcase traceability" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step2Of3UnauthenticatedMalformedPostWithSearchQuery"/>
+    <testcase name="[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | unsupported unauthenticated POST is rejected with 4xx" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step2Of3UnauthenticatedMalformedPostWithSearchQuery">
+      <failure type="AssertionFailure" message="expected 200 to be within 400..499">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr05-product-search-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-05 Product Search — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products / [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query.]]>
+        <![CDATA[Test description: [HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | unsupported unauthenticated POST is rejected with 4xx.]]>
+        <![CDATA[Error message: expected 200 to be within 400..499.]]>
+        <![CDATA[Stacktrace: AssertionError: expected 200 to be within 400..499
+   at Object.eval sandbox-script.js:2:61).]]>
+      </failure>
+    </testcase>
+    <testcase name="[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | request has no Authorization header" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step2Of3UnauthenticatedMalformedPostWithSearchQuery"/>
+    <testcase name="[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | JSON Content-Type is sent" time="0.002" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step2Of3UnauthenticatedMalformedPostWithSearchQuery"/>
+  </testsuite>
+  <testsuite name="HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products / [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST" id="ccb7a7e2-968f-4045-8663-5b483b9df413" timestamp="2026-08-20T14:16:10.338Z" tests="3" failures="1" errors="0" time="0.001">
+    <testcase name="[HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | required X-Student-Id header" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step3Of3VerifyProductIDsAfterPost"/>
+    <testcase name="[HUMAN] HUMAN-FR05-048 | testcase traceability" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step3Of3VerifyProductIDsAfterPost"/>
+    <testcase name="[HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | product ID set is unchanged after rejected POST" time="0.001" classname="HumanReviewerAuthoredAdditionsHumanHumanFr05048UnsupportedOrMalformedPostMustNotMutateProductsHumanHumanFr05048Step3Of3VerifyProductIDsAfterPost">
+      <failure type="AssertionFailure" message="expected [ '1', '2', '3', '4', '5', '6', '8' ] to deeply equal [ '1', '2', '3', '4', '5', '6' ]">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: 23127194-fr05-product-search-collection.]]>
+        <![CDATA[Collection name: HW06 — FR-05 Product Search — 23127194.]]>
+        <![CDATA[Request name: HUMAN — Reviewer-authored additions / [HUMAN] HUMAN-FR05-048 — Unsupported or malformed POST must not mutate products / [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST.]]>
+        <![CDATA[Test description: [HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | product ID set is unchanged after rejected POST.]]>
+        <![CDATA[Error message: expected [ '1', '2', '3', '4', '5', '6', '8' ] to deeply equal [ '1', '2', '3', '4', '5', '6' ].]]>
+        <![CDATA[Stacktrace: AssertionError: expected [ '1', '2', '3', '4', '5', '6', '8' ] to deeply equal [ '1', '2', '3', '4', '5', '6' ]
+   at Object.eval sandbox-script.js:2:62).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>

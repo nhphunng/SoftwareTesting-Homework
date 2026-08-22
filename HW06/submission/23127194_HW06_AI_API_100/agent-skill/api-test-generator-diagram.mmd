@@ -1,0 +1,91 @@
+flowchart
+    %% =========================
+    %% INPUT + REQUIREMENT MODEL
+    %% =========================
+    A["API Specification<br/><br/>• Spec path<br/>• Selected endpoint / FR<br/>• Security requirements"]
+    B["Requirement Parser<br/><br/>• Endpoint facts<br/>• Documented constraints<br/>• Source evidence<br/>• Unresolved rules"]
+    C["Endpoint Model<br/><br/>• HTTP method<br/>• Path<br/>• Parameters<br/>• Request body<br/>• Authentication<br/>• Response observations"]
+    D["Parameter / Constraint Analyzer<br/><br/>• Path parameters<br/>• Query parameters<br/>• Body fields<br/>• Types<br/>• Boundaries<br/>• Missing constraints"]
+
+    A --> B --> C --> D
+
+    %% =========================
+    %% TEST GENERATION BRANCHES
+    %% =========================
+    E["Domain Partition Generator<br/><br/>• Valid partitions<br/>• Invalid partitions<br/>• Boundary values<br/>• Missing / null / wrong type"]
+    F["State Transition Analyzer<br/><br/>• Current states<br/>• Allowed transitions<br/>• Invalid transitions<br/>• Sequence-dependent behavior"]
+
+    D --> E
+    D --> F
+
+    G["Security Mapper<br/><br/>• Authentication<br/>• Authorization<br/>• Role checks<br/>• Injection risks<br/>• State manipulation"]
+
+    E --> G
+    F --> G
+
+    H["Schema Test Generator<br/><br/>• Documented schema checks<br/>• Type checks<br/>• Required fields<br/>• Response characterization<br/><br/>Never invent undocumented schema/status"]
+    I["Coverage Analyzer<br/><br/>• Functional<br/>• Domain<br/>• Boundary<br/>• State<br/>• Security<br/>• Schema"]
+    J["Deduplicator<br/><br/>Remove tests with same:<br/>• Testing intent<br/>• Input shape<br/>• Expected oracle"]
+
+    G --> H --> I --> J
+
+    %% =========================
+    %% PROVENANCE + HUMAN REVIEW
+    %% =========================
+    K["AI Candidates<br/><br/>source = AI_CANDIDATE<br/>status = PENDING_HUMAN_REVIEW"]
+    L{"Human Review Gate<br/><br/>VALID<br/>INCOMPLETE<br/>INVALID"}
+
+    J --> K --> L
+
+    M["VALID<br/><br/>Requirement-supported<br/>and usable"]
+    N["INCOMPLETE<br/><br/>Needs clarification<br/>or correction"]
+    O["INVALID<br/><br/>Unsupported,<br/>duplicate, or wrong"]
+
+    L -->|VALID| M
+    L -->|INCOMPLETE| N
+    L -->|INVALID| O
+
+    %% =========================
+    %% HUMAN CORRECTION LOOP
+    %% =========================
+    Q["Correction / Clarification<br/><br/>• Fix unsupported oracle<br/>• Add missing requirement<br/>• Refine test data<br/>• Reclassify candidate"]
+    R["Discard / Regenerate"]
+
+    N --> Q
+    Q --> L
+    O --> R
+
+    %% =========================
+    %% FINAL OUTPUT
+    %% =========================
+    P["Final Structured API Test Cases<br/><br/>• Human-approved tests<br/>• Provenance preserved<br/>• Coverage metadata<br/>• Audit-ready metadata<br/>• Ready for Postman implementation"]
+
+    M --> P
+
+    %% =========================
+    %% AUDIT METADATA
+    %% =========================
+    X["Audit Metadata<br/><br/>• Generator version<br/>• Spec path<br/>• Source SHA-256<br/>• Generated time<br/>• Candidate count<br/>• Unresolved count"]
+
+    B -. source evidence .-> X
+    K -. candidate metadata .-> X
+    P -. final traceability .-> X
+
+    %% =========================
+    %% STYLES
+    %% =========================
+    classDef input fill:#e8f1ff,stroke:#2457a6,stroke-width:2px,color:#111;
+    classDef analysis fill:#f1eaff,stroke:#6b46a8,stroke-width:2px,color:#111;
+    classDef candidate fill:#f7f1ff,stroke:#7d5ab5,stroke-width:2px,color:#111;
+    classDef review fill:#fff0cc,stroke:#b7791f,stroke-width:3px,color:#111;
+    classDef decision fill:#fff7df,stroke:#c58a21,stroke-width:2px,color:#111;
+    classDef output fill:#e9f8ec,stroke:#2f855a,stroke-width:3px,color:#111;
+    classDef meta fill:#f2f2f2,stroke:#666,stroke-width:1.5px,stroke-dasharray: 5 5,color:#111;
+
+    class A input;
+    class B,C,D,E,F,G,H,I,J analysis;
+    class K candidate;
+    class L review;
+    class M,N,O,Q,R decision;
+    class P output;
+    class X meta;

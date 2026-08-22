@@ -1,0 +1,1593 @@
+newman
+
+HW06 — FR-16 Import Products — 23127194
+
+❏ AI — Functional (JSON API surface)
+↳ [AI] AI-FR16-001 — Canonical JSON import — one valid product
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_001_A_1787286390924_905756 [200 OK, 267B, 20ms]
+  ✓  AI-FR16-001 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 4ms]
+  ✓  [AI] AI-FR16-001 — Canonical JSON import — one valid product | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-001 — Canonical JSON import — one valid product",
+  │ "status":200,"elapsedMs":4,"contentType":"application/
+  │ json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-001 | traceability and Source
+  ✓  AI-FR16-001 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-001"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-001 | response is available for semantic review
+  ✓  AI-FR16-001 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-001 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_001_A_1787286390924_905756 [200 OK, 394B, 2ms]
+  ✓  AI-FR16-001 | persistence oracle A (exactly-one)
+
+↳ [AI] AI-FR16-002 — Canonical JSON import — multiple valid products
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_002_A_1787286390978_229424   GET http://localhost:3000/api/products?search=HW06_AI_FR16_002_B_1787286390978_229424   GET http://localhost:3000/api/products?search=HW06_AI_FR16_002_C_1787286390978_229424 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-002 | baseline marker A is absent
+[200 OK, 267B, 3ms]
+  ✓  AI-FR16-002 | baseline marker B is absent
+[200 OK, 267B, 4ms]
+  ✓  AI-FR16-002 | baseline marker C is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 3ms]
+  ✓  [AI] AI-FR16-002 — Canonical JSON import — multiple valid products | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-002 — Canonical JSON import — multiple valid prod
+  │ ucts","status":200,"elapsedMs":3,"contentType":"applic
+  │ ation/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-002 | traceability and Source
+  ✓  AI-FR16-002 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-002"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-002 | response is available for semantic review
+  ✓  AI-FR16-002 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-002 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_002_A_1787286390978_229424   GET http://localhost:3000/api/products?search=HW06_AI_FR16_002_B_1787286390978_229424   GET http://localhost:3000/api/products?search=HW06_AI_FR16_002_C_1787286390978_229424 [200 OK, 394B, 1ms]
+  ✓  AI-FR16-002 | persistence oracle A (exactly-one)
+[200 OK, 394B, 3ms]
+  ✓  AI-FR16-002 | persistence oracle B (exactly-one)
+[200 OK, 394B, 3ms]
+  ✓  AI-FR16-002 | persistence oracle C (exactly-one)
+
+↳ [AI] AI-FR16-005 — Official request carries required student header
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_005_A_1787286391011_743315 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-005 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-005 — Official request carries required student header | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-005 — Official request carries required student h
+  │ eader","status":200,"elapsedMs":2,"contentType":"appli
+  │ cation/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-005 | traceability and Source
+  ✓  AI-FR16-005 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-005"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-005 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_005_A_1787286391011_743315 [200 OK, 395B, 1ms]
+  ✓  AI-FR16-005 | persistence oracle A (exactly-one)
+
+❏ AI — Domain (JSON API surface)
+↳ [AI] AI-FR16-006 — Missing top-level request body
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 2ms]
+  ✓  AI-FR16-006 | baseline product snapshot is readable
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 323B, 1ms]
+  ✓  [AI] AI-FR16-006 — Missing top-level request body | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-006 — Missing top-level request body","status":40
+  │ 0,"elapsedMs":1,"contentType":"application/json; chars
+  │ et=utf-8"}'
+  └
+  ✓  AI-FR16-006 | traceability and Source
+  ✓  AI-FR16-006 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-006"
+  │ ,"status":400,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":38}'
+  └
+  ✓  AI-FR16-006 | response is available for semantic review
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-006 | persistence snapshot oracle
+
+↳ [AI] AI-FR16-007 — Top-level JSON null
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-007 | baseline product snapshot is readable
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 1.55kB, 1ms]
+  ✓  [AI] AI-FR16-007 — Top-level JSON null | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-007 — Top-level JSON null","status":400,"elapsedM
+  │ s":1,"contentType":"text/html; charset=utf-8"}'
+  └
+  ✓  AI-FR16-007 | traceability and Source
+  ✓  AI-FR16-007 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-007"
+  │ ,"status":400,"contentType":"text/html; charset=utf-8"
+  │ ,"bodyLength":1243}'
+  └
+  ✓  AI-FR16-007 | response is available for semantic review
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-007 | persistence snapshot oracle
+
+↳ [AI] AI-FR16-008 — Top-level array instead of object
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_008_A_1787286391088_596035 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-008 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 323B, 1ms]
+  ✓  [AI] AI-FR16-008 — Top-level array instead of object | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-008 — Top-level array instead of object","status"
+  │ :400,"elapsedMs":1,"contentType":"application/json; ch
+  │ arset=utf-8"}'
+  └
+  ✓  AI-FR16-008 | traceability and Source
+  ✓  AI-FR16-008 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-008"
+  │ ,"status":400,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":38}'
+  └
+  ✓  AI-FR16-008 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_008_A_1787286391088_596035 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-008 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-009 — Missing products field
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-009 | baseline product snapshot is readable
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 323B, 1ms]
+  ✓  [AI] AI-FR16-009 — Missing products field | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-009 — Missing products field","status":400,"elaps
+  │ edMs":1,"contentType":"application/json; charset=utf-8
+  │ "}'
+  └
+  ✓  AI-FR16-009 | traceability and Source
+  ✓  AI-FR16-009 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-009"
+  │ ,"status":400,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":38}'
+  └
+  ✓  AI-FR16-009 | response is available for semantic review
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-009 | persistence snapshot oracle
+
+↳ [AI] AI-FR16-010 — Empty products array
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-010 | baseline product snapshot is readable
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 323B, 1ms]
+  ✓  [AI] AI-FR16-010 — Empty products array | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-010 — Empty products array","status":400,"elapsed
+  │ Ms":1,"contentType":"application/json; charset=utf-8"}
+  │ '
+  └
+  ✓  AI-FR16-010 | traceability and Source
+  ✓  AI-FR16-010 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-010"
+  │ ,"status":400,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":38}'
+  └
+  ✓  AI-FR16-010 | response is available for semantic review
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-010 | persistence snapshot oracle
+
+↳ [AI] AI-FR16-011 — products null
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-011 | baseline product snapshot is readable
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 323B, 1ms]
+  ✓  [AI] AI-FR16-011 — products null | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-011 — products null","status":400,"elapsedMs":1,"
+  │ contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-011 | traceability and Source
+  ✓  AI-FR16-011 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-011"
+  │ ,"status":400,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":38}'
+  └
+  ✓  AI-FR16-011 | response is available for semantic review
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-011 | persistence snapshot oracle
+
+↳ [AI] AI-FR16-012 — products object instead of array
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-012 | baseline product snapshot is readable
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 323B, 1ms]
+  ✓  [AI] AI-FR16-012 — products object instead of array | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-012 — products object instead of array","status":
+  │ 400,"elapsedMs":1,"contentType":"application/json; cha
+  │ rset=utf-8"}'
+  └
+  ✓  AI-FR16-012 | traceability and Source
+  ✓  AI-FR16-012 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-012"
+  │ ,"status":400,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":38}'
+  └
+  ✓  AI-FR16-012 | response is available for semantic review
+  GET http://localhost:3000/api/products [200 OK, 1.87kB, 1ms]
+  ✓  AI-FR16-012 | persistence snapshot oracle
+
+↳ [AI] AI-FR16-013 — Empty product name in JSON row
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_013_A_1787286391207_887254   GET http://localhost:3000/api/products?search=HW06_AI_FR16_013_B_1787286391207_887254 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-013 | baseline marker A is absent
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-013 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 394B, 2ms]
+  ✓  [AI] AI-FR16-013 — Empty product name in JSON row | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-013 — Empty product name in JSON row","status":20
+  │ 0,"elapsedMs":2,"contentType":"application/json; chars
+  │ et=utf-8"}'
+  └
+  ✓  AI-FR16-013 | traceability and Source
+  ✓  AI-FR16-013 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-013"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":106}'
+  └
+  ✓  AI-FR16-013 | response is available for semantic review
+  1. AI-FR16-013 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-013 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_013_A_1787286391207_887254   GET http://localhost:3000/api/products?search=HW06_AI_FR16_013_B_1787286391207_887254 [200 OK, 395B, 2ms]
+  2. AI-FR16-013 | persistence oracle A (absent)
+[200 OK, 395B, 2ms]
+  3. AI-FR16-013 | persistence oracle B (absent)
+
+↳ [AI] AI-FR16-014 — Missing product name in JSON row
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_014_A_1787286391238_584161 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-014 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 394B, 2ms]
+  ✓  [AI] AI-FR16-014 — Missing product name in JSON row | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-014 — Missing product name in JSON row","status":
+  │ 200,"elapsedMs":2,"contentType":"application/json; cha
+  │ rset=utf-8"}'
+  └
+  ✓  AI-FR16-014 | traceability and Source
+  ✓  AI-FR16-014 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-014"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":106}'
+  └
+  ✓  AI-FR16-014 | response is available for semantic review
+  4. AI-FR16-014 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-014 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_014_A_1787286391238_584161 [200 OK, 395B, 1ms]
+  5. AI-FR16-014 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-015 — Null product name
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_015_A_1787286391264_370915 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-015 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 394B, 2ms]
+  ✓  [AI] AI-FR16-015 — Null product name | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-015 — Null product name","status":200,"elapsedMs"
+  │ :2,"contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-015 | traceability and Source
+  ✓  AI-FR16-015 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-015"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":106}'
+  └
+  ✓  AI-FR16-015 | response is available for semantic review
+  6. AI-FR16-015 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-015 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_015_A_1787286391264_370915 [200 OK, 395B, 1ms]
+  7. AI-FR16-015 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-016 — Non-existing category ID — cross-requirement characterization
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_016_A_1787286391288_666657 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-016 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-016 — Non-existing category ID — cross-requirement characterization | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-016 — Non-existing category ID — cross-requiremen
+  │ t characterization","status":200,"elapsedMs":2,"conten
+  │ tType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-016 | traceability and Source
+  ✓  AI-FR16-016 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-016"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-016 | response is available for semantic review
+  ┌
+  │ 'AI-FR16-016 CHARACTERIZATION: acceptance/rejection is
+  │  not a FR-16 defect by itself.'
+  └
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_016_A_1787286391288_666657 [200 OK, 404B, 1ms]
+  ✓  AI-FR16-016 | persistence oracle A (present-or-absent)
+
+↳ [AI] AI-FR16-017 — Whitespace-only name — trimming semantics characterization
+  GET http://localhost:3000/api/products [200 OK, 2.5kB, 1ms]
+  ✓  AI-FR16-017 | baseline product snapshot is readable
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-017 — Whitespace-only name — trimming semantics characterization | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-017 — Whitespace-only name — trimming semantics c
+  │ haracterization","status":200,"elapsedMs":2,"contentTy
+  │ pe":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-017 | traceability and Source
+  ✓  AI-FR16-017 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-017"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-017 | response is available for semantic review
+  ┌
+  │ 'AI-FR16-017 CHARACTERIZATION: trimming/acceptance rem
+  │ ains unresolved; inspect response and stored name if a
+  │ ccepted.'
+  └
+  GET http://localhost:3000/api/products [200 OK, 2.59kB, 1ms]
+  ✓  AI-FR16-017 | persistence snapshot oracle
+
+❏ AI — Boundary
+↳ [AI] AI-FR16-018 — Price = 1 — positive boundary valid
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_018_A_1787286391339_99356 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-018 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 1ms]
+  ✓  [AI] AI-FR16-018 — Price = 1 — positive boundary valid | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-018 — Price = 1 — positive boundary valid","statu
+  │ s":200,"elapsedMs":1,"contentType":"application/json; 
+  │ charset=utf-8"}'
+  └
+  ✓  AI-FR16-018 | traceability and Source
+  ✓  AI-FR16-018 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-018"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-018 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_018_A_1787286391339_99356 [200 OK, 393B, 1ms]
+  ✓  AI-FR16-018 | persistence oracle A (exactly-one)
+
+↳ [AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_019_A_1787286391361_951360 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-019 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 1ms]
+  ✓  [AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-019 — Price = 0 — boundary invalid and rollback",
+  │ "status":200,"elapsedMs":1,"contentType":"application/
+  │ json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-019 | traceability and Source
+  ✓  AI-FR16-019 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-019"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-019 | response is available for semantic review
+  8. AI-FR16-019 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-019 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_019_A_1787286391361_951360 [200 OK, 394B, 1ms]
+  9. AI-FR16-019 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-020 — Price = -1 — invalid negative boundary
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_020_A_1787286391386_235163 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-020 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 3ms]
+  ✓  [AI] AI-FR16-020 — Price = -1 — invalid negative boundary | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-020 — Price = -1 — invalid negative boundary","st
+  │ atus":200,"elapsedMs":3,"contentType":"application/jso
+  │ n; charset=utf-8"}'
+  └
+  ✓  AI-FR16-020 | traceability and Source
+  ✓  AI-FR16-020 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-020"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-020 | response is available for semantic review
+ 10. AI-FR16-020 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-020 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_020_A_1787286391386_235163 [200 OK, 395B, 1ms]
+ 11. AI-FR16-020 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-021 — Positive decimal price
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_021_A_1787286391410_808132 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-021 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 1ms]
+  ✓  [AI] AI-FR16-021 — Positive decimal price | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-021 — Positive decimal price","status":200,"elaps
+  │ edMs":1,"contentType":"application/json; charset=utf-8
+  │ "}'
+  └
+  ✓  AI-FR16-021 | traceability and Source
+  ✓  AI-FR16-021 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-021"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-021 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_021_A_1787286391410_808132 [200 OK, 396B, 1ms]
+  ✓  AI-FR16-021 | persistence oracle A (exactly-one)
+
+↳ [AI] AI-FR16-022 — Very large positive price — no invented maximum
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_022_A_1787286391436_903614 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-022 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-022 — Very large positive price — no invented maximum | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-022 — Very large positive price — no invented max
+  │ imum","status":200,"elapsedMs":2,"contentType":"applic
+  │ ation/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-022 | traceability and Source
+  ✓  AI-FR16-022 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-022"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-022 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_022_A_1787286391436_903614 [200 OK, 406B, 1ms]
+  ✓  AI-FR16-022 | persistence oracle A (present-or-absent)
+
+↳ [AI] AI-FR16-023 — Long name >255 — FR-15 inheritance unresolved
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_023_A_1787286391460_535786_NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN [200 OK, 267B, 1ms]
+  ✓  AI-FR16-023 | baseline long name absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 1ms]
+  ✓  [AI] AI-FR16-023 — Long name >255 — FR-15 inheritance unresolved | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-023 — Long name >255 — FR-15 inheritance unresolv
+  │ ed","status":200,"elapsedMs":1,"contentType":"applicat
+  │ ion/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-023 | traceability and Source
+  ✓  AI-FR16-023 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-023"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-023 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_023_A_1787286391460_535786_NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN [200 OK, 613B, 1ms]
+  ✓  AI-FR16-023 | persistence oracle A (present-or-absent)
+
+❏ AI — State / Sequence
+↳ [AI] AI-FR16-024 — Invalid first row causes full rollback
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_024_A_1787286391484_855088   GET http://localhost:3000/api/products?search=HW06_AI_FR16_024_B_1787286391484_855088 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-024 | baseline marker A is absent
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-024 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 394B, 2ms]
+  ✓  [AI] AI-FR16-024 — Invalid first row causes full rollback | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-024 — Invalid first row causes full rollback","st
+  │ atus":200,"elapsedMs":2,"contentType":"application/jso
+  │ n; charset=utf-8"}'
+  └
+  ✓  AI-FR16-024 | traceability and Source
+  ✓  AI-FR16-024 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-024"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":106}'
+  └
+  ✓  AI-FR16-024 | response is available for semantic review
+ 12. AI-FR16-024 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-024 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_024_A_1787286391484_855088   GET http://localhost:3000/api/products?search=HW06_AI_FR16_024_B_1787286391484_855088 [200 OK, 395B, 1ms]
+ 13. AI-FR16-024 | persistence oracle A (absent)
+[200 OK, 395B, 2ms]
+ 14. AI-FR16-024 | persistence oracle B (absent)
+
+↳ [AI] AI-FR16-025 — Invalid middle row causes full rollback
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_025_A_1787286391512_591330   GET http://localhost:3000/api/products?search=HW06_AI_FR16_025_B_1787286391512_591330   GET http://localhost:3000/api/products?search=HW06_AI_FR16_025_C_1787286391512_591330 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-025 | baseline marker A is absent
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-025 | baseline marker B is absent
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-025 | baseline marker C is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 3ms]
+  ✓  [AI] AI-FR16-025 — Invalid middle row causes full rollback | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-025 — Invalid middle row causes full rollback","s
+  │ tatus":200,"elapsedMs":3,"contentType":"application/js
+  │ on; charset=utf-8"}'
+  └
+  ✓  AI-FR16-025 | traceability and Source
+  ✓  AI-FR16-025 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-025"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-025 | response is available for semantic review
+ 15. AI-FR16-025 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-025 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_025_A_1787286391512_591330   GET http://localhost:3000/api/products?search=HW06_AI_FR16_025_B_1787286391512_591330   GET http://localhost:3000/api/products?search=HW06_AI_FR16_025_C_1787286391512_591330 [200 OK, 395B, 2ms]
+ 16. AI-FR16-025 | persistence oracle A (absent)
+[200 OK, 394B, 2ms]
+ 17. AI-FR16-025 | persistence oracle B (absent)
+[200 OK, 395B, 2ms]
+ 18. AI-FR16-025 | persistence oracle C (absent)
+
+↳ [AI] AI-FR16-026 — Invalid final row causes full rollback
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_026_A_1787286391542_659088   GET http://localhost:3000/api/products?search=HW06_AI_FR16_026_B_1787286391542_659088   GET http://localhost:3000/api/products?search=HW06_AI_FR16_026_C_1787286391542_659088 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-026 | baseline marker A is absent
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-026 | baseline marker B is absent
+[200 OK, 267B, 3ms]
+  ✓  AI-FR16-026 | baseline marker C is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 3ms]
+  ✓  [AI] AI-FR16-026 — Invalid final row causes full rollback | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-026 — Invalid final row causes full rollback","st
+  │ atus":200,"elapsedMs":3,"contentType":"application/jso
+  │ n; charset=utf-8"}'
+  └
+  ✓  AI-FR16-026 | traceability and Source
+  ✓  AI-FR16-026 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-026"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-026 | response is available for semantic review
+ 19. AI-FR16-026 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-026 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_026_A_1787286391542_659088 [200 OK, 395B, 1ms]
+ 20. AI-FR16-026 | persistence oracle A (absent)
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_026_B_1787286391542_659088   GET http://localhost:3000/api/products?search=HW06_AI_FR16_026_C_1787286391542_659088 [200 OK, 395B, 0µs]
+ 21. AI-FR16-026 | persistence oracle B (absent)
+[200 OK, 395B, 1ms]
+ 22. AI-FR16-026 | persistence oracle C (absent)
+
+↳ [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_027_A_1787286391571_645482 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-027 | baseline marker A is absent
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_027_B_1787286391571_645482 [200 OK, 267B, 0µs]
+  ✓  AI-FR16-027 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 394B, 2ms]
+  ✓  [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-027 — Multiple invalid rows still yield zero pers
+  │ istence","status":200,"elapsedMs":2,"contentType":"app
+  │ lication/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-027 | traceability and Source
+  ✓  AI-FR16-027 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-027"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":106}'
+  └
+  ✓  AI-FR16-027 | response is available for semantic review
+ 23. AI-FR16-027 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-027 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_027_A_1787286391571_645482   GET http://localhost:3000/api/products?search=HW06_AI_FR16_027_B_1787286391571_645482 [200 OK, 395B, 2ms]
+ 24. AI-FR16-027 | persistence oracle A (absent)
+[200 OK, 394B, 2ms]
+ 25. AI-FR16-027 | persistence oracle B (absent)
+
+❏ AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch
+↳ [AI] AI-FR16-028 [1/2] — invalid batch A rolls back
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_028_A_1787286391599_982715   GET http://localhost:3000/api/products?search=HW06_AI_FR16_028_B_1787286391599_982715 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-028 | baseline marker A is absent
+[200 OK, 267B, 1ms]
+  ✓  AI-FR16-028 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-028 [1/2] — invalid batch A rolls back | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-028 [1/2] — invalid batch A rolls back","status":
+  │ 200,"elapsedMs":2,"contentType":"application/json; cha
+  │ rset=utf-8"}'
+  └
+  ✓  AI-FR16-028 | traceability and Source
+  ✓  AI-FR16-028 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-028"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-028 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_028_A_1787286391599_982715   GET http://localhost:3000/api/products?search=HW06_AI_FR16_028_B_1787286391599_982715 [200 OK, 395B, 1ms]
+ 26. AI-FR16-028 | persistence oracle A (absent)
+[200 OK, 394B, 1ms]
+ 27. AI-FR16-028 | persistence oracle B (absent)
+
+↳ [AI] AI-FR16-028 [2/2] — independent valid batch B succeeds
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-028 [2/2] — independent valid batch B succeeds | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-028 [2/2] — independent valid batch B succeeds","
+  │ status":200,"elapsedMs":2,"contentType":"application/j
+  │ son; charset=utf-8"}'
+  └
+  ✓  AI-FR16-028 | traceability and Source
+  ✓  AI-FR16-028 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-028"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-028 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_028_A_1787286391599_982715   GET http://localhost:3000/api/products?search=HW06_AI_FR16_028_B_1787286391599_982715 [200 OK, 395B, 1ms]
+ 28. AI-FR16-028 | persistence oracle A (absent)
+[200 OK, 520B, 2ms]
+ 29. AI-FR16-028 | persistence oracle B (exactly-one)
+
+❏ AI — State / Sequence / [AI] AI-FR16-029 — Valid batch A followed by invalid batch B
+↳ [AI] AI-FR16-029 [1/2] — valid batch A persists
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_029_A_1787286391645_921091   GET http://localhost:3000/api/products?search=HW06_AI_FR16_029_B_1787286391645_921091 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-029 | baseline marker A is absent
+[200 OK, 267B, 1ms]
+  ✓  AI-FR16-029 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-029 [1/2] — valid batch A persists | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-029 [1/2] — valid batch A persists","status":200,
+  │ "elapsedMs":2,"contentType":"application/json; charset
+  │ =utf-8"}'
+  └
+  ✓  AI-FR16-029 | traceability and Source
+  ✓  AI-FR16-029 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-029"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-029 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_029_A_1787286391645_921091   GET http://localhost:3000/api/products?search=HW06_AI_FR16_029_B_1787286391645_921091 [200 OK, 395B, 1ms]
+  ✓  AI-FR16-029 | persistence oracle A (exactly-one)
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-029 | persistence oracle B (absent)
+
+↳ [AI] AI-FR16-029 [2/2] — invalid batch B rolls back without deleting A
+  POST http://localhost:3000/api/admin/import-products [200 OK, 394B, 2ms]
+  ✓  [AI] AI-FR16-029 [2/2] — invalid batch B rolls back without deleting A | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-029 [2/2] — invalid batch B rolls back without de
+  │ leting A","status":200,"elapsedMs":2,"contentType":"ap
+  │ plication/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-029 | traceability and Source
+  ✓  AI-FR16-029 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-029"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":106}'
+  └
+  ✓  AI-FR16-029 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_029_A_1787286391645_921091 [200 OK, 395B, 0µs]
+  ✓  AI-FR16-029 | persistence oracle A (present)
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_029_B_1787286391645_921091 [200 OK, 395B, 1ms]
+ 30. AI-FR16-029 | persistence oracle B (absent)
+
+❏ AI — State / Sequence / [AI] AI-FR16-030 — Repeat identical valid batch — duplicate/idempotency characterization
+↳ [AI] AI-FR16-030 [1/2] — first valid import
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_030_A_1787286391690_855290 [200 OK, 267B, 0µs]
+  ✓  AI-FR16-030 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-030 [1/2] — first valid import | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-030 [1/2] — first valid import","status":200,"ela
+  │ psedMs":2,"contentType":"application/json; charset=utf
+  │ -8"}'
+  └
+  ✓  AI-FR16-030 | traceability and Source
+  ✓  AI-FR16-030 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-030"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-030 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_030_A_1787286391690_855290 [200 OK, 395B, 1ms]
+  ✓  AI-FR16-030 | persistence oracle A (present)
+
+↳ [AI] AI-FR16-030 [2/2] — repeat exact body
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-030 [2/2] — repeat exact body | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-030 [2/2] — repeat exact body","status":200,"elap
+  │ sedMs":2,"contentType":"application/json; charset=utf-
+  │ 8"}'
+  └
+  ✓  AI-FR16-030 | traceability and Source
+  ✓  AI-FR16-030 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-030"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-030 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_030_A_1787286391690_855290 [200 OK, 521B, 1ms]
+  ✓  AI-FR16-030 | persistence oracle A (present)
+
+❏ AI — State / Sequence / [AI] AI-FR16-031 — Malformed request followed by canonical valid request
+↳ [AI] AI-FR16-031 [1/2] — malformed JSON does not mutate
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_031_A_1787286391731_431297   GET http://localhost:3000/api/products?search=HW06_AI_FR16_031_B_1787286391731_431297 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-031 | baseline marker A is absent
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-031 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [400 Bad Request, 1.53kB, 1ms]
+  ✓  [AI] AI-FR16-031 [1/2] — malformed JSON does not mutate | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-031 [1/2] — malformed JSON does not mutate","stat
+  │ us":400,"elapsedMs":1,"contentType":"text/html; charse
+  │ t=utf-8"}'
+  └
+  ✓  AI-FR16-031 | traceability and Source
+  ✓  AI-FR16-031 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-031"
+  │ ,"status":400,"contentType":"text/html; charset=utf-8"
+  │ ,"bodyLength":1224}'
+  └
+  ✓  AI-FR16-031 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_031_A_1787286391731_431297 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-031 | persistence oracle A (absent)
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_031_B_1787286391731_431297 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-031 | persistence oracle B (absent)
+
+↳ [AI] AI-FR16-031 [2/2] — canonical valid request still works
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 1ms]
+  ✓  [AI] AI-FR16-031 [2/2] — canonical valid request still works | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-031 [2/2] — canonical valid request still works",
+  │ "status":200,"elapsedMs":1,"contentType":"application/
+  │ json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-031 | traceability and Source
+  ✓  AI-FR16-031 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-031"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-031 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_031_A_1787286391731_431297   GET http://localhost:3000/api/products?search=HW06_AI_FR16_031_B_1787286391731_431297 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-031 | persistence oracle A (absent)
+[200 OK, 395B, 2ms]
+  ✓  AI-FR16-031 | persistence oracle B (exactly-one)
+
+❏ AI — Security (JSON API surface)
+↳ [AI] AI-FR16-032 — Missing JWT cannot import
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_032_A_1787286391777_331855 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-032 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [401 Unauthorized, 301B, 1ms]
+  ✓  [AI] AI-FR16-032 — Missing JWT cannot import | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-032 — Missing JWT cannot import","status":401,"el
+  │ apsedMs":1,"contentType":"application/json; charset=ut
+  │ f-8"}'
+  └
+  ✓  AI-FR16-032 | traceability and Source
+  ✓  AI-FR16-032 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-032"
+  │ ,"status":401,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":24}'
+  └
+  ✓  AI-FR16-032 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_032_A_1787286391777_331855 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-032 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-033 — Malformed JWT cannot import
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_033_A_1787286391803_187224 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-033 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [403 Forbidden, 295B, 1ms]
+  ✓  [AI] AI-FR16-033 — Malformed JWT cannot import | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-033 — Malformed JWT cannot import","status":403,"
+  │ elapsedMs":1,"contentType":"application/json; charset=
+  │ utf-8"}'
+  └
+  ✓  AI-FR16-033 | traceability and Source
+  ✓  AI-FR16-033 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-033"
+  │ ,"status":403,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":21}'
+  └
+  ✓  AI-FR16-033 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_033_A_1787286391803_187224 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-033 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-034 — Tampered JWT signature cannot import
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_034_A_1787286391830_689185 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-034 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [403 Forbidden, 295B, 1ms]
+  ✓  [AI] AI-FR16-034 — Tampered JWT signature cannot import | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-034 — Tampered JWT signature cannot import","stat
+  │ us":403,"elapsedMs":1,"contentType":"application/json;
+  │  charset=utf-8"}'
+  └
+  ✓  AI-FR16-034 | traceability and Source
+  ✓  AI-FR16-034 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-034"
+  │ ,"status":403,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":21}'
+  └
+  ✓  AI-FR16-034 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_034_A_1787286391830_689185 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-034 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-035 — Valid non-admin JWT cannot import
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_035_A_1787286391855_770078 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-035 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-035 — Valid non-admin JWT cannot import | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-035 — Valid non-admin JWT cannot import","status"
+  │ :200,"elapsedMs":2,"contentType":"application/json; ch
+  │ arset=utf-8"}'
+  └
+  ✓  AI-FR16-035 | traceability and Source
+  ✓  AI-FR16-035 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-035"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-035 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_035_A_1787286391855_770078 [200 OK, 395B, 1ms]
+ 31. AI-FR16-035 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-036 — Forged admin role in tampered token does not elevate privilege
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_036_A_1787286391880_224923 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-036 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [403 Forbidden, 295B, 1ms]
+  ✓  [AI] AI-FR16-036 — Forged admin role in tampered token does not elevate privilege | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-036 — Forged admin role in tampered token does no
+  │ t elevate privilege","status":403,"elapsedMs":1,"conte
+  │ ntType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-036 | traceability and Source
+  ✓  AI-FR16-036 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-036"
+  │ ,"status":403,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":21}'
+  └
+  ✓  AI-FR16-036 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_036_A_1787286391880_224923 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-036 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-037 — Unexpected body role/admin fields do not elevate actor
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_037_A_1787286391903_667345 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-037 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-037 — Unexpected body role/admin fields do not elevate actor | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-037 — Unexpected body role/admin fields do not el
+  │ evate actor","status":200,"elapsedMs":2,"contentType":
+  │ "application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-037 | traceability and Source
+  ✓  AI-FR16-037 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-037"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-037 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_037_A_1787286391903_667345 [200 OK, 395B, 1ms]
+ 32. AI-FR16-037 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-038 — SQL-looking product name remains inert data
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_038_A_1787286391928_42375_SQL_'_-- [500 Internal Server Error, 345B, 1ms]
+  ✓  AI-FR16-038 | baseline SQL marker absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 1ms]
+  ✓  [AI] AI-FR16-038 — SQL-looking product name remains inert data | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-038 — SQL-looking product name remains inert data
+  │ ","status":200,"elapsedMs":1,"contentType":"applicatio
+  │ n/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-038 | traceability and Source
+  ✓  AI-FR16-038 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-038"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-038 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_038_A_1787286391928_42375_SQL_'_-- [500 Internal Server Error, 345B, 1ms]
+  ✓  AI-FR16-038 | persistence oracle A (present-or-absent)
+
+↳ [AI] AI-FR16-039 — SQL-looking description remains inert data
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_039_A_1787286391954_830908 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-039 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-039 — SQL-looking description remains inert data | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-039 — SQL-looking description remains inert data"
+  │ ,"status":200,"elapsedMs":2,"contentType":"application
+  │ /json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-039 | traceability and Source
+  ✓  AI-FR16-039 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-039"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-039 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_039_A_1787286391954_830908 [200 OK, 403B, 1ms]
+  ✓  AI-FR16-039 | persistence oracle A (present-or-absent)
+
+↳ [AI] AI-FR16-051 — Mixed JSON row types cannot partially persist
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_051_A_1787286391978_607916 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-051 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [500 Internal Server Error, 1.63kB, 1ms]
+  ✓  [AI] AI-FR16-051 — Mixed JSON row types cannot partially persist | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-051 — Mixed JSON row types cannot partially persi
+  │ st","status":500,"elapsedMs":1,"contentType":"text/htm
+  │ l; charset=utf-8"}'
+  └
+  ✓  AI-FR16-051 | traceability and Source
+  ✓  AI-FR16-051 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-051"
+  │ ,"status":500,"contentType":"text/html; charset=utf-8"
+  │ ,"bodyLength":1311}'
+  └
+  ✓  AI-FR16-051 | response is available for semantic review
+  ✓  AI-FR16-051 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_051_A_1787286391978_607916 [200 OK, 395B, 1ms]
+ 33. AI-FR16-051 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-052 — Duplicate JSON keys — parser precedence characterization
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_052_A_1787286392002_476134   GET http://localhost:3000/api/products?search=HW06_AI_FR16_052_B_1787286392002_476134 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-052 | baseline marker A is absent
+[200 OK, 267B, 2ms]
+  ✓  AI-FR16-052 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-052 — Duplicate JSON keys — parser precedence characterization | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-052 — Duplicate JSON keys — parser precedence cha
+  │ racterization","status":200,"elapsedMs":2,"contentType
+  │ ":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-052 | traceability and Source
+  ✓  AI-FR16-052 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-052"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-052 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_052_A_1787286392002_476134   GET http://localhost:3000/api/products?search=HW06_AI_FR16_052_B_1787286392002_476134 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-052 | persistence oracle A (present-or-absent)
+[200 OK, 395B, 2ms]
+  ✓  AI-FR16-052 | persistence oracle B (present-or-absent)
+
+❏ AI — Schema / Characterization
+↳ [AI] AI-FR16-042 — Record success runtime response shape without promoting it to contract
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_042_A_1787286392027_923697 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-042 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 1ms]
+  ✓  [AI] AI-FR16-042 — Record success runtime response shape without promoting it to contract | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-042 — Record success runtime response shape witho
+  │ ut promoting it to contract","status":200,"elapsedMs":
+  │ 1,"contentType":"application/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-042 | traceability and Source
+  ✓  AI-FR16-042 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-042"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-042 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_042_A_1787286392027_923697 [200 OK, 395B, 1ms]
+  ✓  AI-FR16-042 | persistence oracle A (exactly-one)
+
+↳ [AI] AI-FR16-043 — Record validation-failure runtime response shape
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_043_A_1787286392052_149177 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-043 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 394B, 2ms]
+  ✓  [AI] AI-FR16-043 — Record validation-failure runtime response shape | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-043 — Record validation-failure runtime response 
+  │ shape","status":200,"elapsedMs":2,"contentType":"appli
+  │ cation/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-043 | traceability and Source
+  ✓  AI-FR16-043 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-043"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":106}'
+  └
+  ✓  AI-FR16-043 | response is available for semantic review
+ 34. AI-FR16-043 | exposed success counter does not contradict the persistence oracle
+  ✓  AI-FR16-043 | business report is not empty
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_043_A_1787286392052_149177 [200 OK, 395B, 1ms]
+ 35. AI-FR16-043 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-044 — Record authentication-failure runtime response shape
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_044_A_1787286392076_95679 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-044 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [401 Unauthorized, 301B, 0µs]
+  ✓  [AI] AI-FR16-044 — Record authentication-failure runtime response shape | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-044 — Record authentication-failure runtime respo
+  │ nse shape","status":401,"elapsedMs":0,"contentType":"a
+  │ pplication/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-044 | traceability and Source
+  ✓  AI-FR16-044 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-044"
+  │ ,"status":401,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":24}'
+  └
+  ✓  AI-FR16-044 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_044_A_1787286392076_95679 [200 OK, 267B, 2ms]
+  ✓  AI-FR16-044 | persistence oracle A (absent)
+
+↳ [AI] AI-FR16-045 — Record non-admin authorization response shape
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_045_A_1787286392100_404660 [200 OK, 267B, 1ms]
+  ✓  AI-FR16-045 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [AI] AI-FR16-045 — Record non-admin authorization response shape | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[AI] AI-
+  │ FR16-045 — Record non-admin authorization response sha
+  │ pe","status":200,"elapsedMs":2,"contentType":"applicat
+  │ ion/json; charset=utf-8"}'
+  └
+  ✓  AI-FR16-045 | traceability and Source
+  ✓  AI-FR16-045 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"AI-FR16-045"
+  │ ,"status":200,"contentType":"application/json; charset
+  │ =utf-8","bodyLength":78}'
+  └
+  ✓  AI-FR16-045 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_AI_FR16_045_A_1787286392100_404660 [200 OK, 395B, 1ms]
+ 36. AI-FR16-045 | persistence oracle A (absent)
+
+❏ HUMAN — Additional Coverage
+↳ [HUMAN] HUM-FR16-001 — Concurrent duplicate import race
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_001_A_1787286392125_465944 [200 OK, 267B, 1ms]
+  ✓  HUM-FR16-001 | baseline race marker is absent
+  POST http://localhost:3000/api/admin/import-products   POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 3ms]
+[200 OK, 357B, 4ms]
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_001_A_1787286392125_465944 [200 OK, 523B, 1ms]
+  ✓  [HUMAN] HUM-FR16-001 — Concurrent duplicate import race | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-001 — Concurrent duplicate import race","stat
+  │ us":200,"elapsedMs":1,"contentType":"application/json;
+  │  charset=utf-8"}'
+  └
+  ✓  HUM-FR16-001 | traceability and Source
+  ✓  HUM-FR16-001 | required X-Student-Id header
+  ✓  HUM-FR16-001 | concurrent result contains complete rows only
+  ✓  HUM-FR16-001 | both parallel calls completed
+  ✓  HUM-FR16-001 | exposed counters agree with final persistence
+  ┌
+  │ 'HUM-FR16-001 CONCURRENCY CHARACTERIZATION', '[{"label
+  │ ":"A","error":null,"status":200,"body":"{\\"message\\"
+  │ :\\"Import hoàn tất: 1/1 sản phẩm được thêm\\",\\"inse
+  │ rted\\":1,\\"errors\\":[]}"},{"label":"B","error":null
+  │ ,"status":200,"body":"{\\"message\\":\\"Import hoàn tấ
+  │ t: 1/1 sản phẩm được thêm\\",\\"inserted\\":1,\\"error
+  │ s\\":[]}"}]'
+  └
+
+❏ HUMAN — Additional Coverage / [HUMAN] HUM-FR16-003 — Stale category reference after category deletion
+↳ [HUMAN] HUM-FR16-003 [1/3] — import while category exists
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_003_A_1787286392152_665043 [200 OK, 267B, 1ms]
+  ✓  HUM-FR16-003 | baseline marker A is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [HUMAN] HUM-FR16-003 [1/3] — import while category exists | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-003 [1/3] — import while category exists","st
+  │ atus":200,"elapsedMs":2,"contentType":"application/jso
+  │ n; charset=utf-8"}'
+  └
+  ✓  HUM-FR16-003 | traceability and Source
+  ✓  HUM-FR16-003 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-003
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":78}'
+  └
+  ✓  HUM-FR16-003 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_003_A_1787286392152_665043 [200 OK, 396B, 1ms]
+  ✓  HUM-FR16-003 | persistence oracle A (exactly-one)
+
+↳ [HUMAN] HUM-FR16-003 [2/3] — delete disposable category
+  DELETE http://localhost:3000/api/categories/4 [200 OK, 297B, 3ms]
+  ✓  [HUMAN] HUM-FR16-003 [2/3] — delete disposable category | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-003 [2/3] — delete disposable category","stat
+  │ us":200,"elapsedMs":3,"contentType":"application/json;
+  │  charset=utf-8"}'
+  └
+  ✓  HUM-FR16-003 | traceability and Source
+  ✓  HUM-FR16-003 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-003
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":30}'
+  └
+  ✓  HUM-FR16-003 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_003_A_1787286392152_665043   GET http://localhost:3000/api/categories [200 OK, 396B, 1ms]
+  ✓  HUM-FR16-003 | persistence oracle A (present)
+[200 OK, 358B, 2ms]
+  ✓  HUM-FR16-003 | category list is readable after delete attempt
+  ┌
+  │ 'HUM-FR16-003 CATEGORY DELETE CHARACTERIZATION', '{"ca
+  │ tegoryAbsent":true,"status":200}'
+  └
+
+↳ [HUMAN] HUM-FR16-003 [3/3] — repeat exact import with stale category reference
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [HUMAN] HUM-FR16-003 [3/3] — repeat exact import with stale category reference | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-003 [3/3] — repeat exact import with stale ca
+  │ tegory reference","status":200,"elapsedMs":2,"contentT
+  │ ype":"application/json; charset=utf-8"}'
+  └
+  ✓  HUM-FR16-003 | traceability and Source
+  ✓  HUM-FR16-003 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-003
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":78}'
+  └
+  ✓  HUM-FR16-003 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_003_A_1787286392152_665043 [200 OK, 523B, 1ms]
+  ✓  HUM-FR16-003 | stale-reference branching persistence oracle
+
+❏ HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions
+↳ [HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_A_1787286392220_117498   GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_B_1787286392220_117498 [200 OK, 267B, 2ms]
+  ✓  HUM-FR16-006 | baseline marker A is absent
+[200 OK, 267B, 1ms]
+  ✓  HUM-FR16-006 | baseline marker B is absent
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 3ms]
+  ✓  [HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1 | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-006 [1/5] — identical invalid batch attempt 1
+  │ ","status":200,"elapsedMs":3,"contentType":"applicatio
+  │ n/json; charset=utf-8"}'
+  └
+  ✓  HUM-FR16-006 | traceability and Source
+  ✓  HUM-FR16-006 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-006
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":78}'
+  └
+  ✓  HUM-FR16-006 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_A_1787286392220_117498   GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_B_1787286392220_117498 [200 OK, 396B, 1ms]
+ 37. HUM-FR16-006 | persistence oracle A (absent)
+[200 OK, 395B, 2ms]
+ 38. HUM-FR16-006 | persistence oracle B (absent)
+
+↳ [HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2 | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-006 [2/5] — identical invalid batch attempt 2
+  │ ","status":200,"elapsedMs":2,"contentType":"applicatio
+  │ n/json; charset=utf-8"}'
+  └
+  ✓  HUM-FR16-006 | traceability and Source
+  ✓  HUM-FR16-006 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-006
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":78}'
+  └
+  ✓  HUM-FR16-006 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_A_1787286392220_117498 [200 OK, 523B, 0µs]
+ 39. HUM-FR16-006 | persistence oracle A (absent)
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_B_1787286392220_117498 [200 OK, 521B, 1ms]
+ 40. HUM-FR16-006 | persistence oracle B (absent)
+
+↳ [HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 3ms]
+  ✓  [HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3 | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-006 [3/5] — identical invalid batch attempt 3
+  │ ","status":200,"elapsedMs":3,"contentType":"applicatio
+  │ n/json; charset=utf-8"}'
+  └
+  ✓  HUM-FR16-006 | traceability and Source
+  ✓  HUM-FR16-006 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-006
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":78}'
+  └
+  ✓  HUM-FR16-006 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_A_1787286392220_117498   GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_B_1787286392220_117498 [200 OK, 651B, 1ms]
+ 41. HUM-FR16-006 | persistence oracle A (absent)
+[200 OK, 648B, 2ms]
+ 42. HUM-FR16-006 | persistence oracle B (absent)
+
+↳ [HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4 | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-006 [4/5] — identical invalid batch attempt 4
+  │ ","status":200,"elapsedMs":2,"contentType":"applicatio
+  │ n/json; charset=utf-8"}'
+  └
+  ✓  HUM-FR16-006 | traceability and Source
+  ✓  HUM-FR16-006 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-006
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":78}'
+  └
+  ✓  HUM-FR16-006 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_A_1787286392220_117498   GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_B_1787286392220_117498 [200 OK, 778B, 1ms]
+ 43. HUM-FR16-006 | persistence oracle A (absent)
+[200 OK, 774B, 2ms]
+ 44. HUM-FR16-006 | persistence oracle B (absent)
+
+↳ [HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5
+  POST http://localhost:3000/api/admin/import-products [200 OK, 357B, 2ms]
+  ✓  [HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5 | collection X-Student-Id
+  ┌
+  │ 'FR16 REQUEST CHARACTERIZATION', '{"request":"[HUMAN] 
+  │ HUM-FR16-006 [5/5] — identical invalid batch attempt 5
+  │ ","status":200,"elapsedMs":2,"contentType":"applicatio
+  │ n/json; charset=utf-8"}'
+  └
+  ✓  HUM-FR16-006 | traceability and Source
+  ✓  HUM-FR16-006 | required X-Student-Id header
+  ┌
+  │ 'FR16 RESPONSE CHARACTERIZATION', '{"id":"HUM-FR16-006
+  │ ","status":200,"contentType":"application/json; charse
+  │ t=utf-8","bodyLength":78}'
+  └
+  ✓  HUM-FR16-006 | response is available for semantic review
+  GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_A_1787286392220_117498   GET http://localhost:3000/api/products?search=HW06_HUM_FR16_006_B_1787286392220_117498 [200 OK, 905B, 1ms]
+ 45. HUM-FR16-006 | persistence oracle A (absent)
+[200 OK, 900B, 3ms]
+ 46. HUM-FR16-006 | persistence oracle B (absent)
+
+┌─────────────────────────┬─────────────────┬─────────────────┐
+│                         │        executed │          failed │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              iterations │               1 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│                requests │             195 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│            test-scripts │             112 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│      prerequest-scripts │             103 │               0 │
+├─────────────────────────┼─────────────────┼─────────────────┤
+│              assertions │             388 │              46 │
+├─────────────────────────┴─────────────────┴─────────────────┤
+│ total run duration: 1419ms                                  │
+├─────────────────────────────────────────────────────────────┤
+│ total data received: 42.93kB (approx)                       │
+├─────────────────────────────────────────────────────────────┤
+│ average response time: 1ms [min: 1ms, max: 20ms, s.d.: 1ms] │
+└─────────────────────────────────────────────────────────────┘
+
+[31m   # [39m[31m failure        [39m[31m detail                                                                                                                                                                      [39m
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 01.  AssertionError  AI-FR16-013 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 2 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Domain (JSON API surface) / [AI] AI-FR16-013 — Empty product name in JSON row"                                                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 02.  AssertionError  AI-FR16-013 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — Domain (JSON API surface) / [AI] AI-FR16-013 — Empty product name in JSON row"                                                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 03.  AssertionError  AI-FR16-013 | persistence oracle B (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:6 in test-script                                                                                                                                               
+                      inside "AI — Domain (JSON API surface) / [AI] AI-FR16-013 — Empty product name in JSON row"                                                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 04.  AssertionError  AI-FR16-014 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Domain (JSON API surface) / [AI] AI-FR16-014 — Missing product name in JSON row"                                                                               
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 05.  AssertionError  AI-FR16-014 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — Domain (JSON API surface) / [AI] AI-FR16-014 — Missing product name in JSON row"                                                                               
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 06.  AssertionError  AI-FR16-015 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Domain (JSON API surface) / [AI] AI-FR16-015 — Null product name"                                                                                              
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 07.  AssertionError  AI-FR16-015 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — Domain (JSON API surface) / [AI] AI-FR16-015 — Null product name"                                                                                              
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 08.  AssertionError  AI-FR16-019 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Boundary / [AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback"                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 09.  AssertionError  AI-FR16-019 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — Boundary / [AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback"                                                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 10.  AssertionError  AI-FR16-020 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Boundary / [AI] AI-FR16-020 — Price = -1 — invalid negative boundary"                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 11.  AssertionError  AI-FR16-020 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — Boundary / [AI] AI-FR16-020 — Price = -1 — invalid negative boundary"                                                                                          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 12.  AssertionError  AI-FR16-024 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 2 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-024 — Invalid first row causes full rollback"                                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 13.  AssertionError  AI-FR16-024 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-024 — Invalid first row causes full rollback"                                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 14.  AssertionError  AI-FR16-024 | persistence oracle B (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:6 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-024 — Invalid first row causes full rollback"                                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 15.  AssertionError  AI-FR16-025 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 3 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback"                                                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 16.  AssertionError  AI-FR16-025 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback"                                                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 17.  AssertionError  AI-FR16-025 | persistence oracle B (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:6 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback"                                                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 18.  AssertionError  AI-FR16-025 | persistence oracle C (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:7 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-025 — Invalid middle row causes full rollback"                                                                                 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 19.  AssertionError  AI-FR16-026 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 3 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback"                                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 20.  AssertionError  AI-FR16-026 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback"                                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 21.  AssertionError  AI-FR16-026 | persistence oracle B (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:6 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback"                                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 22.  AssertionError  AI-FR16-026 | persistence oracle C (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:7 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-026 — Invalid final row causes full rollback"                                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 23.  AssertionError  AI-FR16-027 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 2 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence"                                                                      
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 24.  AssertionError  AI-FR16-027 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence"                                                                      
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 25.  AssertionError  AI-FR16-027 | persistence oracle B (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:6 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-027 — Multiple invalid rows still yield zero persistence"                                                                      
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 26.  AssertionError  AI-FR16-028 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [1/2] — invalid batch A rolls back"                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 27.  AssertionError  AI-FR16-028 | persistence oracle B (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [1/2] — invalid batch A rolls back"                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 28.  AssertionError  AI-FR16-028 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [2/2] — independent valid batch B succeeds"          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 29.  AssertionError  AI-FR16-028 | persistence oracle B (exactly-one)                                                                                                                            
+                      expected 2 to deeply equal 1                                                                                                                                                
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-028 — Failed batch followed by independent valid batch / [AI] AI-FR16-028 [2/2] — independent valid batch B succeeds"          
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 30.  AssertionError  AI-FR16-029 | persistence oracle B (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "AI — State / Sequence / [AI] AI-FR16-029 — Valid batch A followed by invalid batch B / [AI] AI-FR16-029 [2/2] — invalid batch B rolls back without deleting A"      
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 31.  AssertionError  AI-FR16-035 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Security (JSON API surface) / [AI] AI-FR16-035 — Valid non-admin JWT cannot import"                                                                            
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 32.  AssertionError  AI-FR16-037 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Security (JSON API surface) / [AI] AI-FR16-037 — Unexpected body role/admin fields do not elevate actor"                                                       
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 33.  AssertionError  AI-FR16-051 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "AI — Security (JSON API surface) / [AI] AI-FR16-051 — Mixed JSON row types cannot partially persist"                                                                
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 34.  AssertionError  AI-FR16-043 | exposed success counter does not contradict the persistence oracle                                                                                            
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Schema / Characterization / [AI] AI-FR16-043 — Record validation-failure runtime response shape"                                                               
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 35.  AssertionError  AI-FR16-043 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:5 in test-script                                                                                                                                               
+                      inside "AI — Schema / Characterization / [AI] AI-FR16-043 — Record validation-failure runtime response shape"                                                               
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 36.  AssertionError  AI-FR16-045 | persistence oracle A (absent)                                                                                                                                 
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "AI — Schema / Characterization / [AI] AI-FR16-045 — Record non-admin authorization response shape"                                                                  
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 37.  AssertionError  HUM-FR16-006 | persistence oracle A (absent)                                                                                                                                
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 38.  AssertionError  HUM-FR16-006 | persistence oracle B (absent)                                                                                                                                
+                      expected 1 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [1/5] — identical invalid batch attempt 1" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 39.  AssertionError  HUM-FR16-006 | persistence oracle A (absent)                                                                                                                                
+                      expected 2 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 40.  AssertionError  HUM-FR16-006 | persistence oracle B (absent)                                                                                                                                
+                      expected 2 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [2/5] — identical invalid batch attempt 2" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 41.  AssertionError  HUM-FR16-006 | persistence oracle A (absent)                                                                                                                                
+                      expected 3 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 42.  AssertionError  HUM-FR16-006 | persistence oracle B (absent)                                                                                                                                
+                      expected 3 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [3/5] — identical invalid batch attempt 3" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 43.  AssertionError  HUM-FR16-006 | persistence oracle A (absent)                                                                                                                                
+                      expected 4 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 44.  AssertionError  HUM-FR16-006 | persistence oracle B (absent)                                                                                                                                
+                      expected 4 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [4/5] — identical invalid batch attempt 4" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 45.  AssertionError  HUM-FR16-006 | persistence oracle A (absent)                                                                                                                                
+                      expected 5 to deeply equal +0                                                                                                                                               
+                      at assertion:3 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5" 
+[90m     [39m[90m                [39m[90m                                                                                                                                                                             [39m
+ 46.  AssertionError  HUM-FR16-006 | persistence oracle B (absent)                                                                                                                                
+                      expected 5 to deeply equal +0                                                                                                                                               
+                      at assertion:4 in test-script                                                                                                                                               
+                      inside "HUMAN — Additional Coverage / [HUMAN] HUM-FR16-006 — Repeated identical invalid-batch submissions / [HUMAN] HUM-FR16-006 [5/5] — identical invalid batch attempt 5" 

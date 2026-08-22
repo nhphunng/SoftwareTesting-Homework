@@ -1,0 +1,340 @@
+{
+  "sourceReport": "postman/newman/FR05-official-report.json",
+  "classificationStatus": "CANDIDATE ONLY — HUMAN REVIEW REQUIRED",
+  "totals": {
+    "requests": 62,
+    "assertions": 142,
+    "assertionFailures": 4
+  },
+  "candidateFailures": [
+    {
+      "testcaseId": "HUMAN-FR05-044",
+      "requestName": "[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/api/products?search=phone%00__NO_MATCH_23127194__",
+        "headers": [
+          {
+            "key": "X-Student-Id",
+            "value": "23127194"
+          },
+          {
+            "key": "User-Agent",
+            "value": "PostmanRuntime/7.39.1"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          },
+          {
+            "key": "Postman-Token",
+            "value": "915edd8a-5e8a-4d76-8bdc-195f8f95d907"
+          },
+          {
+            "key": "Host",
+            "value": "localhost:3000"
+          },
+          {
+            "key": "Accept-Encoding",
+            "value": "gzip, deflate, br"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          }
+        ]
+      },
+      "response": {
+        "status": 500,
+        "statusText": "Internal Server Error",
+        "headers": [
+          {
+            "key": "X-Powered-By",
+            "value": "Express"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Content-Type",
+            "value": "text/html; charset=utf-8"
+          },
+          {
+            "key": "Content-Length",
+            "value": "73"
+          },
+          {
+            "key": "ETag",
+            "value": "W/\"49-NVJpYg6JdtAI0nQtpXPKOxZDHgo\""
+          },
+          {
+            "key": "Date",
+            "value": "Thu, 20 Aug 2026 14:16:11 GMT"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Keep-Alive",
+            "value": "timeout=5"
+          }
+        ],
+        "body": "<h1>Database Error</h1><p>SQLITE_ERROR: unrecognized token: \"'%phone\"</p>"
+      },
+      "assertions": [
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | required X-Student-Id header",
+          "passed": true,
+          "error": null
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-044 | testcase traceability",
+          "passed": true,
+          "error": null
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | null-byte attack does not return 5xx",
+          "passed": false,
+          "error": {
+            "name": "AssertionError",
+            "message": "expected 500 to be below 500"
+          }
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-044 — Step 1 of 2 — encoded null-byte attack | no obvious internal-error disclosure",
+          "passed": false,
+          "error": {
+            "name": "AssertionError",
+            "message": "expected '<h1>Database Error</h1><p>SQLITE_ERRO…' not to match /(?:SQLITE(?:_ERROR)?|SELECT\\s+.+FROM|(?:Error|Exception):\\s+.+\\n\\s+at\\s+)/i"
+          }
+        }
+      ]
+    },
+    {
+      "testcaseId": "HUMAN-FR05-048",
+      "requestName": "[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query",
+      "request": {
+        "method": "POST",
+        "url": "http://localhost:3000/api/products?search=phone",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "X-Student-Id",
+            "value": "23127194"
+          },
+          {
+            "key": "User-Agent",
+            "value": "PostmanRuntime/7.39.1"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          },
+          {
+            "key": "Postman-Token",
+            "value": "c1676829-c3ea-426c-a243-062e80227a6d"
+          },
+          {
+            "key": "Host",
+            "value": "localhost:3000"
+          },
+          {
+            "key": "Accept-Encoding",
+            "value": "gzip, deflate, br"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Content-Length",
+            "value": "33"
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "statusText": "OK",
+        "headers": [
+          {
+            "key": "X-Powered-By",
+            "value": "Express"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json; charset=utf-8"
+          },
+          {
+            "key": "Content-Length",
+            "value": "36"
+          },
+          {
+            "key": "ETag",
+            "value": "W/\"24-mhaziuF8WdpQjd3hv39tIyaT6jI\""
+          },
+          {
+            "key": "Date",
+            "value": "Thu, 20 Aug 2026 14:16:11 GMT"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Keep-Alive",
+            "value": "timeout=5"
+          }
+        ],
+        "body": "{\"message\":\"Product created\",\"id\":8}"
+      },
+      "assertions": [
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | required X-Student-Id header",
+          "passed": true,
+          "error": null
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 | testcase traceability",
+          "passed": true,
+          "error": null
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | unsupported unauthenticated POST is rejected with 4xx",
+          "passed": false,
+          "error": {
+            "name": "AssertionError",
+            "message": "expected 200 to be within 400..499"
+          }
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | request has no Authorization header",
+          "passed": true,
+          "error": null
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 2 of 3 — unauthenticated malformed POST with search query | JSON Content-Type is sent",
+          "passed": true,
+          "error": null
+        }
+      ]
+    },
+    {
+      "testcaseId": "HUMAN-FR05-048",
+      "requestName": "[HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:3000/api/products",
+        "headers": [
+          {
+            "key": "X-Student-Id",
+            "value": "23127194"
+          },
+          {
+            "key": "User-Agent",
+            "value": "PostmanRuntime/7.39.1"
+          },
+          {
+            "key": "Accept",
+            "value": "*/*"
+          },
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          },
+          {
+            "key": "Postman-Token",
+            "value": "eec62cc5-3792-4e1f-8bef-b2024e56f4ea"
+          },
+          {
+            "key": "Host",
+            "value": "localhost:3000"
+          },
+          {
+            "key": "Accept-Encoding",
+            "value": "gzip, deflate, br"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          }
+        ]
+      },
+      "response": {
+        "status": 200,
+        "statusText": "OK",
+        "headers": [
+          {
+            "key": "X-Powered-By",
+            "value": "Express"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json; charset=utf-8"
+          },
+          {
+            "key": "Content-Length",
+            "value": "1240"
+          },
+          {
+            "key": "ETag",
+            "value": "W/\"4d8-jAxeYLC+39TRGInsC3h582Ppdh8\""
+          },
+          {
+            "key": "Date",
+            "value": "Thu, 20 Aug 2026 14:16:11 GMT"
+          },
+          {
+            "key": "Connection",
+            "value": "keep-alive"
+          },
+          {
+            "key": "Keep-Alive",
+            "value": "timeout=5"
+          }
+        ],
+        "body": "[{\"id\":1,\"name\":\"iPhone 15 Pro Max\",\"price\":30000000,\"description\":\"Điện thoại cao cấp của Apple\",\"imageUrl\":\"https://placehold.co/300x300/png?text=iPhone+15\",\"category_id\":1},{\"id\":2,\"name\":\"Samsung Galaxy S24 Ultra\",\"price\":28000000,\"description\":\"Màn hình hiển thị xuất sắc, camera siêu zoom\",\"imageUrl\":\"https://placehold.co/300x300/png?text=Samsung+S24\",\"category_id\":1},{\"id\":3,\"name\":\"MacBook Pro M3\",\"price\":45000000,\"description\":\"Laptop chuyên nghiệp mạnh mẽ\",\"imageUrl\":\"https://placehold.co/300x300/png?text=Macbook+Pro\",\"category_id\":2},{\"id\":4,\"name\":\"Tai nghe AirPods Pro 2\",\"price\":6000000,\"description\":\"Chống ồn chủ động xuất sắc\",\"imageUrl\":\"https://placehold.co/300x300/png?text=AirPods+Pro\",\"category_id\":3},{\"id\":5,\"name\":\"Bàn phím cơ Keychron Q1\",\"price\":4000000,\"description\":\"Gõ cực sướng, thiết kế kim loại\",\"imageUrl\":\"https://placehold.co/300x300/png?text=Keychron+Q1\",\"category_id\":3},{\"id\":6,\"name\":\"HW06_FR05_RENAME_23127194_NEW\",\"price\":23127194,\"description\":\"Disposable fixture for HUMAN-FR05-046\",\"imageUrl\":\"https://example.test/hw06-fr05.png\",\"category_id\":3},{\"id\":8,\"name\":null,\"price\":null,\"description\":null,\"imageUrl\":null,\"category_id\":null}]"
+      },
+      "assertions": [
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | required X-Student-Id header",
+          "passed": true,
+          "error": null
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 | testcase traceability",
+          "passed": true,
+          "error": null
+        },
+        {
+          "assertion": "[HUMAN] HUMAN-FR05-048 — Step 3 of 3 — verify product IDs after POST | product ID set is unchanged after rejected POST",
+          "passed": false,
+          "error": {
+            "name": "AssertionError",
+            "message": "expected [ '1', '2', '3', '4', '5', '6', '8' ] to deeply equal [ '1', '2', '3', '4', '5', '6' ]"
+          }
+        }
+      ]
+    }
+  ]
+}

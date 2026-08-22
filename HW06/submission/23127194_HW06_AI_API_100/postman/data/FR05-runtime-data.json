@@ -1,0 +1,31 @@
+[
+  {
+    "baseUrl": "http://localhost:3000",
+    "knownMatchingKeyword": "iPhone",
+    "expectedMatchingProductName": "iPhone 15 Pro Max",
+    "knownNoMatchKeyword": "__NO_MATCH_23127194__",
+    "knownNoMatchProductName": "iPhone 15 Pro Max",
+    "exactProductName": "iPhone 15 Pro Max",
+    "nonNameOnlyKeyword": "camera",
+    "nonNameOnlyProductName": "Samsung Galaxy S24 Ultra",
+    "partialProductName": "iPhone 15",
+    "unicodeKeyword": "Bàn",
+    "lowercaseKeyword": "iphone",
+    "uppercaseKeyword": "IPHONE",
+    "oneCharacterKeyword": "i",
+    "keywordA": "iPhone",
+    "keywordB": "Samsung",
+    "invalidOrExpiredToken": "invalid-or-expired-token",
+    "assertCaseSensitiveSearch": "false",
+    "enableDestructiveStateTests": "true",
+    "renameProductId": "6",
+    "renameOldName": "HW06_FR05_RENAME_23127194_OLD",
+    "renameNewName": "HW06_FR05_RENAME_23127194_NEW",
+    "renameProductPrice": "23127194",
+    "renameProductDescription": "Disposable fixture for HUMAN-FR05-046",
+    "renameProductImageUrl": "https://example.test/hw06-fr05.png",
+    "renameProductCategoryId": "3",
+    "deleteProductId": "9",
+    "deleteProductName": "HW06_FR05_DELETE_23127194"
+  }
+]

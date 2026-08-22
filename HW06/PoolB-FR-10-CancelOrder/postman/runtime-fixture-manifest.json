@@ -1,0 +1,218 @@
+{
+  "createdAt": "20260821091709",
+  "baseUrl": "http://localhost:3000",
+  "userA": {
+    "id": 7,
+    "email": "hw06.fr10.usera.20260821091709@example.test"
+  },
+  "userB": {
+    "id": 8,
+    "email": "hw06.fr10.userb.20260821091709@example.test"
+  },
+  "adminEmail": "admin@eshop.com",
+  "orders": {
+    "pendingOrderId": {
+      "id": 80,
+      "owner": "A",
+      "state": "pending"
+    },
+    "canonicalRequestOrderId": {
+      "id": 81,
+      "owner": "A",
+      "state": "pending"
+    },
+    "confirmedOrderId": {
+      "id": 82,
+      "owner": "A",
+      "state": "confirmed"
+    },
+    "shippingOrderId": {
+      "id": 83,
+      "owner": "A",
+      "state": "shipping"
+    },
+    "deliveredOrderId": {
+      "id": 84,
+      "owner": "A",
+      "state": "delivered"
+    },
+    "canceledOrderId": {
+      "id": 85,
+      "owner": "A",
+      "state": "canceled"
+    },
+    "boundaryConfirmedOrderId": {
+      "id": 86,
+      "owner": "A",
+      "state": "confirmed"
+    },
+    "boundaryShippingOrderId": {
+      "id": 87,
+      "owner": "A",
+      "state": "shipping"
+    },
+    "pendingBodyEmptyOrderId": {
+      "id": 88,
+      "owner": "A",
+      "state": "pending"
+    },
+    "pendingMalformedBodyOrderId": {
+      "id": 89,
+      "owner": "A",
+      "state": "pending"
+    },
+    "pendingNullBodyOrderId": {
+      "id": 90,
+      "owner": "A",
+      "state": "pending"
+    },
+    "pendingArrayBodyOrderId": {
+      "id": 91,
+      "owner": "A",
+      "state": "pending"
+    },
+    "pendingLargeBodyOrderId": {
+      "id": 92,
+      "owner": "A",
+      "state": "pending"
+    },
+    "pendingBenignQueryOrderId": {
+      "id": 93,
+      "owner": "A",
+      "state": "pending"
+    },
+    "repeatPendingOrderId": {
+      "id": 94,
+      "owner": "A",
+      "state": "pending"
+    },
+    "repeatConfirmedOrderId": {
+      "id": 95,
+      "owner": "A",
+      "state": "confirmed"
+    },
+    "unauthPendingOrderId": {
+      "id": 96,
+      "owner": "A",
+      "state": "pending"
+    },
+    "tamperedConfirmedOrderId": {
+      "id": 97,
+      "owner": "A",
+      "state": "confirmed"
+    },
+    "statusBodyOrderId": {
+      "id": 98,
+      "owner": "A",
+      "state": "pending"
+    },
+    "statusQueryOrderId": {
+      "id": 99,
+      "owner": "A",
+      "state": "confirmed"
+    },
+    "missingAuthOrderId": {
+      "id": 100,
+      "owner": "A",
+      "state": "pending"
+    },
+    "emptyAuthOrderId": {
+      "id": 101,
+      "owner": "A",
+      "state": "pending"
+    },
+    "bearerOnlyOrderId": {
+      "id": 102,
+      "owner": "A",
+      "state": "pending"
+    },
+    "malformedJwtOrderId": {
+      "id": 103,
+      "owner": "A",
+      "state": "pending"
+    },
+    "invalidSigOrderId": {
+      "id": 104,
+      "owner": "A",
+      "state": "pending"
+    },
+    "basicAuthOrderId": {
+      "id": 105,
+      "owner": "A",
+      "state": "pending"
+    },
+    "userBPendingOrderId": {
+      "id": 106,
+      "owner": "B",
+      "state": "pending"
+    },
+    "userBConfirmedOrderId": {
+      "id": 107,
+      "owner": "B",
+      "state": "confirmed"
+    },
+    "userAOwnershipBodyOrderId": {
+      "id": 108,
+      "owner": "A",
+      "state": "pending"
+    },
+    "queryPathOwnOrderId": {
+      "id": 109,
+      "owner": "A",
+      "state": "pending"
+    },
+    "schemaSuccessOrderId": {
+      "id": 110,
+      "owner": "A",
+      "state": "pending"
+    },
+    "schemaShippingOrderId": {
+      "id": 111,
+      "owner": "A",
+      "state": "shipping"
+    },
+    "schemaAuthOrderId": {
+      "id": 112,
+      "owner": "A",
+      "state": "pending"
+    },
+    "headerEvidenceOrderId": {
+      "id": 113,
+      "owner": "A",
+      "state": "pending"
+    },
+    "human043UserBPendingOrderId": {
+      "id": 114,
+      "owner": "B",
+      "state": "pending"
+    },
+    "human044UserBPendingOrderId": {
+      "id": 115,
+      "owner": "B",
+      "state": "pending"
+    },
+    "human045UserBConfirmedOrderId": {
+      "id": 116,
+      "owner": "B",
+      "state": "confirmed"
+    },
+    "human046PendingOrderId": {
+      "id": 117,
+      "owner": "A",
+      "state": "pending"
+    },
+    "human047UserBPendingOrderId": {
+      "id": 118,
+      "owner": "B",
+      "state": "pending"
+    },
+    "human048PendingOrderId": {
+      "id": 119,
+      "owner": "A",
+      "state": "pending"
+    }
+  },
+  "nonExistingOrderId": 10119,
+  "setupMethod": "API register/login + POST /api/checkout + PUT /api/admin/orders/:id/status",
+  "cleanupStrategy": "After official evidence is preserved, delete the dedicated fixture orders/users or rerun this script to create a fresh isolated fixture set before another official run."
+}

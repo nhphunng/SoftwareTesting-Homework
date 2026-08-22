@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><title>FR16-BUG-01 evidence</title><style>
+ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f6f7f9;color:#171717;margin:0;padding:32px}
+ .card{max-width:1100px;margin:auto;background:white;border:1px solid #d9dde3;border-radius:14px;padding:28px;box-shadow:0 4px 18px rgba(0,0,0,.07)}
+ h1{font-size:25px;margin:0 0 6px} h2{font-size:17px;margin-top:24px;border-bottom:1px solid #e5e7eb;padding-bottom:7px}
+ .meta{font-size:13px;color:#555;margin-bottom:18px} .badge{display:inline-block;border:1px solid #b7bdc8;border-radius:999px;padding:4px 9px;margin-right:6px;font-size:12px}
+ .bad{background:#fff4f4} .good{background:#f3fff5} table{border-collapse:collapse;width:100%;font-size:14px} td{border:1px solid #e1e4e8;padding:8px;vertical-align:top}
+ pre{white-space:pre-wrap;word-break:break-word;background:#f3f4f6;border-radius:8px;padding:14px;font-size:13px;line-height:1.45}
+ li{margin:8px 0} code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace} .source{margin-top:24px;font-size:12px;color:#666}
+ </style></head><body><div class="card">
+ <h1>FR16-BUG-01 — Real Newman Evidence</h1>
+ <div class="meta">Rendered from the real official Newman JSON report. This is an evidence view, not a recreated Postman response.</div>
+ <div><span class="badge">Testcase: AI-FR16-019</span><span class="badge">HTTP follow-up status: 200</span><span class="badge good">X-Student-Id: 23127194</span></div>
+ <h2>Testcase execution</h2><p><strong>[AI] AI-FR16-019 — Price = 0 — boundary invalid and rollback</strong></p>
+ <h2>Requirement oracle</h2><p>Expected: invalid price must not persist.</p>
+ <h2>Observed result</h2><p class="bad">Price = 0 is persisted despite FR-16 requiring price &gt; 0</p>
+ <h2>Recorded request headers</h2><table><tr><td>X-Student-Id</td><td>23127194</td></tr></table>
+ <h2>Recorded persistence response</h2><pre>[{&quot;id&quot;:18,&quot;name&quot;:&quot;HW06_AI_FR16_019_A_1787286391361_951360&quot;,&quot;price&quot;:0,&quot;description&quot;:&quot;HW06 FR16&quot;,&quot;imageUrl&quot;:&quot;&quot;,&quot;category_id&quot;:1}]</pre>
+ <h2>Failed Newman assertions</h2><ul><li><code>AI-FR16-019 | exposed success counter does not contradict the persistence oracle</code><br><span>expected 1 to deeply equal +0</span></li><li><code>AI-FR16-019 | persistence oracle A (absent)</code><br><span>expected 1 to deeply equal +0</span></li></ul>
+ <div class="source">Source of truth: <code>postman/newman/FR16-official-report.json</code><br>Official run: 195 requests; exact <code>X-Student-Id: 23127194</code> recorded on 195/195 requests. Authorization is intentionally redacted in this rendered evidence view.</div>
+ </div></body></html>

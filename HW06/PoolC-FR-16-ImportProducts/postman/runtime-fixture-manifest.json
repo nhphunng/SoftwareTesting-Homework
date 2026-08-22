@@ -1,0 +1,24 @@
+{
+  "runId": "FR16-1787286059",
+  "baseUrl": "http://localhost:3000",
+  "studentId": "23127194",
+  "categoryId": 1,
+  "absentCategoryId": 2147483647,
+  "disposableCategory": {
+    "id": 4,
+    "name": "HW06_FR16_STALE_1787286059"
+  },
+  "actors": {
+    "admin": {
+      "id": 1,
+      "email": "admin@eshop.com",
+      "role": "admin"
+    },
+    "nonAdmin": {
+      "id": 7,
+      "email": "hw06.fr10.usera.20260821091709@example.test",
+      "role": "user"
+    }
+  },
+  "secretsStoredInManifest": false
+}
